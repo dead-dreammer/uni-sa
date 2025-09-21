@@ -126,14 +126,14 @@ document.getElementById('signupForm').addEventListener('submit', async function(
     const response = await fetch('/auth/sign-up', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({username, companyName, email, number, password, dob, gender})
+      body: JSON.stringify({username, email, number, password, dob, gender})
     });
 
     const result = await response.json();
 
     if(response.ok){
       alert(result.message);
-      window.location.href = '/choice';
+      window.location.href = '/profile';
     } else {
       alert(`Signup failed: ${result.message}`);
     }

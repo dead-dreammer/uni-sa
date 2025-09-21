@@ -59,7 +59,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
     if(response.ok){
       alert(result.message);
-      window.location.href = '/choice';
+      window.location.href = '/profile';
     } else {
       alert(`Login failed: ${result.message}`);
     }

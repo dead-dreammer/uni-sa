@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template
 from Database.auth import auth
 from Database.__init__ import db, create_database
 from flask import session
@@ -20,14 +20,16 @@ with app.app_context():
 
 @app.after_request
 def add_header(response):
-
     response.headers["Cache-Control"] = "no-store"
     return response
-
 
 @app.route('/') 
 def home():
     return render_template('base.html')
+
+@app.route('/home')
+def home_page():
+    return render_template('HomePage.html')
 
 @app.route('/profile')
 def profile():
