@@ -50,7 +50,7 @@ body {
 }
 
 .navbar a:hover .logo {
-    transform: scale(1.05);
+    transform: scale(1.03);
     cursor: pointer;
 }
 
@@ -238,26 +238,180 @@ ul.dropdown-content {
     margin: 0;
     font-size: 1rem; 
 }
+/* Features section - dont know if i want to use----------------------------------------------------------------------------------------------------------------------------------------*/
+
+.feature-strip {
+    padding: 4rem 2rem;
+    text-align: center;
+    background-color: rgba(153, 179, 252, 0.1); /* subtle background */
+}
+
+.feature-strip h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.features-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap; /* allows wrapping on smaller screens */
+}
+
+.feature-card {
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 10px;
+    padding: 2rem;
+    width: 220px; /* adjust width as needed */
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(125, 46, 216, 0.4);
+}
+
+.feature-card img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+    font-size: 1rem;
+    color: #ddd;
+}
+
+
+/*cta NOT SURE --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+.cta-section {
+    background: linear-gradient(135deg, rgba(125, 46, 216, 0.3), rgba(153, 179, 252, 0.3));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 5rem 2rem;
+    text-align: center;
+    margin: 4rem 0 3rem 0;
+}
+
+.cta-content h2 {
+    font-size: 2.8rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.cta-content p {
+    font-size: 1.3rem;
+    color: #f0f0f0;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-button {
+    display: inline-block;
+    background: linear-gradient(135deg, #7d2ed8, #b36ed8);
+    color: white;
+    padding: 1.2rem 3rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 8px 20px rgba(125, 46, 216, 0.4);
+}
+
+.cta-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(125, 46, 216, 0.6);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .cta-content h2 {
+        font-size: 2rem;
+    }
+    
+    .cta-content p {
+        font-size: 1.1rem;
+    }
+}
+
 /*footer*/
 footer {
     background-color: #99b3fc;
-    color: rgb(255, 255, 255);
-    text-align: center;
-    padding: 1rem 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    margin-top: 3rem;
+    color: white;
+    padding: 2rem 1rem;
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
 }
-.footer nav a {
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.footer-section {
+    flex: 1 1 200px; 
+}
+
+.footer-section h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: white;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem; 
+}
+
+.footer-section a {
     color: white;
     text-decoration: none;
-    margin: 0 1rem;
+    transition: color 0.3s;
 }
-footer p {
-    margin: 0;
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    margin-top: 2rem;
+    text-align: center;
     font-size: 0.9rem;
 }
+
+.back-to-top {
+    display: block;
+    margin: 1rem auto 0 auto;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.back-to-top:hover {
+    text-decoration: underline;
+}
+
 
 /*about us*/
 
