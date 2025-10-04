@@ -295,8 +295,8 @@ ul.dropdown-content {
 /*cta NOT SURE --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 .cta-section {
     background: linear-gradient(135deg, rgba(125, 46, 216, 0.3), rgba(153, 179, 252, 0.3));
-    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     padding: 5rem 2rem;
     text-align: center;
     margin: 4rem 0 3rem 0;
