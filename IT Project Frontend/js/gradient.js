@@ -520,3 +520,9 @@ class Gradient {
 */
 
 export { Gradient }
+
+// Create your instance
+const gradient = new Gradient()
+
+// Call `initGradient` with the selector to your canvas
+gradient.initGradient('#gradient-canvas')
