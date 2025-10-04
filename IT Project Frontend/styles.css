@@ -76,15 +76,16 @@ body {
 	position: relative;
 	padding: 10px 0.6rem;
 	transition: color 0.2s;
+  display: inline-block;
 }
 
 /* Link hover color */
-.navbar ul li a:hover {
+.navbar ul li a.underline:hover {
 	color: #7d2ed8;
 }
 
 /* Animated underline */
-.navbar ul li a::after {
+.navbar ul li a.underline::after {
 	content: "";
 	position: absolute;
 	left: 0;
@@ -95,7 +96,7 @@ body {
 	transition: width 0.3s ease-in-out;
 }
 
-.navbar ul li a:hover::after {
+.navbar ul li a.underline:hover::after {
 	width: 100%;
 }
 
