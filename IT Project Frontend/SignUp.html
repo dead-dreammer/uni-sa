@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | uni.sa</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      color: white;
+      background: linear-gradient(to bottom, #5ba9e0 0%, #8a7bd9 50%, #f0b7a4 100%);
+      padding-top: 80px;
+    }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #556ee6, #00FFB3);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      z-index: 1000;
+      height: 80px;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-size: 20px;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* ===== Container ===== */
+    .container {
+      max-width: 1000px;
+      max-height: 580px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 3rem auto;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      color: white;
+    }
+
+    /* ===== Form Layout ===== */
+    .form-wrapper {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .form-column {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .form-input,
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 16px;
+      font-family: inherit;
+    }
+
+    select option {
+      background-color: cornflowerblue;
+      color: white;
+    }
+
+    .form-input:focus, select:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #556ee6;
+    }
+
+    /* ===== Button ===== */
+    .button {
+      display: inline-block;
+      background: #556ee6;
+      color: white;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      background: #3747a8;
+      transform: translateY(-2px);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: white;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+        margin: 2rem;
+      }
+      .button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Simple Navbar -->
+  <nav class="navbar">
+    <a href="home_pg.html" class="nav-link">Home</a>
+    <a href="login.html" class="nav-link">Login</a>
+  </nav>
+
+  <main class="main">
+    <div class="container">
+      <h1>Sign Up</h1>
+
+      <form id="signupForm">
+        <div class="form-wrapper">
+          <!-- Left Column -->
+          <div class="form-column">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" id="username" name="username" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+              <label for="number">Phone Number</label>
+              <input type="text" id="number" name="number" class="form-input" required />
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="form-column">
+            <div class="form-group">
+              <label for="dob">Date of Birth</label>
+              <input type="date" id="dob" name="dob" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+              <label for="gender">Gender</label>
+              <select id="gender" name="gender" class="form-input" required>
+                <option value="">--Select Gender--</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+              <label for="confirmPassword">Re-enter Password</label>
+              <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" required />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" style="text-align: center; margin-top: 1rem;">
+          <button type="submit" class="button" style="width: 150px;">Sign Up</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const number = document.getElementById('number').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const confirmPassword = document.getElementById('confirmPassword').value.trim();
+      const dob = document.getElementById('dob').value.trim();
+      const gender = document.getElementById('gender').value;
+
+      if(!username || !email || !number || !password || !confirmPassword || !dob || !gender){
+        alert("All required fields must be filled.");
+        return;
+      }
+      if(number.length !== 10){
+        alert("Phone number must be 10 digits.");
+        return;
+      }
+      if(password.length < 6){
+        alert("Password must be at least 6 characters long.");
+        return;
+      }
+      if(password !== confirmPassword){
+        alert("Passwords do not match.");
+        return;
+      }
+
+      alert(`Account created successfully for ${username}!`);
+      window.location.href = "login.html"; // redirect to login page
+    });
+  </script>
+</body>
+</html>
