@@ -238,58 +238,6 @@ ul.dropdown-content {
     margin: 0;
     font-size: 1rem; 
 }
-/* Features section - dont know if i want to use----------------------------------------------------------------------------------------------------------------------------------------*/
-
-.feature-strip {
-    padding: 4rem 2rem;
-    text-align: center;
-    background-color: rgba(153, 179, 252, 0.1); /* subtle background */
-}
-
-.feature-strip h2 {
-    font-size: 2.5rem;
-    color: #fff;
-    margin-bottom: 2rem;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-}
-
-.features-container {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap; /* allows wrapping on smaller screens */
-}
-
-.feature-card {
-    background-color: rgba(0,0,0,0.5);
-    border-radius: 10px;
-    padding: 2rem;
-    width: 220px; /* adjust width as needed */
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(125, 46, 216, 0.4);
-}
-
-.feature-card img {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 1rem;
-}
-
-.feature-card h3 {
-    font-size: 1.3rem;
-    color: #fff;
-    margin-bottom: 0.5rem;
-}
-
-.feature-card p {
-    font-size: 1rem;
-    color: #ddd;
-}
 
 
 /*cta NOT SURE --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -307,15 +255,6 @@ ul.dropdown-content {
     color: #ffffff;
     margin-bottom: 1rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.cta-content p {
-    font-size: 1.3rem;
-    color: #f0f0f0;
-    margin-bottom: 2rem;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .cta-button {
@@ -544,7 +483,7 @@ body.about-page {
 /* contact us */
 /* Contact Page Styling */
 body.contact-page {
-  background: linear-gradient(to bottom right, #99b3fc, #7d2ed8);
+  background: url("contact_bg.png") no-repeat center top fixed;
   font-family: 'Montserrat', sans-serif;
   color: #fff;
   margin: 0;
@@ -555,7 +494,7 @@ body.contact-page {
 .hero {
   text-align: center;
   padding: 5rem 2rem;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(203, 160, 243, 0.274);
 }
 
 .hero h1 {
@@ -706,5 +645,144 @@ button[type="submit"]:hover {
   display: block;
   margin-bottom: 0.3rem;
   color: #ffda79;
+}
+
+/*HOW IT WORKS*/
+/* Hero Section */
+.how-it-works-page .hero-section {
+    padding: 5rem 2rem 3rem;
+    text-align: center;
+}
+
+.how-it-works-page .hero-section h1 {
+    font-size: 5rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.how-it-works-page .hero-section p {
+    font-size: 1.5rem;
+    color: #704792;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Steps Section */
+.steps-section {
+    background-color: rgba(153, 179, 252, 0.15); 
+    backdrop-filter: blur(5px); 
+    -webkit-backdrop-filter: blur(5px);
+    padding: 4rem 2rem;
+    margin-top: 3rem;
+}
+
+.steps-section h2 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.steps-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.step-card {
+    background-color: rgba(104, 101, 117, 0.274);
+    border-radius: 15px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.step-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 10px 20px rgba(125, 46, 216, 0.4);
+}
+
+.step-number {
+    min-width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #7d2ed8, #b36ed8);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: bold;
+    box-shadow: 0 8px 20px rgba(125, 46, 216, 0.4);
+}
+
+.step-content h3 {
+    color: #ffffff;
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+}
+
+.step-content p {
+    color: #f0f0f0;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Features Section*/
+.how-it-works-page .features-section {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.how-it-works-page .features-section h2 {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.how-it-works-page .features-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.how-it-works-page .feature-card {
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 10px;
+    padding: 2rem;
+    width: 280px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.how-it-works-page .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(125, 46, 216, 0.4);
+}
+
+.feature-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.how-it-works-page .feature-card h3 {
+    font-size: 1.3rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.how-it-works-page .feature-card p {
+    font-size: 1rem;
+    color: #ddd;
 }
 
