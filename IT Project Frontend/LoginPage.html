@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | uni.sa</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      color: white;
+      background: linear-gradient(to bottom, #5ba9e0 0%, #8a7bd9 50%, #f0b7a4 100%);
+      padding-top: 80px;
+    }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, #556ee6, #00FFB3);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      z-index: 1000;
+      height: 80px;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-size: 20px;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* ===== Main Container ===== */
+    .main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: calc(100vh - 100px);
+    }
+
+    .container {
+      max-width: 500px;
+      margin-top: 50px;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== Form Styling ===== */
+    .form-container {
+      margin-top: 20px;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: none;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .form-input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #556ee6;
+    }
+
+    .button {
+      display: inline-block;
+      background: #556ee6;
+      color: white !important;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .button:hover {
+      background: #3747a8;
+      transform: translateY(-2px);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      margin-top: 20px;
+      color: #fff;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 1rem;
+      }
+
+      .container {
+        padding: 1.5rem;
+        margin-top: 30px;
+      }
+
+      h1 {
+        font-size: 1.75rem;
+      }
+
+      .button {
+        padding: 0.75rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Simple Navbar -->
+  <nav class="navbar">
+    <a href="home_pg.html" class="nav-link">Home</a>
+    <a href="signup.html" class="nav-link">Sign Up</a>
+  </nav>
+
+  <main class="main">
+    <div class="container">
+      <div class="form-container">
+        <h1>Welcome Back</h1>
+        <form id="loginForm" class="form-container">
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-input" type="email" id="email" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <input class="form-input" type="password" id="password" required />
+          </div>
+          <div class="form-group" style="margin-top: 2rem;">
+            <button type="submit" class="button">Sign In</button>
+          </div>
+          <div style="display: flex; justify-content: center; margin-top: 1rem;">
+            <p>Create an account:</p>
+            <a href="signup.html" style="margin-left: 20px;" class="nav-link">Sign Up</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Example JS (simulated login)
+    document.getElementById('loginForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if(email === "" || password === ""){
+        alert("Please fill out all fields.");
+        return;
+      }
+
+      // Simulate a login success
+      alert(`Welcome, ${email}! (Simulated login)`);
+      window.location.href = "home_pg.html";
+    });
+  </script>
+</body>
+</html>
