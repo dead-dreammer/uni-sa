@@ -1,19 +1,21 @@
+from textblob import TextBlob
 from chatterbot import ChatBot
 from chatterbot.trainers import ChatterBotCorpusTrainer
 
-chatbot = ChatBot('WhatsBot')
-
+chatbot = ChatBot("SentimentBot")
 trainer = ChatterBotCorpusTrainer(chatbot)
+trainer.train("chatterbot.corpus.english")
 
-# Train on your custom WhatsApp data
-trainer.train("C:/Users/dalzi/OneDrive/Desktop/Chatbot/whatsapp_data.yml")
-
-
-print("Training complete! Start chatting below:")
+def get_response(user_input):
+    sentiment = TextBlob(user_input).sentiment.polarity
+    response = chatbot.get_response(user_input)
+    if sentiment < -0.3:
+        return f"I'm sorry you're feeling that way. {response}"
+    elif sentiment > 0.3:
+        return f"That's great! {response}"
+    else:
+        return str(response)
 
 while True:
     user_input = input("You: ")
-    if user_input.lower() == 'quit':
-        break
-    response = chatbot.get_response(user_input)
-    print("Bot:", response)
+    print("Bot:", get_response(user_input))

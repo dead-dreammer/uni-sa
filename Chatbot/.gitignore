@@ -1,0 +1,3 @@
+*.yml     # ignore all YAML files
+
+*.txt     # ignore all text files
