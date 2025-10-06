@@ -203,7 +203,7 @@ ul.dropdown-content {
     flex-wrap: wrap;
     justify-content: center;
     gap: 2.5rem;
-    padding: 2rem 0
+    padding: 2rem 0;
 }
 
 .team-member {
@@ -352,7 +352,7 @@ footer {
 }
 
 
-/*about us*/
+/*about us----------------------------------------------------------------------------------------------------------------*/
 
 body.about-page {
 	background-color: #869ddb;
@@ -647,7 +647,7 @@ button[type="submit"]:hover {
   color: #ffda79;
 }
 
-/*HOW IT WORKS*/
+/*HOW IT WORKS---------------------------------------------------------------------------------------------------------------------------------*/
 /* Hero Section */
 .how-it-works-page .hero-section {
     padding: 5rem 2rem 3rem;
@@ -668,7 +668,6 @@ button[type="submit"]:hover {
     margin: 0 auto;
 }
 
-/* Steps Section */
 .steps-section {
     background-color: rgba(153, 179, 252, 0.15); 
     -webkit-backdrop-filter: blur(5px); 
@@ -785,4 +784,123 @@ button[type="submit"]:hover {
     font-size: 1rem;
     color: #ddd;
 }
+
+/*sign up form*/
+ * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      color: white;
+      background: linear-gradient(to bottom, #a5c9e2 0%, #8a7bd9 50%, #f0b7a4 100%);
+    }
+
+    /*.signup-page {
+      background-color: #869ddb;
+	    background-image: url("sign&log_up_bg.png");
+	    background-size: cover;
+	    background-position: center top;
+	    background-repeat: no-repeat;
+	    background-attachment: fixed;}
+
+
+
+    /* ===== Container ===== */
+    .container {
+      max-width: 1000px;
+      max-height: 580px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 2rem;
+      margin: 3rem auto;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      color: white;
+    }
+
+    /* ===== Form Layout ===== */
+    .form-wrapper {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .form-column {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .form-input,
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-size: 16px;
+      font-family: inherit;
+    }
+
+    select option {
+      background-color: cornflowerblue;
+      color: white;
+    }
+
+    .form-input:focus, select:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #556ee6;
+    }
+
+    /* ===== Button ===== */
+    .button {
+      display: inline-block;
+      background: #556ee6;
+      color: white;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      background: #3747a8;
+      transform: translateY(-2px);
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: white;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+        margin: 2rem;
+      }
+      .button {
+        width: 100%;
+      }
+    }
+
 
