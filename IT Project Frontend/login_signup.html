@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login/Signup | uni.sa</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="auth.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"  rel="stylesheet">
+</head>
+<body class="auth-page">
+  <nav class="navbar">
+    <a href="home_pg.html"><img class="logo" src="atom-removebg-preview.png" alt="uni.sa"></a>
+    <ul>
+      <li><a href="home_pg.html" class="underline">Home</a></li>
+      <li><a href="about_us.html" class="underline">About Us</a></li>
+      <li><a href="how_it_works.html" class="underline">How it Works</a></li>
+      <li class="dropdown">
+        <a href="#">Student Tools</a>
+        <ul class="dropdown-content">
+          <li><a href="admissions.html" class="underline">Admissions Calendar</a></li>
+          <li><a href="bursaries.html" class="underline">Bursaries</a></li>
+        </ul>
+      </li>
+      <li><a href="contact_us.html" class="underline">Contact Us</a></li>
+      <li><a href="login_signup.html" class="underline">Login</a></li>
+      <li><a href="start_my_search.html" class="special-link">START MY SEARCH!</a></li>
+    </ul>
+  </nav>
+
+  <main class="main">
+    <!-- LOGIN FORM -->
+    <div id="loginForm" class="form-container">
+      <div class="container">
+        <h1>Welcome Back</h1>
+        <form id="loginFormElement">
+          <div class="form-wrapper">
+            <div class="form-column" style="flex: 1; min-width: 100%;">
+              <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" name="loginEmail" class="form-input" placeholder="Enter your email" required />
+              </div>
+
+              <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" name="loginPassword" class="form-input" placeholder="Enter your password" required />
+              </div>
+
+              <div class="form-group" style="text-align: center; margin-top: 1rem;">
+                <button type="submit" class="button" style="width: 150px;">Login</button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="toggle-text">
+          Not a member? <a onclick="toggleForms()"> Sign up now!</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIGNUP FORM -->
+    <div id="signupForm" class="form-container hidden">
+      <div class="container">
+        <h1>Sign Up</h1>
+        <form id="signupFormElement">
+          <div class="form-wrapper">
+            <!-- Left Column -->
+            <div class="form-column">
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" class="form-input" placeholder="Choose a username" required />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required />
+              </div>
+
+              <div class="form-group">
+                <label for="number">Phone Number</label>
+                <input type="text" id="number" name="number" class="form-input" placeholder="10 digit number" required />
+              </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="form-column">
+              <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" class="form-input" required />
+              </div>
+
+              <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" class="form-input" required>
+                  <option value="">--Select Gender--</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-input" placeholder="Min 6 characters" required />
+              </div>
+
+              <div class="form-group">
+                <label for="confirmPassword">Re-enter Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="Confirm password" required />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group" style="text-align: center; margin-top: 1rem;">
+            <button type="submit" class="button" style="width: 150px;">Sign Up</button>
+          </div>
+        </form>
+
+        <div class="toggle-text">
+          Already a member? <a onclick="toggleForms()">Login here!</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="auth.js"></script>
+</body>
+</html>
