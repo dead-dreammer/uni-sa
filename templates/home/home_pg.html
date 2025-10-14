@@ -2,9 +2,18 @@
 
 {% block title %}uni.sa Home{% endblock %}
 
+{% block head_extras %}
+    <style>
+        :root {
+            --gradient-color-1: #c3e4ff;
+            --gradient-color-2: #6ec3f4;
+            --gradient-color-3: #eae2ff;
+            --gradient-color-4: #b9beff;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
-    <!--gradient canvas-->
-    <canvas id="gradient-canvas" data-transition-in></canvas>
     <div class="main-content">
         <h1>UNI.SA</h1>
         <p>University Matchmakers</p>

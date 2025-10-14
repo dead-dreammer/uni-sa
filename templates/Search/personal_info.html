@@ -4,8 +4,7 @@
 
 {% block content %}
   <div class="search-page">
-    <!-- Gradient canvas background -->
-    <canvas id="gradient-canvas" data-transition-in></canvas>
+    <!-- Gradient background provided globally in base.html -->
 
     <!-- Main content -->
     <div class="main-content">
@@ -363,7 +362,7 @@
     {% endblock %}
 
 {% block scripts %}
-    <script type="module" src="{{ url_for('static', filename='js/gradient.js') }}"></script>
+    <!-- gradient module loaded globally in base.html -->
     <script>
         // Subject Management
         let subjectCount = 1;

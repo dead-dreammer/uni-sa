@@ -524,5 +524,11 @@ export { Gradient }
 // Create your instance
 const gradient = new Gradient()
 
-// Call `initGradient` with the selector to your canvas
-gradient.initGradient('#gradient-canvas')
+// Call `initGradient` with the selector to your canvas only if the element exists
+if (typeof document !== 'undefined' && document.querySelector('#gradient-canvas')) {
+    // Safely initialize when the canvas is present
+    gradient.initGradient('#gradient-canvas')
+} else {
+    // No canvas on this page — skip initialization
+    // console.log('No gradient canvas found on this page.')
+}

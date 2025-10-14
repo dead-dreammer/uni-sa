@@ -800,7 +800,7 @@ button[type="submit"]:hover {
       font-family: 'Poppins', sans-serif;
       min-height: 100vh;
       color: white;
-      /* global background served from static/img */
+      /* global background served from static/img 
       background: url('/static/img/background.png') no-repeat center top fixed;
       background-size: cover;
     }
@@ -1085,7 +1085,7 @@ body.signup-page select option {
 
 body.auth-page {
   /* auth page background served from static/img */
-  background: url('/static/img/background.png') no-repeat center top fixed;
+
   background-size: cover;
   font-family: 'Montserrat', sans-serif;
   min-height: 100vh;
@@ -1197,7 +1197,7 @@ body.auth-page {
   cursor: pointer;
   appearance: none;
   /* small dropdown icon uses background.png - serve from static/img */
-  background-image: url('/static/img/background.png');
+
   background-position: right 10px center;
   background-size: 20px;
   padding-right: 35px;
@@ -1327,7 +1327,7 @@ body.auth-page {
 html, body {
   height: 100%;
   /* global background served from static/img */
-  background-image: url('/static/img/background.png');
+
  	background-size: cover;
  	background-position: center top;
  	background-repeat: no-repeat;

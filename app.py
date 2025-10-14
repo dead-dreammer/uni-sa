@@ -60,6 +60,10 @@ def signup():
     # same template contains signup UI
     return render_template('Login/login_signup.html')
 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
 
 @app.route('/start-search')
 def start_search():
@@ -91,10 +95,7 @@ def privacy():
     return render_template('privacy.html')
 
 
-# Backwards-compatible routes (left in place for any old links)
-@app.route('/profile')
-def profile():
-    return render_template('Search/personal_info.html')
+
 
 
 if __name__ == '__main__':
