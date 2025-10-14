@@ -1,8 +1,6 @@
 from flask import Flask, render_template
 from Database.auth import auth
 from Database.__init__ import db, create_database
-from flask import session
-
 
 
 app = Flask(__name__, static_folder="static")
@@ -14,35 +12,91 @@ db.init_app(app)
 app.register_blueprint(auth, url_prefix='/auth')
 
 
+
 # Create DB if not exists
 with app.app_context():
     create_database(app)
 
+
 @app.after_request
 def add_header(response):
+    # Prevent caching during development
     response.headers["Cache-Control"] = "no-store"
     return response
 
-@app.route('/') 
-def home():
-    return render_template('base.html')
 
+# --- Routes for template pages ---
+@app.route('/')
 @app.route('/home')
 def home_page():
-    return render_template('HomePage.html')
+    # root serves the main home page (template under templates/home/home_pg.html)
+    return render_template('home/home_pg.html')
 
+
+
+@app.route('/about')
+def about():
+    return render_template('About Us/about_us.html')
+
+
+@app.route('/how-it-works')
+def how_it_works():
+    return render_template('how_it_works.html')
+
+
+@app.route('/contact')
+def contact():
+    return render_template('Contact us/contact_us.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    # Combined login/signup page
+    return render_template('Login/login_signup.html')
+
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    # same template contains signup UI
+    return render_template('Login/login_signup.html')
+
+
+@app.route('/start-search')
+def start_search():
+    return render_template('Search/start_my_search.html')
+
+
+@app.route('/personal-info')
+def personal_info():
+    return render_template('Search/personal_info.html')
+
+
+@app.route('/admissions')
+def admissions():
+    return render_template('Contact us/Student Tools/admissions.html')
+
+
+@app.route('/bursaries')
+def bursaries():
+    return render_template('Contact us/Student Tools/bursaries.html')
+
+
+@app.route('/terms')
+def terms():
+    return render_template('terms.html')
+
+
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
+
+
+# Backwards-compatible routes (left in place for any old links)
 @app.route('/profile')
 def profile():
-    return render_template('Profile.html')
+    return render_template('Search/personal_info.html')
 
-@app.route('/login', methods=['GET','POST'])
-def login():
-    return render_template('LoginPage.html')
-
-@app.route('/signup', methods=['GET','POST'])
-def signup():
-    return render_template('SignUp.html')
 
 if __name__ == '__main__':
-    # Runs the Flask development server with debugging enabled
+    # Runs the Flask development server
     app.run(host="0.0.0.0", port=5000)

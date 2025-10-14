@@ -1,34 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login/Signup | uni.sa</title>
-  <link rel="stylesheet" href="../styles.css">
-  <link rel="stylesheet" href="auth.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"  rel="stylesheet">
-</head>
-<body class="auth-page">
-  <nav class="navbar">
-    <a href="../home_pg.html"><img class="logo" src="atom-removebg-preview.png" alt="uni.sa"></a>
-    <ul>
-      <li><a href="../home_pg.html" class="underline">Home</a></li>
-      <li><a href="../about_us.html" class="underline">About Us</a></li>
-      <li><a href="../how_it_works.html" class="underline">How it Works</a></li>
-      <li class="dropdown">
-        <a href="#">Student Tools</a>
-        <ul class="dropdown-content">
-          <li><a href="../admissions.html" class="underline">Admissions Calendar</a></li>
-          <li><a href="../bursaries.html" class="underline">Bursaries</a></li>
-        </ul>
-      </li>
-      <li><a href="../contact_us.html" class="underline">Contact Us</a></li>
-      <li><a href="login_signup.html" class="underline">Login</a></li>
-      <li><a href="../start_my_search.html" class="special-link">START MY SEARCH!</a></li>
-    </ul>
-  </nav>
+{% extends 'base.html' %}
 
-  <main class="main">
+{% block title %}Login / Signup | uni.sa{% endblock %}
+
+{% block head_extras %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"  rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+  <main class="main auth-page">
     <!-- LOGIN FORM -->
     <div id="loginForm" class="form-container">
       <div class="container">
@@ -123,7 +103,8 @@
       </div>
     </div>
   </main>
+{% endblock %}
 
-  <script src="auth.js"></script>
-</body>
-</html>
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+{% endblock %}

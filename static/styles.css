@@ -1,14 +1,15 @@
 /* General body styling */
 body {
-	font-family: 'Montserrat', sans-serif;
-	margin: 0;
-	padding: 0;
-	/*background-image: url("background.png");
-	background-size: cover;
-	background-position: center top;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	min-height: 100vh;*/
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  /* background image is served from static/img; use absolute path when CSS is static */
+  /*background-image: url('/static/img/background.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;*/
 }
 /*whatamesh background animation*/
 #gradient-canvas {
@@ -208,7 +209,7 @@ ul.dropdown-content {
 
 .team-member {
     background-color: rgba(104, 101, 117, 0.274); 
-    padding: 2cm;
+    padding: 2rem;
     border-radius: 15px;
     width: 250px;
     transition: transform 0.3s, box-shadow 0.3s;
@@ -225,7 +226,7 @@ ul.dropdown-content {
     border-radius: 50%;;
     object-fit: cover;
     margin-bottom: 1.2rem;
-    border: 3px solid #7d2ed8;   border: 3px solid #7d2ed8;
+    border: 3px solid #7d2ed8;   
 }
 
 .team-member h3 {
@@ -355,12 +356,13 @@ footer {
 /*about us----------------------------------------------------------------------------------------------------------------*/
 
 body.about-page {
-	background-color: #869ddb;
-	background-image: url("about_us_bg.png");
-	background-size: cover;
-	background-position: center top;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
+  background-color: #869ddb;
+  /* About Us background served from static/img/About Us/about_us_bg.png */
+  background-image: url('/static/img/About%20Us/about_us_bg.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 .main-content_about {
 	padding: 3rem 1.5rem 0.5rem;
@@ -484,7 +486,8 @@ body.about-page {
 /* contact us */
 /* Contact Page Styling */
 body.contact-page {
-  background: url("contact_bg.png") no-repeat center top fixed;
+  /* Contact page background served from static/img/Contact us/contact_bg.png */
+  background: url('/static/img/Contact%20us/contact_bg.png') no-repeat center top fixed;
   font-family: 'Montserrat', sans-serif;
   color: #fff;
   margin: 0;
@@ -787,7 +790,7 @@ button[type="submit"]:hover {
 }
 
 /*SIGN UP FORM--------------------------------------------------------------------------------------------------------------------------------------------------------------*/
- /** {
+/* {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -797,17 +800,18 @@ button[type="submit"]:hover {
       font-family: 'Poppins', sans-serif;
       min-height: 100vh;
       color: white;
-      background: url("background.png") no-repeat center top fixed;
+      /* global background served from static/img */
+      background: url('/static/img/background.png') no-repeat center top fixed;
       background-size: cover;
     }
 
     /*.signup-page {
       background-color: #869ddb;
-	    background-image: url("sign&log_up_bg.png");
-	    background-size: cover;
-	    background-position: center top;
-	    background-repeat: no-repeat;
-	    background-attachment: fixed;}*/
+    	background-image: url('/static/img/Login/sign%26log_up_bg.png');
+    	background-size: cover;
+    	background-position: center top;
+    	background-repeat: no-repeat;
+    	background-attachment: fixed;}*/
 
 
 
@@ -1080,7 +1084,8 @@ body.signup-page select option {
 /* Auth Page Styling */
 
 body.auth-page {
-  background: url("background.png") no-repeat center top fixed;
+  /* auth page background served from static/img */
+  background: url('/static/img/background.png') no-repeat center top fixed;
   background-size: cover;
   font-family: 'Montserrat', sans-serif;
   min-height: 100vh;
@@ -1188,10 +1193,11 @@ body.auth-page {
   background: #ffffff;
 }
 
-.auth-page select {
+  .auth-page select {
   cursor: pointer;
   appearance: none;
-  background-image: url("background.png");
+  /* small dropdown icon uses background.png - serve from static/img */
+  background-image: url('/static/img/background.png');
   background-position: right 10px center;
   background-size: 20px;
   padding-right: 35px;
@@ -1320,12 +1326,13 @@ body.auth-page {
 
 html, body {
   height: 100%;
-  background-image: url("background.png");
-	background-size: cover;
-	background-position: center top;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	min-height: 100vh; 
+  /* global background served from static/img */
+  background-image: url('/static/img/background.png');
+ 	background-size: cover;
+ 	background-position: center top;
+ 	background-repeat: no-repeat;
+ 	background-attachment: fixed;
+ 	min-height: 100vh; 
 }
 
 body {
