@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | uni.sa</title>
+  <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar">
+		<a href="home_pg.html"><img class="logo" src="atom-removebg-preview.png" alt="uni.sa"></a>
+		<ul>
+			<li><a href="home_pg.html" class="underline">Home</a></li>
+			<li><a href="about_us.html" class="underline">About Us</a></li>
+			<li><a href="how_it_works.html" class="underline">How it Works</a></li>
+                <li class = "dropdown">
+                    <a href="#">Student Tools</a>
+                    <ul class="dropdown-content">
+                        <li><a href="admissions.html" class="underline">Admissions Calendar</a></li>
+                        <li><a href="bursaries.html" class="underline">Bursaries</a></li>
+                    </ul>
+		        </li>
+                <li><a href="contact_us.html" class="underline">Contact Us</a></li>
+                <li><a href="login_signup.html" class="underline">Login</a></li>
+                <li><a href="start_my_search.html" class ="special-link">START MY SEARCH!</a></li>
+		</ul>
+	</nav>
+
+  <!-- Main Content -->
+  <main class="main-container">
+    <!-- Header -->
+    <div class="dashboard-header">
+      <h1>Dashboard</h1>
+      <p>Manage your university search and matched results</p>
+    </div>
+
+    <!-- Dashboard Grid -->
+    <div class="dashboard-grid">
+      
+      <!-- Personal Information Section -->
+      <section class="dashboard-section personal-section">
+        <div class="section-header">
+          <h2>Personal Information and Preferences</h2>
+          <span class="section-icon">🎓</span>
+        </div>
+        <p class="section-description">Update your profile details and preferences to receive better university matches</p>
+        <a href="personal_info.html" class="btn btn-primary">Edit </a>
+      </section>
+
+      <!-- Reports Section -->
+      <section class="dashboard-section reports-section">
+        <div class="section-header">
+          <h2>Generated Reports</h2>
+          <span class="section-icon">📊</span>
+        </div>
+        <div class="reports-content">
+          <div id="reportsContainer">
+            <p class="empty-state">No reports generated yet. Complete your profile to get started.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Matched Universities Section -->
+      <section class="dashboard-section matches-section">
+        <div class="section-header">
+          <h2>Matched Universities</h2>
+          <span class="section-icon">🎯</span>
+        </div>
+        <div id="matchesContainer" class="matches-container">
+          <p class="empty-state">No matches available yet. Complete your profile to discover universities.</p>
+        </div>
+      </section>
+
+      <!-- Liked Universities Section -->
+      <section class="dashboard-section likes-section">
+        <div class="section-header">
+          <h2>Saved Universities</h2>
+          <span class="section-icon">❤️</span>
+        </div>
+        <div id="likesContainer" class="likes-container">
+          <p class="empty-state">You haven't saved any universities yet.</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+   <footer>
+    <div class="footer-container">
+        <!-- Contact Section -->
+        <div class="footer-section contact">
+            <h3>Contact Us</h3>
+            <p>Email: <a href="mailto:tmothilall07@gmail.com">info@uni.sa</a></p>
+            <p>Phone: +27 62 933 0262</p>
+        </div>
+
+        <!-- Explore Section -->
+        <div class="footer-section explore">
+            <h3>Explore</h3>
+            <ul>
+                <li><a href="home_pg.html">Home</a></li>
+                <li><a href="about_us.html">About Us</a></li>
+                <li><a href="how_it_works.html">How it Works</a></li>
+                <li><a href="admissions.html">Admissions Calendar</a></li>
+                <li><a href="bursaries.html">Bursaries</a></li>
+                <li><a href="contact_us.html">Contact Us</a></li>
+                <li><a href="start_my_search.html">START MY SEARCH!</a></li>
+            </ul>
+        </div>
+
+        <!-- Legal Section -->
+        <div class="footer-section legal">
+            <h3>Legal</h3>
+            <ul>
+                <li><a href="terms.html">Terms of Use</a></li>
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="#">Accessibility Statement</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <p class="footer-bottom">Developed by ATOM for the Richfield IT Project (2025)</p>
+    <a href="#top" class="back-to-top">Back to Top ↑</a>
+</footer>
+
+  <script>
+    // Sample data structure
+    const userData = {
+      reports: [
+        { id: 1, title: 'Profile Assessment Report', date: 'Nov 15, 2024' },
+        { id: 2, title: 'University Ranking Analysis', date: 'Nov 20, 2024' }
+      ],
+      matches: [
+        { id: 1, name: 'University of Cape Town', province: 'Western Cape', ranking: 1, matched: true },
+        { id: 2, name: 'University of the Witwatersrand', province: 'Gauteng', ranking: 2, matched: true },
+        { id: 3, name: 'Stellenbosch University', province: 'Western Cape', ranking: 3, matched: true },
+        { id: 4, name: 'University of Pretoria', province: 'Gauteng', ranking: 4, matched: true }
+      ],
+      likes: [
+        { id: 1, name: 'University of Cape Town', province: 'Western Cape' }
+      ]
+    };
+
+    // Render Reports
+    function renderReports() {
+      const container = document.getElementById('reportsContainer');
+      if (userData.reports.length === 0) {
+        container.innerHTML = '<p class="empty-state">No reports generated yet. Complete your profile to get started.</p>';
+        return;
+      }
+      container.innerHTML = userData.reports.map(report => `
+        <div class="report-item">
+          <div class="report-info">
+            <h4>${report.title}</h4>
+            <p class="report-date">${report.date}</p>
+          </div>
+          <a href="#" class="btn btn-small btn-secondary">Download</a>
+        </div>
+      `).join('');
+    }
+
+    // Render Matched Universities
+    function renderMatches() {
+      const container = document.getElementById('matchesContainer');
+      if (userData.matches.length === 0) {
+        container.innerHTML = '<p class="empty-state">No matches available yet. Complete your profile to discover universities.</p>';
+        return;
+      }
+      container.innerHTML = userData.matches.map(uni => `
+        <div class="match-item">
+          <div class="match-info">
+            <h4>${uni.name}</h4>
+            <p class="match-province">${uni.province}</p>
+          </div>
+          <button class="btn btn-like" onclick="addToLikes(${uni.id}, '${uni.name}', '${uni.province}')">
+            <span class="heart">♡</span>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    // Render Liked Universities
+    function renderLikes() {
+      const container = document.getElementById('likesContainer');
+      if (userData.likes.length === 0) {
+        container.innerHTML = '<p class="empty-state">You haven\'t saved any universities yet.</p>';
+        return;
+      }
+      container.innerHTML = userData.likes.map((uni, index) => `
+        <div class="like-item">
+          <div class="like-info">
+            <h4>${uni.name}</h4>
+            <p class="like-province">${uni.province}</p>
+          </div>
+          <button class="btn btn-remove" onclick="removeFromLikes(${index})">
+            ✕
+          </button>
+        </div>
+      `).join('');
+    }
+
+    // Add to Likes
+    function addToLikes(id, name, province) {
+      const alreadyLiked = userData.likes.some(uni => uni.id === id);
+      if (!alreadyLiked) {
+        userData.likes.push({ id, name, province });
+        renderLikes();
+        renderMatches();
+      }
+    }
+
+    // Remove from Likes
+    function removeFromLikes(index) {
+      userData.likes.splice(index, 1);
+      renderLikes();
+    }
+
+    // Initialize
+    renderReports();
+    renderMatches();
+    renderLikes();
+  </script>
+</body>
+</html>

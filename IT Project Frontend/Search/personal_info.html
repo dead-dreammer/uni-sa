@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start My Search | uni.sa</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="search-page">
+    <!-- Navigation -->
+    <nav class="navbar">
+		<a href="home_pg.html"><img class="logo" src="atom-removebg-preview.png" alt="uni.sa"></a>
+		<ul>
+			<li><a href="home_pg.html" class="underline">Home</a></li>
+			<li><a href="about_us.html" class="underline">About Us</a></li>
+			<li><a href="how_it_works.html" class="underline">How it Works</a></li>
+                <li class = "dropdown">
+                    <a href="#">Student Tools</a>
+                    <ul class="dropdown-content">
+                        <li><a href="admissions.html" class="underline">Admissions Calendar</a></li>
+                        <li><a href="bursaries.html" class="underline">Bursaries</a></li>
+                    </ul>
+		        </li>
+                <li><a href="contact_us.html" class="underline">Contact Us</a></li>
+                <li><a href="login_signup.html" class="underline">Login</a></li>
+                <li><a href="start_my_search.html" class ="special-link">START MY SEARCH!</a></li>
+		</ul>
+	</nav>
+
+    <!-- Gradient canvas background -->
+    <canvas id="gradient-canvas" data-transition-in></canvas>
+
+    <!-- Main content -->
+    <div class="main-content">
+        <h1>START YOUR SEARCH</h1>
+        <p>Find Your Perfect University Match</p>
+        <p>Answer a few questions and discover universities tailored to you</p>
+    </div>
+
+    <!-- Error Toast Notification -->
+    <div id="errorToast" class="error-toast">
+        <span id="errorMessage"></span>
+    </div>
+
+    <!-- Search Form Section -->
+    <section class="search-section">
+        <h2>Tell Us About Yourself</h2>
+        <div class="search-form-container">
+            <form id="searchForm" class="search-form" novalidate>
+                
+                <!-- Question 1: Subjects and Marks -->
+                <div class="form-section" id="section-subjects">
+                    <h3>1. Input your marks and subjects below <span class="required-asterisk">*</span></h3>
+                    <div id="subjectsContainer">
+                        <div class="subject-entry">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Subject</label>
+                                    <select class="subject-select" required>
+                                        <option value="">Select Subject</option>
+                                        <option value="mathematics">Mathematics</option>
+                                        <option value="physical-sciences">Physical Sciences</option>
+                                        <option value="life-sciences">Life Sciences</option>
+                                        <option value="accounting">Accounting</option>
+                                        <option value="business-studies">Business Studies</option>
+                                        <option value="economics">Economics</option>
+                                        <option value="geography">Geography</option>
+                                        <option value="history">History</option>
+                                        <option value="agricultural-sciences">Agricultural Sciences</option>
+                                        <option value="consumer-studies">Consumer Studies</option>
+                                        <option value="tourism">Tourism</option>
+                                        <option value="dramatic-arts">Dramatic Arts</option>
+                                        <option value="visual-arts">Visual Arts</option>
+                                        <option value="design">Design</option>
+                                        <option value="music">Music</option>
+                                        <option value="civil-technology">Civil Technology</option>
+                                        <option value="electrical-technology">Electrical Technology</option>
+                                        <option value="mechanical-technology">Mechanical Technology</option>
+                                        <option value="computer-applications-technology">Computer Applications Technology</option>
+                                        <option value="information-technology">Information Technology</option>
+                                        <option value="english-home-language">English Home Language</option>
+                                        <option value="english-first-additional">English First Additional Language</option>
+                                        <option value="afrikaans-home-language">Afrikaans Home Language</option>
+                                        <option value="afrikaans-first-additional">Afrikaans First Additional Language</option>
+                                        <option value="isizulu">IsiZulu</option>
+                                        <option value="isixhosa">IsiXhosa</option>
+                                        <option value="sepedi">Sepedi</option>
+                                        <option value="setswana">Setswana</option>
+                                        <option value="sesotho">Sesotho</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mark (%)</label>
+                                    <input type="number" class="subject-mark" min="0" max="100" placeholder="e.g., 85" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Grade</label>
+                                    <select class="subject-grade" required>
+                                        <option value="">Select Grade</option>
+                                        <option value="10">Grade 10</option>
+                                        <option value="11">Grade 11</option>
+                                        <option value="12">Grade 12</option>
+                                    </select>
+                                </div>
+                                <div class="form-group-actions">
+                                    <button type="button" class="btn-remove-subject" title="Remove Subject" disabled>−</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="addSubject" class="btn-add">+ Add Another Subject</button>
+                </div>
+
+                <!-- Question 2: Location -->
+                <div class="form-section" id="section-location">
+                    <h3>2. Where do you currently live? <span class="required-asterisk">*</span></h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Province</label>
+                            <select id="province" required>
+                                <option value="">Select Province</option>
+                                <option value="gauteng">Gauteng</option>
+                                <option value="western-cape">Western Cape</option>
+                                <option value="kwazulu-natal">KwaZulu-Natal</option>
+                                <option value="eastern-cape">Eastern Cape</option>
+                                <option value="free-state">Free State</option>
+                                <option value="limpopo">Limpopo</option>
+                                <option value="mpumalanga">Mpumalanga</option>
+                                <option value="northern-cape">Northern Cape</option>
+                                <option value="north-west">North West</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Suburb/Area</label>
+                            <input type="text" id="suburb" placeholder="e.g., Sandton" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 3: Willing to Relocate -->
+                <div class="form-section" id="section-relocate">
+                    <h3>3. Are you willing to relocate? <span class="required-asterisk">*</span></h3>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="relocate" value="yes" required>
+                            <span>Yes</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="relocate" value="no" required>
+                            <span>No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 4: Study Mode -->
+                <div class="form-section" id="section-study-mode">
+                    <h3>4. Do you prefer studying in contact (in person) or distance (online)? <span class="required-asterisk">*</span></h3>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="studyMode" value="contact" required>
+                            <span>Contact (In Person)</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="studyMode" value="distance" required>
+                            <span>Distance (Online)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 5: Disabilities/Support -->
+                <div class="form-section" id="section-support">
+                    <h3>5. Do you have any disabilities or need academic support? <span class="required-asterisk">*</span></h3>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="needSupport" value="yes" id="supportYes" required>
+                            <span>Yes</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="needSupport" value="no" id="supportNo" required>
+                            <span>No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 6: Support Details (Conditional) -->
+                <div class="form-section hidden" id="section-support-details">
+                    <h3>6. If yes, please specify below: <span class="required-asterisk">*</span></h3>
+                    <div class="form-group">
+                        <textarea id="supportDetails" rows="4" placeholder="Please describe the type of support you need..."></textarea>
+                    </div>
+                </div>
+
+                <!-- Question 7: Career Interests -->
+                <div class="form-section" id="section-careers">
+                    <h3>7. Input up to 5 careers that interest you <span class="required-asterisk">*</span></h3>
+                    <div id="careersContainer">
+                        <div class="form-group">
+                            <label>Career 1</label>
+                            <select class="career-select" required>
+                                <option value="">Select Career</option>
+                                <option value="accountant">Accountant</option>
+                                <option value="actuary">Actuary</option>
+                                <option value="architect">Architect</option>
+                                <option value="attorney">Attorney</option>
+                                <option value="auditor">Auditor</option>
+                                <option value="biologist">Biologist</option>
+                                <option value="business-analyst">Business Analyst</option>
+                                <option value="chemical-engineer">Chemical Engineer</option>
+                                <option value="chemist">Chemist</option>
+                                <option value="civil-engineer">Civil Engineer</option>
+                                <option value="clinical-psychologist">Clinical Psychologist</option>
+                                <option value="dentist">Dentist</option>
+                                <option value="doctor">Doctor/Physician</option>
+                                <option value="electrical-engineer">Electrical Engineer</option>
+                                <option value="economist">Economist</option>
+                                <option value="environmental-scientist">Environmental Scientist</option>
+                                <option value="financial-manager">Financial Manager</option>
+                                <option value="graphic-designer">Graphic Designer</option>
+                                <option value="industrial-engineer">Industrial Engineer</option>
+                                <option value="it-specialist">IT Specialist</option>
+                                <option value="journalist">Journalist</option>
+                                <option value="lawyer">Lawyer</option>
+                                <option value="mechanical-engineer">Mechanical Engineer</option>
+                                <option value="medical-specialist">Medical Specialist</option>
+                                <option value="nurse">Nurse</option>
+                                <option value="occupational-therapist">Occupational Therapist</option>
+                                <option value="optometrist">Optometrist</option>
+                                <option value="pharmacist">Pharmacist</option>
+                                <option value="physiotherapist">Physiotherapist</option>
+                                <option value="pilot">Pilot</option>
+                                <option value="project-manager">Project Manager</option>
+                                <option value="quantity-surveyor">Quantity Surveyor</option>
+                                <option value="social-worker">Social Worker</option>
+                                <option value="software-developer">Software Developer</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="town-planner">Town Planner</option>
+                                <option value="veterinarian">Veterinarian</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Career 2</label>
+                            <select class="career-select">
+                                <option value="">Select Career (Optional)</option>
+                                <option value="accountant">Accountant</option>
+                                <option value="actuary">Actuary</option>
+                                <option value="architect">Architect</option>
+                                <option value="attorney">Attorney</option>
+                                <option value="auditor">Auditor</option>
+                                <option value="biologist">Biologist</option>
+                                <option value="business-analyst">Business Analyst</option>
+                                <option value="chemical-engineer">Chemical Engineer</option>
+                                <option value="chemist">Chemist</option>
+                                <option value="civil-engineer">Civil Engineer</option>
+                                <option value="clinical-psychologist">Clinical Psychologist</option>
+                                <option value="dentist">Dentist</option>
+                                <option value="doctor">Doctor/Physician</option>
+                                <option value="electrical-engineer">Electrical Engineer</option>
+                                <option value="economist">Economist</option>
+                                <option value="environmental-scientist">Environmental Scientist</option>
+                                <option value="financial-manager">Financial Manager</option>
+                                <option value="graphic-designer">Graphic Designer</option>
+                                <option value="industrial-engineer">Industrial Engineer</option>
+                                <option value="it-specialist">IT Specialist</option>
+                                <option value="journalist">Journalist</option>
+                                <option value="lawyer">Lawyer</option>
+                                <option value="mechanical-engineer">Mechanical Engineer</option>
+                                <option value="medical-specialist">Medical Specialist</option>
+                                <option value="nurse">Nurse</option>
+                                <option value="occupational-therapist">Occupational Therapist</option>
+                                <option value="optometrist">Optometrist</option>
+                                <option value="pharmacist">Pharmacist</option>
+                                <option value="physiotherapist">Physiotherapist</option>
+                                <option value="pilot">Pilot</option>
+                                <option value="project-manager">Project Manager</option>
+                                <option value="quantity-surveyor">Quantity Surveyor</option>
+                                <option value="social-worker">Social Worker</option>
+                                <option value="software-developer">Software Developer</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="town-planner">Town Planner</option>
+                                <option value="veterinarian">Veterinarian</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Career 3</label>
+                            <select class="career-select">
+                                <option value="">Select Career (Optional)</option>
+                                <option value="accountant">Accountant</option>
+                                <option value="actuary">Actuary</option>
+                                <option value="architect">Architect</option>
+                                <option value="attorney">Attorney</option>
+                                <option value="auditor">Auditor</option>
+                                <option value="biologist">Biologist</option>
+                                <option value="business-analyst">Business Analyst</option>
+                                <option value="chemical-engineer">Chemical Engineer</option>
+                                <option value="chemist">Chemist</option>
+                                <option value="civil-engineer">Civil Engineer</option>
+                                <option value="clinical-psychologist">Clinical Psychologist</option>
+                                <option value="dentist">Dentist</option>
+                                <option value="doctor">Doctor/Physician</option>
+                                <option value="electrical-engineer">Electrical Engineer</option>
+                                <option value="economist">Economist</option>
+                                <option value="environmental-scientist">Environmental Scientist</option>
+                                <option value="financial-manager">Financial Manager</option>
+                                <option value="graphic-designer">Graphic Designer</option>
+                                <option value="industrial-engineer">Industrial Engineer</option>
+                                <option value="it-specialist">IT Specialist</option>
+                                <option value="journalist">Journalist</option>
+                                <option value="lawyer">Lawyer</option>
+                                <option value="mechanical-engineer">Mechanical Engineer</option>
+                                <option value="medical-specialist">Medical Specialist</option>
+                                <option value="nurse">Nurse</option>
+                                <option value="occupational-therapist">Occupational Therapist</option>
+                                <option value="optometrist">Optometrist</option>
+                                <option value="pharmacist">Pharmacist</option>
+                                <option value="physiotherapist">Physiotherapist</option>
+                                <option value="pilot">Pilot</option>
+                                <option value="project-manager">Project Manager</option>
+                                <option value="quantity-surveyor">Quantity Surveyor</option>
+                                <option value="social-worker">Social Worker</option>
+                                <option value="software-developer">Software Developer</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="town-planner">Town Planner</option>
+                                <option value="veterinarian">Veterinarian</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Career 4</label>
+                            <select class="career-select">
+                                <option value="">Select Career (Optional)</option>
+                                <option value="accountant">Accountant</option>
+                                <option value="actuary">Actuary</option>
+                                <option value="architect">Architect</option>
+                                <option value="attorney">Attorney</option>
+                                <option value="auditor">Auditor</option>
+                                <option value="biologist">Biologist</option>
+                                <option value="business-analyst">Business Analyst</option>
+                                <option value="chemical-engineer">Chemical Engineer</option>
+                                <option value="chemist">Chemist</option>
+                                <option value="civil-engineer">Civil Engineer</option>
+                                <option value="clinical-psychologist">Clinical Psychologist</option>
+                                <option value="dentist">Dentist</option>
+                                <option value="doctor">Doctor/Physician</option>
+                                <option value="electrical-engineer">Electrical Engineer</option>
+                                <option value="economist">Economist</option>
+                                <option value="environmental-scientist">Environmental Scientist</option>
+                                <option value="financial-manager">Financial Manager</option>
+                                <option value="graphic-designer">Graphic Designer</option>
+                                <option value="industrial-engineer">Industrial Engineer</option>
+                                <option value="it-specialist">IT Specialist</option>
+                                <option value="journalist">Journalist</option>
+                                <option value="lawyer">Lawyer</option>
+                                <option value="mechanical-engineer">Mechanical Engineer</option>
+                                <option value="medical-specialist">Medical Specialist</option>
+                                <option value="nurse">Nurse</option>
+                                <option value="occupational-therapist">Occupational Therapist</option>
+                                <option value="optometrist">Optometrist</option>
+                                <option value="pharmacist">Pharmacist</option>
+                                <option value="physiotherapist">Physiotherapist</option>
+                                <option value="pilot">Pilot</option>
+                                <option value="project-manager">Project Manager</option>
+                                <option value="quantity-surveyor">Quantity Surveyor</option>
+                                <option value="social-worker">Social Worker</option>
+                                <option value="software-developer">Software Developer</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="town-planner">Town Planner</option>
+                                <option value="veterinarian">Veterinarian</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Career 5</label>
+                            <select class="career-select">
+                                <option value="">Select Career (Optional)</option>
+                                <option value="accountant">Accountant</option>
+                                <option value="actuary">Actuary</option>
+                                <option value="architect">Architect</option>
+                                <option value="attorney">Attorney</option>
+                                <option value="auditor">Auditor</option>
+                                <option value="biologist">Biologist</option>
+                                <option value="business-analyst">Business Analyst</option>
+                                <option value="chemical-engineer">Chemical Engineer</option>
+                                <option value="chemist">Chemist</option>
+                                <option value="civil-engineer">Civil Engineer</option>
+                                <option value="clinical-psychologist">Clinical Psychologist</option>
+                                <option value="dentist">Dentist</option>
+                                <option value="doctor">Doctor/Physician</option>
+                                <option value="electrical-engineer">Electrical Engineer</option>
+                                <option value="economist">Economist</option>
+                                <option value="environmental-scientist">Environmental Scientist</option>
+                                <option value="financial-manager">Financial Manager</option>
+                                <option value="graphic-designer">Graphic Designer</option>
+                                <option value="industrial-engineer">Industrial Engineer</option>
+                                <option value="it-specialist">IT Specialist</option>
+                                <option value="journalist">Journalist</option>
+                                <option value="lawyer">Lawyer</option>
+                                <option value="mechanical-engineer">Mechanical Engineer</option>
+                                <option value="medical-specialist">Medical Specialist</option>
+                                <option value="nurse">Nurse</option>
+                                <option value="occupational-therapist">Occupational Therapist</option>
+                                <option value="optometrist">Optometrist</option>
+                                <option value="pharmacist">Pharmacist</option>
+                                <option value="physiotherapist">Physiotherapist</option>
+                                <option value="pilot">Pilot</option>
+                                <option value="project-manager">Project Manager</option>
+                                <option value="quantity-surveyor">Quantity Surveyor</option>
+                                <option value="social-worker">Social Worker</option>
+                                <option value="software-developer">Software Developer</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="town-planner">Town Planner</option>
+                                <option value="veterinarian">Veterinarian</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Question 8: NSFAS -->
+                <div class="form-section" id="section-nsfas">
+                    <h3>8. Are you going to be applying for NSFAS? <span class="required-asterisk">*</span></h3>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="nsfas" value="yes" required>
+                            <span>Yes</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="nsfas" value="no" required>
+                            <span>No</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-actions">
+                    <button type="submit" class="cta-button">Find My Matches</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p>Email: <a href="mailto:tmothilall07@gmail.com">info@uni.sa</a></p>
+                <p>Phone: +27 62 933 0262</p>
+            </div>
+            <div class="footer-section explore">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="home_pg.html">Home</a></li>
+                    <li><a href="about_us.html">About Us</a></li>
+                    <li><a href="how_it_works.html">How it Works</a></li>
+                    <li><a href="admissions.html">Admissions Calendar</a></li>
+                    <li><a href="bursaries.html">Bursaries</a></li>
+                    <li><a href="contact_us.html">Contact Us</a></li>
+                    <li><a href="start_my_search.html">START MY SEARCH!</a></li>
+                </ul>
+            </div>
+            <div class="footer-section legal">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="terms.html">Terms of Use</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="#">Accessibility Statement</a></li>
+                </ul>
+            </div>
+        </div>
+        <p class="footer-bottom">Developed by ATOM for the Richfield IT Project (2025)</p>
+        <a href="#top" class="back-to-top">Back to Top ↑</a>
+    </footer>
+
+    <script type="module" src="gradient.js"></script>
+    <script>
+        // Subject Management
+        let subjectCount = 1;
+        const maxSubjects = 10;
+
+        document.getElementById('addSubject').addEventListener('click', function() {
+            if (subjectCount < maxSubjects) {
+                subjectCount++;
+                const container = document.getElementById('subjectsContainer');
+                const newEntry = document.createElement('div');
+                newEntry.className = 'subject-entry';
+                newEntry.innerHTML = `
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <select class="subject-select" required>
+                                <option value="">Select Subject</option>
+                                <option value="mathematics">Mathematics</option>
+                                <option value="physical-sciences">Physical Sciences</option>
+                                <option value="life-sciences">Life Sciences</option>
+                                <option value="accounting">Accounting</option>
+                                <option value="business-studies">Business Studies</option>
+                                <option value="economics">Economics</option>
+                                <option value="geography">Geography</option>
+                                <option value="history">History</option>
+                                <option value="agricultural-sciences">Agricultural Sciences</option>
+                                <option value="consumer-studies">Consumer Studies</option>
+                                <option value="tourism">Tourism</option>
+                                <option value="dramatic-arts">Dramatic Arts</option>
+                                <option value="visual-arts">Visual Arts</option>
+                                <option value="design">Design</option>
+                                <option value="music">Music</option>
+                                <option value="civil-technology">Civil Technology</option>
+                                <option value="electrical-technology">Electrical Technology</option>
+                                <option value="mechanical-technology">Mechanical Technology</option>
+                                <option value="computer-applications-technology">Computer Applications Technology</option>
+                                <option value="information-technology">Information Technology</option>
+                                <option value="english-home-language">English Home Language</option>
+                                <option value="english-first-additional">English First Additional Language</option>
+                                <option value="afrikaans-home-language">Afrikaans Home Language</option>
+                                <option value="afrikaans-first-additional">Afrikaans First Additional Language</option>
+                                <option value="isizulu">IsiZulu</option>
+                                <option value="isixhosa">IsiXhosa</option>
+                                <option value="sepedi">Sepedi</option>
+                                <option value="setswana">Setswana</option>
+                                <option value="sesotho">Sesotho</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Mark (%)</label>
+                            <input type="number" class="subject-mark" min="0" max="100" placeholder="e.g., 85" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Grade</label>
+                            <select class="subject-grade" required>
+                                <option value="">Select Grade</option>
+                                <option value="10">Grade 10</option>
+                                <option value="11">Grade 11</option>
+                                <option value="12">Grade 12</option>
+                            </select>
+                        </div>
+                        <div class="form-group-actions">
+                            <button type="button" class="btn-remove-subject" title="Remove Subject">−</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(newEntry);
+                updateRemoveButtons();
+            }
+        });
+
+        document.getElementById('subjectsContainer').addEventListener('click', function(e) {
+            if (e.target.classList.contains('btn-remove-subject')) {
+                e.target.closest('.subject-entry').remove();
+                subjectCount--;
+                updateRemoveButtons();
+            }
+        });
+
+        function updateRemoveButtons() {
+            const buttons = document.querySelectorAll('.btn-remove-subject');
+            buttons.forEach((btn, index) => {
+                btn.disabled = buttons.length === 1;
+            });
+        }
+
+        // Show/Hide Support Details
+        document.querySelectorAll('input[name="needSupport"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                const detailsSection = document.getElementById('section-support-details');
+                const detailsTextarea = document.getElementById('supportDetails');
+                if (this.value === 'yes') {
+                    detailsSection.classList.remove('hidden');
+                    detailsTextarea.required = true;
+                } else {
+                    detailsSection.classList.add('hidden');
+                    detailsTextarea.required = false;
+                    detailsTextarea.value = '';
+                }
+            });
+        });
+
+        // Error Toast Function
+        function showError(message, sectionId) {
+            const toast = document.getElementById('errorToast');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            errorMessage.textContent = message;
+            toast.classList.add('show');
+            
+            // Highlight the section with error
+            const section = document.getElementById(sectionId);
+            section.classList.add('error-highlight');
+            
+            // Scroll to the error
+            section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            setTimeout(() => {
+                toast.
