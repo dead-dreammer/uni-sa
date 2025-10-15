@@ -12,7 +12,7 @@
     <nav class="navbar">
         <a href="{{ url_for('home_page') }}"><img class="logo" src="{{ url_for('static', filename='img/atom-removebg-preview.png') }}" alt="uni.sa"></a>
             {% if session.get('username') %}
-      <a href="/profile" class="nav-link">{{ session.get('username') }}</a>
+      <a href="/personal-info" class="nav-link">{{ session.get('username') }}</a>
     {% endif %}
         <ul>
             <li><a href="{{ url_for('home_page') }}" class="underline">Home</a></li>
