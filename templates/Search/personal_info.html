@@ -1,503 +1,547 @@
-{% extends 'base.html' %}
-
-{% block title %}Start My Search | uni.sa{% endblock %}
-
-{% block content %}
-  <div class="search-page">
-    <!-- Gradient background provided globally in base.html -->
-
-    <!-- Main content -->
-    <div class="main-content">
-        <h1>START YOUR SEARCH</h1>
-        <p>Find Your Perfect University Match</p>
-        <p>Answer a few questions and discover universities tailored to you</p>
+{% extends 'base.html' %} {% block title %}Start My Search | uni.sa{% endblock
+%} {% block content %}
+<div class="search-page">
+  <!-- Hero Section -->
+  <div class="search-hero">
+    <div class="search-hero-content">
+      <h1>START YOUR SEARCH</h1>
+      <p class="hero-subtitle">Find Your Perfect University Match</p>
+      <p class="hero-description">
+        Answer a few questions and discover universities tailored to you
+      </p>
     </div>
+  </div>
 
-    <!-- Error Toast Notification -->
-    <div id="errorToast" class="error-toast">
-        <span id="errorMessage"></span>
+  <!-- Progress Indicator -->
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
     </div>
+    <p class="progress-text"><span id="progressText">0</span>% Complete</p>
+  </div>
 
-    <!-- Search Form Section -->
-    <section class="search-section">
-        <h2>Tell Us About Yourself</h2>
-        <div class="search-form-container">
-            <form id="searchForm" class="search-form" novalidate>
-                
-                <!-- Question 1: Subjects and Marks -->
-                <div class="form-section" id="section-subjects">
-                    <h3>1. Input your marks and subjects below <span class="required-asterisk">*</span></h3>
-                    <div id="subjectsContainer">
-                        <div class="subject-entry">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label>Subject</label>
-                                    <select class="subject-select" required>
-                                        <option value="">Select Subject</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" id="addSubject" class="add-subject-button">+ Add Another Subject</button>
-                </div>
+  <!-- Error Toast Notification -->
+  <div id="errorToast" class="error-toast">
+    <span id="errorMessage"></span>
+  </div>
 
-                <!-- Question 2: Location -->
-                <div class="form-section" id="section-location">
-                    <h3>2. Where do you currently live? <span class="required-asterisk">*</span></h3>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Province</label>
-                            <select id="province" required>
-                                <option value="">Select Province</option>
-                                <option value="gauteng">Gauteng</option>
-                                <option value="western-cape">Western Cape</option>
-                                <option value="kwazulu-natal">KwaZulu-Natal</option>
-                                <option value="eastern-cape">Eastern Cape</option>
-                                <option value="free-state">Free State</option>
-                                <option value="limpopo">Limpopo</option>
-                                <option value="mpumalanga">Mpumalanga</option>
-                                <option value="northern-cape">Northern Cape</option>
-                                <option value="north-west">North West</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Suburb/Area</label>
-                            <input type="text" id="suburb" placeholder="e.g., Sandton" required>
-                        </div>
-                    </div>
+  <!-- Search Form Section -->
+  <section class="search-section">
+    <div class="search-form-container">
+      <form id="searchForm" class="search-form" novalidate>
+        <!-- Question 1: Subjects and Marks -->
+        <div class="form-card" id="section-subjects">
+          <div class="card-header">
+            <span class="question-number">01</span>
+            <h3>
+              Input your marks and subjects below
+              <span class="required-asterisk">*</span>
+            </h3>
+          </div>
+          <div class="card-body">
+            <div id="subjectsContainer">
+              <div class="subject-entry">
+                <div class="subject-row">
+                  <div class="form-group flex-2">
+                    <label>Subject</label>
+                    <select id="subject" class="subject-select" required title="select subject">
+                      <option value="">Select Subject</option>
+                      <option value="mathematics">Mathematics</option>
+                      <option value="physical-sciences">Physical Sciences</option>
+                      <option value="life-sciences">Life Sciences</option>
+                      <option value="accounting">Accounting</option>
+                      <option value="business-studies">Business Studies</option>
+                      <option value="economics">Economics</option>
+                      <option value="geography">Geography</option>
+                      <option value="history">History</option>
+                      <option value="Mathematics Literacy">Mathematics Literacy</option>
+                      <option value="EGD">EGD</option>
+                      <option value="nformation technology">Information Technology</option>
+                        
+                    </select>
+                  </div>
+                  <div class="form-group flex-1">
+                    <label>Mark (%)</label>
+                    <input
+                      type="number"
+                      class="subject-mark"
+                      min="0"
+                      max="100"
+                      placeholder="85"
+                      required
+                    />
+                  </div>
+                  <div class="form-group flex-1">
+                    <label>Grade</label>
+                    <select id="grade" class="subject-grade" required title="Select Grade">
+                      <option value="">Grade</option>
+                      <option value="10">Grade 10</option>
+                      <option value="11">Grade 11</option>
+                      <option value="12">Grade 12</option>
+                    </select>
+                  </div>
                 </div>
-
-                <!-- Question 3: Willing to Relocate -->
-                <div class="form-section" id="section-relocate">
-                    <h3>3. Are you willing to relocate? <span class="required-asterisk">*</span></h3>
-                    <div class="radio-group">
-                        <label class="radio-label">
-                            <input type="radio" name="relocate" value="yes" required>
-                            <span>Yes</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="relocate" value="no" required>
-                            <span>No</span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Question 4: Study Mode -->
-                <div class="form-section" id="section-study-mode">
-                    <h3>4. Do you prefer studying in contact (in person) or distance (online)? <span class="required-asterisk">*</span></h3>
-                    <div class="radio-group">
-                        <label class="radio-label">
-                            <input type="radio" name="studyMode" value="contact" required>
-                            <span>Contact (In Person)</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="studyMode" value="distance" required>
-                            <span>Distance (Online)</span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Question 5: Disabilities/Support -->
-                <div class="form-section" id="section-support">
-                    <h3>5. Do you have any disabilities or need academic support? <span class="required-asterisk">*</span></h3>
-                    <div class="radio-group">
-                        <label class="radio-label">
-                            <input type="radio" name="needSupport" value="yes" id="supportYes" required>
-                            <span>Yes</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="needSupport" value="no" id="supportNo" required>
-                            <span>No</span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Question 6: Support Details (Conditional) -->
-                <div class="form-section hidden" id="section-support-details">
-                    <h3>6. If yes, please specify below: <span class="required-asterisk">*</span></h3>
-                    <div class="form-group">
-                        <textarea id="supportDetails" rows="4" placeholder="Please describe the type of support you need..."></textarea>
-                    </div>
-                </div>
-
-                <!-- Question 7: Career Interests -->
-                <div class="form-section" id="section-careers">
-                    <h3>7. Input up to 5 careers that interest you <span class="required-asterisk">*</span></h3>
-                    <div id="careersContainer">
-                        <div class="form-group">
-                            <label>Career 1</label>
-                            <select class="career-select" required>
-                                <option value="">Select Career</option>
-                                <option value="accountant">Accountant</option>
-                                <option value="actuary">Actuary</option>
-                                <option value="architect">Architect</option>
-                                <option value="attorney">Attorney</option>
-                                <option value="auditor">Auditor</option>
-                                <option value="biologist">Biologist</option>
-                                <option value="business-analyst">Business Analyst</option>
-                                <option value="chemical-engineer">Chemical Engineer</option>
-                                <option value="chemist">Chemist</option>
-                                <option value="civil-engineer">Civil Engineer</option>
-                                <option value="clinical-psychologist">Clinical Psychologist</option>
-                                <option value="dentist">Dentist</option>
-                                <option value="doctor">Doctor/Physician</option>
-                                <option value="electrical-engineer">Electrical Engineer</option>
-                                <option value="economist">Economist</option>
-                                <option value="environmental-scientist">Environmental Scientist</option>
-                                <option value="financial-manager">Financial Manager</option>
-                                <option value="graphic-designer">Graphic Designer</option>
-                                <option value="industrial-engineer">Industrial Engineer</option>
-                                <option value="it-specialist">IT Specialist</option>
-                                <option value="journalist">Journalist</option>
-                                <option value="lawyer">Lawyer</option>
-                                <option value="mechanical-engineer">Mechanical Engineer</option>
-                                <option value="medical-specialist">Medical Specialist</option>
-                                <option value="nurse">Nurse</option>
-                                <option value="occupational-therapist">Occupational Therapist</option>
-                                <option value="optometrist">Optometrist</option>
-                                <option value="pharmacist">Pharmacist</option>
-                                <option value="physiotherapist">Physiotherapist</option>
-                                <option value="pilot">Pilot</option>
-                                <option value="project-manager">Project Manager</option>
-                                <option value="quantity-surveyor">Quantity Surveyor</option>
-                                <option value="social-worker">Social Worker</option>
-                                <option value="software-developer">Software Developer</option>
-                                <option value="teacher">Teacher</option>
-                                <option value="town-planner">Town Planner</option>
-                                <option value="veterinarian">Veterinarian</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Career 2</label>
-                            <select class="career-select">
-                                <option value="">Select Career (Optional)</option>
-                                <option value="accountant">Accountant</option>
-                                <option value="actuary">Actuary</option>
-                                <option value="architect">Architect</option>
-                                <option value="attorney">Attorney</option>
-                                <option value="auditor">Auditor</option>
-                                <option value="biologist">Biologist</option>
-                                <option value="business-analyst">Business Analyst</option>
-                                <option value="chemical-engineer">Chemical Engineer</option>
-                                <option value="chemist">Chemist</option>
-                                <option value="civil-engineer">Civil Engineer</option>
-                                <option value="clinical-psychologist">Clinical Psychologist</option>
-                                <option value="dentist">Dentist</option>
-                                <option value="doctor">Doctor/Physician</option>
-                                <option value="electrical-engineer">Electrical Engineer</option>
-                                <option value="economist">Economist</option>
-                                <option value="environmental-scientist">Environmental Scientist</option>
-                                <option value="financial-manager">Financial Manager</option>
-                                <option value="graphic-designer">Graphic Designer</option>
-                                <option value="industrial-engineer">Industrial Engineer</option>
-                                <option value="it-specialist">IT Specialist</option>
-                                <option value="journalist">Journalist</option>
-                                <option value="lawyer">Lawyer</option>
-                                <option value="mechanical-engineer">Mechanical Engineer</option>
-                                <option value="medical-specialist">Medical Specialist</option>
-                                <option value="nurse">Nurse</option>
-                                <option value="occupational-therapist">Occupational Therapist</option>
-                                <option value="optometrist">Optometrist</option>
-                                <option value="pharmacist">Pharmacist</option>
-                                <option value="physiotherapist">Physiotherapist</option>
-                                <option value="pilot">Pilot</option>
-                                <option value="project-manager">Project Manager</option>
-                                <option value="quantity-surveyor">Quantity Surveyor</option>
-                                <option value="social-worker">Social Worker</option>
-                                <option value="software-developer">Software Developer</option>
-                                <option value="teacher">Teacher</option>
-                                <option value="town-planner">Town Planner</option>
-                                <option value="veterinarian">Veterinarian</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Career 3</label>
-                            <select class="career-select">
-                                <option value="">Select Career (Optional)</option>
-                                <option value="accountant">Accountant</option>
-                                <option value="actuary">Actuary</option>
-                                <option value="architect">Architect</option>
-                                <option value="attorney">Attorney</option>
-                                <option value="auditor">Auditor</option>
-                                <option value="biologist">Biologist</option>
-                                <option value="business-analyst">Business Analyst</option>
-                                <option value="chemical-engineer">Chemical Engineer</option>
-                                <option value="chemist">Chemist</option>
-                                <option value="civil-engineer">Civil Engineer</option>
-                                <option value="clinical-psychologist">Clinical Psychologist</option>
-                                <option value="dentist">Dentist</option>
-                                <option value="doctor">Doctor/Physician</option>
-                                <option value="electrical-engineer">Electrical Engineer</option>
-                                <option value="economist">Economist</option>
-                                <option value="environmental-scientist">Environmental Scientist</option>
-                                <option value="financial-manager">Financial Manager</option>
-                                <option value="graphic-designer">Graphic Designer</option>
-                                <option value="industrial-engineer">Industrial Engineer</option>
-                                <option value="it-specialist">IT Specialist</option>
-                                <option value="journalist">Journalist</option>
-                                <option value="lawyer">Lawyer</option>
-                                <option value="mechanical-engineer">Mechanical Engineer</option>
-                                <option value="medical-specialist">Medical Specialist</option>
-                                <option value="nurse">Nurse</option>
-                                <option value="occupational-therapist">Occupational Therapist</option>
-                                <option value="optometrist">Optometrist</option>
-                                <option value="pharmacist">Pharmacist</option>
-                                <option value="physiotherapist">Physiotherapist</option>
-                                <option value="pilot">Pilot</option>
-                                <option value="project-manager">Project Manager</option>
-                                <option value="quantity-surveyor">Quantity Surveyor</option>
-                                <option value="social-worker">Social Worker</option>
-                                <option value="software-developer">Software Developer</option>
-                                <option value="teacher">Teacher</option>
-                                <option value="town-planner">Town Planner</option>
-                                <option value="veterinarian">Veterinarian</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Career 4</label>
-                            <select class="career-select">
-                                <option value="">Select Career (Optional)</option>
-                                <option value="accountant">Accountant</option>
-                                <option value="actuary">Actuary</option>
-                                <option value="architect">Architect</option>
-                                <option value="attorney">Attorney</option>
-                                <option value="auditor">Auditor</option>
-                                <option value="biologist">Biologist</option>
-                                <option value="business-analyst">Business Analyst</option>
-                                <option value="chemical-engineer">Chemical Engineer</option>
-                                <option value="chemist">Chemist</option>
-                                <option value="civil-engineer">Civil Engineer</option>
-                                <option value="clinical-psychologist">Clinical Psychologist</option>
-                                <option value="dentist">Dentist</option>
-                                <option value="doctor">Doctor/Physician</option>
-                                <option value="electrical-engineer">Electrical Engineer</option>
-                                <option value="economist">Economist</option>
-                                <option value="environmental-scientist">Environmental Scientist</option>
-                                <option value="financial-manager">Financial Manager</option>
-                                <option value="graphic-designer">Graphic Designer</option>
-                                <option value="industrial-engineer">Industrial Engineer</option>
-                                <option value="it-specialist">IT Specialist</option>
-                                <option value="journalist">Journalist</option>
-                                <option value="lawyer">Lawyer</option>
-                                <option value="mechanical-engineer">Mechanical Engineer</option>
-                                <option value="medical-specialist">Medical Specialist</option>
-                                <option value="nurse">Nurse</option>
-                                <option value="occupational-therapist">Occupational Therapist</option>
-                                <option value="optometrist">Optometrist</option>
-                                <option value="pharmacist">Pharmacist</option>
-                                <option value="physiotherapist">Physiotherapist</option>
-                                <option value="pilot">Pilot</option>
-                                <option value="project-manager">Project Manager</option>
-                                <option value="quantity-surveyor">Quantity Surveyor</option>
-                                <option value="social-worker">Social Worker</option>
-                                <option value="software-developer">Software Developer</option>
-                                <option value="teacher">Teacher</option>
-                                <option value="town-planner">Town Planner</option>
-                                <option value="veterinarian">Veterinarian</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Career 5</label>
-                            <select class="career-select">
-                                <option value="">Select Career (Optional)</option>
-                                <option value="accountant">Accountant</option>
-                                <option value="actuary">Actuary</option>
-                                <option value="architect">Architect</option>
-                                <option value="attorney">Attorney</option>
-                                <option value="auditor">Auditor</option>
-                                <option value="biologist">Biologist</option>
-                                <option value="business-analyst">Business Analyst</option>
-                                <option value="chemical-engineer">Chemical Engineer</option>
-                                <option value="chemist">Chemist</option>
-                                <option value="civil-engineer">Civil Engineer</option>
-                                <option value="clinical-psychologist">Clinical Psychologist</option>
-                                <option value="dentist">Dentist</option>
-                                <option value="doctor">Doctor/Physician</option>
-                                <option value="electrical-engineer">Electrical Engineer</option>
-                                <option value="economist">Economist</option>
-                                <option value="environmental-scientist">Environmental Scientist</option>
-                                <option value="financial-manager">Financial Manager</option>
-                                <option value="graphic-designer">Graphic Designer</option>
-                                <option value="industrial-engineer">Industrial Engineer</option>
-                                <option value="it-specialist">IT Specialist</option>
-                                <option value="journalist">Journalist</option>
-                                <option value="lawyer">Lawyer</option>
-                                <option value="mechanical-engineer">Mechanical Engineer</option>
-                                <option value="medical-specialist">Medical Specialist</option>
-                                <option value="nurse">Nurse</option>
-                                <option value="occupational-therapist">Occupational Therapist</option>
-                                <option value="optometrist">Optometrist</option>
-                                <option value="pharmacist">Pharmacist</option>
-                                <option value="physiotherapist">Physiotherapist</option>
-                                <option value="pilot">Pilot</option>
-                                <option value="project-manager">Project Manager</option>
-                                <option value="quantity-surveyor">Quantity Surveyor</option>
-                                <option value="social-worker">Social Worker</option>
-                                <option value="software-developer">Software Developer</option>
-                                <option value="teacher">Teacher</option>
-                                <option value="town-planner">Town Planner</option>
-                                <option value="veterinarian">Veterinarian</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Question 8: NSFAS -->
-                <div class="form-section" id="section-nsfas">
-                    <h3>8. Are you going to be applying for NSFAS? <span class="required-asterisk">*</span></h3>
-                    <div class="radio-group">
-                        <label class="radio-label">
-                            <input type="radio" name="nsfas" value="yes" required>
-                            <span>Yes</span>
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="nsfas" value="no" required>
-                            <span>No</span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- Submit Button -->
-                <div class="form-actions">
-                    <button type="submit" class="cta-button">Find My Matches</button>
-                </div>
-            </form>
+              </div>
+            </div>
+            <button type="button" id="addSubject" class="add-button">
+              <span>+</span> Add Another Subject
+            </button>
+          </div>
         </div>
-    </section>
 
-    {% endblock %}
+        <!-- Question 2: Location -->
+        <div class="form-card" id="section-location">
+          <div class="card-header">
+            <span class="question-number">02</span>
+            <h3>
+              Where do you currently live?
+              <span class="required-asterisk">*</span>
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Province</label>
+                <select id="province" required title="select province">
+                  <option value="">Select Province</option>
+                  <option value="gauteng">Gauteng</option>
+                  <option value="western-cape">Western Cape</option>
+                  <option value="kwazulu-natal">KwaZulu-Natal</option>
+                  <option value="eastern-cape">Eastern Cape</option>
+                  <option value="free-state">Free State</option>
+                  <option value="limpopo">Limpopo</option>
+                  <option value="mpumalanga">Mpumalanga</option>
+                  <option value="northern-cape">Northern Cape</option>
+                  <option value="north-west">North West</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Suburb/Area</label>
+                <input
+                  type="text"
+                  id="suburb"
+                  placeholder="e.g., Sandton"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+        </div>
 
-{% block scripts %}
-    <!-- gradient module loaded globally in base.html -->
-    <script>
-        // Subject Management
-        let subjectCount = 1;
-        const maxSubjects = 10;
+        <!-- Question 3: Willing to Relocate -->
+        <div class="form-card" id="section-relocate">
+          <div class="card-header">
+            <span class="question-number">03</span>
+            <h3>
+              Are you willing to relocate?
+              <span class="required-asterisk">*</span>
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="radio-group-modern">
+              <label class="radio-card">
+                <input type="radio" name="relocate" value="yes" required />
+                <div class="radio-card-content">
+                  <span class="radio-icon">✓</span>
+                  <span class="radio-text">Yes, I'm willing to relocate</span>
+                </div>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="relocate" value="no" required />
+                <div class="radio-card-content">
+                  <span class="radio-icon">✗</span>
+                  <span class="radio-text">No, I prefer to stay local</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
 
-        document.getElementById('addSubject').addEventListener('click', function() {
-            if (subjectCount < maxSubjects) {
-                subjectCount++;
-                const container = document.getElementById('subjectsContainer');
-                const newEntry = document.createElement('div');
-                newEntry.className = 'subject-entry';
-                newEntry.innerHTML = `
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Subject</label>
-                            <select class="subject-select" required>
-                                <option value="">Select Subject</option>
-                                <option value="mathematics">Mathematics</option>
-                                <option value="physical-sciences">Physical Sciences</option>
-                                <option value="life-sciences">Life Sciences</option>
-                                <option value="accounting">Accounting</option>
-                                <option value="business-studies">Business Studies</option>
-                                <option value="economics">Economics</option>
-                                <option value="geography">Geography</option>
-                                <option value="history">History</option>
-                                <option value="agricultural-sciences">Agricultural Sciences</option>
-                                <option value="consumer-studies">Consumer Studies</option>
-                                <option value="tourism">Tourism</option>
-                                <option value="dramatic-arts">Dramatic Arts</option>
-                                <option value="visual-arts">Visual Arts</option>
-                                <option value="design">Design</option>
-                                <option value="music">Music</option>
-                                <option value="civil-technology">Civil Technology</option>
-                                <option value="electrical-technology">Electrical Technology</option>
-                                <option value="mechanical-technology">Mechanical Technology</option>
-                                <option value="computer-applications-technology">Computer Applications Technology</option>
-                                <option value="information-technology">Information Technology</option>
-                                <option value="english-home-language">English Home Language</option>
-                                <option value="english-first-additional">English First Additional Language</option>
-                                <option value="afrikaans-home-language">Afrikaans Home Language</option>
-                                <option value="afrikaans-first-additional">Afrikaans First Additional Language</option>
-                                <option value="isizulu">IsiZulu</option>
-                                <option value="isixhosa">IsiXhosa</option>
-                                <option value="sepedi">Sepedi</option>
-                                <option value="setswana">Setswana</option>
-                                <option value="sesotho">Sesotho</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Mark (%)</label>
-                            <input type="number" class="subject-mark" min="0" max="100" placeholder="e.g., 85" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Grade</label>
-                            <select class="subject-grade" required>
-                                <option value="">Select Grade</option>
-                                <option value="10">Grade 10</option>
-                                <option value="11">Grade 11</option>
-                                <option value="12">Grade 12</option>
-                            </select>
-                        </div>
-                        <div class="form-group-actions">
-                            <button type="button" class="btn-remove-subject" title="Remove Subject">−</button>
-                        </div>
+        <!-- Question 4: Study Mode -->
+        <div class="form-card" id="section-study-mode">
+          <div class="card-header">
+            <span class="question-number">04</span>
+            <h3>
+              Do you prefer studying in contact or distance?
+              <span class="required-asterisk">*</span>
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="radio-group-modern">
+              <label class="radio-card">
+                <input type="radio" name="studyMode" value="contact" required />
+                <div class="radio-card-content">
+                  <span class="radio-icon">🏫</span>
+                  <span class="radio-text">Contact (In Person)</span>
+                </div>
+              </label>
+              <label class="radio-card">
+                <input
+                  type="radio"
+                  name="studyMode"
+                  value="distance"
+                  required
+                />
+                <div class="radio-card-content">
+                  <span class="radio-icon">💻</span>
+                  <span class="radio-text">Distance (Online)</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 5: Disabilities/Support -->
+        <div class="form-card" id="section-support">
+          <div class="card-header">
+            <span class="question-number">05</span>
+            <h3>
+              Do you need any academic support?
+              <span class="required-asterisk">*</span>
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="radio-group-modern">
+              <label class="radio-card">
+                <input
+                  type="radio"
+                  name="needSupport"
+                  value="yes"
+                  id="supportYes"
+                  required
+                />
+                <div class="radio-card-content">
+                  <span class="radio-icon">✓</span>
+                  <span class="radio-text">Yes, I need support</span>
+                </div>
+              </label>
+              <label class="radio-card">
+                <input
+                  type="radio"
+                  name="needSupport"
+                  value="no"
+                  id="supportNo"
+                  required
+                />
+                <div class="radio-card-content">
+                  <span class="radio-icon">✗</span>
+                  <span class="radio-text">No support needed</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 6: Support Details (Conditional) -->
+        <div class="form-card hidden" id="section-support-details">
+          <div class="card-header">
+            <span class="question-number">06</span>
+            <h3>
+              Please specify the support you need
+              <span class="required-asterisk">*</span>
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <textarea
+                id="supportDetails"
+                rows="4"
+                placeholder="Please describe the type of support you need..."
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 7: Career Interests -->
+        <div class="form-card" id="section-careers">
+          <div class="card-header">
+            <span class="question-number">07</span>
+            <h3>
+              Select up to 3 careers that interest you
+              <span class="required-asterisk">*</span>
+            </h3>
+          </div>
+          <div class="card-body">
+            <div id="careersContainer" class="careers-grid">
+              <!-- Career dropdowns will be here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 8: NSFAS -->
+        <div class="form-card" id="section-nsfas">
+          <div class="card-header">
+            <span class="question-number">08</span>
+            <h3>
+              Will you be applying for NSFAS?
+              <span class="required-asterisk">*</span>
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="radio-group-modern">
+              <label class="radio-card">
+                <input type="radio" name="nsfas" value="yes" required />
+                <div class="radio-card-content">
+                  <span class="radio-icon">✓</span>
+                  <span class="radio-text">Yes, I'll apply for NSFAS</span>
+                </div>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="nsfas" value="no" required />
+                <div class="radio-card-content">
+                  <span class="radio-icon">✗</span>
+                  <span class="radio-text">No, I have other funding</span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-actions">
+          <button type="submit" class="submit-button">
+            <span>Find My Perfect Match</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path
+                d="M4 10H16M16 10L11 5M16 10L11 15"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+  </section>
+</div>
+{% endblock %} {% block scripts %}
+<script>
+  // Subject Management
+  let subjectCount = 1;
+  const maxSubjects = 10;
+
+  // Full subject list
+  const subjects = [
+    "Mathematics",
+    "Physical Sciences",
+    "Life Sciences",
+    "Accounting",
+    "Business Studies",
+    "Economics",
+    "Geography",
+    "History",
+    "EGD",
+    "Consumer Studies",
+    "Tourism",
+    "Mathematics Literacy",
+    "Dramatic Arts",
+    "Visual Arts",
+    "Design",
+    "Music",
+    "Civil Technology",
+    "Electrical Technology",
+    "Mechanical Technology",
+    "Computer Applications Technology",
+    "Information Technology",
+    "English Home Language",
+    "English First Additional Language",
+    "Afrikaans Home Language",
+    "Afrikaans First Additional Language",
+    "IsiZulu",
+    "IsiXhosa",
+    "Sepedi",
+    "Setswana",
+    "Sesotho",
+  ];
+
+  // Career list
+  const careers = [
+    "Accountant",
+    "Actuary",
+    "Architect",
+    "Attorney",
+    "Auditor",
+    "Biologist",
+    "Business Analyst",
+    "Chemical Engineer",
+    "Chemist",
+    "Civil Engineer",
+    "Dentist",
+    "Data Scientist",
+    "Designer",
+    "Electrical Engineer",
+    "Financial Analyst",
+    "Docter",
+    "Nurse",
+    "Financial Manager",
+    "Graphic Designer",
+    "Industrial Engineer",
+    "IT Specialist",
+    "Journalist",
+    "Lawyer",
+    "Mechanical Engineer",
+    "Medical Specialist",
+    "Nurse",
+    "Occupational Therapist",
+    "Optometrist",
+    "Pharmacist",
+    "Physiotherapist",
+    "Pilot",
+    "Project Manager",
+    "SQL Developer",
+    "Software Developer",
+    "Teacher",
+    "Web Developer",
+  ];
+
+  // Initialize career selects
+  const careersContainer = document.getElementById("careersContainer");
+  for (let i = 1; i <= 3; i++) {
+    const formGroup = document.createElement("div");
+    formGroup.className = "form-group";
+    formGroup.innerHTML = `
+            <label>Career ${i}${i === 1 ? " (Required)" : " (Optional)"}</label>
+            <select class="career-select" ${i === 1 ? "required" : ""}>
+                <option value="">Select Career</option>
+                ${careers
+                  .map(
+                    (c) =>
+                      `<option value="${c
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")}">${c}</option>`
+                  )
+                  .join("")}
+            </select>
+        `;
+    careersContainer.appendChild(formGroup);
+  }
+
+  document.getElementById("addSubject").addEventListener("click", function () {
+    if (subjectCount < maxSubjects) {
+      subjectCount++;
+      const container = document.getElementById("subjectsContainer");
+      const newEntry = document.createElement("div");
+      newEntry.className = "subject-entry";
+      newEntry.innerHTML = `
+                <div class="subject-row">
+                    <div class="form-group flex-2">
+                        <label>Subject</label>
+                        <select class="subject-select" required>
+                            <option value="">Select Subject</option>
+                            ${subjects
+                              .map(
+                                (s) =>
+                                  `<option value="${s
+                                    .toLowerCase()
+                                    .replace(/\s+/g, "-")}">${s}</option>`
+                              )
+                              .join("")}
+                        </select>
                     </div>
-                `;
-                container.appendChild(newEntry);
-                updateRemoveButtons();
-            }
-        });
+                    <div class="form-group flex-1">
+                        <label>Mark (%)</label>
+                        <input type="number" class="subject-mark" min="0" max="100" placeholder="85" required>
+                    </div>
+                    <div class="form-group flex-1">
+                        <label>Grade</label>
+                        <select class="subject-grade" required>
+                            <option value="">Grade</option>
+                            <option value="10">Grade 10</option>
+                            <option value="11">Grade 11</option>
+                            <option value="12">Grade 12</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn-remove-subject" title="Remove Subject">×</button>
+                </div>
+            `;
+      container.appendChild(newEntry);
+    }
+  });
 
-        document.getElementById('subjectsContainer').addEventListener('click', function(e) {
-            if (e.target.classList.contains('btn-remove-subject')) {
-                e.target.closest('.subject-entry').remove();
-                subjectCount--;
-                updateRemoveButtons();
-            }
-        });
+  document
+    .getElementById("subjectsContainer")
+    .addEventListener("click", function (e) {
+      if (e.target.classList.contains("btn-remove-subject")) {
+        e.target.closest(".subject-entry").remove();
+        subjectCount--;
+      }
+    });
 
-        function updateRemoveButtons() {
-            const buttons = document.querySelectorAll('.btn-remove-subject');
-            buttons.forEach((btn, index) => {
-                btn.disabled = buttons.length === 1;
-            });
+  // Show/Hide Support Details
+  document.querySelectorAll('input[name="needSupport"]').forEach((radio) => {
+    radio.addEventListener("change", function () {
+      const detailsSection = document.getElementById("section-support-details");
+      const detailsTextarea = document.getElementById("supportDetails");
+      if (this.value === "yes") {
+        detailsSection.classList.remove("hidden");
+        detailsTextarea.required = true;
+      } else {
+        detailsSection.classList.add("hidden");
+        detailsTextarea.required = false;
+        detailsTextarea.value = "";
+      }
+    });
+  });
+
+  // Error Toast Function
+  function showError(message, sectionId) {
+    const toast = document.getElementById("errorToast");
+    const errorMessage = document.getElementById("errorMessage");
+    errorMessage.textContent = message;
+    toast.classList.add("show");
+
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.classList.add("error-highlight");
+      section.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    setTimeout(() => {
+      toast.classList.remove("show");
+      if (section) section.classList.remove("error-highlight");
+    }, 3000);
+  }
+
+  // Progress tracking
+  function updateProgress() {
+    const form = document.getElementById("searchForm");
+    const sections = form.querySelectorAll(".form-card");
+    let completed = 0;
+
+    sections.forEach((section) => {
+      const inputs = section.querySelectorAll(
+        "input[required], select[required], textarea[required]"
+      );
+      let sectionComplete = true;
+
+      inputs.forEach((input) => {
+        if (input.type === "radio") {
+          const radioGroup = section.querySelectorAll(
+            `input[name="${input.name}"]`
+          );
+          const checked = Array.from(radioGroup).some((r) => r.checked);
+          if (!checked) sectionComplete = false;
+        } else if (!input.value) {
+          sectionComplete = false;
         }
+      });
 
-        // Show/Hide Support Details
-        document.querySelectorAll('input[name="needSupport"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                const detailsSection = document.getElementById('section-support-details');
-                const detailsTextarea = document.getElementById('supportDetails');
-                if (this.value === 'yes') {
-                    detailsSection.classList.remove('hidden');
-                    detailsTextarea.required = true;
-                } else {
-                    detailsSection.classList.add('hidden');
-                    detailsTextarea.required = false;
-                    detailsTextarea.value = '';
-                }
-            });
-        });
+      if (sectionComplete) completed++;
+    });
 
-        // Error Toast Function
-        function showError(message, sectionId) {
-            const toast = document.getElementById('errorToast');
-            const errorMessage = document.getElementById('errorMessage');
+    const percentage = Math.round((completed / sections.length) * 100);
+    document.getElementById("progressFill").style.width = percentage + "%";
+    document.getElementById("progressText").textContent = percentage;
+  }
 
-            errorMessage.textContent = message;
-            toast.classList.add('show');
-
-            // Highlight the section with error
-            const section = document.getElementById(sectionId);
-            if (section) section.classList.add('error-highlight');
-
-            // Scroll to the error
-            if (section) section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-            setTimeout(() => {
-                // hide toast and remove highlight after timeout
-                toast.classList.remove('show');
-                if (section) section.classList.remove('error-highlight');
-            }, 3000);
-        }
-
-        // Initialize any remaining UI behaviour (placeholder)
-        document.addEventListener('DOMContentLoaded', function() {
-            updateRemoveButtons();
-        });
-
-    </script>
+  // Update progress on any form change
+  document
+    .getElementById("searchForm")
+    .addEventListener("change", updateProgress);
+  document
+    .getElementById("searchForm")
+    .addEventListener("input", updateProgress);
+</script>
 {% endblock %}

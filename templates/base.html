@@ -1,90 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{% block title %}uni.sa{% endblock %}</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-  {% block head_extras %}{% endblock %}
-</head>
-<body>
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}uni.sa{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    {% block head_extras %}{% endblock %}
+  </head>
+  <body>
     <nav class="navbar">
-        <canvas id="gradient-canvas" data-transition-in></canvas>
-        <a href="{{ url_for('home_page') }}"><img class="logo" src="{{ url_for('static', filename='img/atom-removebg-preview.png') }}" alt="uni.sa"></a>
-            {% if session.get('username') %}
-      <a href="/personal-info" class="nav-link">{{ session.get('username') }}</a>
-    {% endif %}
-        <ul>
-            <li><a href="{{ url_for('home_page') }}" class="underline">Home</a></li>
-            <li><a href="{{ url_for('about') }}" class="underline">About Us</a></li>
-            <li><a href="{{ url_for('how_it_works') }}" class="underline">How it Works</a></li>
-                <li class = "dropdown">
-                    <a href="#">Student Tools</a>
-                    <ul class="dropdown-content">
-                        <li><a href="{{ url_for('admissions') }}" class="underline">Admissions Calendar</a></li>
-                        <li><a href="{{ url_for('bursaries') }}" class="underline">Bursaries</a></li>
-                    </ul>
-                </li>
-                <li><a href="{{ url_for('contact') }}" class="underline">Contact Us</a></li>
-                 {% if session.get('username') %}
-                 <li><a href="/#" class="underline" id="logoutBtn">Logout</a></li>
-                 {% else %}
-                <li><a href="{{ url_for('login') }}" class="underline">Login</a></li>
-                    {% endif %}
-                <li><a href="{{ url_for('start_search') }}" class ="special-link">START MY SEARCH!</a></li>
-        </ul>
+      <canvas id="gradient-canvas" data-transition-in></canvas>
+      <a href="{{ url_for('home_page') }}"
+        ><img
+          class="logo"
+          src="{{ url_for('static', filename='img/atom-removebg-preview.png') }}"
+          alt="uni.sa"
+      /></a>
+      {% if session.get('username') %}
+      <a href="/personal-info" class="nav-link"
+        >{{ session.get('username') }}</a
+      >
+      {% endif %}
+      <ul>
+        <li><a href="{{ url_for('home_page') }}" class="underline">Home</a></li>
+        <li><a href="{{ url_for('about') }}" class="underline">About Us</a></li>
+        <li>
+          <a href="{{ url_for('how_it_works') }}" class="underline"
+            >How it Works</a
+          >
+        </li>
+        <li class="dropdown">
+          <a href="#">Student Tools</a>
+          <ul class="dropdown-content">
+            <li>
+              <a href="{{ url_for('admissions') }}" class="underline"
+                >Admissions Calendar</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('bursaries') }}" class="underline"
+                >Bursaries</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="{{ url_for('contact') }}" class="underline">Contact Us</a>
+        </li>
+        {% if session.get('username') %}
+        <li><a href="/#" class="underline" id="logoutBtn">Logout</a></li>
+        {% else %}
+        <li><a href="{{ url_for('login') }}" class="underline">Login</a></li>
+        {% endif %}
+        <li>
+          <a href="{{ url_for('start_search') }}" class="special-link"
+            >START MY SEARCH!</a
+          >
+        </li>
+      </ul>
     </nav>
 
     {% block content %}{% endblock %}
 
     <footer>
-    <div class="footer-container">
+      <div class="footer-container">
         <!-- Contact Section -->
         <div class="footer-section contact">
-            <h3>Contact Us</h3>
-            <p>Email: <a href="mailto:tmothilall07@gmail.com">info@uni.sa</a></p>
-            <p>Phone: +27 62 933 0262</p>
+          <h3>Contact Us</h3>
+          <p>Email: <a href="mailto:tmothilall07@gmail.com">info@uni.sa</a></p>
+          <p>Phone: +27 62 933 0262</p>
         </div>
 
         <!-- Explore Section -->
         <div class="footer-section explore">
-            <h3>Explore</h3>
-            <ul>
-                <li><a href="{{ url_for('home_page') }}">Home</a></li>
-                <li><a href="{{ url_for('about') }}">About Us</a></li>
-                <li><a href="{{ url_for('how_it_works') }}">How it Works</a></li>
-                <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
-                <li><a href="{{ url_for('admissions') }}">Admissions Calendar</a></li>
-                <li><a href="{{ url_for('bursaries') }}">Bursaries</a></li>
-                <li><a href="{{ url_for('login') }}">Login</a></li>
-                <li><a href="{{ url_for('start_search') }}">START MY SEARCH!</a></li>
-                <li><a href="{{ url_for('personal_info') }}">Personal Info</a></li>
-            </ul>
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="{{ url_for('home_page') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="{{ url_for('how_it_works') }}">How it Works</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+            <li>
+              <a href="{{ url_for('admissions') }}">Admissions Calendar</a>
+            </li>
+            <li><a href="{{ url_for('bursaries') }}">Bursaries</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+            <li>
+              <a href="{{ url_for('start_search') }}">START MY SEARCH!</a>
+            </li>
+            <li><a href="{{ url_for('personal_info') }}">Personal Info</a></li>
+          </ul>
         </div>
 
         <!-- Legal Section -->
         <div class="footer-section legal">
-            <h3>Legal</h3>
-            <ul>
-                <li><a href="{{ url_for('terms') }}">Terms of Use</a></li>
-                <li><a href="{{ url_for('privacy') }}">Privacy Policy</a></li>
-                <li><a href="#">Accessibility Statement</a></li>
-            </ul>
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="{{ url_for('terms') }}">Terms of Use</a></li>
+            <li><a href="{{ url_for('privacy') }}">Privacy Policy</a></li>
+            <li><a href="#">Accessibility Statement</a></li>
+          </ul>
         </div>
-    </div>
+      </div>
 
-    <p class="footer-bottom">Developed by ATOM for the Richfield IT Project (2025)</p>
-    <a href="#top" class="back-to-top">Back to Top ↑</a>
+      <p class="footer-bottom">
+        Developed by ATOM for the Richfield IT Project (2025)
+      </p>
+      <a href="#top" class="back-to-top">Back to Top ↑</a>
     </footer>
 
     {% block scripts %}{% endblock %}
     <!-- Global gradient module (initializes only if #gradient-canvas exists) -->
-     <script type="module" src="{{ url_for('static', filename='js/gradient.js') }}"></script>
-    <script type="module" src="{{ url_for('static', filename='js/logout.js') }}"></script>
-    
-</body>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/gradient.js') }}"
+    ></script>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/logout.js') }}"
+    ></script>
+  </body>
 </html>
