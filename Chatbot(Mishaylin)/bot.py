@@ -1,27 +1,32 @@
 import json
 import nltk
+from pathlib import Path  
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from difflib import get_close_matches
 import string
+from flask import Flask, request, jsonify, render_template
 
+# Download NLTK resources (only needed once)
 nltk.download('punkt')
 nltk.download('wordnet')
 
-# Load dataset
+app = Flask(__name__, static_folder='static', template_folder='templates')
+
+#Locate JSON dataset
+base_path = Path(__file__).parent
+file_path = base_path / "student_questions.json"
+
 try:
-    with open("student_questions.json", "r", encoding="utf-8") as file:
+    with open(file_path, "r", encoding="utf-8") as file:
         data = json.load(file)
     questions = [item['question'] for item in data['data']]
     answers = [item['answer'] for item in data['data']]
-except FileNotFoundError:
-    print("Error: student_questions.json not found.")
-    exit()
-except json.JSONDecodeError:
-    print("Error: JSON file is not properly formatted.")
-    exit()
+except Exception as e:
+    print("Error loading JSON:", e)
+    questions, answers = [], []
 
-# Synonyms mapping
+#Synonyms mapping
 synonyms = {
     "fee": ["fees", "cost", "price"],
     "course": ["courses", "class", "program"],
@@ -35,7 +40,6 @@ def normalize_text(text):
             text = text.replace(syn, key)
     return text
 
-# Correct spelling with multiple suggestions
 def correct_spelling(user_input):
     normalized_questions = [normalize_text(q) for q in questions]
     matches = get_close_matches(normalize_text(user_input), normalized_questions, n=3, cutoff=0.7)
@@ -72,18 +76,26 @@ def chatbot_response(user_input):
     else:
         return answers[idx]
 
-# Run chatbot
-print("ATOM: Hello, my name is ATOM! How may I help you choose your course?")
-while True:
-    try:
-        user_input = input("You: ")
-        if user_input.lower() in ["exit", "quit", "bye", "done", "goodbye", "stop"]:
-            print("ATOM: Goodbye! Have a great day 👋")
-            break
-        response = chatbot_response(user_input)
-        print(f"ATOM: {response}")
-    except KeyboardInterrupt:
-        print("\nATOM: Goodbye! 👋")
-        break
-    except Exception as e:
-        print(f"ATOM: Something unexpected happened ({e}). Please try again.")
+#Flask routes
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/ask', methods=['POST'])
+def ask():
+    user_message = request.json.get("message", "").strip().lower()
+
+    # Exit/Goodbye handling
+    exit_words = ["exit", "quit", "bye", "done", "goodbye", "stop"]
+    if user_message in exit_words:
+        reply = "Goodbye! 👋 Have a great day ahead!"
+    else:
+        try:
+            reply = chatbot_response(user_message)
+        except Exception as e:
+            reply = f"Something unexpected happened ({e}). Please try again."
+
+    return jsonify({"reply": reply})
+
+if __name__ == '__main__':
+    app.run(debug=True)
