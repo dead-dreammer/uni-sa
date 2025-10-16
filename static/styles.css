@@ -175,11 +175,13 @@ ul.dropdown-content {
 	font-size: 6rem;
 	color: #ffffff;
 	margin-top: 10rem;
+  
 }
 
 .main-content p {
 	font-size: 1.5rem;
 	color: rgb(110, 65, 116);
+  padding-bottom: 9rem;
 }
 
 /* Team section with enhanced backdrop */
@@ -380,6 +382,7 @@ body.about-page {
 .main-content_about p {
 	font-size: 1.5rem;
 	color: whitesmoke;
+  padding-bottom: 4rem;
 }
 
 /* Horizontal scrolling*/
@@ -483,8 +486,7 @@ body.about-page {
   color: #ddd;
 }
 
-/* contact us */
-/* Contact Page Styling */
+/* contact us ----------------------------------------------------------------------------------------------------------------------------------------*/
 body.contact-page {
   /* Contact page background served from static/img/Contact us/contact_bg.png */
   background: url('/static/img/Contact%20us/contact_bg.png') no-repeat center top fixed;
@@ -514,13 +516,21 @@ body.contact-page {
   margin: 0 auto;
 }
 
-/* Main layout: form + info side by side */
-main {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
+/* Main layout - changed to block instead of flex */
+.contact-page main {
+  display: block;
   padding: 3rem 2rem;
-  justify-content: center;
+}
+
+/* Top sections container for form and info */
+.top-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Contact form section */
@@ -528,8 +538,8 @@ main {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 12px;
   padding: 2rem;
-  flex: 1 1 400px;
-  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); 
 }
 
 .contact-form-section h2 {
@@ -582,8 +592,8 @@ button[type="submit"]:hover {
   background: rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   padding: 2rem;
-  flex: 1 1 300px;
-  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); 
 }
 
 .info-section h2 {
@@ -604,7 +614,7 @@ button[type="submit"]:hover {
 }
 
 .contact-link {
-  color: #ffda79;
+  color: #190a5f;
   text-decoration: none;
 }
 
@@ -631,24 +641,64 @@ button[type="submit"]:hover {
   border-radius: 8px;
 }
 
-/* FAQ section */
+/* FAQ section - full width below the top sections */
 .faq {
-  margin-top: 2rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); 
 }
 
 .faq h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
 }
 
 .faq-item {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.719);
+}
+
+.faq-item:last-child {
+  border-bottom: none;
 }
 
 .faq-item strong {
   display: block;
-  margin-bottom: 0.3rem;
-  color: #ffda79;
+  margin-bottom: 0.5rem;
+  color: #05065a;
+  font-size: 1.05rem;
+}
+
+.faq-item span {
+  color: #000000;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .top-sections {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .contact-page main {
+    padding: 2rem 1rem;
+  }
 }
 
 /*HOW IT WORKS---------------------------------------------------------------------------------------------------------------------------------*/
@@ -789,319 +839,32 @@ button[type="submit"]:hover {
     color: #ddd;
 }
 
-/*SIGN UP FORM--------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
-      color: white;
-      /* global background served from static/img 
-      background: url('/static/img/background.png') no-repeat center top fixed;
-      background-size: cover;
-    }
-
-    /*.signup-page {
-      background-color: #869ddb;
-    	background-image: url('/static/img/Login/sign%26log_up_bg.png');
-    	background-size: cover;
-    	background-position: center top;
-    	background-repeat: no-repeat;
-    	background-attachment: fixed;}*/
-
-
-
-    /* ===== Container ===== 
-    .container {
-      max-width: 1000px;
-      max-height: 580px;
-      background: rgba(255, 255, 255, 0.1);
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      padding: 2rem;
-      margin: 3rem auto;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      color: white;
-    }
-
-    /* ===== Form Layout ===== 
-    .form-wrapper {
-      display: flex;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-
-    .form-column {
-      flex: 1;
-      min-width: 300px;
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-
-   .form-input,
-    select {
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    background: rgba(255, 255, 255, 0.9);  
-    color: #333;   
-    font-size: 16px;
-    font-family: inherit;
-  }
-
-  select{
-    cursor: pointer;
-  }
-
-  select option {
-  background-color: #556ee6;
-  color: white;
-  }
-
-  .form-input:focus, select:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px #556ee6;
-  background: #ffffff;  
-}
-
-    
-    .button {
-      display: inline-block;
-      background: #556ee6;
-      color: white;
-      text-decoration: none;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      font-weight: 500;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .form-group .button {
-      width: 100%;
-      text-align: center;
-      max-width: 200px;
-      margin: 0 auto;
-    }
-
-    .button:hover {
-      background: #2132a1;
-      transform: translateY(-2px);
-    }
-
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 2rem;
-      color: white;
-      font-weight: 600;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        padding: 1.5rem;
-        margin: 2rem;
-      }
-      .button {
-        width: 100%;
-      }
-    }*/
-
-/*LOGIN PAGE-----------------------------------------------------------------------------------------------------------------------------------------------------------------*/
- /*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
-      color: white;
-      background: linear-gradient(to bottom, #5ba9e0 0%, #8a7bd9 50%, #f0b7a4 100%);
-    }
-
-
-    /* ===== Main Container ===== 
-    .main {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: calc(100vh - 100px);
-    }
-
-    .container {
-      max-width: 500px;
-      margin-top: 50px;
-      padding: 2rem;
-      background: rgba(255, 255, 255, 0.1);
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      animation: fadeIn 0.5s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ===== Form Styling ===== 
-    .form-container {
-      margin-top: 20px;
-      max-width: 300px;
-      margin: 0 auto;
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-    }
-
-    .form-input {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: none;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      font-family: inherit;
-      font-size: 1rem;
-    }
-
-    .form-input:focus {
-      outline: none;
-      box-shadow: 0 0 0 2px #556ee6;
-    }
-
-    .button {
-      display: inline-block;
-      background: #556ee6;
-      color: white !important;
-      text-decoration: none;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      font-weight: 500;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      width: 100%;
-    }
-
-    .button:hover {
-      background: #3747a8;
-      transform: translateY(-2px);
-    }
-
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      margin-top: 20px;
-      color: #fff;
-      font-weight: 600;
-      text-align: center;
-    }
-
-    p {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      color: rgba(255, 255, 255, 0.9);
-    }
-
-    @media (max-width: 768px) {
-     
-
-      .container {
-        padding: 1.5rem;
-        margin-top: 30px;
-      }
-
-      h1 {
-        font-size: 1.75rem;
-      }
-
-      .button {
-        padding: 0.75rem 1.5rem;
-      }
-    }*/
-
-
-/* Sign Up Form Specific Styles */
-/*body.signup-page input,
-body.signup-page select,
-body.signup-page textarea {
-  width: 100% !important;
-  padding: 12px !important;
-  border-radius: 8px !important;
-  border: 2px solid #ccc !important;
-  background: #ffffff !important;
-  color: #333 !important;
-  font-size: 16px !important;
-  font-family: inherit !important;
-}
-
-body.signup-page input:focus,
-body.signup-page select:focus,
-body.signup-page textarea:focus {
-  outline: none !important;
-  border-color: #556ee6 !important;
-  box-shadow: 0 0 0 3px rgba(85, 110, 230, 0.2) !important;
-  background: #ffffff !important;
-}
-
-body.signup-page select {
-  cursor: pointer !important;
-}
-
-body.signup-page select option {
-  background-color: #556ee6 !important;
-  color: white !important;
-}*/
-
-/* Auth Page Styling */
+/* Auth Page Styling -------------------------------------------------------------------------------------*/
 
 body.auth-page {
   /* auth page background served from static/img */
 
+  background: url('/static/img/background.png') no-repeat center top fixed;
+  background-repeat: no-repeat;
+  background-position: center top;
   background-size: cover;
+  background-attachment: fixed;
   font-family: 'Montserrat', sans-serif;
   min-height: 100vh;
-  color: white;
+  color: #ffffff;
   margin: 0;
   padding: 0;
 }
 
 /* Main container and layout */
-.auth-page .main {
+.auth-page.main {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   min-height: 80vh;
-  padding: 2rem 2rem;
-  padding-right: 7.5rem;
+  padding: 2rem ;
+  overflow-y: auto;
 }
 
 .auth-page .container {
@@ -1114,6 +877,7 @@ body.auth-page {
   padding: 3rem 4rem;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   color: white;
+  
 }
 
 /* Form container with fade transition */

@@ -4,12 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}uni.sa{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   {% block head_extras %}{% endblock %}
 </head>
 <body>
-    <canvas id="gradient-canvas" data-transition-in></canvas>
+    
     <nav class="navbar">
+        <canvas id="gradient-canvas" data-transition-in></canvas>
         <a href="{{ url_for('home_page') }}"><img class="logo" src="{{ url_for('static', filename='img/atom-removebg-preview.png') }}" alt="uni.sa"></a>
             {% if session.get('username') %}
       <a href="/profile" class="nav-link">{{ session.get('username') }}</a>
@@ -79,7 +83,8 @@
 
     {% block scripts %}{% endblock %}
     <!-- Global gradient module (initializes only if #gradient-canvas exists) -->
-    <script type="module" src="{{ url_for('static', filename='js/gradient.js') }}"></script>
+     <script type="module" src="{{ url_for('static', filename='js/gradient.js') }}"></script>
     <script type="module" src="{{ url_for('static', filename='js/logout.js') }}"></script>
+    
 </body>
 </html>
