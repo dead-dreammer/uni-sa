@@ -1,0 +1,1088 @@
+{
+  "data": [
+    {
+      "question": "Hello",
+      "answer": "Hello! My name is ATOM, your Student Advisor.Welcome to the UNI.SA platform! You can ask me about universities such as UKZN, MUT, DUT, UNISA, Eduvos, or Richfield — including their courses, study durations, tuition fees in ZAR, entry requirements, matric subject mappings (APS), and how to apply."
+    },
+    {
+      "question": "ukzn overview",
+      "answer": "UKZN (University of KwaZulu-Natal) is a research-led public university with five campuses:\nHoward College, Westville, Pietermaritzburg, Edgewood and Nelson R. Mandela Medical School.\nIt offers undergraduate and postgraduate programmes across Agriculture, Engineering & Science, Health Sciences, Humanities, Law and Management.\nTypical intakes: February and July."
+    },
+    {
+      "question": "ukzn courses list",
+      "answer": "Popular UKZN programmes:\nBSc (Computer Science, Environmental Science, Life & Earth Sciences streams)\nBSc Eng (Chemical, Civil, Computer, Electrical, Electronic, Mechanical)\nBCom (Accounting, Finance, Business Administration)\nLLB (Law)\nMBChB (Medicine)\nBEd (Education)\nBA (Humanities)\nBSc Agric (Plant Sciences, Soil Science, Animal & Poultry Science)."
+    },
+    {
+      "question": "ukzn bsc eng computer duration and requirements",
+      "answer": "BSc Engineering (Computer)\nDuration: 4 years.\nEntry: NSC Degree pass with Mathematics and Physical Science at high levels (programme APS range typically in the high-40s → 48–33 shown as selection range for many engineering streams).\nApplicants must check the campus-specific tables for exact subject level requirements."
+    },
+    {
+      "question": "ukzn bsc computer science duration and requirements",
+      "answer": "BSc (Computer Science)\nDuration: typically 3 years (honours an extra 1 year).\nEntry: NSC Degree pass; Mathematics is strongly recommended (Maths or Maths-stream subjects at higher levels improve admission chances).\nSelection is APS-based; programmes may apply higher subject-level requirements."
+    },
+    {
+      "question": "ukzn mbchb duration and requirements",
+      "answer": "MBChB (Medicine)\nDuration: 6 years.\nEntry: Very competitive.\nHigh NSC aggregate, high levels in Life Sciences and Physical Science (and usually Mathematics), and programme-specific selection rules.\nMedicine applications have earlier closing dates and extra faculty selection steps."
+    },
+    {
+      "question": "ukzn bcom accounting duration and requirements",
+      "answer": "BCom (Accounting)\nDuration: 3 years (with honours/CTA for SAICA pathways).\nEntry: NSC Degree pass, Mathematics at a required level (often Level 4–5 depending on pathway) and English Level 4 minimum.\nSAICA-pathway routes may require higher APS and additional subject standards."
+    },
+    {
+      "question": "ukzn aps and how matric maps to courses",
+      "answer": "UKZN uses an Academic Performance Score (APS) built from your best subjects (universities exclude Life Orientation).\nEach NSC level maps to points; programmes publish APS ranges and required subject levels (e.g., Engineering typically requires Maths & Phys Sci at higher levels).\nMeeting min APS does not guarantee selection — programmes rank applicants by APS."
+    },
+    {
+      "question": "mut overview",
+      "answer": "MUT (Mangosuthu University of Technology) is a public university of technology in Umlazi (Durban) focused on applied STEM and management sciences.\nIt offers diplomas, degrees and short learning programmes with strong work-integrated learning (WIL) components."
+    },
+    {
+      "question": "mut diplomas engineering duration and requirements",
+      "answer": "Typical MUT engineering diplomas (Chemical, Civil, Electrical, Mechanical, Building, Surveying)\nDuration: 3 years.\nEntry: NSC diploma pass or equivalent.\nEnglish, Mathematics and Physical Science usually required at 50%+ (or NSC level 4+).\nSpecific departmental screening may apply."
+    },
+    {
+      "question": "mut fees and residence costs",
+      "answer": "MUT tuition ranges roughly between R4,530 and R15,350 per semester depending on programme and subjects (indicative).\nResidence fees range between R4,120 and R11,150 per semester.\nFinancial support (NSFAS, bursaries) is available for eligible students."
+    },
+    {
+      "question": "how to apply to mut",
+      "answer": "First-year applications to MUT are mostly via the Central Applications Office (CAO).\nSubmit NSC/Grade 11/12 results, ID and certified documents.\nCheck MUT prospectus for faculty-specific closing dates and CAO codes."
+    },
+    {
+      "question": "dut overview",
+      "answer": "DUT is a multi-campus University of Technology offering career-focused diplomas, degrees and postgraduate qualifications across Engineering, Applied Sciences, Arts & Design, Health Sciences, Accounting and IT with a strong emphasis on work-integrated learning."
+    },
+    {
+      "question": "dut bachelor of information and communications technology duration and requirements",
+      "answer": "Bachelor of Information & Communications Technology\nDuration: 3 years (honours or advanced routes vary).\nEntry: NSC Degree / Bachelors pass with English HL/FAL Level 4 and Mathematics Level 4 and at least three designated 20-credit subjects at Level 4 (not more than one language)."
+    },
+    {
+      "question": "dut diploma ict applications development duration and requirements",
+      "answer": "Diploma ICT: Applications Development\nDuration: 3 years (or 4-year foundation variant).\nEntry: NSC Diploma with English HL 3/FAL 4 and Maths 3/Maths Lit 6 and three 20-credit subjects at Level 3."
+    },
+    {
+      "question": "dut applied science and engineering entry and fees",
+      "answer": "DUT programmes in Applied Sciences and Engineering typically require English Level 4, Mathematics and Physical Science at Level 4–5 depending on the specific qualification.\nClosing dates are usually 30 September for first-semester intake.\nConsult DUT prospectus for the programme fee booklet and module-level fees."
+    },
+    {
+      "question": "unisa overview",
+      "answer": "UNISA is Africa’s largest open distance-learning university.\nFlexible, module-based registration, regional support centres, and strong online student services (myUnisa).\nPopular for students needing flexible study schedules."
+    },
+    {
+      "question": "unisa how fees are charged and typical costs",
+      "answer": "UNISA charges per module.\nModule fees vary widely; typical module fees range approximately between R1,900 and R8,000 depending on the module and level.\nAnnual cost depends on the number of modules taken (students commonly take 4–6 modules per year)."
+    },
+    {
+      "question": "unisa application and supporting documents",
+      "answer": "Apply directly via UNISA’s online portal.\nRequired documents: certified copy of ID/passport, certified school qualifications (NSC/Matric), tertiary transcripts (if applicable).\nDocuments must be certified within three months before upload.\nUNISA issues a student number which is used to pay the application fee once assigned."
+    },
+    {
+      "question": "unisa postgraduate entry requirements",
+      "answer": "Masters usually require an Honours degree or postgraduate diploma with a relevant average (often 60%+).\nDoctoral entry normally requires an appropriate Master’s degree and supervisor availability.\nApplicants should contact relevant academic departments before applying."
+    },
+    {
+      "question": "eduvos overview",
+      "answer": "Eduvos is a private higher education institution offering career-focused qualifications in IT, Commerce, Creative Arts and Education.\nThey offer campus-based and online modes, monthly payment plans and bridging/access options for those who don't meet direct entry requirements."
+    },
+    {
+      "question": "eduvos typical courses durations and entry requirements",
+      "answer": "Eduvos offers Bachelor degrees (3 years), diplomas (2–3 years), higher certificates (1 year) and honours (1 year).\nEntry normally requires a National Senior Certificate with competency in English (often 50%+).\nSome programmes require Mathematics (not Maths Lit) — bridging courses are offered where needed."
+    },
+    {
+      "question": "eduvos fees and how to apply",
+      "answer": "Eduvos publishes programme-specific fee schedules and offers deposit and monthly payment options.\nApply via Eduvos admissions portal or campus; provide certified ID/Matric and proof of payment for application where required."
+    },
+    {
+      "question": "what is mancosa",
+      "answer": "MANCOSA (Management College of Southern Africa) is a leading private higher education institution registered with the Department of Higher Education and Training (DHET) and accredited by the Council on Higher Education (CHE). It specializes in management, commerce, information technology, and education programmes, offered via distance and online learning."
+    },
+    {
+      "question": "what faculties does mancosa have",
+      "answer": "MANCOSA offers programmes under five main academic schools: 1) School of Business and Management, 2) School of Education, 3) School of Information and Digital Technology, 4) School of Public Administration, and 5) School of Health and Social Sciences."
+    },
+    {
+      "question": "what undergraduate programmes does mancosa offer",
+      "answer": "MANCOSA offers undergraduate programmes such as Higher Certificates (Business Management, Marketing, HR, Project Management, Public Management, IT), Diplomas, and Bachelor’s Degrees (BCom Accounting, BCom Marketing Management, BCom Human Resource Management, Bachelor of Education, Bachelor of Public Administration, and Bachelor of Commerce in IT Management)."
+    },
+    {
+      "question": "what postgraduate programmes does mancosa offer",
+      "answer": "MANCOSA’s postgraduate qualifications include Honours Degrees and Postgraduate Diplomas (Business Management, Project Management, Education, Public Administration) as well as Master’s programmes such as the MBA, MPA (Master of Public Administration), and MEd (Master of Education)."
+    },
+    {
+      "question": "how many years to complete a degree at mancosa",
+      "answer": "Bachelor’s Degrees are generally 3 years full-time or 4–5 years part-time. Higher Certificates take 1 year. Postgraduate Diplomas and Honours Degrees take 1 year. Master’s Degrees like the MBA usually take 2 years to complete."
+    },
+    {
+      "question": "does mancosa offer short courses",
+      "answer": "Yes, MANCOSA offers short learning programmes (SLPs) in business, leadership, digital transformation, and project management. These courses typically last between 6 and 12 weeks and award a certificate of completion."
+    },
+    {
+      "question": "what are the entry requirements for mancosa higher certificates",
+      "answer": "Applicants need a National Senior Certificate (NSC) or equivalent with at least 30% in English, or an NQF Level 4 qualification. Mature students without matric may apply through Recognition of Prior Learning (RPL)."
+    },
+    {
+      "question": "what are the entry requirements for mancosa bachelor degrees",
+      "answer": "A National Senior Certificate (NSC) with a Bachelor’s pass and at least 50% in English. Some commerce and IT degrees recommend Mathematics or Maths Literacy at Level 4 or higher."
+    },
+    {
+      "question": "what are the entry requirements for mancosa honours degrees and postgraduate diplomas",
+      "answer": "Applicants must hold a relevant Bachelor’s Degree at NQF Level 7 or equivalent. Some programmes require at least two years of work experience."
+    },
+    {
+      "question": "what are the entry requirements for mancosa masters degrees",
+      "answer": "Master’s applicants need an Honours Degree or Postgraduate Diploma at NQF Level 8, and relevant managerial or professional experience. Admission may include an interview or submission of a motivation letter."
+    },
+    {
+      "question": "does mancosa accept students with n6 diplomas",
+      "answer": "Yes. Students with an N6 Diploma or equivalent qualification may be considered for admission into certain Bachelor’s Degree programmes through an articulation process."
+    },
+    {
+      "question": "does mancosa accept foreign students",
+      "answer": "Yes. International applicants must provide a SAQA evaluation certificate, a valid study permit, and proof of English proficiency (if applicable)."
+    },
+    {
+      "question": "how much is the registration fee at mancosa",
+      "answer": "Registration fees vary per qualification, but generally range between R750 and R1,200. This is a once-off, non-refundable payment at the time of registration."
+    },
+    {
+      "question": "what are mancosa tuition fees for bachelors degrees",
+      "answer": "Bachelor’s Degrees cost approximately R32,000–R45,000 per year depending on the programme. For example, the BCom in IT Management costs around R38,500 annually, while the BCom in Marketing Management is around R36,000."
+    },
+    {
+      "question": "what are mancosa mba fees",
+      "answer": "MANCOSA’s MBA fees are around R85,000–R110,000 for the full 2-year programme, with payment plans available. Fees cover study materials, online platform access, and supervision for the research component."
+    },
+    {
+      "question": "does mancosa offer payment plans",
+      "answer": "Yes. Students can pay fees monthly, per semester, or annually. MANCOSA offers flexible installment options to ease financial pressure."
+    },
+    {
+      "question": "are mancosa fees refundable",
+      "answer": "Registration and application fees are non-refundable. Tuition fees may be refunded on a pro-rata basis depending on the date of withdrawal, as per MANCOSA’s refund policy."
+    },
+    {
+      "question": "what matric subjects do i need for accounting",
+      "answer": "For accounting-related courses, Mathematics or Mathematical Literacy is essential. Recommended subjects: Accounting, Business Studies, and Economics. A minimum of 50% in English is required."
+    },
+    {
+      "question": "what matric subjects do i need for human resource management",
+      "answer": "Recommended subjects include Business Studies, English, and Life Orientation. Mathematics Literacy is acceptable. Applicants need a Bachelor’s pass with at least 50% in English."
+    },
+    {
+      "question": "what matric subjects do i need for education degrees",
+      "answer": "For the Bachelor of Education, English and another language are compulsory. Recommended subjects include Life Sciences, Geography, History, or Mathematics depending on the phase of teaching specialization."
+    },
+    {
+      "question": "what is aps for mancosa courses",
+      "answer": "MANCOSA does not use a strict APS calculator but follows the NSC endorsement levels: 30% for Higher Certificate, 40% for Diploma, 50% for Bachelor’s Degree. Strong performance in relevant subjects improves eligibility."
+    },
+    {
+      "question": "can i study with maths literacy at mancosa",
+      "answer": "Yes, Maths Literacy is accepted for most MANCOSA qualifications except for certain IT and Accounting degrees that prefer pure Mathematics. You can start with a Higher Certificate to bridge into those programmes."
+    },
+    {
+      "question": "how do i apply to mancosa",
+      "answer": "Apply online at www.mancosa.co.za or in person at a MANCOSA Learning Centre. You’ll need a certified ID, matric certificate, academic transcripts (if applicable), and proof of payment for the application fee."
+    },
+    {
+      "question": "what is mancosa application fee",
+      "answer": "The application fee is typically R500–R750, depending on the qualification level. It is non-refundable."
+    },
+    {
+      "question": "when are mancosa applications open",
+      "answer": "Applications open in August for the February intake and in March for the July intake each year. Short Learning Programmes may have rolling intakes."
+    },
+    {
+      "question": "does mancosa require interviews",
+      "answer": "Most undergraduate programmes do not require interviews, but postgraduate and MBA applicants may be invited for an interview or to submit a motivation letter."
+    },
+    {
+      "question": "is mancosa online or contact",
+      "answer": "MANCOSA operates mainly through distance and online learning, supported by regional learning centres that host tutorials, workshops, and exams."
+    },
+    {
+      "question": "what is mancosa ilearn",
+      "answer": "MANCOSA iLearn is the online learning management system where students access study materials, submit assignments, interact with lecturers, and take online assessments."
+    },
+    {
+      "question": "does mancosa have campuses",
+      "answer": "Yes. MANCOSA has regional learning centres in major cities including Durban, Johannesburg, Cape Town, Pretoria, Polokwane, Port Elizabeth, East London, and Nelspruit."
+    },
+    {
+      "question": "what support does mancosa offer",
+      "answer": "MANCOSA provides academic support, online tutoring, career guidance, library access, and student counselling. Dedicated programme coordinators assist with coursework and progression."
+    },
+    {
+      "question": "does mancosa offer graduation ceremonies",
+      "answer": "Yes. MANCOSA holds annual graduation ceremonies for all qualifying students. Graduates receive accredited certificates recognized by DHET and CHE."
+    },
+    {
+      "question": "is mancosa accredited",
+      "answer": "Yes. All MANCOSA qualifications are accredited by the Council on Higher Education (CHE) and registered with the South African Qualifications Authority (SAQA)."
+    },
+    {
+      "question": "can i transfer from another college to mancosa",
+      "answer": "Yes. Students from other accredited institutions can apply for credit transfers or Recognition of Prior Learning (RPL). You’ll need transcripts and course outlines for evaluation."
+    },
+    {
+      "question": "can i work while studying at mancosa",
+      "answer": "Yes. MANCOSA’s flexible distance-learning model allows you to work full-time while studying part-time. Most coursework and exams are online."
+    },
+    {
+      "question": "does mancosa help with job placement",
+      "answer": "While MANCOSA does not guarantee job placement, it offers employability workshops, career readiness training, and networking events through its Graduate Support Unit."
+    },
+    {
+      "question": "how can i contact mancosa",
+      "answer": "Email: info@mancosa.co.za | Phone: 0861 262 667 | Website: www.mancosa.co.za. Visit any regional learning centre nationwide for assistance."
+    },
+    {
+      "question": "what courses do you offer",
+      "answer": "Richfield offers programs under two main faculties: Faculty of Information Technology and Faculty of Business & Management Sciences. IT courses include BSc in Information Technology (Programming, Emerging Technologies, Network Engineering, IT Management), Diplomas, and Higher Certificates. Business courses include Bachelor of Commerce, Bachelor of Business Administration, MBA, and Postgraduate Diplomas."
+    },
+    {
+      "question": "information technology courses and fees",
+      "answer": "Information Technology programs include:\n• BSc in IT (Programming, Network Engineering, Emerging Technologies, IT Management): Approx. R41,740–R43,990 per year.\n• Diploma in IT (Programming, Business Analysis, Network Engineering): Around R35,240–R37,490.\n• Higher Certificate in IT: About R27,740–R29,990.\nRegistration deposit: R2,250."
+    },
+    {
+      "question": "business courses and fees",
+      "answer": "Business and Management Science programs include:\n• Bachelor of Commerce (HR, Marketing, Accounting, SAICA Pathway): R37,740–R41,990.\n• Bachelor of Business Administration (HR, Marketing, Supply Chain, Accounting): R37,240–R39,490.\n• Diploma in Business Administration: R33,240–R35,490.\n• Higher Certificate in Business Administration: R24,740–R26,990.\n• MBA (1st year): Around R84,990–R89,990.\nRegistration deposit: R2,250."
+    },
+    {
+      "question": "entry requirements",
+      "answer": "For undergraduate programs, a National Senior Certificate (NSC) or equivalent with a pass in English and Mathematics is required. Higher Certificates require a minimum of 30% in English. Postgraduate programs require a relevant Bachelor's degree or equivalent qualification."
+    },
+    {
+      "question": "mba program details",
+      "answer": "The Richfield MBA focuses on leadership, business strategy, digital transformation, and innovation. It costs approximately R84,990–R89,990 for the first year. It’s delivered via distance and hybrid modes with flexible evening classes and weekend workshops. Entry requires a Bachelor’s degree or equivalent plus relevant work experience."
+    },
+    {
+      "question": "when does the semester start",
+      "answer": "Richfield has two major intakes — February and July each year."
+    },
+    {
+      "question": "do you offer distance learning",
+      "answer": "Yes, Richfield offers both distance and online learning for many programs, allowing students to study from anywhere in South Africa."
+    },
+    {
+      "question": "do you offer scholarships or financial aid",
+      "answer": "Yes, Richfield provides merit-based scholarships and need-based financial assistance. Students can apply via the Bursary Committee or visit the Richfield website at richfield.ac.za."
+    },
+    {
+      "question": "how can i apply",
+      "answer": "You can apply online through Richfield’s application portal at https://application.richfield.ac.za. Ensure you pay the non-refundable application fee of R750 and the registration deposit of R2,250 upon admission."
+    },
+    {
+      "question": "matric subjects for engineering",
+      "answer": "Engineering (BEng / BSc Eng) usually requires:\nMathematics (not Maths Literacy) and Physical Science at higher levels.\nMany universities ask for Math at Level 5 (or 60%+) for competitive engineering streams.\nCheck the programme APS table for the exact level required by the campus."
+    },
+    {
+      "question": "matric subjects for medicine",
+      "answer": "Medicine (MBChB) usually requires strong performance in Life Sciences and Physical Science.\nMathematics or Mathematical Literacy sometimes required, strong English and a high overall APS.\nMedicine programmes have earlier closing dates and extra selection steps."
+    },
+    {
+      "question": "matric subjects for it computer science",
+      "answer": "IT / Computer Science typically requires Mathematics (or at some institutions, Maths Literacy + bridging).\nProgramming-heavy degrees prefer Maths at higher levels; network / IT-support diplomas sometimes accept Maths Literacy with bridging.\nCheck specific programme rules for exceptions."
+    },
+    {
+      "question": "how is aps calculated",
+      "answer": "APS is calculated using your NSC subject levels mapped to points.\nUniversities usually sum your best six subjects (excluding Life Orientation).\nEach institution publishes the exact NP-to-points mapping and the subjects counted.\nCheck the target university’s prospectus or APS calculator page."
+    },
+    {
+      "question": "how to apply via cao",
+      "answer": "CAO (Central Applications Office) is used by many South African universities (UKZN, MUT, DUT where applicable).\nApply via www.cao.ac.za, list choices, pay the CAO administration fee (example R250 on-time).\nSome programmes (Medicine, selective degrees) have earlier closing dates and separate faculty processes."
+    },
+    {
+      "question": "nsfas and bursaries",
+      "answer": "NSFAS provides funding for eligible South African students at public universities (UNISA, UKZN, MUT, DUT).\nPrivate providers (Eduvos, Richfield) have their own bursary schemes and merit/need-based awards.\nContact each university’s bursary office or the national NSFAS portal for eligibility and deadlines.For other bursaries"
+    },
+    {
+      "question": "documents needed to apply",
+      "answer": "Common documents:\nCertified ID or passport, certified matric/NSC certificate or most recent results, academic transcripts (if transferring), proof of payment of application fee, CV for postgraduate applicants, and programme-specific items (portfolios for creative programmes, audition certificates for music, etc.)."
+    },
+    {
+      "question": "ukzn contact and closing dates summary",
+      "answer": "UKZN:\nCAO closing dates for Semester 1 entry typically around 30 September (some selective programmes like Medicine have earlier dates).\nApplication fees: SA on-time R210 (late R420).\nConsult UKZN admissions pages and CAO for precise campus deadlines and bank payment instructions."
+    },
+    {
+      "question": "mut contact and closing dates summary",
+      "answer": "MUT:\nCAO closing dates normally 30 September for most faculties (faculty-specific exceptions may apply).\nContact MUT recruitment or visit the MUT website for faculty-specific requirements and residence enquiries."
+    },
+    {
+      "question": "dut contact and closing dates summary",
+      "answer": "DUT:\nClosing dates typically 30 September for main intakes.\nSite-specific closing dates and programme entry requirements are published in the DUT prospectus and CAO handbook.\nContact DUT Admissions or visit dut.ac.za for details."
+    },
+    {
+      "question": "unisa contact and application windows",
+      "answer": "UNISA:\nApply through the UNISA portal.\nRegistration windows and module registration dates are published on the UNISA website.\nEnsure documents are certified within 3 months before upload."
+    },
+    {
+      "question": "What is Regent Business School and is it accredited?",
+      "answer": "Regent Business School (RBS) is a private higher education institution based in Durban with learning centres across Southern Africa. It is registered with the Department of Higher Education & Training (DHET) and its programmes are accredited by the Council on Higher Education (CHE) and registered with SAQA. RBS is also recognised by the Namibian NQA and Mauritian Tertiary Education Commission."
+    },
+    {
+      "question": "What undergraduate programmes does Regent offer and how long do they take?",
+      "answer": "RBS offers multiple undergraduate degrees (e.g., Bachelor of Commerce, BCom in Accounting, Human Resource Management, Supply Chain Management, Law, Public Administration, Retail Management, Business Administration) — most bachelor degrees are structured as 3-year programmes. Higher Certificates are typically 1 year; Diplomas and Advanced Diplomas are 1–3 years depending on the qualification."
+    },
+    {
+      "question": "What are the minimum entrance requirements for degree programmes at Regent?",
+      "answer": "A National Senior Certificate (NSC) with a Bachelor's Degree endorsement, or an equivalent NQF 4 qualification. Alternatively, a relevant Higher Certificate, Advanced Certificate or Diploma in a cognate field may satisfy entry requirements. Applicants who do not meet minimum requirements may apply via Recognition of Prior Learning (RPL)."
+    },
+    {
+      "question": "What documents are required to apply to Regent Business School?",
+      "answer": "Completed RBS application/registration form, certified copy of National Senior Certificate or equivalent, certified copy of ID or passport, CV and portfolio where applicable. RPL applicants should also include a portfolio of evidence, letter of motivation and letters of recommendation where required."
+    },
+    {
+      "question": "Does Regent accept RPL (Recognition of Prior Learning)?",
+      "answer": "Yes. Applicants with appropriate work experience or prior study who do not meet formal entry requirements can apply via RPL. Admissions via RPL are subject to approval by the RBS Selection Committee and may require assessment of prior learning, age, work and management experience."
+    },
+    {
+      "question": "How much does study at Regent cost (ZAR examples from the prospectus)?",
+      "answer": "Regent publishes flexible payment plans. Example fee lines from the 2025 prospectus (distance Access programme examples): R34,800 (Plan B/Plan A/Cash variations shown in prospectus), R42,000 and R45,300 entries appear as example annual fee totals for specific access programmes. Fees vary by programme and delivery mode; consult the RBS fee schedule for the programme-year you are applying for."
+    },
+    {
+      "question": "What payment options are available at Regent?",
+      "answer": "RBS offers multiple payment options including Cash with early-bird discount, Payment Plan A (deposit plus 3 instalments), Plan B (deposit plus 6 instalments), and Plan C (deposit plus 9 instalments). An initial non-refundable deposit is required at registration."
+    },
+    {
+      "question": "What are the steps to apply and enroll at Regent Business School?",
+      "answer": "1) Submit completed application and certified documents; 2) Wait for selection committee decision; 3) If accepted, pay the deposit/initial payment and register; 4) Receive study pack and LMS access; 5) Attend orientation and begin modules. For international students additional certified immigration documentation is required."
+    },
+    {
+      "question": "Which matric subjects are typically required for BCom at Regent?",
+      "answer": "A National Senior Certificate with Bachelor's endorsement is required. For specific BCom specialisations (Accounting, Supply Chain, HR), strong performance in Mathematics or Mathematical Literacy (Mathematics preferred for Accounting), English, and relevant subjects (e.g., Accounting or Economics where offered) is recommended. Exact subject requirements can depend on the specialisation."
+    },
+    {
+      "question": "What matric subjects are recommended for Bachelor of Commerce in Accounting?",
+      "answer": "Mathematics (preferably), English, and Accounting/Economics are recommended. A Bachelor's endorsement on the NSC is required. Where Mathematics is a strict requirement, applicants without Maths may be advised to take bridging or foundation modules or apply for alternate pathways (e.g., Higher Certificate)."
+    },
+    {
+      "question": "How long is the Regent MBA and what are the admission requirements?",
+      "answer": "The Regent MBA is primarily a 20-month programme (there are also 32-month variants). Entry requires an appropriate Honours degree / NQF level 8 qualification (or equivalent postgraduate diploma), plus applicants should be at least 25 years old with a minimum of three years' work experience. RPL pathways may apply for experienced applicants without formal qualifications."
+    },
+    {
+      "question": "Does Regent offer distance or blended learning?",
+      "answer": "Yes. RBS delivers many programmes via supported distance learning, blended formats and face-to-face workshops. Delivery modes are designed to support working adults and include workshops, virtual classrooms, online resources and LMS support."
+    },
+    {
+      "question": "Where can I find Regent’s fee schedule and how often is it updated?",
+      "answer": "Regent publishes an annual fee schedule (the prospectus notes the 2025 fee schedule). The fee schedule is valid for the stated academic year and reviewed at the end of that year. Contact study@regent.ac.za or the registrar for the most recent schedule and specific programme fees."
+    },
+    {
+      "question": "Do Regent’s graduates have good employability prospects?",
+      "answer": "RBS emphasises employability through industry-aligned curricula, employability programmes, REDhub enterprise initiatives and practical skills development. The prospectus highlights graduate placements and networking opportunities across Africa via HONORIS United Universities."
+    },
+    {
+      "question": "Who should I contact for applications and enrolment at Regent?",
+      "answer": "Applications and general study enquiries: study@regent.ac.za. Headquarters (Durban) registrar: +27 31 304 4626. Specific learning centres have local contact emails listed in the prospectus."
+    },
+    {
+      "question": "What are common postgraduate pathways after a BCom at Regent?",
+      "answer": "Graduates can progress to Honours programmes, Postgraduate Diplomas (PG Dip), and ultimately to the MBA. Regent offers postgraduate diplomas in management, educational leadership, Islamic finance and other specialist areas which can articulate to the MBA."
+    },
+    {
+      "question": "If I cancel registration at Regent, what are the rules?",
+      "answer": "If a student cancels on or before 30 calendar days from date of initial deposit, they may be liable for 50% of fees based on the payment plan chosen. Cancelling after 30 days may incur 100% liability for the fees based on the chosen payment plan. See the RBS General Handbook for full details."
+    },
+    {
+      "question": "Are there makerspaces, labs or entrepreneurship supports at Regent?",
+      "answer": "Yes. RBS offers iLeadLAB maker spaces (3D printing, laser cutting, Raspberry Pi, robotics, coding workshops) and the REDhub enterprise development hub to support entrepreneurship, product prototyping and SMME development."
+    },
+    {
+      "question": "What types of assessments and academic support are available?",
+      "answer": "RBS provides one-to-one academic support, workshop sessions, webinars, enrichment sessions where student numbers permit, and LMS resources. Assessments include assignments, exams, projects and where applicable practical elements."
+    },
+    {
+      "question": "Can international students study at Regent and what is needed?",
+      "answer": "Yes — international applicants must provide certified immigration and passport documents (certified by a Commissioner of Oaths or Notary, not older than six months) and may need a study visa. Contact the International Office for details."
+    },
+    {
+      "question": "Is UCT a public university and are its degrees recognised?",
+      "answer": "Yes. The University of Cape Town (UCT) is a public research university whose degrees are internationally recognised. UCT publishes annual fee booklets and faculty handbooks for course-level fee and curriculum details."
+    },
+    {
+      "question": "Where can I find UCT tuition fees for 2025?",
+      "answer": "UCT publishes an annual fees booklet and faculty handbooks; the 2024 fee booklet was used in the prospectus to indicate typical ranges. UCT’s official website (uct.ac.za) and the Fees Office provide the final 2025 figures and course-based fees."
+    },
+    {
+      "question": "What are typical undergraduate tuition ranges at UCT (example figures from prospectus)?",
+      "answer": "Example 2024 undergraduate fee ranges (from UCT materials in the prospectus): BCom/Bachelor of Business Science ranges roughly R72,680–R102,470 depending on the programme; other degrees vary (e.g., MBChB R98,010; selected BSc and architecture figures are listed in the UCT fees booklet). Exact 2025 fees should be checked via UCT’s Fees Office or fees handbook."
+    },
+    {
+      "question": "How does UCT calculate tuition fees?",
+      "answer": "UCT uses a course-based fee structure. Students calculate the total fee by summing the course fees for required modules using the course codes listed in the faculty handbook and the fees handbook."
+    },
+    {
+      "question": "What initial payments are required at UCT?",
+      "answer": "For tuition, UCT historically required an initial payment (example from 2024: R31,000) or the full fee if less than that; residences required initial payments (e.g., R39,000 for catered). Exact initial payment amounts and deadlines for 2025 will be communicated by UCT Fees Office each year."
+    },
+    {
+      "question": "What are typical matric and subject requirements for UCT BCom?",
+      "answer": "UCT requires an NSC with appropriate subject levels; for BCom programmes Mathematics is typically required and high achievement levels are expected. Exact APS (Admission Points Score) thresholds and subject-specific level requirements are published by UCT’s Faculty of Commerce."
+    },
+    {
+      "question": "What documents does UCT require for international applicants?",
+      "answer": "International applicants must submit certified academic transcripts, passport pages, and any immigration documentation; certification must follow UCT’s international office guidelines. Contact international.uct.ac.za for precise instructions."
+    },
+    {
+      "question": "How do I apply to study at UCT?",
+      "answer": "Apply online via UCT’s application portal. The prospectus notes application steps, closing dates, and the need to check application status online. Use UCT’s website for current closing dates and faculty-specific online application instructions."
+    },
+    {
+      "question": "Which matric subjects are essential for applying to UCT engineering and science degrees?",
+      "answer": "Engineering and many science degrees normally require Mathematics and Physical Sciences at competitive achievement levels. Specific required levels and subject combinations vary by faculty and programme, so consult the faculty handbook or UCT admissions for exact requirements."
+    },
+    {
+      "question": "Does UCT offer financial aid and bursaries?",
+      "answer": "Yes. UCT provides various funding sources including bursaries, scholarships and financial aid packages. The Fees Office and Student Funding websites list available bursaries, application processes and eligibility criteria."
+    },
+    {
+      "question": "Where can I find UCT residence costs?",
+      "answer": "UCT residence costs are published in the annual fees/residence booklet. The 2024 example in the prospectus lists an average single room in a first-tier residence at around R74,350 and catered residence costs up to ~R105,850 (including a 3-meal option). 2025 residence costs are determined yearly."
+    },
+    {
+      "question": "Are there bridging or access programmes at UCT for students who don’t meet direct entry requirements?",
+      "answer": "UCT runs various access and extended programmes in certain faculties to support students who need additional preparation. Check the relevant faculty (e.g., Faculty of Humanities or Science) for extended curriculum or access stream offerings."
+    },
+    {
+      "question": "How are course choices and module registration done at UCT?",
+      "answer": "Modules and course codes are listed in the faculty handbook. Students register for modules each year according to programme requirements and use the course-based fee schedule to compute fees. Module selection is subject to prerequisites and faculty approval where applicable."
+    },
+    {
+      "question": "What support exists for international students at UCT?",
+      "answer": "UCT’s International Office provides guidance on immigration, certified documents, orientation and student support. Contact the International Office (iapo@uct.ac.za) for details and processes."
+    },
+    {
+      "question": "Who should I contact at UCT for fee and application queries?",
+      "answer": "UCT Fees Office and the Student Service Centre are the primary contacts. Faculty-specific enquiries should go to the relevant faculty admissions office; general contact info is on uct.ac.za."
+    },
+    {
+      "question": "Is University of Pretoria (UP) a public university and where to find official information?",
+      "answer": "Yes—UP is a public research university. Official information including applications, closing dates, fees, and faculty handbooks is available on the University of Pretoria website (www.up.ac.za) and via the Student Service Centre (ssc@up.ac.za)."
+    },
+    {
+      "question": "How do I apply to the University of Pretoria?",
+      "answer": "Apply online through UP’s application portal. The UP prospectus outlines the online application process, closing dates and documents required. Check UP’s official admissions pages for faculty-specific instructions and deadlines."
+    },
+    {
+      "question": "What documents are required to apply to UP?",
+      "answer": "Typical requirements include a completed online application, certified copy of NSC/IEB or equivalent, ID/passport copy, and any requested supporting documents (e.g., portfolios for certain programmes). UP’s application portal will list exact requirements per programme."
+    },
+    {
+      "question": "Where can I find UP tuition fee details?",
+      "answer": "UP publishes tuition fees and payment instructions in its official fee schedule and prospectus. The UP prospectus included contact information and banking details; for exact per-programme fees contact the Student Service Centre (ssc@up.ac.za) or consult UP’s fee booklet online."
+    },
+    {
+      "question": "What matric subjects and levels are required for UP degrees?",
+      "answer": "Admission thresholds vary by faculty and programme. UP’s prospectus and faculty pages list general admission regulations: applicants need an NSC (or IEB equivalent) with appropriate subject combinations and achievement levels. Specific programmes (e.g., Engineering, Medicine) require particular subjects (Maths, Physical Sciences, Life Sciences) at set levels — consult the faculty admission pages for exact subject-level requirements."
+    },
+    {
+      "question": "Does UP have scholarships and first-year awards?",
+      "answer": "Yes. UP offers awards and bursaries including first-year support schemes (e.g., FLY@UP and other awards). Eligibility criteria and application procedures are outlined in the UP prospectus and on the UP website."
+    },
+    {
+      "question": "How does UP handle international students and certified documents?",
+      "answer": "International applicants must submit certified academic documents and passport information according to UP’s international admissions requirements. Contact UP Student Service Centre for precise certification and visa guidance."
+    },
+    {
+      "question": "Which matric subjects are commonly required for a Bachelor of Engineering at UP?",
+      "answer": "Typically Mathematics and Physical Sciences at certain achievement levels are required. UP’s faculty of Engineering publishes the exact level (e.g., minimum APS or subject levels) needed for each engineering programme; applicants should verify on the faculty pages."
+    },
+    {
+      "question": "What is the general student application timeline at UP?",
+      "answer": "UP’s prospectus provides the online application process and closing dates. Exact application windows vary by intake and faculty; applicants should check UP’s admissions portal for current year deadlines."
+    },
+    {
+      "question": "Who is the contact for UP admissions queries?",
+      "answer": "University of Pretoria Student Service Centre: ssc@up.ac.za. Postal and campus contacts are in the UP prospectus; phone and online contact details are available on www.up.ac.za."
+    },
+    {
+      "question": "How are fees paid at UP and what banking details are used?",
+      "answer": "UP provides bank account details and deposit reference instructions in the prospectus and on the fees pages. Students must use the correct bank account and reference (usually initials and surname or student number) and observe the fees office payment deadlines."
+    },
+    {
+      "question": "If I don’t meet direct entry requirements for UP, are there alternative routes?",
+      "answer": "Yes. UP may offer access or extended programmes or alternative admission routes for applicants who do not meet direct entry criteria; consult the relevant faculty or UP admissions for available pathways and bridging options."
+    },
+    {
+      "question": "Does UP publish faculty handbooks and fee-booklets?",
+      "answer": "Yes. UP publishes faculty handbooks and a fees booklet that provide detailed module lists, course codes and costs. Applicants should consult the relevant faculty handbook to plan module selections and estimate fees."
+    },
+    {
+      "question": "Are residence costs published by UP?",
+      "answer": "Residence/accommodation and meal plan costs are included in UP’s annual fees and residence information and are published in the fees/residence booklet or on the UP housing pages. Check UP’s residence office for the latest rates."
+    },
+    {
+      "question": "Where can I verify a UP programme’s qualification and admission regulation?",
+      "answer": "UP’s prospectus includes a programme qualification verification section and general admission regulations that apply across faculties. For programme-specific confirmation consult the faculty admissions webpage or the Student Service Centre."
+    },
+    {
+      "question": "goodbye",
+      "answer": "Goodbye.\nIf you’d like, I saved the detailed JSON file with all entries and you can download it to use directly in your chatbot.\nAsk me to update/add any specific programme or campus details."
+    },
+    {
+      "question": "What campuses and learning centres does Regent Business School have?",
+      "answer": "Regent Business School (RBS) operates a head office in Durban and learning centres across South Africa (including Johannesburg, Pretoria, Cape Town, East London, Gqeberha) as well as regional centres in Namibia and Eswatini (Manzini, Mbabane, Ongwediva, Windhoek). Learning centres provide tutorials, workshops, exams and student support."
+    },
+    {
+      "question": "What postgraduate programmes are offered at Regent Business School?",
+      "answer": "RBS offers a range of postgraduate programmes including Honours (e.g., BCom Honours), Postgraduate Diplomas (e.g., PG Dip Management, PG Dip Educational Management), and Master’s programmes such as the MBA (with electives like Healthcare, Public Sector Management, Islamic Finance). Duration and admission requirements vary by programme."
+    },
+    {
+      "question": "Does Regent offer scholarships, bursaries or financial aid?",
+      "answer": "RBS provides limited institutional bursaries, merit awards and payment plans. Students are encouraged to contact the RBS Fees or Student Services office for current bursary options and application procedures. External scholarships, employer sponsorship, and payment plans are commonly used."
+    },
+    {
+      "question": "How do I apply to Regent Business School as an international student?",
+      "answer": "International applicants must submit certified copies of passport and academic documents (certified by a Commissioner of Oaths or Notary, not older than 6 months), a SAQA evaluation if required, and proof of visa/study permit arrangements. Contact the International Office at study@regent.ac.za for guidance."
+    },
+    {
+      "question": "What is RBS's online learning platform and study material provision?",
+      "answer": "RBS supplies students with a study pack on registration and provides online learning via an LMS (learning management system), virtual classrooms, and support webinars. Selected modules include video resources and access to online libraries."
+    },
+    {
+      "question": "How are assessments conducted at Regent and what are re-mark/supplementary fees?",
+      "answer": "Assessments include assignments, tests, and summative exams. RBS charges administrative fees for services such as viewing/remarking scripts, resubmission, and supplementary exams (fees vary; the prospectus lists e.g., viewing/remarking fees and supplementary exam fees). Check the RBS fee schedule for current amounts."
+    },
+    {
+      "question": "What are typical application deadlines and intakes at Regent?",
+      "answer": "RBS commonly runs key intakes in February and July and supports rolling admissions for some programmes. Application closing dates vary by programme and campus—always check the RBS website or contact study@regent.ac.za for exact deadlines."
+    },
+    {
+      "question": "Who do I contact for admission queries at Regent Business School?",
+      "answer": "For general admissions and applications contact: study@regent.ac.za. RBS headquarters (Durban) phone: +27 31 304 4626. For campus-specific enquiries use the local learning centre emails listed in the prospectus."
+    },
+    {
+      "question": "What faculties and schools does UCT have?",
+      "answer": "UCT has faculties and professional schools including: Commerce (including GSB-related activities), Engineering & the Built Environment, Health Sciences, Humanities, Law, Science, and a Graduate School of Business. Each faculty publishes its own programme handbooks and admission criteria."
+    },
+    {
+      "question": "What postgraduate routes exist at UCT (Honours, Masters, PhD)?",
+      "answer": "UCT offers Honours (usually 1 year), Master's degrees (coursework or research, typically 1–2 years) and Doctoral (PhD) research degrees (typically 3+ years). Admission often requires an appropriate undergraduate degree, supervisor availability, and faculty-specific entry requirements."
+    },
+    {
+      "question": "What financial support is available for UCT students?",
+      "answer": "UCT provides scholarships, merit and needs-based bursaries, faculty-specific awards, and external funding programmes. The Fees Office and Student Funding webpages list opportunities and closing dates; international applicants should also check faculty scholarship schemes and external donors."
+    },
+    {
+      "question": "What are typical UCT residence application steps and deposits?",
+      "answer": "Students apply for residence through UCT’s housing/Residences Office. Residence offers and deposits are confirmed before registration; historically UCT required an initial payment for accommodation (examples in prior years: R39,000 for catering residences). Check the UCT website for up-to-date residence application windows and deposit amounts."
+    },
+    {
+      "question": "What does UCT expect from international applicants (documents & language)?",
+      "answer": "International applicants must provide certified transcripts, passport copies, and any immigration documents. Proof of English proficiency (e.g., IELTS/TOEFL) may be required for non-English-medium applicants. Certification and visa queries are handled by the International Office (iapo@uct.ac.za)."
+    },
+    {
+      "question": "How does UCT support graduate employability and careers?",
+      "answer": "UCT’s Careers Service offers CV workshops, interview preparation, career fairs, employer engagement events, internship listings and graduate recruitment initiatives. Faculties also run discipline-specific employability programmes and industry links."
+    },
+    {
+      "question": "How are UCT fees calculated and where do I find the fee booklet?",
+      "answer": "UCT uses a course-based fee structure. Check the annual Fees Booklet and faculty handbooks (available on uct.ac.za) to total the cost of modules for a programme. Faculties and the Fees Office publish the official booklet each year."
+    },
+    {
+      "question": "Who should I contact at UCT for application or fee queries?",
+      "answer": "Contact UCT’s Student Fees Office or the Student Service Centre via the contacts on uct.ac.za. For international queries contact the International Office: iapo@uct.ac.za."
+    },
+    {
+      "question": "What faculties does the University of Pretoria (UP) have?",
+      "answer": "UP comprises faculties including: Economic and Management Sciences, Education, Engineering, Built Environment and Information Technology, Health Sciences, Humanities, Law, Natural and Agricultural Sciences, Theology and Religion, and Veterinary Science, plus the Gordon Institute of Business Science (GIBS). Check faculty pages for programme details."
+    },
+    {
+      "question": "What are UP’s scholarship and first-year award programmes (e.g., FLY@UP)?",
+      "answer": "UP offers multiple scholarships and awards including first-year support awards and merit/need-based bursaries. FLY@UP and other faculty awards support top-performing or disadvantaged entrants. Details and application steps are on UP’s Student Service and bursaries pages."
+    },
+    {
+      "question": "How do I apply for accommodation at UP and what are typical deadlines?",
+      "answer": "Apply for residence via UP’s housing portal during the residence application window after faculty admission offers are made. Deadlines and deposit amounts are published annually by UP Housing. Spaces are often allocated by academic standing and proximity to campus accommodation."
+    },
+    {
+      "question": "What international admission rules apply at UP (SAQA, language & documents)?",
+      "answer": "International applicants must have foreign qualifications evaluated by SAQA when requested, submit certified transcripts and passport copies, and may need to show English proficiency where applicable. For visa guidance contact UP’s Student Service Centre (ssc@up.ac.za)."
+    },
+    {
+      "question": "How can I verify a UP programme’s admission regulation and qualification level?",
+      "answer": "Use UP’s programme qualification verification pages and faculty handbooks which list required subject combinations, NQF levels and minimum admission scores. Contact the relevant faculty admissions office for official confirmation."
+    },
+    {
+      "question": "How do I calculate my APS (Academic Performance Score)?",
+      "answer": "A typical APS method: map your NSC subject Levels (7 to 1) to points (7→7, 6→6, 5→5, 4→4, 3→3, 2→2, 1→1). Sum the points of your best six subjects excluding Life Orientation. Example: if your top six NSC levels are 7,6,6,5,5,4 then APS = 7+6+6+5+5+4 = 33. Note: some institutions add bonus points or use different weightings—always check the specific university’s APS rules."
+    },
+    {
+      "question": "What are NQF levels and how do they relate to degrees?",
+      "answer": "The National Qualifications Framework (NQF) in South Africa classifies qualifications by level: NQF 5 (Higher Certificate), NQF 6 (Diploma), NQF 7 (Bachelor’s degree), NQF 8 (Honours/Postgraduate Diploma), NQF 9 (Master’s), NQF 10 (Doctorate). This helps compare and align qualifications nationally."
+    },
+    {
+      "question": "What is Recognition of Prior Learning (RPL) and how do I apply?",
+      "answer": "RPL allows applicants to gain admission or credit based on work experience and prior learning. To apply: prepare a portfolio of evidence (CV, references, work records, samples of work), complete the RPL application form with the institution, attend any assessments or interviews required, and await the selection committee’s decision. RPL policies differ between universities."
+    },
+    {
+      "question": "What is a SAQA evaluation and who needs one?",
+      "answer": "SAQA (South African Qualifications Authority) evaluates foreign qualifications to determine equivalence with South African NQF levels. International applicants typically need a SAQA evaluation when applying with foreign school or tertiary certificates. Check the target institution’s international admissions pages for exact SAQA requirements."
+    },
+    {
+      "question": "What is NSFAS and who qualifies for NSFAS funding?",
+      "answer": "NSFAS (National Student Financial Aid Scheme) provides funding to eligible South African students attending public universities and TVET colleges. Eligibility is means-tested and depends on family income and academic criteria. NSFAS can cover tuition, allowances for accommodation, transport and living costs for qualifying students—verify eligibility on the NSFAS website and the respective university bursaries office."
+    },
+    {
+      "question": "What are bridging or extended curriculum programmes (ECPs)?",
+      "answer": "Bridging or Extended Curriculum Programmes (ECPs) help students who don’t meet direct entry requirements to build subject knowledge and study skills. They usually extend degree programmes by a year and offer academic support; many universities run ECPs for STEM and Commerce streams."
+    },
+    {
+      "question": "How do I get a bursary or scholarship and what documents are needed?",
+      "answer": "Search university bursary pages, national bursary databases and private sector scholarships. Typical documents: ID, academic transcripts, proof of household income, motivation letter, CV, and references. Apply before bursary deadlines and tailor your application to the funder’s criteria."
+    },
+    {
+      "question": "How do I transfer credits between South African institutions?",
+      "answer": "To transfer credits, request an official transcript and module outlines from your previous institution. Submit these with a credit transfer/exemption application to the receiving university; the faculty will assess equivalence and grant exemptions where appropriate. Approval is faculty-dependent."
+    },
+    {
+      "question": "What are common application documents required by RBS, UCT and UP?",
+      "answer": "Common documents include a certified copy of your National Senior Certificate or final school results, certified ID or passport copy, academic transcripts for prior study, CV (for postgraduate), motivation letter (where required), proof of payment (application/registration), and SAQA evaluation for international qualifications."
+    },
+    {
+      "question": "What should I do if my application is unsuccessful?",
+      "answer": "If unsuccessful, request feedback from admissions, consider alternative intakes or bridging programmes, strengthen weak subject results (e.g., rewrite Matric subjects where possible), apply for similar programmes at other institutions, or use RPL routes if you have relevant work experience."
+    },
+    {
+      "question": "How can I check my application status at RBS, UCT or UP?",
+      "answer": "Each university provides an online application portal where you can check status. Alternatively, contact the admissions or Student Service Centre email (e.g., study@regent.ac.za, iapo@uct.ac.za, ssc@up.ac.za) and provide your application number or ID."
+    },
+    {
+      "question": "What are typical academic support services at these universities?",
+      "answer": "Typical services include academic advising, tutoring, writing centres, library services, mental health counselling, career services, mentoring, workshops, and online learning supports. Each university publishes available student support services and contact points in the prospectus and on their websites."
+    },
+    {
+      "question": "How long do I have to accept an offer of admission?",
+      "answer": "Offer acceptance deadlines vary by institution and programme. Offers often require an acceptance registration or payment of an initial deposit within a specified period. Check the offer letter for the exact deadline and the consequences of not accepting in time."
+    },
+    {
+      "question": "What is Richfield Graduate Institute of Technology?",
+      "answer": "Richfield Graduate Institute of Technology is a private South African higher-education provider focused on applied IT, business and technology training. They offer degrees, diplomas, higher certificates, short courses and industry certifications. Richfield offers various courses and certifications — take a bit longer to think through carefully before choosing the right one for your career."
+    },
+    {
+      "question": "Where is Richfield located?",
+      "answer": "The main Richfield campus is in Durban (Musgrave Road). They also have additional campuses and learning centres in other South African cities, plus distance/online options for remote study."
+    },
+    {
+      "question": "What makes Richfield unique?",
+      "answer": "Richfield pairs formal qualifications with industry-recognised badges (IBM, AWS, Cisco) and practical, job-focused training like bootcamps and work-readiness pods — which helps graduates be more employable. Because the choice of course vs certification affects your career path, it’s worth taking extra time to decide."
+    },
+    {
+      "question": "Is Richfield an accredited institution?",
+      "answer": "Yes — Richfield offers accredited qualifications that are registered with South African authorities (check the prospectus for programme-specific accreditation). Industry badges are vendor certifications and complement, rather than replace, formal qualifications."
+    },
+    {
+      "question": "What faculties or schools does Richfield have?",
+      "answer": "Richfield is mainly structured around Information Technology and Business & Management disciplines, with centres for short learning programmes and postgraduate studies."
+    },
+    {
+      "question": "What kind of qualifications does Richfield offer (degrees, diplomas, certificates)?",
+      "answer": "They offer Higher Certificates, Diplomas, Bachelor’s degrees (e.g., BSc IT, BCom), postgraduate diplomas, an MBA, and short learning programmes including vendor certifications."
+    },
+    {
+      "question": "When does Richfield’s academic year start?",
+      "answer": "The main intakes are February and July. Short courses and some distance modules may have rolling intakes."
+    },
+    {
+      "question": "Does Richfield offer distance or online learning?",
+      "answer": "Yes — many programmes are available via distance and online learning in addition to contact and blended delivery."
+    },
+    {
+      "question": "What are the major campuses or learning centres?",
+      "answer": "Richfield’s main campus is in Durban, with additional campuses and learning centres in other major South African cities. Check the prospectus or the website for the current list of locations."
+    },
+    {
+      "question": "What IT courses does Richfield offer?",
+      "answer": "IT offerings include BSc IT (Programming, Network Engineering, IT Management, Emerging Technologies), diplomas in Applications Development and Network Engineering, short courses in cloud, cybersecurity basics, and industry badges (IBM, AWS, Cisco)."
+    },
+    {
+      "question": "What business courses does Richfield offer?",
+      "answer": "Business programmes include BCom degrees (Accounting, Marketing, HR), BBA options, diplomas in Business Administration, short courses in entrepreneurship and digital marketing, and an MBA."
+    },
+    {
+      "question": "What engineering or technology programmes are available?",
+      "answer": "Richfield focuses on IT and applied technology (networking, software, systems). It does not typically offer traditional BEng engineering degrees — for those you’d look at universities of technology."
+    },
+    {
+      "question": "Does Richfield offer postgraduate qualifications or MBAs?",
+      "answer": "Yes — Richfield offers postgraduate diplomas and an MBA aimed at working professionals."
+    },
+    {
+      "question": "Are there any short learning programmes or certifications?",
+      "answer": "Yes — there are short learning programmes (weeks to months) and vendor certifications that help build practical skills quickly."
+    },
+    {
+      "question": "What specialisations exist in the BSc IT programme?",
+      "answer": "Common specialisations are Programming/Software Development, Network Engineering, IT Management and Emerging Technologies (e.g., cloud and data). Availability depends on campus and intake."
+    },
+    {
+      "question": "What are the entry requirements for the BSc IT (Programming) degree?",
+      "answer": "Usually a National Senior Certificate (NSC) with degree endorsement and Mathematics at the required level. RPL and bridging routes may exist for applicants who lack certain subjects."
+    },
+    {
+      "question": "How long is the BSc IT degree at Richfield?",
+      "answer": "Typically 3 years full-time; some specialisations or articulation pathways may extend to 4 years. Part-time/distance study takes longer depending on module load."
+    },
+    {
+      "question": "What are the entry requirements for the Diploma in IT?",
+      "answer": "A National Senior Certificate with Diploma endorsement or equivalent, with Mathematics or Maths Literacy and English commonly required. Check the specific diploma entry criteria before applying."
+    },
+    {
+      "question": "What subjects are recommended for studying IT at Richfield?",
+      "answer": "Recommended subjects: Mathematics (preferred), English, and any computer/technology subjects. If you lack Maths, ask the admissions team about bridging options."
+    },
+    {
+      "question": "Does Richfield offer Higher Certificates in IT or Business?",
+      "answer": "Yes — Higher Certificates are available as entry-level options in IT and business streams to prepare students for diplomas or degrees."
+    },
+    {
+      "question": "How much are Richfield’s tuition fees?",
+      "answer": "Fees vary by programme and year. Indicative ranges (from recent prospectuses) put many undergraduate programmes between R28,000–R43,000 per year. For exact current amounts, consult Richfield’s official fee schedule."
+    },
+    {
+      "question": "How much is the registration fee at Richfield?",
+      "answer": "Registration deposits are typically in the range of R1,600–R2,250; application fees may also apply (e.g., R600–R750). Confirm the exact figure for your intake."
+    },
+    {
+      "question": "What payment plans are available for students?",
+      "answer": "Richfield usually offers full upfront payment or instalment/payment-plan options (monthly or by semester). Specific plans differ by programme and campus."
+    },
+    {
+      "question": "Are Richfield’s fees refundable?",
+      "answer": "Application fees are usually non-refundable. Tuition refunds, if applicable, follow a pro-rata refund policy based on the withdrawal date — check the official refund policy for exact rules."
+    },
+    {
+      "question": "Are there additional fees for application, re-marks, or supplementary exams?",
+      "answer": "Yes, expect separate administrative fees for application processing, script re-marking, supplementary exams, certificate reprints and other services. The prospectus lists common ancillary fees."
+    },
+    {
+      "question": "Does Richfield offer bursaries or financial aid?",
+      "answer": "Yes, Richfield offers institutional bursaries and financial-aid options, plus merit awards. Check the bursary office or prospectus for current opportunities and eligibility criteria."
+    },
+    {
+      "question": "Does NSFAS fund Richfield students?",
+      "answer": "NSFAS primarily funds students at public institutions; private providers are typically not NSFAS-funded. Policy can change, so contact NSFAS and Richfield’s bursary office to confirm current eligibility."
+    },
+    {
+      "question": "Does Richfield offer scholarships for top-performing students?",
+      "answer": "Yes, there are merit scholarships and incentives for top performers or early payment. Availability and value vary by intake."
+    },
+    {
+      "question": "How do I apply to study at Richfield?",
+      "answer": "Apply via Richfield’s online application portal or in person at a campus. Upload certified documents and pay any required application fee. You’ll get an application reference to track progress."
+    },
+    {
+      "question": "What documents are required for a Richfield application?",
+      "answer": "Usually: certified ID or passport copy, certified Matric/NSC certificate or recent results, tertiary transcripts (if applicable), CV for postgraduate applications, proof of payment for any application fee and SAQA evaluation for foreign qualifications."
+    },
+    {
+      "question": "What are the closing dates for applications?",
+      "answer": "Closing dates depend on the programme and campus — main intakes are February and July. Some programmes have rolling admissions; check the prospectus for exact deadlines."
+    },
+    {
+      "question": "Can I apply online or must I apply on campus?",
+      "answer": "You can apply online through the official portal. In-person applications at campuses are also supported but online is usually faster."
+    },
+    {
+      "question": "What happens after I submit my application?",
+      "answer": "Admissions processes the application, may request extra documents, and issues an outcome (offer, conditional offer or decline). If accepted you’ll receive an offer letter with instructions to accept and pay a deposit."
+    },
+    {
+      "question": "Can international students apply to Richfield?",
+      "answer": "Yes. International applicants are accepted but must meet document and visa requirements. Contact the international admissions office for detailed guidance."
+    },
+    {
+      "question": "What are the requirements for foreign students (SAQA, visas, etc.)?",
+      "answer": "Foreign applicants typically need a SAQA evaluation of qualifications, certified passport copies, proof of funds and, after acceptance, a study visa. Specific documentation depends on your country of origin."
+    },
+    {
+      "question": "How do I check my application status?",
+      "answer": "Use the application portal with your reference number or contact the admissions office by email/phone and provide your application reference to get a status update."
+    },
+    {
+      "question": "Can I transfer from another university to Richfield?",
+      "answer": "Transfers and credit exemptions are possible but evaluated individually. Submit official transcripts and module outlines; the faculty assesses equivalence and may grant credits."
+    },
+    {
+      "question": "What is Richfield’s academic calendar?",
+      "answer": "The academic calendar details semester dates, assessment periods and registration windows — main semesters start around February and July. Check Richfield’s website for the current year calendar."
+    },
+    {
+      "question": "How are assessments conducted (assignments, tests, exams)?",
+      "answer": "Assessments include assignments, projects, tests and formal exams. Practical work and industry projects may form part of the assessment mix depending on the course."
+    },
+    {
+      "question": "How do I access Richfield’s online portal or LMS?",
+      "answer": "Login details are provided at registration. The LMS link is on the student portal — use your student number/email and temporary password to sign in and then change your password."
+    },
+    {
+      "question": "What is Richfield’s LMS called and how do I log in?",
+      "answer": "Richfield uses an online learning platform (name varies by year). The admissions or IT support team provides exact login instructions after registration."
+    },
+    {
+      "question": "How are re-mark or supplementary exam requests handled?",
+      "answer": "Follow the formal procedure in the student handbook: complete the request form, pay the required fee and the result will be reviewed following academic governance timelines."
+    },
+    {
+      "question": "What happens if I withdraw or cancel my registration?",
+      "answer": "Withdrawal rules and refunds depend on timing; application fees are non-refundable and tuition refunds (if any) follow the pro-rata policy. Always check the withdrawal deadlines and financial implications before cancelling."
+    },
+    {
+      "question": "How do I get my student card?",
+      "answer": "Student cards are issued at registration or orientation. Bring ID to the student services desk and they’ll issue your card with instructions on how to use it."
+    },
+    {
+      "question": "Does Richfield provide accommodation or residence options?",
+      "answer": "Richfield may not operate on-campus residences at every location; they usually provide lists of vetted private accommodation and guidance from the housing office."
+    },
+    {
+      "question": "What student support services does Richfield offer?",
+      "answer": "Services include academic support, counselling, career services, library access and IT help. They also run employability workshops and industry engagement events."
+    },
+    {
+      "question": "Are there student activities, clubs, or societies?",
+      "answer": "Yes, Campuses typically host student clubs (coding, entrepreneurship, sport and interest groups). Offerings vary by campus and student involvement."
+    },
+    {
+      "question": "What career support does Richfield provide?",
+      "answer": "Career support includes CV help, interview coaching, employer events, internship referrals and job-readiness bootcamps. Use the career office early to build networks."
+    },
+    {
+      "question": "Does Richfield help with job placement or internships?",
+      "answer": "Richfield helps connect students with internships and employer partners but cannot guarantee placements. Career services and faculty industry links help with referrals."
+    },
+    {
+      "question": "What facilities are available on richfield campus (labs, libraries, Wi-Fi, etc.)?",
+      "answer": "Most campuses have computer labs, access to digital libraries, Wi‑Fi, study spaces and practical IT labs. Facility availability differs by campus — check the campus brochure."
+    },
+    {
+      "question": "Are there entrepreneurship or innovation hubs at Richfield?",
+      "answer": "Some campuses run entrepreneurship hubs or bootcamps to support student startups and innovation; availability depends on the campus."
+    },
+    {
+      "question": "Does Richfield host graduation ceremonies?",
+      "answer": "Yes, Qualifying students are invited to graduation ceremonies which are scheduled and communicated by the institution."
+    },
+    {
+      "question": "Does Richfield accept international students?",
+      "answer": "Yes, International students are accepted, subject to admissions, documentation and visa requirements."
+    },
+    {
+      "question": "What are the requirements for foreign qualifications?",
+      "answer": "Foreign qualifications typically need a SAQA evaluation to confirm equivalence and certified translations if required. Contact the international office for specific instructions."
+    },
+    {
+      "question": "How can I get my foreign qualification evaluated by SAQA?",
+      "answer": "Apply online to SAQA and submit certified copies of your qualifications (and translations if necessary). SAQA will produce an evaluation report you can include with your Richfield application."
+    },
+    {
+      "question": "Does Richfield offer online learning for international students?",
+      "answer": "Yes, Many distance and online programmes are available to international students, though some programmes may require on-campus attendance for certain practical modules."
+    },
+    {
+      "question": "What is the difference between a diploma, degree, and higher certificate?",
+      "answer": "Good question — here’s a quick breakdown:\n• Higher Certificate: Short (usually 1 year). Focuses on practical skills and is a quick entry route into tertiary study or work.\n• Diploma: Usually 2–3 years. More practical and career-focused than a degree; ideal for vocational or technical careers.\n• Bachelor’s Degree: Typically 3 years (some 4). Deeper academic study with broader theory and career options — required for many professional careers and postgraduate study.\nTip: Think about whether you want fast entry to work (Higher Certificate/Diploma) or a longer academic route (Degree)."
+    },
+    {
+      "question": "Which qualification is better — public university or private college?",
+      "answer": "Neither is always ‘better’ — it depends on your goals. Public universities often offer wide academic choices, research opportunities and NSFAS funding; private colleges can offer flexible schedules, practical training, industry ties and faster intakes. Check accreditation, graduate outcomes, fees, and whether the course matches the jobs you want."
+    },
+    {
+      "question": "How do I choose the right career path after matric?",
+      "answer": "Start by listing what you enjoy, what you’re good at, and what kind of lifestyle you want. Try online career quizzes, chat with school career advisors, do short work shadowing or internships, and research entry requirements. Don’t worry about picking one forever — many careers combine skills and people switch paths later."
+    },
+    {
+      "question": "What is the difference between a university and a university of technology?",
+      "answer": "Universities focus more on academic and theoretical study (research and degrees), while Universities of Technology focus on applied, hands-on training and industry skills (diplomas and degrees with practical components). Both can lead to good careers — choose based on whether you prefer theory or practical work."
+    },
+    {
+      "question": "What can I study if I don’t know what career to choose yet?",
+      "answer": "Go for broad, flexible programmes (e.g., general BCom, BSc, Information Technology, or a Higher Certificate). These keep options open while you explore. Also consider short courses, internships, and part-time work to discover what you enjoy."
+    },
+    {
+      "question": "What are the easiest degrees to find a job with in South Africa?",
+      "answer": "No degree guarantees an easy job, but degrees in IT, nursing/healthcare, accounting, engineering, and teaching often have steady demand. Practical experience, internships, and soft skills (communication, teamwork) matter a lot — employers value experience along with the qualification."
+    },
+    {
+      "question": "Which careers are in high demand in South Africa right now?",
+      "answer": "High-demand areas commonly include IT (software development, cyber security), healthcare (nurses, allied health), engineering, accounting/finance, and skilled trades. Demand changes, so check job boards and university career centres for sector trends in your area."
+    },
+    {
+      "question": "What are STEM courses and why are they important?",
+      "answer": "STEM stands for Science, Technology, Engineering and Mathematics. These courses teach problem-solving, technical skills and logical thinking — all useful in many growing industries like tech, renewable energy, and engineering. They often lead to strong job prospects."
+    },
+    {
+      "question": "What is the difference between full-time, part-time, and distance learning?",
+      "answer": "Full-time: study a full module load each semester — faster completion and campus life involvement. Part-time: fewer modules per year — good if you work. Distance learning: study remotely with online materials — flexible for work or family commitments. Pick the mode that fits your schedule and finances."
+    },
+    {
+      "question": "What does 'accredited qualification' mean?",
+      "answer": "An accredited qualification is officially recognised by the relevant education authorities (e.g., CHE, SAQA in South Africa). Accreditation ensures quality, that employers recognise your qualification, and that you can progress to further study. Always confirm accreditation before you enrol."
+    },
+    {
+      "question": "How do my Grade 11 marks affect university applications?",
+      "answer": "Grade 11 marks can be used for provisional placement and early conditional offers — many universities accept strong Grade 11 results while waiting for final Matric. Good Grade 11 marks also guide subject choices and whether you need to rewrite or improve any subjects in Grade 12."
+    },
+    {
+      "question": "Can I apply with Grade 11 results?",
+      "answer": "Yes, many universities allow you to apply with Grade 11 results and a predicted Grade 12 outcome, but final admission depends on your Matric certificate. Applying early can secure provisional places and give you time to meet conditions."
+    },
+    {
+      "question": "What happens if I fail a matric subject?",
+      "answer": "If you fail a subject, you can rewrite it in the next August/November exam cycle (or through the IEB/FET repeat options). Consider rewrite strategies or alternative programmes that accept your results (e.g., a Higher Certificate or bridging course). Speak with your school or the universities about options."
+    },
+    {
+      "question": "Can I upgrade my matric results?",
+      "answer": "Yes. You can rewrite Matric subjects to improve marks; many universities accept upgraded results or provide routes via bridging courses. Upgrading is common — plan which subjects to rewrite based on the programme requirements you want."
+    },
+    {
+      "question": "What is a Bachelor’s pass, Diploma pass, and Higher Certificate pass?",
+      "answer": "These are different NSC endorsement levels:\n• Bachelor’s pass: allows entry to degree programmes (higher-level achievement across subjects).\n• Diploma pass: allows entry to diploma programmes (slightly lower requirements).\n• Higher Certificate pass: entry to Higher Certificate programmes (lowest of the three but still a tertiary route). Check each programme for exact subject-level requirements."
+    },
+    {
+      "question": "Can I go to university with Maths Literacy?",
+      "answer": "Some programmes accept Maths Literacy (especially some humanities, business or education courses), but many IT, engineering and accounting degrees require pure Mathematics. If you have Maths Literacy but want Maths-heavy degrees, look for bridging courses or alternative pathways."
+    },
+    {
+      "question": "Which subjects are compulsory for university admission?",
+      "answer": "English is usually compulsory (home or first additional language). Many programmes also require Mathematics or Physical Science. Exact required subjects depend on the course — always check the faculty’s admission rules before choosing subjects."
+    },
+    {
+      "question": "What careers can I follow if I don’t take pure Maths?",
+      "answer": "You can still pursue careers in law, journalism, business, HR, social sciences, teaching (depending on phase), marketing and many creative fields. For technical careers, consider bridging courses or diplomas that allow you to catch up on required maths."
+    },
+    {
+      "question": "How is Life Orientation used in university applications?",
+      "answer": "Life Orientation is usually excluded from APS calculations at most universities, but it appears on your Matric certificate. Most universities calculate APS from your best six subjects excluding Life Orientation, though some have slightly different rules."
+    },
+    {
+      "question": "What is the average cost of studying at a university in South Africa?",
+      "answer": "Costs vary a lot by institution and programme — public universities may range from modest to high per year depending on modules; private colleges can be higher. Expect to budget for tuition, accommodation, textbooks, transport and living costs. Check each institution’s fee booklet for accurate figures."
+    },
+    {
+      "question": "What are the cheapest universities in South Africa?",
+      "answer": "Cheapest options depend on your course and whether you qualify for funding. Public universities with NSFAS support can be very affordable for eligible students; TVET colleges and some distance-learning universities are also lower-cost. Compare total cost (fees + living expenses) rather than tuition alone."
+    },
+    {
+      "question": "How do bursaries and scholarships work?",
+      "answer": "Bursaries/scholarships are financial awards based on merit, need, or specific criteria (e.g., sport, field of study). You usually apply with documents (ID, transcripts, motivation letter) and meet deadlines. Some bursaries pay tuition directly; others reimburse you — read the terms carefully."
+    },
+    {
+      "question": "What are common bursaries available for South African students?",
+      "answer": "Common sources: NSFAS (public students), university-specific bursaries, corporate bursaries (banks, mining companies), professional bodies (e.g., SAICA for accounting), and private foundations. Each has its own eligibility rules and application windows."
+    },
+    {
+      "question": "How do I apply for NSFAS funding?",
+      "answer": "Apply online through the NSFAS portal in the open application window — you’ll need your ID, proof of income (parents/household), and academic records. NSFAS is means-tested; check deadlines and submit documents on time. If you’re applying to a private college, NSFAS usually does not apply."
+    },
+    {
+      "question": "Can I get funding if I study at a private institution?",
+      "answer": "NSFAS mainly funds public institutions, but some private colleges or universities have their own bursaries and payment plans. Check the private provider’s bursary office and external funders for possible support."
+    },
+    {
+      "question": "Do universities allow payment in instalments?",
+      "answer": "Yes — many universities and private colleges offer payment plans (monthly or by semester). Contact the fees office to arrange a plan and confirm any required deposit or admin fees."
+    },
+    {
+      "question": "When should I start applying for university?",
+      "answer": "Start researching in Grade 11 and apply early in Grade 12 — many universities open applications in mid–late Grade 12 (or earlier for some courses). Some programmes have early closing dates (Medicine, Architecture) so check deadlines and apply as soon as you meet requirements."
+    },
+    {
+      "question": "What happens after I submit my application?",
+      "answer": "Admissions will process your application, may request certified documents, and either send an offer, a conditional offer (depending on final Matric results), or a decline. Keep an eye on your email and application portal and reply to any requests quickly."
+    },
+    {
+      "question": "How can I check my university application status?",
+      "answer": "Use the university’s online application portal or the CAO portal (where used). You can also email the admissions office with your application number. Check regularly and keep copies of any correspondence."
+    },
+    {
+      "question": "What happens if I miss the application deadline?",
+      "answer": "Late applications may be accepted with a fee for some programmes, but selective programmes often close early and won’t accept late entries. If you miss a deadline, contact admissions immediately and consider alternative intakes (July) or bridging programmes."
+    },
+    {
+      "question": "What is a conditional offer?",
+      "answer": "A conditional offer means the university will accept you if you meet certain final requirements (e.g., pass Matric with a Bachelor’s pass and specific subject levels). Once you meet the conditions, the offer becomes final."
+    },
+    {
+      "question": "How do I write a motivation letter for university?",
+      "answer": "Be clear and honest: say why you want the programme, highlight relevant skills/experience (school projects, volunteer work, leadership), and explain your future goals. Keep it short (1 page), use simple language, and proofread. Tailor it to the programme rather than using a generic letter."
+    },
+    {
+      "question": "What documents do I need to apply for university?",
+      "answer": "Common documents: certified ID or passport, certified Matric/NSC certificate or most recent results, proof of payment for application (if required), academic transcripts (if transferring), and any programme-specific items (portfolios, CV, motivation letter)."
+    },
+    {
+      "question": "Can I apply to more than one university at a time?",
+      "answer": "Yes — you should apply to multiple institutions to increase your chances. Keep track of deadlines and offers, and only accept one final place once you are sure."
+    },
+    {
+      "question": "Can I study overseas after matric?",
+      "answer": "Yes — many students study abroad. You’ll need to check each country’s entry requirements, get a SAQA evaluation (if required), arrange visas, and prove finances. Research scholarships and exchange programmes early, and compare costs vs benefits."
+    },
+    {
+      "question": "What is a SAQA certificate and when do I need one?",
+      "answer": "SAQA evaluates foreign qualifications to show South African NQF equivalence. If you studied abroad and want to apply to South African universities or employers who need local equivalence, you’ll usually request a SAQA evaluation."
+    },
+    {
+      "question": "Can foreign students apply to South African universities?",
+      "answer": "Yes — international applicants must submit certified transcripts, passport copies, and sometimes a SAQA evaluation. Visa/immigration rules apply and you may need proof of funds and English language results."
+    },
+    {
+      "question": "What are bridging or foundation programmes?",
+      "answer": "Bridging/Foundation programmes help students who don’t meet direct entry requirements build knowledge and skills to join a degree later. They usually last 6–12 months to a year and often include extra academic support."
+    },
+    {
+      "question": "What are TVET colleges and what do they offer?",
+      "answer": "TVET (Technical and Vocational Education & Training) colleges offer vocational diplomas, national certificates and trades training (plumbing, electrical, hospitality, automotive). They’re practical, cost-effective, and directly linked to workplace skills."
+    },
+    {
+      "question": "What is university orientation?",
+      "answer": "Orientation is an introduction week where you meet classmates, learn how the campus works (registration, libraries, support), and find clubs and services. It helps you settle in and find resources for study success — try to attend as much as you can."
+    },
+    {
+      "question": "How do I prepare for my first year at university?",
+      "answer": "Organise your finances, buy essential textbooks and stationery, set up your email/LMS access, and prepare time-management routines. Read the module outlines in advance, do any recommended pre-reading, and connect with peers or study groups before classes start."
+    },
+    {
+      "question": "What skills do I need to succeed at university?",
+      "answer": "Time management, note-taking, basic research and writing, critical thinking, and self-discipline are key. Communication and teamwork matter too — join study groups and use academic support services when needed."
+    },
+    {
+      "question": "What is a typical day like for a university student?",
+      "answer": "It varies: you might have lectures and tutorials for a few hours, study time, assignments, and part-time work. Plan your week by blocking study sessions and keeping time for rest, clubs, and social activities."
+    },
+    {
+      "question": "How do online lectures and assignments work?",
+      "answer": "Lectures are often recorded or live via the LMS; assignments are submitted online. Check deadlines carefully, keep files organised, and communicate with lecturers if you have trouble with access or deadlines."
+    },
+    {
+      "question": "Are there clubs or societies for students?",
+      "answer": "Yes, most campuses have clubs for sports, coding, entrepreneurship, arts and more. Joining clubs is a great way to build skills, meet people and boost your CV."
+    },
+    {
+      "question": "Which careers pay the most in South Africa?",
+      "answer": "High-paying careers often include medical specialists, senior engineers, experienced IT developers/architects, certain finance roles (investment banking), and senior management. Pay varies by experience, location and industry — aim for strong skills and experience to increase earning potential."
+    },
+    {
+      "question": "What are good IT careers to study for the future?",
+      "answer": "Software development, data science/analytics, cyber security, cloud engineering and network engineering are strong choices. These areas grow quickly and offer remote work options, internships and clear certification paths alongside degrees."
+    },
+    {
+      "question": "What are some careers that don’t require a degree?",
+      "answer": "Trades (electrician, plumber), many IT support and coding bootcamp roles, paralegal or administrative roles, and entrepreneurship can be entered without degrees. Short courses, apprenticeships and certificates can still lead to good careers."
+    },
+    {
+      "question": "How do internships and learnerships work?",
+      "answer": "Internships are short work placements (often unpaid or stipended) giving workplace experience; learnerships combine work and study with a training contract and often lead to a nationally recognised qualification. Both are great for gaining experience and improving employability."
+    },
+    {
+      "question": "What is the difference between a learnership and an apprenticeship?",
+      "answer": "A learnership is a workplace-based learning programme that leads to an accredited qualification and often includes formal coursework. Apprenticeships are similar but traditionally focused on trades and craft skills; the exact definitions can vary by sector."
+    },
+    {
+      "question": "How can I gain work experience while studying?",
+      "answer": "Look for part-time jobs, internships, volunteer roles, campus assistant positions, or short industry projects. Use university career centres and LinkedIn to find opportunities — even small roles help build your CV and networks."
+    }
+  ]
+}
