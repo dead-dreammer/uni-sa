@@ -11,7 +11,7 @@ from flask import Flask, request, jsonify, render_template
 nltk.download('punkt')
 nltk.download('wordnet')
 
-app = Flask(__name__, static_folder='static', template_folder='templates')
+
 
 #Locate JSON dataset
 base_path = Path(__file__).parent
@@ -76,26 +76,7 @@ def chatbot_response(user_input):
     else:
         return answers[idx]
 
-#Flask routes
-@app.route('/')
-def index():
-    return render_template('index.html')
 
-@app.route('/ask', methods=['POST'])
-def ask():
-    user_message = request.json.get("message", "").strip().lower()
 
-    # Exit/Goodbye handling
-    exit_words = ["exit", "quit", "bye", "done", "goodbye", "stop"]
-    if user_message in exit_words:
-        reply = "Goodbye! 👋 Have a great day ahead!"
-    else:
-        try:
-            reply = chatbot_response(user_message)
-        except Exception as e:
-            reply = f"Something unexpected happened ({e}). Please try again."
 
-    return jsonify({"reply": reply})
 
-if __name__ == '__main__':
-    app.run(debug=True)

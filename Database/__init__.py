@@ -42,8 +42,6 @@ def create_app():
     # Register blueprints
     app.register_blueprint(auth, url_prefix='/auth')
 
-
-
     from .models import User
     
     # Create the database if it doesn't exist

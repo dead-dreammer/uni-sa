@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from Database.auth import auth
 from Database.__init__ import db, create_database
+from Chatbot.bot import chatbot_response
 
 
 app = Flask(__name__, static_folder="static")
@@ -64,6 +65,21 @@ def signup():
 def profile():
     return render_template('profile.html')
 
+@app.route('/ask', methods=['POST'])
+def ask():
+    user_message = request.json.get("message", "").strip().lower()
+
+    # Exit/Goodbye handling
+    exit_words = ["exit", "quit", "bye", "done", "goodbye", "stop"]
+    if user_message in exit_words:
+        reply = "Goodbye! 👋 Have a great day ahead!"
+    else:
+        try:
+            reply = chatbot_response(user_message)
+        except Exception as e:
+            reply = f"Something unexpected happened ({e}). Please try again."
+
+    return jsonify({"reply": reply})
 
 @app.route('/start-search')
 def start_search():
@@ -93,9 +109,6 @@ def terms():
 @app.route('/privacy')
 def privacy():
     return render_template('privacy.html')
-
-
-
 
 
 if __name__ == '__main__':
