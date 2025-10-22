@@ -26,7 +26,7 @@
           alt="uni.sa"
       /></a>
       {% if session.get('username') %}
-      <a href="/personal-info" class="nav-link"
+      <a href="/personal-info" class="underline0"
         >{{ session.get('username') }}</a
       >
       {% endif %}
@@ -70,6 +70,67 @@
     </nav>
 
     {% block content %}{% endblock %}
+
+        <!-- Floating chat button -->
+    <button class="chat-button" id="chatButton">
+        <svg class="chat-button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            
+        </svg>
+        <span class="chat-badge">1</span>
+    </button>
+
+    <!-- Chat widget -->
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="header-icon"></div>
+            <div class="header-title">ATOM</div>
+            <div class="close-icon" id="closeChat">✕</div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+            <div class="timestamp" id="currentTime"></div>
+            
+            <div class="welcome-message">
+                <div class="join-notice">
+                    <div class="header-icon" style="width: 60px; height: 60px;"></div>
+                    <span><strong>ATOM Student Advisor</strong> joined • <span id="joinTime"></span></span>
+                </div>
+                
+                <div class="privacy-notice">
+                    By continuing, you consent to this chat being monitored, recorded, and stored in accordance with <a href="#" class="privacy-link">ATOM's Privacy Policy</a>.
+                </div>
+                
+                <div class="welcome-text">
+                    Hello! 👋 I’m ATOM, your student advisor. Ask me about courses, fees, or entry requirements?
+                </div>
+                <ul class="options-list">
+                    <li>Get Support</li>
+                    <li>Explore Course Information</li>
+                    <li>Check Entry Requirements</li>
+                    <li>Ask about Fees & Funding</li>
+                    <li>Learn about Universities</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <input 
+                type="text" 
+                class="chat-input" 
+                id="userInput" 
+                placeholder="Type your message..."
+                autocomplete="off"
+            >
+            <button class="send-button" id="sendButton">
+                ➤
+            </button>
+        </div>
+    </div>
 
     <footer>
       <div class="footer-container">
