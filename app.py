@@ -12,8 +12,6 @@ db.init_app(app)
 # Register blueprint
 app.register_blueprint(auth, url_prefix='/auth')
 
-
-
 # Create DB if not exists
 with app.app_context():
     create_database(app)
@@ -32,7 +30,6 @@ def add_header(response):
 def home_page():
     # root serves the main home page (template under templates/home/home_pg.html)
     return render_template('home/home_pg.html')
-
 
 
 @app.route('/about')
