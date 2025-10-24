@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify, session
-from Database.models import User
+from Database.models import *
 from Database.__init__ import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
@@ -12,7 +12,7 @@ auth = Blueprint('auth', __name__)
 @auth.post('/sign-up')
 def sign_up():
     data = request.get_json()
-    username = data.get('username')
+    name = data.get('username')
     email = data.get('email')
     number = data.get('number')
     password = data.get('password')
@@ -26,38 +26,38 @@ def sign_up():
         dob_obj = datetime.strptime(dob_str, '%Y-%m-%d').date()
 
     # Prevent duplicate emails
-    if User.query.filter_by(email=email).first():
+    if Student.query.filter_by(email=email).first():
         return jsonify({'message': 'Account already exists with that email address'}), 400
 
-    # Create new user
-    new_user = User(
+    # Create new_student
+    new_student = Student(
         email=email,
-        name=username,
+        name=name,
         number=number,
         dob=dob_obj,
         gender=gender,
         password=generate_password_hash(password)
     )
-    db.session.add(new_user)
-    db.session.commit()  # commit so new_user.id is available
+    db.session.add(new_student)
+    db.session.commit()  # commit so new_student.id is available
 
 
     # Store session
     # Store session
-    session['user_id'] = new_user.id
-    session['username'] = new_user.name
-    session['email'] = new_user.email
-    session['number'] = new_user.number   # add this
+    session['student_id'] = new_student.student_id
+    session['name'] = new_student.name
+    session['email'] = new_student.email
+    session['number'] = new_student.number   # add this
 
     # calculate and store age
-    if new_user.dob:
+    if new_student.dob:
         today = datetime.today().date()
-        age = today.year - new_user.dob.year - ((today.month, today.day) < (new_user.dob.month, new_user.dob.day))
+        age = today.year - new_student.dob.year - ((today.month, today.day) < (new_student.dob.month, new_student.dob.day))
         session['age'] = age
     else:
         session['age'] = None
 
-    return jsonify({'message': 'Account Created!', 'username': new_user.name}), 201
+    return jsonify({'message': 'Account Created!', 'name': new_student.name}), 201
 
 
 # -------------------------
@@ -69,25 +69,25 @@ def login():
     email = data.get('email')
     password = data.get('password')
 
-    user = User.query.filter_by(email=email).first()
-    if not user or not check_password_hash(user.password, password):
+    new_student = Student.query.filter_by(email=email).first()
+    if not new_student or not check_password_hash(new_student.password, password):
         return jsonify({'message': 'Invalid credentials'}), 401
 
-    session['user_id'] = user.id
-    session['username'] = user.name
-    session['email'] = user.email
-    session['number'] = user.number
+    session['student_id'] = new_student.student_id
+    session['name'] = new_student.name
+    session['email'] = new_student.email
+    session['number'] = new_student.number
     from datetime import date
  
-    if user.dob:
+    if new_student.dob:
         today = date.today()
-        age = today.year - user.dob.year - ((today.month, today.day) < (user.dob.month, user.dob.day))
+        age = today.year - new_student.dob.year - ((today.month, today.day) < (new_student.dob.month, new_student.dob.day))
         session['age'] = age
     else:
         session['age'] = None
 
 
-    return jsonify({'message': 'Login successful', 'username': user.name}), 200
+    return jsonify({'message': 'Login successful', 'studentnew_studentname': new_student.name}), 200
 
 
 # -------------------------

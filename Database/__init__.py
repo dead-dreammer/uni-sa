@@ -7,11 +7,11 @@ db = SQLAlchemy()
 DB_NAME = "database.db"
 
 def create_database(app):
-    db_path = path.join(app.instance_path, DB_NAME)
-    if not path.exists(db_path):
+    if not path.exists(DB_NAME):
         with app.app_context():
             db.create_all()
-            print('Created Database!')
+            print('✅ Created Database and Tables!')
+
     else:
         print('Database already exists!')
 
@@ -36,13 +36,15 @@ def create_app():
 
     # Import blueprints and models within the function scope to avoid circular imports
     from .auth import auth
-
-    
+    from .search import search
 
     # Register blueprints
     app.register_blueprint(auth, url_prefix='/auth')
+    app.register_blueprint(search, url_prefix='/search')
 
-    from .models import User
+    from .models import Student
+    from .models import AcademicMark
+    from .models import Preference  
     
     # Create the database if it doesn't exist
     create_database(app)

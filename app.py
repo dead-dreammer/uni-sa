@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from Database.auth import auth
+from Database.search import search
 from Database.__init__ import db, create_database
 from Chatbot.bot import chatbot_response
 
@@ -11,6 +12,7 @@ db.init_app(app)
 
 # Register blueprint
 app.register_blueprint(auth, url_prefix='/auth')
+app.register_blueprint(search, url_prefix='/search')
 
 # Create DB if not exists
 with app.app_context():
