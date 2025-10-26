@@ -12,12 +12,11 @@ auth = Blueprint('auth', __name__)
 @auth.post('/sign-up')
 def sign_up():
     data = request.get_json()
-    name = data.get('username')
+    name = data.get('name')
     email = data.get('email')
     number = data.get('number')
     password = data.get('password')
     gender = data.get('gender')
-
     dob_str = data.get('dob')
 
     # Parse date of birth
@@ -69,25 +68,25 @@ def login():
     email = data.get('email')
     password = data.get('password')
 
-    new_student = Student.query.filter_by(email=email).first()
-    if not new_student or not check_password_hash(new_student.password, password):
+    student = Student.query.filter_by(email=email).first()
+    if not student or not check_password_hash(student.password, password):
         return jsonify({'message': 'Invalid credentials'}), 401
 
-    session['student_id'] = new_student.student_id
-    session['name'] = new_student.name
-    session['email'] = new_student.email
-    session['number'] = new_student.number
+    session['student_id'] = student.student_id
+    session['name'] = student.name
+    session['email'] = student.email
+    session['number'] = student.number
     from datetime import date
  
-    if new_student.dob:
+    if student.dob:
         today = date.today()
-        age = today.year - new_student.dob.year - ((today.month, today.day) < (new_student.dob.month, new_student.dob.day))
+        age = today.year - student.dob.year - ((today.month, today.day) < (student.dob.month, student.dob.day))
         session['age'] = age
     else:
         session['age'] = None
 
 
-    return jsonify({'message': 'Login successful', 'studentnew_studentname': new_student.name}), 200
+    return jsonify({'message': 'Login successful', 'name': student.name}), 200
 
 
 # -------------------------

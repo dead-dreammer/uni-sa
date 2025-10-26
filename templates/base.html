@@ -25,9 +25,9 @@
           src="{{ url_for('static', filename='img/atom-removebg-preview.png') }}"
           alt="uni.sa"
       /></a>
-      {% if session.get('username') %}
+      {% if session.get('name') %}
       <a href="/personal-info" class="underline0"
-        >{{ session.get('username') }}</a
+        >{{ session.get('name') }}</a
       >
       {% endif %}
       <ul>
@@ -56,7 +56,7 @@
         <li>
           <a href="{{ url_for('contact') }}" class="underline">Contact Us</a>
         </li>
-        {% if session.get('username') %}
+        {% if session.get('name') %}
         <li><a href="/#" class="underline" id="logoutBtn">Logout</a></li>
         {% else %}
         <li><a href="{{ url_for('login') }}" class="underline">Login</a></li>
