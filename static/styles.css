@@ -840,7 +840,7 @@ button[type="submit"]:hover {
 }
 
 
-/* Auth Page Styling -------------------------------------------------------------------------------------*/
+/* login/signup -------------------------------------------------------------------------------------*/
 
 body.auth-page {
   /* auth page background served from static/img */
@@ -865,6 +865,8 @@ body.auth-page {
   min-height: 80vh;
   padding: 2rem ;
   overflow-y: auto;
+  position: relative;
+  margin-top: 30px;
 }
 
 .auth-page .container {
@@ -1061,7 +1063,122 @@ body.auth-page {
     margin-top: 1.5rem;
     font-size: 0.9rem;
   }
+
+  .admin-lock-icon{
+    top:25px;
+    left:15px;
+  }
+
+  .back-button{
+    top:25px;
+    left:15px;
+  }
+
 }
+
+/*admin lock*/
+/* Admin lock icon styling */
+.admin-lock-icon {
+  position: fixed;
+  top: 110px;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.admin-lock-icon:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.admin-lock-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: #ffffff;
+}
+
+/* Tooltip for admin lock */
+.admin-lock-icon::after {
+  content: 'Admin Login';
+  position: absolute;
+  left: 60px;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.admin-lock-icon:hover::after {
+  opacity: 1;
+}
+
+/* Admin badge styling */
+.admin-badge {
+  position: absolute;
+  top: -15px;
+  right: 50%;
+  transform: translateX(50%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  letter-spacing: 1px;
+}
+
+/* Back button styling */
+.back-button {
+  position: fixed;
+  top: 110px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(-5px);
+}
+
+.back-button svg {
+  width: 18px;
+  height: 18px;
+  fill: white;
+}
+
+
 
 
 /*START MY SEARCH PAGE --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

@@ -61,6 +61,10 @@ def signup():
     # same template contains signup UI
     return render_template('Login/login_signup.html')
 
+@app.route('/admin/login', methods=['GET', 'POST'])
+def admin_login():
+    return render_template('Login/admin_login.html')
+
 @app.route('/profile')
 def profile():
     return render_template('profile.html')

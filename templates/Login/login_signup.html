@@ -8,6 +8,14 @@
 {% endblock %}
 
 {% block content %}
+
+<!-- Admin Lock Icon -->
+  <a href="{{ url_for('admin_login') }}" class="admin-lock-icon" title="Admin Login">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+      <path d="M12 1C8.676 1 6 3.676 6 7v3H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V12c0-1.1-.9-2-2-2h-2V7c0-3.324-2.676-6-6-6zm0 2c2.276 0 4 1.724 4 4v3H8V7c0-2.276 1.724-4 4-4zm0 10c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2z"/>
+    </svg>
+  </a>
+  
   <main class="main auth-page">
     <!-- LOGIN FORM -->
     <div id="loginForm" class="form-container">
