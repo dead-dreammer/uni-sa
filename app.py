@@ -112,12 +112,12 @@ def personal_info():
 
 @app.route('/admissions')
 def admissions():
-    return render_template('Contact us/Student Tools/admissions.html')
+    return render_template('Student Tools/admissions.html')
 
 
 @app.route('/bursaries')
 def bursaries():
-    return render_template('Contact us/Student Tools/bursaries.html')
+    return render_template('Student Tools/bursaries.html')
 
 
 @app.route('/terms')

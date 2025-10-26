@@ -14,6 +14,10 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='styles.css') }}"
     />
+     <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='chatbot.css') }}"
+    />
     {% block head_extras %}{% endblock %}
   </head>
   <body>
@@ -61,23 +65,8 @@
         <li>
           <a href="{{ url_for('contact') }}" class="underline">Contact Us</a>
         </li>
-<<<<<<< HEAD
+
         {% if session.get('name') %}
-=======
-
-        <!-- Admin Dropdown - Only visible when admin is logged in -->
-        {% if session.get('is_admin') %}
-        <li class="dropdown">
-          <a href="#" class="underline">Admin ▾</a>
-          <ul class="dropdown-content">
-            <li><a href="{{ url_for('course_management') }}">Manage Courses</a></li>
-            <li><a href="{{ url_for('admin_logout') }}">Admin Logout</a></li>
-          </ul>
-        </li>
-        {% endif %}
-
-        {% if session.get('username') %}
->>>>>>> d5245bbe836cd1705e84d80ef2d2c6b343e1c99b
         <li><a href="/#" class="underline" id="logoutBtn">Logout</a></li>
         {% else %}
         <li><a href="{{ url_for('login') }}" class="underline">Login</a></li>
@@ -209,5 +198,6 @@
       type="module"
       src="{{ url_for('static', filename='js/logout.js') }}"
     ></script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
   </body>
 </html>
