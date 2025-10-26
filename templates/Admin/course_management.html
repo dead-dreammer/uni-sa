@@ -1,0 +1,444 @@
+{% extends 'base.html' %}
+
+{% block title %}Course Management | Admin Panel{% endblock %}
+
+{% block head_extras %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/course_management.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="course-management-wrapper">
+  
+  <!-- Hero Section with Gradient Background -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <div class="hero-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+        </svg>
+      </div>
+      <h1 class="hero-title">Course Management</h1>
+      <p class="hero-subtitle">Manage and organize university courses across all institutions</p>
+    </div>
+  </div>
+
+  <!-- Main Content Container -->
+  <div class="content-container">
+    
+    <!-- Control Panel -->
+    <div class="control-panel">
+      <div class="control-left">
+        <button class="btn-primary" onclick="openAddModal()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Add Course
+        </button>
+        <button class="btn-secondary" onclick="uploadCSV()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          Import CSV
+        </button>
+      </div>
+      
+      <div class="control-right">
+        <div class="search-box">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input type="text" id="searchInput" placeholder="Search courses..." onkeyup="searchCourses()">
+        </div>
+        <select id="collegeFilter" class="filter-select" onchange="filterCourses()" aria-label="Filter">
+          <option value="all">All Institutions</option>
+          <option value="dut">DUT</option>
+          <option value="ukzn">UKZN</option>
+          <option value="stadio">Stadio</option>
+          <option value="richfield">Richfield</option>
+          <option value="mut">MUT</option>
+          <option value="unisa">UNISA</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+      <div class="stat-card stat-primary">
+        <div class="stat-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <h3 class="stat-number">247</h3>
+          <p class="stat-label">Total Courses</p>
+        </div>
+      </div>
+      
+      <div class="stat-card stat-success">
+        <div class="stat-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <h3 class="stat-number">6</h3>
+          <p class="stat-label">Institutions</p>
+        </div>
+      </div>
+      
+      <div class="stat-card stat-warning">
+        <div class="stat-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <h3 class="stat-number">42</h3>
+          <p class="stat-label">Updated Today</p>
+        </div>
+      </div>
+      
+      <div class="stat-card stat-info">
+        <div class="stat-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <h3 class="stat-number">1,284</h3>
+          <p class="stat-label">Active Students</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Courses Grid -->
+    <div class="courses-grid">
+      
+      <!-- DUT Course -->
+      <div class="course-card" data-college="dut">
+        <div class="card-header">
+          <span class="college-badge badge-dut">DUT</span>
+          <div class="card-actions">
+            <button class="btn-icon" onclick="editCourse(1)" title="Edit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+            </button>
+            <button class="btn-icon btn-delete" onclick="deleteCourse(1)" title="Delete">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="course-title">Bachelor of Engineering in Civil Engineering</h3>
+          <p class="course-description">Comprehensive program focused on infrastructure design, construction management, and sustainable engineering practices.</p>
+          <div class="course-meta">
+            <span class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              4 years
+            </span>
+            <span class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              Full-time
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- UKZN Course -->
+      <div class="course-card" data-college="ukzn">
+        <div class="card-header">
+          <span class="college-badge badge-ukzn">UKZN</span>
+          <div class="card-actions">
+            <button class="btn-icon" onclick="editCourse(2)" title="Edit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+            </button>
+            <button class="btn-icon btn-delete" onclick="deleteCourse(2)" title="Delete">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="course-title">Bachelor of Medicine and Bachelor of Surgery (MBChB)</h3>
+          <p class="course-description">Comprehensive medical degree program preparing students for clinical practice with extensive practical training.</p>
+          <div class="course-meta">
+            <span class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              6 years
+            </span>
+            <span class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              Full-time
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stadio Course -->
+      <div class="course-card" data-college="stadio">
+        <div class="card-header">
+          <span class="college-badge badge-stadio">Stadio</span>
+          <div class="card-actions">
+            <button class="btn-icon" onclick="editCourse(3)" title="Edit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+            </button>
+            <button class="btn-icon btn-delete" onclick="deleteCourse(3)" title="Delete">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="course-title">Bachelor of Commerce in Marketing</h3>
+          <p class="course-description">Dynamic marketing program with practical business applications and industry partnerships.</p>
+          <div class="course-meta">
+            <span class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              3 years
+            </span>
+            <span class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              Full-time / Part-time
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Richfield Course -->
+      <div class="course-card" data-college="richfield">
+        <div class="card-header">
+          <span class="college-badge badge-richfield">Richfield</span>
+          <div class="card-actions">
+            <button class="btn-icon" onclick="editCourse(4)" title="Edit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+            </button>
+            <button class="btn-icon btn-delete" onclick="deleteCourse(4)" title="Delete">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="course-title">Bachelor of Information Technology</h3>
+          <p class="course-description">IT program covering software development, networking, and cybersecurity fundamentals.</p>
+          <div class="course-meta">
+            <span class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              3 years
+            </span>
+            <span class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              Full-time
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MUT Course -->
+      <div class="course-card" data-college="mut">
+        <div class="card-header">
+          <span class="college-badge badge-mut">MUT</span>
+          <div class="card-actions">
+            <button class="btn-icon" onclick="editCourse(5)" title="Edit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+            </button>
+            <button class="btn-icon btn-delete" onclick="deleteCourse(5)" title="Delete">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="course-title">National Diploma in Electrical Engineering</h3>
+          <p class="course-description">Technical program in electrical systems, power distribution, and industrial automation.</p>
+          <div class="course-meta">
+            <span class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              3 years
+            </span>
+            <span class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              Full-time
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- UNISA Course -->
+      <div class="course-card" data-college="unisa">
+        <div class="card-header">
+          <span class="college-badge badge-unisa">UNISA</span>
+          <div class="card-actions">
+            <button class="btn-icon" onclick="editCourse(6)" title="Edit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+            </button>
+            <button class="btn-icon btn-delete" onclick="deleteCourse(6)" title="Delete">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="course-title">Bachelor of Accounting Science</h3>
+          <p class="course-description">Distance learning program in accounting and financial management with flexible scheduling.</p>
+          <div class="course-meta">
+            <span class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              3 years
+            </span>
+            <span class="meta-item">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              Distance Learning
+            </span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Add/Edit Modal -->
+  <div id="courseModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add New Course</h2>
+        <button class="modal-close" onclick="closeModal()" aria-label="Modal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <form id="courseForm" class="modal-body">
+        <div class="form-group">
+          <label for="collegeName">Institution *</label>
+          <select id="collegeName" required>
+            <option value="">Select Institution</option>
+            <option value="dut">DUT</option>
+            <option value="ukzn">UKZN</option>
+            <option value="stadio">Stadio</option>
+            <option value="richfield">Richfield</option>
+            <option value="mut">MUT</option>
+            <option value="unisa">UNISA</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="courseName">Course Name *</label>
+          <input type="text" id="courseName" placeholder="e.g., Bachelor of Science in Computer Science" required>
+        </div>
+
+        <div class="form-group">
+          <label for="courseDescription">Description *</label>
+          <textarea id="courseDescription" rows="4" placeholder="Brief description of the course" required></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="courseDuration">Duration *</label>
+            <input type="text" id="courseDuration" placeholder="e.g., 3 years" required>
+          </div>
+
+          <div class="form-group">
+            <label for="courseMode">Study Mode *</label>
+            <select id="courseMode" required>
+              <option value="">Select Mode</option>
+              <option value="full-time">Full-time</option>
+              <option value="part-time">Part-time</option>
+              <option value="distance">Distance Learning</option>
+              <option value="both">Full-time / Part-time</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn-submit">Save Course</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/course_management.js') }}"></script>
+{% endblock %}

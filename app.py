@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from Database.auth import auth
 from Database.search import search
 from Database.backup import backup_database
@@ -50,6 +50,11 @@ def contact():
     return render_template('Contact us/contact_us.html')
 
 
+@app.route('/course-management')
+def course_management():
+    return render_template('Admin/course_management.html')
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     # Combined login/signup page
@@ -61,13 +66,35 @@ def signup():
     # same template contains signup UI
     return render_template('Login/login_signup.html')
 
+# Admin login route
 @app.route('/admin/login', methods=['GET', 'POST'])
 def admin_login():
+    if request.method == 'POST':
+        email = request.form.get('adminEmail')
+        password = request.form.get('adminPassword')
+        
+        # TODO: Replace with your actual admin verification logic
+        # Example: Check against database or environment variables
+        if email == 'admin@uni.sa' and password == 'admin123':  # CHANGE THESE CREDENTIALS!
+            session['is_admin'] = True
+            session['admin_email'] = email
+            return redirect(url_for('home_page'))  
+        else:
+            # Invalid credentials - pass error message to template
+            return render_template('Login/admin_login.html', error='Invalid admin credentials')
+    
     return render_template('Login/admin_login.html')
+
+@app.route('/admin/logout')
+def admin_logout():
+    session.pop('is_admin', None)
+    session.pop('admin_email', None)
+    return redirect(url_for('home_page'))
 
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
+
 
 @app.route('/ask', methods=['POST'])
 def ask():
@@ -121,4 +148,4 @@ def backup_now():
 
 if __name__ == '__main__':
     # Runs the Flask development server
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)

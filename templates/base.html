@@ -38,6 +38,11 @@
             >How it Works</a
           >
         </li>
+        <li>
+          <a href="{{ url_for('course_management') }}" class="underline"
+            >Course Management</a
+          >
+        </li>
         <li class="dropdown">
           <a href="#">Student Tools</a>
           <ul class="dropdown-content">
@@ -56,6 +61,18 @@
         <li>
           <a href="{{ url_for('contact') }}" class="underline">Contact Us</a>
         </li>
+
+        <!-- Admin Dropdown - Only visible when admin is logged in -->
+        {% if session.get('is_admin') %}
+        <li class="dropdown">
+          <a href="#" class="underline">Admin ▾</a>
+          <ul class="dropdown-content">
+            <li><a href="{{ url_for('course_management') }}">Manage Courses</a></li>
+            <li><a href="{{ url_for('admin_logout') }}">Admin Logout</a></li>
+          </ul>
+        </li>
+        {% endif %}
+
         {% if session.get('username') %}
         <li><a href="/#" class="underline" id="logoutBtn">Logout</a></li>
         {% else %}
@@ -106,7 +123,7 @@
                 </div>
                 
                 <div class="welcome-text">
-                    Hello! 👋 I’m ATOM, your student advisor. Ask me about courses, fees, or entry requirements?
+                    Hello! 👋 I'm ATOM, your student advisor. Ask me about courses, fees, or entry requirements?
                 </div>
                 <ul class="options-list">
                     <li>Get Support</li>
