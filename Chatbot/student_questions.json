@@ -1085,10 +1085,6 @@
       "answer": "Look for part-time jobs, internships, volunteer roles, campus assistant positions, or short industry projects. Use university career centres and LinkedIn to find opportunities — even small roles help build your CV and networks."
     },
     {
-      "question": "__NEW_ENTRIES_START__",
-      "answer": "New entries begin here. Remove this record after review."
-    },
-    {
       "question": "what is uni.sa",
       "answer": "UNI.SA is a student advisory platform that helps you find and compare South African universities, courses, fees and bursaries so you can make a confident application."
     },
@@ -1102,11 +1098,11 @@
     },
     {
       "question": "who is on the uni.sa team",
-      "answer": "Our team includes education advisors, admissions specialists and career coaches who keep the information up to date and ready to help you."
+      "answer": "Our team includes my creator Mishaylin, Alex the team lead, Thwisha the frontend developer, and finally Osama the backend developer."
     },
     {
       "question": "is uni.sa free to use",
-      "answer": "Basic search features are free to use. We may offer premium personalised services that are clearly labelled on the site."
+      "answer": "Yes,it's features are free to use"
     },
     {
       "question": "how does uni.sa work",
@@ -5083,6 +5079,50 @@
     {
       "question": "Can I study nurse with Sepedi?",
       "answer": "Yes, Sepedi can help if you want to become a nurse. Universities typically look for Life Sciences, English, and common qualifications are Bachelor of Nursing, Diploma in Nursing. If you’re missing a required subject, some institutions offer bridging options — it’s worth asking the admissions office."
+    },
+    {
+      "question": "Can I study electrical technician with Life Sciences?",
+      "answer": "Yes, Life Sciences can help if you want to become a electrical technician. Universities typically look for Electrical Technology, Mathematics, and common qualifications are Diploma Electrical Technology. If you’re missing a required subject, some institutions offer bridging options — it’s worth asking the admissions office."
+    },
+    {
+      "question": "How do I apply to Richfield for a distance-learning qualification?",
+      "answer": "Apply online at Richfield’s application portal or submit the completed application form with proof of the non-refundable application fee. Include certified ID/passport and academic transcripts; international applicants must include SAQA evaluation where required."
+    },
+    {
+      "question": "What is the non-refundable application fee at Richfield?",
+      "answer": "Richfield charges a non-refundable application fee (the prospectus shows amounts such as R600–R750 depending on the intake and mode). Check the current fee with a student advisor before payment."
+    },
+    {
+      "question": "How much is the registration deposit at Richfield and when is it due?",
+      "answer": "A non-refundable registration deposit is payable upon admission (examples in the prospectus: R1,600–R2,250 for South African students; international students may pay a percentage of annual course fees). Pay promptly to secure your registration."
+    },
+    {
+      "question": "What payment methods does Richfield accept?",
+      "answer": "Payments may be made by EFT/direct deposit using the student number/ID as the reference, stop order, or card payment where available. Always use your student number or ID as the payment reference so amounts are allocated correctly."
+    },
+    {
+      "question": "Can I transfer from contact learning to distance learning at Richfield?",
+      "answer": "Yes — Richfield allows modality transfers (contact to distance) but charges an administration fee for the transfer. Speak to a student advisor to start the process."
+    },
+    {
+      "question": "Does Richfield offer recognition of prior learning (RPL)?",
+      "answer": "Yes — Richfield offers RPL processes for eligible applicants. There is typically an RPL application fee and separate fees for module exemptions where applicable. Contact admissions for details and evidence required."
+    },
+    {
+      "question": "What are DUT’s closing dates for CAO applications and where are they listed?",
+      "answer": "DUT lists CAO programme closing dates by programme in the prospectus (examples: 30 September for many programmes). Check the DUT CAO entries in the prospectus or CAO website for the exact closing date per programme."
+    },
+    {
+      "question": "What are UKZN’s application sections and timetables?",
+      "answer": "UKZN’s prospectus provides a section on how to apply, campus lists, programme offerings, entrance requirements, alternative access and financing including scholarship and bursary sections. Follow the step-by-step application instructions in the prospectus."
+    },
+    {
+      "question": "How do I apply to UCT and how many programme choices can I include?",
+      "answer": "Apply online through UCT’s application portal; applicants may typically choose up to two programme choices on a single application but follow the prospectus guidance for specifics and deadlines."
+    },
+    {
+      "question": "Does UCT require the NBT and for which applicants?",
+      "answer": "UCT requires NBTs for many undergraduate applicants; Health Sciences and some competitive programmes require NBTs regardless of residence. See the UCT admissions section for specific NBT requirements by programme."
     }
   ]
 }
