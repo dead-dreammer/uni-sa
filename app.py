@@ -1,24 +1,12 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from Database.auth import auth
 from Database.search import search
 from Database.backup import backup_database
-from Database.__init__ import db, create_database
+from Database.__init__ import db, create_database, create_app
 from Chatbot.bot import chatbot_response
+from Database.backup import backup_database, restore_latest_backup
 
-
-app = Flask(__name__, static_folder="static")
-app.config['SECRET_KEY'] = 'dalziel'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
-db.init_app(app)
-
-# Register blueprint
-app.register_blueprint(auth, url_prefix='/auth')
-app.register_blueprint(search, url_prefix='/search')
-
-# Create DB if not exists
-with app.app_context():
-    create_database(app)
-
+app = create_app()
 
 @app.after_request
 def add_header(response):
@@ -50,6 +38,11 @@ def contact():
     return render_template('Contact us/contact_us.html')
 
 
+@app.route('/course-management')
+def course_management():
+    return render_template('Admin/course_management.html')
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     # Combined login/signup page
@@ -61,9 +54,35 @@ def signup():
     # same template contains signup UI
     return render_template('Login/login_signup.html')
 
+# Admin login route
+@app.route('/admin/login', methods=['GET', 'POST'])
+def admin_login():
+    if request.method == 'POST':
+        email = request.form.get('adminEmail')
+        password = request.form.get('adminPassword')
+        
+        # TODO: Replace with your actual admin verification logic
+        # Example: Check against database or environment variables
+        if email == 'admin@uni.sa' and password == 'admin123':  # CHANGE THESE CREDENTIALS!
+            session['is_admin'] = True
+            session['admin_email'] = email
+            return redirect(url_for('home_page'))  
+        else:
+            # Invalid credentials - pass error message to template
+            return render_template('Login/admin_login.html', error='Invalid admin credentials')
+    
+    return render_template('Login/admin_login.html')
+
+@app.route('/admin/logout')
+def admin_logout():
+    session.pop('is_admin', None)
+    session.pop('admin_email', None)
+    return redirect(url_for('home_page'))
+
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
+
 
 @app.route('/ask', methods=['POST'])
 def ask():
@@ -93,12 +112,12 @@ def personal_info():
 
 @app.route('/admissions')
 def admissions():
-    return render_template('Contact us/Student Tools/admissions.html')
+    return render_template('Student Tools/admissions.html')
 
 
 @app.route('/bursaries')
 def bursaries():
-    return render_template('Contact us/Student Tools/bursaries.html')
+    return render_template('Student Tools/bursaries.html')
 
 
 @app.route('/terms')
@@ -110,11 +129,7 @@ def terms():
 def privacy():
     return render_template('privacy.html')
 
-@app.route('/backup-db')
-def backup_now():
-    backup_database(app)
-    return "✅ Database backup completed!"
 
 if __name__ == '__main__':
     # Runs the Flask development server
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=True)

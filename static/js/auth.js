@@ -42,8 +42,7 @@ document.getElementById('signupForm').addEventListener('submit', async function(
   e.preventDefault();
 
   // Collect values
-  const username = document.getElementById('username').value.trim();
-
+  const name = document.getElementById('username').value.trim();
   const email = document.getElementById('email').value.trim();
   const number = document.getElementById('number').value.trim();
   const password = document.getElementById('password').value.trim();
@@ -53,7 +52,7 @@ document.getElementById('signupForm').addEventListener('submit', async function(
 
 
   // Validation
-  if(!username || !email || !number || !password || !confirmPassword || !dob || !gender){
+  if(!name || !email || !number || !password || !confirmPassword || !dob || !gender){
     alert("All required fields must be filled.");
     return;
   }
@@ -74,7 +73,7 @@ document.getElementById('signupForm').addEventListener('submit', async function(
     const response = await fetch('/auth/sign-up', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({username,  email, number, password, dob, gender})
+      body: JSON.stringify({name,  email, number, password, dob, gender})
     });
 
     const result = await response.json();

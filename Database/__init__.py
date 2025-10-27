@@ -1,40 +1,47 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import path
 from flask_cors import CORS
+import os
+from os import path
+from Database.backup import backup_database, restore_latest_backup
 
 db = SQLAlchemy()
-DB_NAME = "database.db"
+
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+DB_PATH = os.path.join(BASE_DIR, "database.db")
+BACKUP_DIR = os.path.join(BASE_DIR, "backups")
 
 def create_database(app):
-    if not path.exists(DB_NAME):
-        with app.app_context():
-            db.create_all()
-            print('✅ Created Database and Tables!')
-
+    """Ensure the database exists and all tables are created."""
+    if not path.exists(DB_PATH):
+        print("⚠️ Main database missing...")
+        restored = restore_latest_backup(DB_PATH, BACKUP_DIR)
+        if restored:
+            print("✅ Restored database from latest backup.")
+        else:
+            with app.app_context():
+                db.create_all()
+                print("🆕 Created new database and tables (no backup found).")
     else:
-        print('Database already exists!')
+        print(f"✅ Database already exists at: {DB_PATH}")
+
+    # Ensure tables exist
+    with app.app_context():
+        db.create_all()
+        print("📦 Verified all tables exist.")
 
 def create_app():
-    app = Flask(__name__)
+    """Initialize Flask app, database, and backup."""
+    app = Flask(__name__, template_folder='../templates', static_folder='../static')
     CORS(app)
     app.config['SECRET_KEY'] = 'dalziel'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_PATH}"
 
-    # Set up the database URI
-    app.config['SQLALCHEMY_DATABASE_URI'] = f"sqlite:///{DB_NAME}"
-
-    # Ensure that the SQLAlchemy instance is properly initialized with the app
+    # Initialize SQLAlchemy with app
     db.init_app(app)
 
-    # Access the database engine within the application context
-    with app.app_context():
-        # Check if the SQLAlchemy engine is initialized
-        if db.engine is not None:
-            print("Flask app is connected to the database.")
-        else:
-            print("Flask app is NOT connected to the database.")
-
-    # Import blueprints and models within the function scope to avoid circular imports
+    # Import models AFTER db.init_app(app)
+    from .models import Student, AcademicMark, Preference, University, Program, Requirement, Application
     from .auth import auth
     from .search import search
 
@@ -42,10 +49,10 @@ def create_app():
     app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(search, url_prefix='/search')
 
-    from .models import Student
-    from .models import AcademicMark
-    from .models import Preference  
-    
-    # Create the database if it doesn't exist
+    # Create or restore database
     create_database(app)
+
+    # Backup database
+    backup_database(DB_PATH, BACKUP_DIR)
+
     return app

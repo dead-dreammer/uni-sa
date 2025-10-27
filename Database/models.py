@@ -6,10 +6,16 @@ class Student(db.Model):
     student_id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True, nullable=False)
     name = db.Column(db.String(150), nullable=False)
-    number = db.Column(db.String(15), nullable=True)
-    dob = db.Column(db.Date, nullable=True)
-    gender = db.Column(db.String(10), nullable=True)
+    number = db.Column(db.String(15))
+    dob = db.Column(db.Date)
+    gender = db.Column(db.String(10))
     password = db.Column(db.String(200), nullable=False)
+
+    # Relationships
+    academic_marks = db.relationship('AcademicMark', backref='student', lazy=True)
+    preferences = db.relationship('Preference', backref='student', lazy=True)
+    applications = db.relationship('Application', backref='student', lazy=True)
+
 
 class AcademicMark(db.Model):
     __tablename__ = 'academic_mark'
@@ -18,6 +24,7 @@ class AcademicMark(db.Model):
     subject_name = db.Column(db.String(100), nullable=False)
     grade_or_percentage = db.Column(db.Float, nullable=False)
     grade_level = db.Column(db.String(20), default='12th Grade')
+
 
 class Preference(db.Model):
     __tablename__ = 'preference'
@@ -29,12 +36,17 @@ class Preference(db.Model):
     focus_area = db.Column(db.String(100))
     __table_args__ = (db.UniqueConstraint('student_id', 'focus_area', name='_student_focus_uc'),)
 
+
 class University(db.Model):
     __tablename__ = 'university'
     university_id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200), unique=True, nullable=False)
     city = db.Column(db.String(100), nullable=False)
     province_state = db.Column(db.String(100), nullable=False)
+
+    # Relationship
+    programs = db.relationship('Program', backref='university', lazy=True)
+
 
 class Program(db.Model):
     __tablename__ = 'program'
@@ -46,6 +58,11 @@ class Program(db.Model):
     description = db.Column(db.Text)
     __table_args__ = (db.UniqueConstraint('university_id', 'program_name', name='_program_name_uc'),)
 
+    # Relationships
+    requirements = db.relationship('Requirement', backref='program', lazy=True)
+    applications = db.relationship('Application', backref='program', lazy=True)
+
+
 class Requirement(db.Model):
     __tablename__ = 'requirement'
     requirement_id = db.Column(db.Integer, primary_key=True)
@@ -54,13 +71,10 @@ class Requirement(db.Model):
     min_grade_percentage = db.Column(db.Float, nullable=False)
     is_prerequisite = db.Column(db.Boolean, default=True)
 
+
 class Application(db.Model):
     __tablename__ = 'application'
     application_id = db.Column(db.Integer, primary_key=True)
     student_id = db.Column(db.Integer, db.ForeignKey('student.student_id'), nullable=False)
     program_id = db.Column(db.Integer, db.ForeignKey('program.program_id'), nullable=False)
     application_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-
-
-
- 
