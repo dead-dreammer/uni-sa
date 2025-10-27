@@ -93,32 +93,36 @@ def chatbot_response(user_input: str) -> str:
     greetings = ["hi", "hello", "hey", "good morning", "good afternoon", "good evening"]
     slang_greetings = ["what's up", "whats up", "sup", "yo", "how's it going", "how are you", "how you doing"]
 
-    has_greeting = any(g in normalized_input for g in greetings + slang_greetings)
+    all_greetings = greetings + slang_greetings
 
-    # If only greeting (short message)
-    if has_greeting and len(normalized_input.split()) <= 4:
+    # Detect if any greeting exists
+    has_greeting = any(re.search(rf"\b{re.escape(g)}\b", normalized_input) for g in all_greetings)
+
+    # --- Check if input is ONLY a greeting ---
+    clean_input = re.sub(r"[^\w\s]", "", normalized_input)
+    input_words = clean_input.split()
+    greeting_words = []
+    for g in all_greetings:
+        greeting_words.extend(g.split())
+
+    # If all words are part of greetings → only greeting
+    if has_greeting and all(word in greeting_words for word in input_words):
+        # Slang vs regular greeting response
         if any(s in normalized_input for s in slang_greetings):
-            return "Hey there 😎 All good here! What can I help you with today?"
+            return "Hey there dudeee 😎 All good here! What can I help you with today?"
         return "Hello! 👋 I’m ATOM, your student advisor. Ask me about courses, fees, or entry requirements."
 
-    # If greeting + question (multi-intent)
+    # --- Greeting + question (multi-intent) ---
     query_text = user_input
-    greeting_response = ""
     if has_greeting:
-        greeting_response = "Hi! 👋 "
-        cleaned = normalized_input
-        for g in greetings + slang_greetings:
-            cleaned = re.sub(r"\b" + re.escape(g) + r"\b", "", cleaned)
-        cleaned = cleaned.strip(" ,.?;:!-")
-        if cleaned:
-            query_text = cleaned
-        else:
-            return "Hello! 👋 What would you like to know about UniSA or our partner institutions?"
+        for g in all_greetings:
+            query_text = re.sub(rf"\b{re.escape(g)}\b", "", query_text, flags=re.IGNORECASE)
+        query_text = query_text.strip(" ,.?;:!-")
 
     # --- Spelling correction ---
     suggestion, sugg_idx = correct_spelling(query_text)
     if sugg_idx is not None and normalize_text(suggestion) != normalize_text(query_text):
-        return greeting_response + f"Did you mean **'{questions[sugg_idx]}'**?\n\n{answers[sugg_idx]}"
+        return f"Did you mean **'{questions[sugg_idx]}'**?\n\n{answers[sugg_idx]}"
 
     # --- TF-IDF similarity ---
     try:
@@ -131,11 +135,12 @@ def chatbot_response(user_input: str) -> str:
         best_idx = int(similarity_scores.argmax())
         best_score = float(similarity_scores[best_idx])
     except Exception as e:
-        return greeting_response + f"Oops! Something went wrong ({e})"
+        return f"Oops! Something went wrong ({e})"
 
     if best_score < 0.12:
-        return greeting_response + (
+        return (
             "Sorry, I didn’t quite get that 🤔. Try asking about universities, courses, fees, or matric subjects."
         )
     else:
-        return greeting_response + answers[best_idx]
+        return answers[best_idx]
+
