@@ -109,6 +109,10 @@ def start_search():
 def personal_info():
     return render_template('Search/personal_info.html')
 
+@app.route('/matching-page')
+def matching_page():
+    return render_template('Search/matching_page.html')
+
 
 @app.route('/admissions')
 def admissions():
