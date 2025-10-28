@@ -29,6 +29,7 @@
   <section class="search-section">
     <div class="search-form-container">
       <form id="searchForm" class="search-form" novalidate>
+        <input type="hidden" id="studentId" value="{{ session['student_id'] }}">
         <!-- Question 1: Subjects and Marks -->
         <div class="form-card" id="section-subjects">
           <div class="card-header">
@@ -190,11 +191,45 @@
             </div>
           </div>
         </div>
+        <!-- Question 5: Preferred Degree / Qualification Type -->
+
+<div class="form-card">
+        <div class="card-header">
+            <span class="question-number">05</span>
+            <h3>
+              Qualification Type
+              <span class="required-asterisk">*</span>
+            </h3>
+          </div>
+  <div id="preferred_degree_group">
+    <label><input type="checkbox" name="preferred_degree" value="certificate"> Certificate</label><br>
+    <label><input type="checkbox" name="preferred_degree" value="diploma"> Diploma</label><br>
+    <label><input type="checkbox" name="preferred_degree" value="bachelor"> Bachelor's Degree</label><br>
+    <label><input type="checkbox" name="preferred_degree" value="honours"> Honours Degree</label><br>
+    <label><input type="checkbox" name="preferred_degree" value="postgraduate-diploma"> Postgraduate Diploma</label><br>
+    <label><input type="checkbox" name="preferred_degree" value="masters"> Master's Degree</label><br>
+    <label><input type="checkbox" name="preferred_degree" value="doctorate"> Doctorate / PhD</label>
+  </div>
+</div>
+
+        <!-- Question 4: Maximum Tuition Fee -->
+
+        <div class="form-card" >
+          <div class="card-header">
+          <span class="question-number">06</span>
+            <h3>
+              Maximum Tuition Fee (R)
+              <span class="required-asterisk">*</span>
+            </h3>
+          </div>
+          <input type="number" id="max_tuition_fee" placeholder="e.g., 50000" required />
+        
+        </div>
 
         <!-- Question 5: Disabilities/Support -->
         <div class="form-card" id="section-support">
           <div class="card-header">
-            <span class="question-number">05</span>
+            <span class="question-number">07</span>
             <h3>
               Do you need any academic support?
               <span class="required-asterisk">*</span>
@@ -235,7 +270,7 @@
         <!-- Question 6: Support Details (Conditional) -->
         <div class="form-card hidden" id="section-support-details">
           <div class="card-header">
-            <span class="question-number">06</span>
+            <span class="question-number">08</span>
             <h3>
               Please specify the support you need
               <span class="required-asterisk">*</span>
@@ -255,7 +290,7 @@
         <!-- Question 7: Career Interests -->
         <div class="form-card" id="section-careers">
           <div class="card-header">
-            <span class="question-number">07</span>
+            <span class="question-number">09</span>
             <h3>
               Select up to 3 careers that interest you
               <span class="required-asterisk">*</span>
@@ -271,7 +306,7 @@
         <!-- Question 8: NSFAS -->
         <div class="form-card" id="section-nsfas">
           <div class="card-header">
-            <span class="question-number">08</span>
+            <span class="question-number">10</span>
             <h3>
               Will you be applying for NSFAS?
               <span class="required-asterisk">*</span>
@@ -544,4 +579,5 @@
     .getElementById("searchForm")
     .addEventListener("input", updateProgress);
 </script>
+<script src="{{ url_for('static', filename='js/personal-info.js') }}"></script>
 {% endblock %}

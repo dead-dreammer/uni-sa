@@ -1,5 +1,6 @@
 from Database.__init__ import db
 from datetime import datetime
+import json
 
 class Student(db.Model):
     __tablename__ = "student"
@@ -11,7 +12,6 @@ class Student(db.Model):
     gender = db.Column(db.String(10))
     password = db.Column(db.String(200), nullable=False)
 
-    # Relationships
     academic_marks = db.relationship('AcademicMark', backref='student', lazy=True)
     preferences = db.relationship('Preference', backref='student', lazy=True)
     applications = db.relationship('Application', backref='student', lazy=True)
@@ -31,9 +31,15 @@ class Preference(db.Model):
     preference_id = db.Column(db.Integer, primary_key=True)
     student_id = db.Column(db.Integer, db.ForeignKey('student.student_id'), nullable=False)
     preferred_location = db.Column(db.String(100))
-    preferred_degree = db.Column(db.String(50))
+    preferred_degrees = db.Column(db.Text)  # JSON array of selected degrees
     max_tuition_fee = db.Column(db.Float)
     focus_area = db.Column(db.String(100))
+    relocate = db.Column(db.String(10))          # yes/no
+    study_mode = db.Column(db.String(20))        # contact/distance
+    need_support = db.Column(db.String(10))      # yes/no
+    support_details = db.Column(db.Text)
+    career_interests = db.Column(db.Text)        # JSON string
+    nsfas = db.Column(db.String(10))
     __table_args__ = (db.UniqueConstraint('student_id', 'focus_area', name='_student_focus_uc'),)
 
 
@@ -43,8 +49,6 @@ class University(db.Model):
     name = db.Column(db.String(200), unique=True, nullable=False)
     city = db.Column(db.String(100), nullable=False)
     province_state = db.Column(db.String(100), nullable=False)
-
-    # Relationship
     programs = db.relationship('Program', backref='university', lazy=True)
 
 
@@ -57,8 +61,6 @@ class Program(db.Model):
     duration_years = db.Column(db.Integer)
     description = db.Column(db.Text)
     __table_args__ = (db.UniqueConstraint('university_id', 'program_name', name='_program_name_uc'),)
-
-    # Relationships
     requirements = db.relationship('Requirement', backref='program', lazy=True)
     applications = db.relationship('Application', backref='program', lazy=True)
 

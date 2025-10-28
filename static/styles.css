@@ -2934,6 +2934,68 @@ body {
     margin-bottom: 0.3rem;
 }
 
+/* ===== Qualification Type Checkboxes ===== */
+#preferred_degree_group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+#preferred_degree_group label {
+  display: flex;
+  align-items: center;
+  background: #f7f9fc;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+}
+
+#preferred_degree_group input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #556ee6;
+  border-radius: 4px;
+  margin-right: 8px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: white;
+}
+
+#preferred_degree_group input[type="checkbox"]:checked {
+  background-color: #556ee6;
+  border-color: #6ec3f4;
+}
+
+#preferred_degree_group input[type="checkbox"]:checked::after {
+  content: "✓";
+  color: white;
+  font-size: 12px;
+  position: absolute;
+  top: 0;
+  left: 3px;
+}
+
+#preferred_degree_group label:hover {
+  background-color: #eaf5ff;
+  border-color: #6ec3f4;
+}
+
+#preferred_degree_group label:active {
+  transform: scale(0.97);
+}
+
+
 input[type="text"],
 input[type="number"],
 input[type="date"],

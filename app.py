@@ -107,7 +107,7 @@ def start_search():
     return render_template('Search/start_my_search.html')
 
 
-@app.route('/personal-info')
+@app.route('/save_data', methods=['POST', 'GET'])
 def personal_info():
     return render_template('Search/personal_info.html')
 
