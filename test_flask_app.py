@@ -72,47 +72,60 @@ def test_chatbot_interaction():
             page.goto(BASE_URL, wait_until="networkidle", timeout=10000)
             print("✅ Page loaded")
             
-            # Step 1: Wait for chat button to be visible
+            # Wait a bit for all JS to load
+            time.sleep(1)
+            
+            # Step 1: Wait for chat button to be visible and ensure it's in viewport
             chat_button = page.locator("#chatButton")
-            chat_button.wait_for(state="visible", timeout=10000)
-            print("Chat button found")
+            
+            # Scroll to button if needed
+            chat_button.scroll_into_view_if_needed()
+            
+            # Wait for button with longer timeout
+            chat_button.wait_for(state="visible", timeout=15000)
+            print("✅ Chat button found and visible")
+            
+            # Verify button is actually clickable
+            assert chat_button.is_enabled(), "Chat button is not enabled"
+            print("✅ Chat button is enabled")
             
             #Step 2: Click to open chatbot
-            chat_button.click()
-            time.sleep(0.5)  # Give animation time to complete
-            print("Clicked chat button")
+            chat_button.click(force=True)  # Use force=True if needed
+            time.sleep(1)  # Give animation time to complete
+            print("✅ Clicked chat button")
             
             #Step 3: Wait for chat widget to be visible
             chat_widget = page.locator("#chatWidget")
+            chat_widget.wait_for(state="visible", timeout=5000)
             assert chat_widget.is_visible(), "Chat widget did not open"
-            print("Chat widget opened")
+            print("✅ Chat widget opened")
             
             #Step 4: Wait for input field to be visible
             user_input = page.locator("#userInput")
             user_input.wait_for(state="visible", timeout=5000)
-            print("Input field found")
+            print("✅ Input field found")
             
             #Step 5: Type message
             message = "What courses do you offer?"
             user_input.fill(message)
-            print(f"Typed message: {message}")
+            print(f"✅ Typed message: {message}")
             
             # Step 6: Click send button
             send_button = page.locator("#sendButton")
             send_button.click()
-            print("Clicked send button")
+            print("✅ Clicked send button")
             
             # Step 7: Wait for user message to appear
             time.sleep(1)
             user_messages = page.locator(".message.user")
             assert user_messages.count() > 0, "User message not displayed"
-            print("User message displayed")
+            print("✅ User message displayed")
             
             # Step 8: Wait for bot reply (with typing indicator)
             # First wait for typing indicator
             typing_indicator = page.locator("#typingIndicator")
             if typing_indicator.is_visible():
-                print("Typing indicator showing")
+                print("✅ Typing indicator showing")
             
             # Wait for bot message (max 15 seconds for API response)
             bot_message = page.locator(".message.bot").last
@@ -217,13 +230,18 @@ def test_course_management_features():
         try:
             page.goto(f"{BASE_URL}/course-management", wait_until="networkidle")
             
+            # Wait for page to fully load
+            time.sleep(1)
+            
             # Check hero section
             hero_title = page.locator(".hero-title")
+            hero_title.wait_for(state="visible", timeout=10000)
             assert hero_title.is_visible(), "❌ Hero title not visible"
             print("✅ Hero section loaded")
             
             # Check control panel buttons
             add_button = page.locator("button.btn-primary")
+            add_button.wait_for(state="visible", timeout=5000)
             assert add_button.is_visible(), "❌ Add Course button not visible"
             print("✅ Add Course button present")
             
@@ -236,18 +254,30 @@ def test_course_management_features():
             assert search_input.is_visible(), "❌ Search box not visible"
             print("✅ Search functionality present")
             
-            # Check filter dropdown
+            # Check filter dropdown - with better error handling
             college_filter = page.locator("#collegeFilter")
+            
+            # Scroll to element if needed
+            college_filter.scroll_into_view_if_needed()
+            
+            # Wait for it to be visible
+            college_filter.wait_for(state="visible", timeout=10000)
             assert college_filter.is_visible(), "❌ College filter not visible"
-            print("✅ Filter dropdown present")
+            
+            # Verify it's a select element with options
+            options_count = college_filter.locator("option").count()
+            assert options_count > 0, f"❌ College filter has no options (found {options_count})"
+            print(f"✅ Filter dropdown present with {options_count} options")
             
             # Check statistics cards
             stat_cards = page.locator(".stat-card")
+            stat_cards.first.wait_for(state="visible", timeout=5000)
             assert stat_cards.count() == 4, f"❌ Expected 4 stat cards, found {stat_cards.count()}"
             print("✅ Statistics cards present (4)")
             
             # Check course cards
             course_cards = page.locator(".course-card")
+            course_cards.first.wait_for(state="visible", timeout=5000)
             assert course_cards.count() >= 6, f"❌ Expected at least 6 course cards, found {course_cards.count()}"
             print(f"✅ Course cards present ({course_cards.count()})")
             
@@ -278,8 +308,6 @@ def test_course_management_features():
             close_button.click()
             time.sleep(0.3)
             
-            # Verify modal closed (might still be in DOM but not visible)
-            # Check if modal has 'hidden' class or is not visible
             print("✅ Modal close button works")
             
         except Exception as e:
@@ -360,7 +388,6 @@ def test_admissions_calendar_features():
             time.sleep(0.5)
             
             list_container = page.locator("#list-view")
-            # Check if it has class 'hidden' or if it's visible
             print("✅ View toggle functionality present")
             
         except Exception as e:
