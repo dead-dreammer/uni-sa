@@ -1,3 +1,4 @@
+
 const chatButton = document.getElementById('chatButton');
 const chatWidget = document.getElementById('chatWidget');
 const closeChat = document.getElementById('closeChat');
@@ -6,32 +7,16 @@ const userInput = document.getElementById('userInput');
 const sendButton = document.getElementById('sendButton');
 const chatBadge = document.querySelector('.chat-badge');
 
-// --- Load saved chat from localStorage or sessionStorage ---
-let chatHistory = [];
-
-// Load chat from localStorage first, fallback to sessionStorage
-if (localStorage.getItem("chat_history")) {
-    chatHistory = JSON.parse(localStorage.getItem("chat_history"));
-} else if (sessionStorage.getItem("chat_history")) {
-    chatHistory = JSON.parse(sessionStorage.getItem("chat_history"));
-}
-
-// Render saved chat
-chatHistory.forEach(msg => addMessage(msg.text, msg.isUser));
-
-// --- Save chat to storage ---
-function saveChat() {
-    sessionStorage.setItem("chat_history", JSON.stringify(chatHistory));
-    localStorage.setItem("chat_history", JSON.stringify(chatHistory));
-}
-
 // Toggle chat widget
 chatButton.addEventListener('click', () => {
     chatWidget.classList.toggle('open');
     chatButton.classList.toggle('active');
     if (chatWidget.classList.contains('open')) {
         userInput.focus();
-        if (chatBadge) chatBadge.style.display = 'none';
+        // Remove notification badge
+        if (chatBadge) {
+            chatBadge.style.display = 'none';
+        }
     }
 });
 
@@ -62,14 +47,14 @@ function getCurrentTime() {
     });
 }
 
-// Add message to chat and save
+// Add message to chat
 function addMessage(text, isUser = false) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
     
     const avatar = document.createElement('div');
     avatar.className = 'message-avatar';
-    if (isUser) avatar.textContent = 'U';
+    if (isUser) avatar.textContent = 'U'; // Only user has text avatar
     
     const contentDiv = document.createElement('div');
     contentDiv.className = 'message-content';
@@ -89,10 +74,6 @@ function addMessage(text, isUser = false) {
     
     chatMessages.appendChild(messageDiv);
     chatMessages.scrollTop = chatMessages.scrollHeight;
-
-    // Save message to history
-    chatHistory.push({ text: text, isUser: isUser });
-    saveChat();
 }
 
 // Show typing indicator
@@ -102,7 +83,7 @@ function showTypingIndicator() {
     typingDiv.id = 'typingIndicator';
     
     const avatar = document.createElement('div');
-    avatar.className = 'message-avatar';
+    avatar.className = 'message-avatar'; // Bot avatar image
     
     const contentDiv = document.createElement('div');
     contentDiv.className = 'message-content';
@@ -164,7 +145,6 @@ async function sendMessage() {
     }
 }
 
-// Event listeners
 sendButton.addEventListener('click', sendMessage);
 userInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') sendMessage();

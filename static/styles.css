@@ -4253,7 +4253,7 @@ textarea:focus {
 
 .course-management-wrapper {
   min-height: auto; /* Let content determine height */
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
   font-family: 'Montserrat', sans-serif;
   padding-bottom: 40px;
   position: relative;
@@ -4262,7 +4262,7 @@ textarea:focus {
 
 /* Hero Section */
 .hero-section {
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+ 
   padding: 60px 20px 50px; /* Reduced padding */
   text-align: center;
   position: relative;
@@ -4971,7 +4971,7 @@ textarea:focus {
 
 .matches-wrapper {
   font-family: 'Montserrat', sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+ 
   /*min-height: 100vh;*/
   padding-bottom: 60px;
   position: relative;

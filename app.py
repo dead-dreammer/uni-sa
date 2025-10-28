@@ -87,6 +87,8 @@ def profile():
 @app.route('/ask', methods=['POST'])
 def ask():
     user_message = request.json.get("message", "").strip().lower()
+    if not request.is_json:
+        return jsonify({"reply": "Invalid request"}), 400
 
     # Exit/Goodbye handling
     exit_words = ["exit", "quit", "bye", "done", "goodbye", "stop"]
@@ -136,4 +138,4 @@ def privacy():
 
 if __name__ == '__main__':
     # Runs the Flask development server
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True, threaded=True)
