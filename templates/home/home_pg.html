@@ -48,63 +48,384 @@
         
     </div>
 
-    <div class="about-page">
-    
-    <div class="main-content_about">
-      <h1>Who We Are</h1>
-      <p>
-        Our Mission: To simplify the university application process for South
-        African students by providing personalized university recommendations
-        based on individual preferences and academic profiles.
-      </p>
-    </div>
-
-    <section class="image-marquee">
-      <div class="marquee-track">
-  <img src="{{ url_for('static', filename='img/About Us/image1.webp') }}" alt="Image 1.1" />
-  <img src="{{ url_for('static', filename='img/About Us/image2.webp') }}" alt="Image 2" />
-  <img src="{{ url_for('static', filename='img/About Us/image3.webp') }}" alt="Image 3" />
-  <img src="{{ url_for('static', filename='img/About Us/image4.webp') }}" alt="Image 4" />
-  <img src="{{ url_for('static', filename='img/About Us/image6.webp') }}" alt="Image 6" />
-  <img src="{{ url_for('static', filename='img/About Us/image1.webp') }}" alt="Image 1" />
-  <img src="{{ url_for('static', filename='img/About Us/image2.webp') }}" alt="Image 2" />
-  <img src="{{ url_for('static', filename='img/About Us/image3.webp') }}" alt="Image 3" />
-  <img src="{{ url_for('static', filename='img/About Us/image4.webp') }}" alt="Image 4" />
-  <img src="{{ url_for('static', filename='img/About Us/image5.webp') }}" alt="Image 5" />
-  <img src="{{ url_for('static', filename='img/About Us/image6.webp') }}" alt="Image 6" />
-      </div>
-    </section>
-
-    <section class="mission-section">
-      <h2>Our Mission & Vision</h2>
-      <div class="mission-container">
-        <div class="mission-card">
-            <img src="{{ url_for('static', filename='img/About Us/mission.png') }}" alt="Mission Icon" />
-          <h3>Mission</h3>
-          <p>
-            To guide students to the right universities and help them achieve
-            their academic goals.
-          </p>
-        </div>
-        <div class="mission-card">
-          <img src="{{ url_for('static', filename='img/About Us/visions.png') }}" alt="Vision Icon" />
-          <h3>Vision</h3>
-          <p>
-            To be the leading platform connecting students with universities for
-            a brighter future.
-          </p>
-        </div>
-        <div class="mission-card">
-          <img src="{{ url_for('static', filename='img/About Us/values.png') }}" alt="Values Icon" />
-          <h3>Values</h3>
-          <p>
-            Integrity, transparency, and dedication in helping every student
-            succeed.
-          </p>
-        </div>
-      </div>
-    </section>
+   <div class="about-page"> <!--DO NOT TOUCH, ASK THWISHA FIRST!-->
+   
+     <!-- Home About Us Section -->
+<section class="home-about-section">
+  <div class="home-about-container">
   
+    <div class="home-about-content" data-animation="fade-right">
+      <div class="about-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 16v-4"></path>
+          <path d="M12 8h.01"></path>
+        </svg>
+        <span>About uni.sa</span>
+      </div>
+      
+      <h2 class="home-about-title">
+        Your Journey to Higher Education <span class="highlight-text">Starts Here</span>
+      </h2>
+      
+      <p class="home-about-description">
+        We're more than just a platform—we're your trusted partner in navigating South Africa's complex university landscape. uni.sa was born from a simple belief: every student deserves clarity, guidance, and equal access to educational opportunities.
+      </p>
+      
+      <div class="about-features">
+        <div class="about-feature-item">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </div>
+          <div class="feature-text">
+            <h4>Smart Matching</h4>
+            <p>AI-powered recommendations based on your unique profile</p>
+          </div>
+        </div>
+        
+        <div class="about-feature-item">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <div class="feature-text">
+            <h4>Real-Time Updates</h4>
+            <p>Stay informed with deadline alerts and application status</p>
+          </div>
+        </div>
+        
+        <div class="about-feature-item">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <div class="feature-text">
+            <h4>Expert Support</h4>
+            <p>Connect with advisors who understand your journey</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="about-cta-buttons">
+        <a href="{{ url_for('about') }}" class="btn-primary-about">
+          <span>Learn More About Us</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+        <a href="{{ url_for('start_search') }}" class="btn-secondary-about">
+          Start Your Search
+        </a>
+      </div>
+    </div>
+    
+    <div class="home-about-visual" data-animation="fade-left">
+      <div class="visual-card card-1">
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+          </svg>
+        </div>
+        <h4>100+</h4>
+        <p>Universities & Colleges</p>
+      </div>
+      
+      <div class="visual-card card-2">
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+        </div>
+        <h4>500+</h4>
+        <p>Programs Available</p>
+      </div>
+      
+      <div class="visual-card card-3">
+        <div class="card-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </div>
+        <h4>1000+</h4>
+        <p>Students Helped</p>
+      </div>
+      
+      <div class="floating-shape shape-1"></div>
+      <div class="floating-shape shape-2"></div>
+      <div class="floating-shape shape-3"></div>
+    </div>
+  </div>
+  
+  <div class="trust-badges" data-animation="fade-up">
+    <div class="trust-badge">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+      </svg>
+      <span>Student Data Protected</span>
+    </div>
+    
+    <div class="trust-badge">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+      <span>Verified Institutions</span>
+    </div>
+    
+    <div class="trust-badge">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+      <span>24/7 Support Available</span>
+    </div>
+    
+    <div class="trust-badge">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+      </svg>
+      <span>100% Free to Use</span>
+    </div>
+  </div>
+</section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="stats-container">
+        
+       
+        <div class="stats-header">
+          <h2 class="stats-title">The Numbers Don't Lie</h2>
+          <p class="stats-subtitle">Real students. Real challenges. Real solutions.</p>
+        </div>
+
+      
+        <div class="hero-stats-grid">
+          <div class="hero-stat-card" data-animation="fade-up">
+            <div class="stat-icon problem">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+            </div>
+            <div class="stat-number" data-target="73">0</div>
+            <div class="stat-percent">%</div>
+            <p class="stat-label">of students don't know what they qualify for</p>
+          </div>
+
+          <div class="hero-stat-card" data-animation="fade-up" data-delay="100">
+            <div class="stat-icon success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <div class="stat-number" data-target="98">0</div>
+            <div class="stat-percent">%</div>
+            <p class="stat-label">want a tool like uni.sa</p>
+          </div>
+
+          <div class="hero-stat-card" data-animation="fade-up" data-delay="200">
+            <div class="stat-icon success">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <div class="stat-number" data-target="100">0</div>
+            <div class="stat-percent">%</div>
+            <p class="stat-label">of advisors agree it would help</p>
+          </div>
+
+          <div class="hero-stat-card" data-animation="fade-up" data-delay="300">
+            <div class="stat-icon info">
+              <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <div class="stat-number" data-target="56">0</div>
+            <div class="stat-plus">+</div>
+            <p class="stat-label">students & advisors surveyed</p>
+          </div>
+        </div>
+
+        <div class="challenges-section">
+          <h3 class="challenges-title">Student Challenges We Solve</h3>
+          <div class="challenges-grid">
+            
+            <div class="challenge-card" data-animation="slide-right">
+              <div class="challenge-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+              </div>
+              <div class="challenge-content">
+                <div class="challenge-stat">
+                  <span class="challenge-number" data-target="73">0</span>
+                  <span class="challenge-percent">%</span>
+                </div>
+                <p class="challenge-label">Program eligibility confusion</p>
+              </div>
+              <div class="challenge-bar">
+                <div class="challenge-bar-fill" data-width="73"></div>
+              </div>
+            </div>
+
+            <div class="challenge-card" data-animation="slide-right" data-delay="100">
+              <div class="challenge-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="20" x2="18" y2="10"></line>
+                  <line x1="12" y1="20" x2="12" y2="4"></line>
+                  <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+              </div>
+              <div class="challenge-content">
+                <div class="challenge-stat">
+                  <span class="challenge-number" data-target="54">0</span>
+                  <span class="challenge-percent">%</span>
+                </div>
+                <p class="challenge-label">Difficulty comparing options</p>
+              </div>
+              <div class="challenge-bar">
+                <div class="challenge-bar-fill" data-width="54"></div>
+              </div>
+            </div>
+
+            <div class="challenge-card" data-animation="slide-right" data-delay="200">
+              <div class="challenge-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="1" x2="12" y2="23"></line>
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+              <div class="challenge-content">
+                <div class="challenge-stat">
+                  <span class="challenge-number" data-target="45">0</span>
+                  <span class="challenge-percent">%</span>
+                </div>
+                <p class="challenge-label">Scholarship/cost uncertainty</p>
+              </div>
+              <div class="challenge-bar">
+                <div class="challenge-bar-fill" data-width="45"></div>
+              </div>
+            </div>
+
+            <div class="challenge-card" data-animation="slide-right" data-delay="300">
+              <div class="challenge-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </div>
+              <div class="challenge-content">
+                <div class="challenge-stat">
+                  <span class="challenge-number" data-target="34">0</span>
+                  <span class="challenge-percent">%</span>
+                </div>
+                <p class="challenge-label">Missed deadlines</p>
+              </div>
+              <div class="challenge-bar">
+                <div class="challenge-bar-fill" data-width="34"></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="before-after-section">
+          <div class="before-after-grid">
+            
+            <div class="before-card" data-animation="fade-left">
+              <div class="ba-header before-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="15" y1="9" x2="9" y2="15"></line>
+                  <line x1="9" y1="9" x2="15" y2="15"></line>
+                </svg>
+                <h4>Before uni.sa</h4>
+              </div>
+              <ul class="ba-list">
+                <li>
+                  <span class="ba-icon">✗</span>
+                  <span>73% didn't know what they qualified for</span>
+                </li>
+                <li>
+                  <span class="ba-icon">✗</span>
+                  <span>54% couldn't compare options easily</span>
+                </li>
+                <li>
+                  <span class="ba-icon">✗</span>
+                  <span>45% were confused about funding</span>
+                </li>
+                <li>
+                  <span class="ba-icon">✗</span>
+                  <span>Students missed critical deadlines</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="after-card" data-animation="fade-right">
+              <div class="ba-header after-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <h4>With uni.sa</h4>
+              </div>
+              <ul class="ba-list">
+                <li>
+                  <span class="ba-icon">✓</span>
+                  <span>Instant eligibility matching</span>
+                </li>
+                <li>
+                  <span class="ba-icon">✓</span>
+                  <span>Side-by-side university comparison</span>
+                </li>
+                <li>
+                  <span class="ba-icon">✓</span>
+                  <span>Comprehensive funding information</span>
+                </li>
+                <li>
+                  <span class="ba-icon">✓</span>
+                  <span>Never miss a deadline with our calendar</span>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="research-badge" data-animation="fade-up">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <p>Based on research conducted July 2025 with 56 university applicants and 7 student advisors from Richfield and surrounding institutions</p>
+        </div>
+
+      </div>
+    </section>
 
     <!-- Meet the team section -->
      <section class="team-section">
@@ -139,6 +460,6 @@
 {% endblock %}
 
 {% block scripts %}
-
-    
+    <script src="{{ url_for('static', filename='js/about_us.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/stats_section.js') }}"></script>
 {% endblock %}
