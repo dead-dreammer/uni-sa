@@ -44,10 +44,12 @@ def create_app():
     from .models import Student, AcademicMark, Preference, University, Program, Requirement, Application
     from .auth import auth
     from .search import search
+    from .courses import courses
 
     # Register blueprints
     app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(search, url_prefix='/search')
+    app.register_blueprint(courses, url_prefix='/courses')
 
     # Create or restore database
     create_database(app)
