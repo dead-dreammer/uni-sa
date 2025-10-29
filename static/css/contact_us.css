@@ -1,0 +1,267 @@
+/* contact us ----------------------------------------------------------------------------------------------------------------------------------------*/
+body.contact-page {
+  /* Contact page background served from static/img/Contact us/contact_bg.png */
+  background: url('/static/img/Contact%20us/contact_bg.png') no-repeat center top fixed;
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+/* Hero section */
+.hero {
+  text-align: center;
+  padding: 5rem 2rem;
+  background: rgba(203, 160, 243, 0.274);
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #f1f1f1;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Main layout - changed to block instead of flex */
+.contact-page main {
+  display: block;
+  padding: 3rem 2rem;
+}
+
+/* Top sections container for form and info */
+.top-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Contact form section */
+.contact-form-section {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); 
+}
+
+.contact-form-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+.contact-form-section form div {
+  margin-bottom: 1.2rem;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid #7d2ed8;
+  background-color: #fdfdfd;
+}
+
+button[type="submit"] {
+  background-color: #7d2ed8;
+  color: white;
+  padding: 0.9rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #5a20a8;
+}
+
+/* Info section */
+.info-section {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); 
+}
+
+.info-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+.info-block {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.info-block .icon {
+  font-size: 1.5rem;
+  margin-right: 0.8rem;
+}
+
+.contact-link {
+  color: #190a5f;
+  text-decoration: none;
+}
+
+.contact-link:hover {
+  text-decoration: underline;
+}
+
+/* Office hours + map */
+.office-hours {
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.map {
+  margin: 1rem 0;
+  background: rgba(0, 0, 0, 0.2);
+  height: 150px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ddd;
+  border-radius: 8px;
+}
+
+/* FAQ section - full width below the top sections */
+/* FAQ section - full width below the top sections */
+.faq {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-height: 600px; /* Set maximum height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Hide horizontal overflow */
+}
+
+/* Custom scrollbar styling for FAQ */
+.faq::-webkit-scrollbar {
+  width: 8px;
+}
+
+.faq::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.faq::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.faq::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Firefox scrollbar styling */
+.faq {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+}
+
+.faq h3 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  position: sticky;
+  top: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.15) 85%, rgba(255, 255, 255, 0) 100%);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  padding: 1rem 0 1.5rem 0;
+  margin: -1rem 0 0 0;
+  z-index: 10;
+  border-radius: 12px 12px 0 0;
+}
+
+.faq-item {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.719);
+}
+
+.faq-item:first-of-type {
+  margin-top: 1rem;
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-item strong {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #05065a;
+  font-size: 1.05rem;
+}
+
+.faq-item span {
+  color: #000000;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .top-sections {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .contact-page main {
+    padding: 2rem 1rem;
+  }
+  
+  /* Adjust FAQ for mobile */
+  .faq {
+    max-height: 500px;
+    padding: 1.5rem;
+  }
+  
+  .faq h3 {
+    font-size: 1.5rem;
+  }
+}

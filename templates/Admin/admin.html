@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Panel | Uni.sa{% endblock %}
+
+{% block head_extras %}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="admin-dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2 class="logo">Uni.sa Admin</h2>
+    <nav class="sidebar-nav">
+      <a href="{{ url_for('admin') }}" class="nav-item {% if active_page == 'dashboard' %}active{% endif %}">🏠 Dashboard</a>
+      <a href="{{ url_for('course_management') }}" class="nav-item {% if active_page == 'courses' %}active{% endif %}">📚 Course Management</a>
+      <a href="#" class="nav-item">👥 Users</a>
+      <a href="#" class="nav-item">🏫 Institutions</a>
+      <a href="#" class="nav-item">📈 Reports</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dashboard-content">
+    {% block admin_content %}
+    <h1>Welcome, Admin 👋</h1>
+  <p>Select a management module from the sidebar to get started.</p>
+
+  <div class="dashboard-cards">
+    <div class="card" onclick="window.location.href='{{ url_for('course_management') }}'">
+      <h3>📚 Course Management</h3>
+      <p>View, add, and organize courses across institutions.</p>
+    </div>
+    <div class="card">
+      <h3>👥 User Management</h3>
+      <p>Manage user accounts and permissions.</p>
+    </div>
+    <div class="card">
+      <h3>🏫 Institution Management</h3>
+      <p>Update and maintain partner universities.</p>
+    </div>
+  </div>
+    {% endblock %}
+  </main>
+
+</div>
+{% endblock %}

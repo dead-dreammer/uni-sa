@@ -135,6 +135,11 @@ def terms():
 def privacy():
     return render_template('privacy.html')
 
+@app.route('/admin')
+def admin():
+
+    return render_template('Admin/admin.html')
+
 
 if __name__ == '__main__':
     # Runs the Flask development server

@@ -1,12 +1,14 @@
-{% extends 'base.html' %}
-
+{% extends 'Admin/admin.html' %}
+{% set active_page = 'courses' %}
 {% block title %}Course Management | Admin Panel{% endblock %}
 
 {% block head_extras %}
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/course_mangement.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
 {% endblock %}
 
-{% block content %}
+{% block admin_content %}
 <div class="course-management-wrapper">
   
   <!-- Hero Section with Gradient Background -->

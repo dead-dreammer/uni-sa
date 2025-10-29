@@ -2,6 +2,13 @@
 
 {% block title %}How It Works - uni.sa{% endblock %}
 
+{% block head_extras %}
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/how_it_works.css') }}"
+  />
+{% endblock %}
+
 {% block content %}
     <div class="how-it-works-page">
 

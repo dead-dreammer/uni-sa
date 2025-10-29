@@ -1,5 +1,16 @@
-{% extends 'base.html' %} {% block title %}Contact Us | uni.sa{% endblock %} {%
-block content %}
+{% extends 'base.html' %} 
+
+{% block title %}Contact Us | uni.sa{% endblock %} 
+
+{% block head_extras %}
+
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/contact_us.css') }}"
+  />
+{% endblock %}
+
+{%block content %}
 <div class="contact-page">
   <header class="hero">
     <h1>Contact Us</h1>
