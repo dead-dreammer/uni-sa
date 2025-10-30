@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, session
+from flask import Blueprint, request, jsonify, session, render_template
 from Database.models import db, AcademicMark, Preference
 import json
 
@@ -104,4 +104,36 @@ def get_data():
         }
 
     return jsonify({"academic_marks": marks, "preferences": prefs})
+
+courses = [
+    {
+        "id": "coastal-tvet",
+        "name": "National Certificate (Vocational) in Finance, Economics, & Accounting",
+        "institution": "Coastal KZN TVET College",
+        "location": "Verulam Campus",
+        "mode": "contact",
+        "min_fee": 5000,
+        "max_fee": 8000,
+        "career_paths": ["bookkeeper", "accounting-clerk", "junior-accountant"],
+    },
+    # DUT, INTEC, etc...
+]
+
+@search.route('/find_matches', methods=['POST'])
+def find_matches():
+    student_info = request.form.to_dict(flat=False)
+    # Example: extract subjects, max fee, preferred study mode
+    subjects = student_info.get("subject[]", [])
+    max_fee = int(student_info.get("max_tuition_fee", [0])[0])
+    study_mode = student_info.get("studyMode", ["contact"])[0]
+
+    # Filter courses based on max fee and study mode
+    filtered_courses = []
+    for course in courses:
+        if course['mode'] == study_mode and course['max_fee'] <= max_fee:
+            filtered_courses.append(course)
+    
+    # Pass filtered courses to matches template
+    return render_template("matches.html", courses=filtered_courses, student_info=student_info)
+
 

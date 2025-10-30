@@ -1,5 +1,7 @@
 // ===== Course Management JS =====
 
+// ===== Course Management JS =====
+
 // Modal controls
 const courseModal = document.getElementById('courseModal');
 const modalTitle = document.getElementById('modalTitle');
@@ -23,6 +25,8 @@ function openAddModal() {
 function closeModal() {
   courseModal.style.display = 'none';
 }
+const locationInput = document.getElementById('courseLocation');
+const studyModeInput = document.getElementById('courseStudyMode');
 
 // Add/Edit Course
 courseForm.addEventListener('submit', async (e) => {
@@ -33,7 +37,9 @@ courseForm.addEventListener('submit', async (e) => {
     description: descInput.value,
     university_id: universityInput.value,
     duration_years: durationInput.value,
-    degree_type: degreeTypeInput.value
+    degree_type: degreeTypeInput.value,
+    location: locationInput.value,          // NEW
+    study_mode: studyModeInput.value       // NEW
   };
   const url = id ? `/courses/edit/${id}` : '/courses/add';
   
@@ -52,37 +58,98 @@ courseForm.addEventListener('submit', async (e) => {
   }
 });
 
-// Edit Course
-document.querySelectorAll('.btn-edit').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const card = btn.closest('.course-card');
-    courseIdInput.value = btn.dataset.id;
-    nameInput.value = card.querySelector('.course-title').textContent;
-    descInput.value = card.querySelector('.course-description').textContent;
-    universityInput.value = card.dataset.university;
-    durationInput.value = card.querySelector('.meta-duration')?.textContent || '';
-    degreeTypeInput.value = card.querySelector('.meta-degree')?.textContent || '';
-    modalTitle.textContent = 'Edit Course';
-    courseModal.style.display = 'flex';
-  });
-});
+// Edit Course modal
+function populateEditModal(card, id) {
+  courseIdInput.value = id;
+  nameInput.value = card.querySelector('.course-title').textContent;
+  descInput.value = card.querySelector('.course-description').textContent;
+  universityInput.value = card.dataset.college;
+  durationInput.value = card.querySelector('.meta-item')?.textContent.replace(/\D/g, '') || '';
+  degreeTypeInput.value = card.dataset.degree || '';
+  
+  // Populate new fields
+  locationInput.value = card.dataset.location || '';
+  studyModeInput.value = card.dataset.studyMode || '';
 
-// Delete Course
-document.querySelectorAll('.btn-delete').forEach(btn => {
-  btn.addEventListener('click', async () => {
-    if (!confirm('Are you sure you want to delete this course?')) return;
-    const id = btn.dataset.id;
-    try {
-      const res = await fetch(`/courses/delete/${id}`, { method: 'POST' });
-      const data = await res.json();
-      if (data.success) location.reload();
-      else alert('Failed to delete course: ' + (data.error || 'Unknown error'));
-    } catch (err) {
-      console.error(err);
-      alert('An error occurred while deleting the course.');
-    }
+  modalTitle.textContent = 'Edit Course';
+  courseModal.style.display = 'flex';
+}
+
+// Update bindCourseButtons to handle new fields
+function bindCourseButtons() {
+  document.querySelectorAll('.btn-edit').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.course-card');
+      populateEditModal(card, btn.dataset.id);
+    });
   });
-});
+
+  document.querySelectorAll('.btn-delete').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (!confirm('Are you sure you want to delete this course?')) return;
+      const id = btn.dataset.id;
+      try {
+        const res = await fetch(`/courses/delete/${id}`, { method: 'POST' });
+        const data = await res.json();
+        if (data.success) loadCourses();
+        else alert('Failed to delete course: ' + (data.error || 'Unknown error'));
+      } catch (err) {
+        console.error(err);
+        alert('An error occurred while deleting the course.');
+      }
+    });
+  });
+}
+
+// Load courses dynamically
+async function loadCourses() {
+  try {
+    const res = await fetch('/courses/all');
+    const courses = await res.json();
+    const grid = document.querySelector('.courses-grid');
+    grid.innerHTML = '';
+
+    courses.forEach(course => {
+      const card = document.createElement('div');
+      card.className = 'course-card';
+      card.dataset.college = course.university_id;
+      card.dataset.degree = course.degree_type || '';
+      card.dataset.location = course.location || '';         // NEW
+      card.dataset.studyMode = course.study_mode || '';      // NEW
+
+      card.innerHTML = `
+        <div class="card-header">
+          <span class="college-badge badge-${course.college?.toLowerCase() || 'unknown'}">
+            ${course.college || 'Unknown College'}
+          </span>
+          <div class="card-actions">
+            <button class="btn-icon btn-edit" data-id="${course.id}">✎</button>
+            <button class="btn-icon btn-delete" data-id="${course.id}">🗑</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="course-title">${course.title}</h3>
+          <p class="course-description">${course.description || 'No description available.'}</p>
+          <div class="course-meta">
+            <div class="meta-item"><strong>Duration:</strong> ${course.duration || 'N/A'} years</div>
+            <div class="meta-item meta-degree" data-degree="${course.degree_type || ''}">
+              <strong>Degree Type:</strong> ${course.degree_type || 'N/A'}
+            </div>
+            <div class="meta-item"><strong>Fees:</strong> ${course.fees || 'N/A'}</div>
+            <div class="meta-item"><strong>Location:</strong> ${course.location || 'N/A'}</div>        <!-- NEW -->
+            <div class="meta-item"><strong>Study Mode:</strong> ${course.study_mode || 'N/A'}</div>  <!-- NEW -->
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    bindCourseButtons();
+  } catch (err) {
+    console.error('Error loading courses:', err);
+  }
+}
+
 
 // Close Modal Events
 document.getElementById('modalClose').addEventListener('click', closeModal);
@@ -127,51 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-async function loadCourses() {
-  try {
-    const res = await fetch('/courses/all');
-    const courses = await res.json();
-    const grid = document.querySelector('.courses-grid');
-    grid.innerHTML = ''; // clear old content
-
-    courses.forEach(course => {
-      const card = document.createElement('div');
-      card.className = 'course-card';
-      card.dataset.college = course.university_id;       // store ID for dropdown
-      card.dataset.degree = course.degree_type || '';    // store degree type
-
-      card.innerHTML = `
-        <div class="card-header">
-          <span class="college-badge badge-${course.college?.toLowerCase() || 'unknown'}">
-            ${course.college || 'Unknown College'}
-          </span>
-          <div class="card-actions">
-            <button class="btn-icon btn-edit" data-id="${course.id}">✎</button>
-            <button class="btn-icon btn-delete" data-id="${course.id}">🗑</button>
-          </div>
-        </div>
-        <div class="card-body">
-          <h3 class="course-title">${course.title}</h3>
-          <p class="course-description">${course.description || 'No description available.'}</p>
-          <div class="course-meta">
-            <div class="meta-item"><strong>Duration:</strong> ${course.duration || 'N/A'} years</div>
-            <div class="meta-item meta-degree" data-degree="${course.degree_type || ''}">
-              <strong>Degree Type:</strong> ${course.degree_type || 'N/A'}
-            </div>
-            <div class="meta-item"><strong>Fees:</strong> ${course.fees || 'N/A'}</div>
-          </div>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-
-    // Rebind edit/delete events after DOM update
-    bindCourseButtons();
-  } catch (err) {
-    console.error('Error loading courses:', err);
-  }
-}
-
 function bindCourseButtons() {
   // Edit buttons
   document.querySelectorAll('.btn-edit').forEach(btn => {
@@ -206,5 +228,4 @@ function bindCourseButtons() {
   });
 }
 
-// Call on page load
 document.addEventListener('DOMContentLoaded', loadCourses);
