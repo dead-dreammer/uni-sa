@@ -1,0 +1,318 @@
+/* Bursaries Page Styles */
+
+.header {
+    /*background: linear-gradient(135deg, var(--gradient-color-2, #b6a3ec5e) 0%, var(--gradient-color-1, #dfc1e64d) 100%);*/
+    color: whitesmoke;
+    padding: 3rem 0;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.header h1 {
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    color: #2d2d44;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto 4rem auto;
+    padding: 0 2rem;
+}
+
+/* Filters Section */
+.filters {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+}
+
+.filters:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.filters h3 {
+    color: #1a1a2e;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.filter-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filter-group input,
+.filter-group select {
+    padding: 0.75rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    flex: 1;
+    min-width: 200px;
+    transition: all 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: white;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    outline: none;
+    border-color: var(--gradient-color-2, #6ec3f4);
+    box-shadow: 0 0 0 3px rgba(110, 195, 244, 0.1);
+}
+
+.filter-group select {
+    cursor: pointer;
+}
+
+/* Bursary Grid */
+.bursary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.bursary-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.bursary-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.bursary-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.bursary-title {
+    color: #1a1a2e;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.bursary-provider {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.bursary-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.highlight-icon {
+    color: var(--gradient-color-2, #6ec3f4);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Tags */
+.tag-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.tag {
+    background: linear-gradient(135deg, rgba(110, 195, 244, 0.15) 0%, rgba(195, 228, 255, 0.15) 100%);
+    color: var(--gradient-color-2, #6ec3f4);
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1px solid rgba(110, 195, 244, 0.2);
+    transition: all 0.2s ease;
+}
+
+.tag:hover {
+    background: linear-gradient(135deg, rgba(110, 195, 244, 0.25) 0%, rgba(195, 228, 255, 0.25) 100%);
+    border-color: rgba(110, 195, 244, 0.4);
+}
+
+/* Expandable Details */
+.bursary-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 1.5rem;
+}
+
+.bursary-card.expanded .bursary-details {
+    max-height: 1500px;
+    padding: 1.5rem;
+    padding-top: 1rem;
+}
+
+.details-section {
+    margin-bottom: 1.5rem;
+}
+
+.details-section h4 {
+    color: #1a1a2e;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.details-section p,
+.details-section ul {
+    color: #555;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.details-section ul {
+    list-style-position: inside;
+    padding-left: 1rem;
+}
+
+.details-section li {
+    margin-bottom: 0.4rem;
+    padding-left: 0.5rem;
+}
+
+/* Apply Button */
+.apply-button {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gradient-color-2, #6ec3f4) 0%, var(--gradient-color-1, #c3e4ff) 100%);
+    color: #1a1a2e;
+    padding: 0.9rem 2rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    box-shadow: 0 2px 8px rgba(110, 195, 244, 0.3);
+}
+
+.apply-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(110, 195, 244, 0.4);
+}
+
+/* Expand Indicator */
+.expand-indicator {
+    text-align: center;
+    padding: 0.8rem;
+    color: var(--gradient-color-2, #6ec3f4);
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-top: 1px solid #f0f0f0;
+    transition: background 0.2s ease;
+}
+
+.expand-indicator:hover {
+    background: rgba(110, 195, 244, 0.05);
+}
+
+.bursary-card.expanded .expand-indicator::after {
+    content: "▲ Show Less";
+}
+
+.bursary-card:not(.expanded) .expand-indicator::after {
+    content: "▼ Show More";
+}
+
+/* No Results */
+.no-results {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+    font-size: 1.1rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .header p {
+        font-size: 1rem;
+    }
+
+    .bursary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-group {
+        flex-direction: column;
+    }
+
+    .filter-group input,
+    .filter-group select {
+        width: 100%;
+        min-width: unset;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    .header-content {
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 2rem 0;
+    }
+
+    .header h1 {
+        font-size: 1.75rem;
+    }
+
+    .bursary-title {
+        font-size: 1.15rem;
+    }
+
+    .filters {
+        padding: 1rem;
+    }
+}

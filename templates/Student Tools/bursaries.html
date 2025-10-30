@@ -1,11 +1,51 @@
 {% extends 'base.html' %}
 
-{% block title %}Bursaries | uni.sa{% endblock %}
+{% block title %}Bursaries & Financial Aid - uni.sa{% endblock %}
 
-{% block content %}
-  <main>
-	<h1>Bursaries</h1>
-	<p>Placeholder bursaries page. Replace with real bursary information.</p>
-  </main>
+{% block head_extras %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bursaries.css') }}">
 {% endblock %}
 
+{% block content %}
+    <div class="header">
+        <div class="header-content">
+            <h1>Bursaries & Financial Aid</h1>
+            <p>Find funding opportunities to support your academic journey</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="filters">
+            <h3>Filter Bursaries</h3>
+            <div class="filter-group">
+                <input type="text" id="searchInput" placeholder="Search by name or provider...">
+                <select id="fieldFilter" aria-label="fieldfilter">
+                    <option value="">All Fields of Study</option>
+                    <option value="engineering">Engineering</option>
+                    <option value="commerce">Commerce</option>
+                    <option value="science">Science</option>
+                    <option value="humanities">Humanities</option>
+                    <option value="health">Health Sciences</option>
+                    <option value="law">Law</option>
+                    <option value="education">Education</option>
+                </select>
+                <select id="levelFilter" aria-label="levelfilter">
+                    <option value="">All Study Levels</option>
+                    <option value="undergraduate">Undergraduate</option>
+                    <option value="postgraduate">Postgraduate</option>
+                    <option value="honours">Honours</option>
+                    <option value="masters">Masters</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="bursary-grid" id="bursaryGrid"></div>
+        <div class="no-results" id="noResults" style="display: none;">
+            No bursaries found matching your criteria.
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/bursaries.js') }}"></script>
+{% endblock %}

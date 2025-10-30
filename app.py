@@ -42,6 +42,10 @@ def contact():
 def course_management():
     return render_template('Admin/course_management.html')
 
+@app.route('/bursary-management')
+def bursary_management():
+    return render_template('Admin/bursary_management.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
