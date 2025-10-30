@@ -180,6 +180,6 @@ def find_matches():
             filtered_courses.append(course)
     
     # Pass filtered courses to matches template
-    return render_template("matches.html", courses=filtered_courses, student_info=student_info)
+    return render_template("Search/matching_page.html", courses=filtered_courses, student_info=student_info)
 
 

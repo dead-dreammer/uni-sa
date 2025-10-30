@@ -62,7 +62,7 @@ async function saveStudentData(event) {
     if (response.ok) {
       // After saving successfully, go to the courses matches page to show results
       // the courses blueprint exposes matching at /courses/matches
-      window.location.href = '/course';
+      window.location.href = '/courses/matches';
     } else {
       alert(result.message || "Failed to save data");
     }

@@ -7,12 +7,9 @@ from Database.__init__ import db, create_database, create_app
 from Database.models import Student, Preference, AcademicMark, Program, University, Requirement
 from Chatbot.bot import chatbot_response
 from Database.backup import backup_database, restore_latest_backup
-<<<<<<< HEAD
 import threading
 import webview
 import json
-=======
->>>>>>> 5decf13ca5d5a68705e6e1312282e22f670bbe98
 
 app = create_app()
 
