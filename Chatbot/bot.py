@@ -1,11 +1,11 @@
-import json
-import nltk
-import re
-import string
-from pathlib import Path
-from difflib import get_close_matches
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+import json # To read the dataset 
+import nltk #Helps the chatbot understand and process human language, It provides tool like tokenizers for text analysis
+import re  #Used for pattern matching and text cleaning
+import string #Used for removing punctuation from text
+from pathlib import Path #Finds exact location of json file
+from difflib import get_close_matches #Checks which question in the dataset closely matches user input
+from sklearn.feature_extraction.text import TfidfVectorizer #Helps the chatbot understand the importance of words in question
+from sklearn.metrics.pairwise import cosine_similarity #This finds which stored question is most similar to the user's input
 
 # ----------------------------
 # NLTK setup
@@ -30,7 +30,7 @@ try:
         records = data["data"]
     else:
         records = data
-    records = [r for r in records if isinstance(r, dict) and r.get("question") != "__NEW_ENTRIES_START__"]
+    records = [r for r in records if isinstance(r, dict)]
     questions = [item["question"] for item in records]
     answers = [item["answer"] for item in records]
 except Exception as e:
