@@ -29,8 +29,10 @@ def add_course():
             program_name=data['program_name'],
             description=data.get('description', ''),
             university_id=int(data['university_id']),
-            duration_years=int(data.get('duration_years')),
-            degree_type=data.get('degree_type')
+            duration_years=int(data.get('duration_years', 0)),
+            degree_type=data.get('degree_type'),
+            location=data.get('location', ''),        # NEW
+            study_mode=data.get('study_mode', '')     # NEW
         )
         db.session.add(new_course)
         db.session.commit()
@@ -51,9 +53,11 @@ def edit_course(course_id):
         data = request.get_json()
         course.program_name = data['program_name']
         course.description = data.get('description', '')
-        course.university_id = data['university_id']
-        course.duration_years = data.get('duration_years')
+        course.university_id = int(data['university_id'])
+        course.duration_years = int(data.get('duration_years', 0))
         course.degree_type = data.get('degree_type')
+        course.location = data.get('location', '')          # NEW
+        course.study_mode = data.get('study_mode', '')     # NEW
         db.session.commit()
         return jsonify({'success': True})
     except Exception as e:
@@ -77,6 +81,7 @@ def delete_course(course_id):
         db.session.rollback()
         return jsonify({'success': False, 'error': str(e)})
 
+
 # Return all courses as JSON
 @courses.route('/all', methods=['GET'])
 def get_all_courses():
@@ -89,7 +94,9 @@ def get_all_courses():
             'college': c.university_id if c.university else '',
             'duration': c.duration_years,
             'degree_type': c.degree_type,
-            'fees': getattr(c, 'fees', '')  # if you have a fees field
+            'fees': getattr(c, 'fees', ''),
+            'location': getattr(c, 'location', ''),          # NEW
+            'study_mode': getattr(c, 'study_mode', '')       # NEW
         }
         for c in all_courses
     ]

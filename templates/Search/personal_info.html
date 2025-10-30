@@ -38,7 +38,7 @@
   <!-- Search Form Section -->
   <section class="search-section">
     <div class="search-form-container">
-      <form id="searchForm" class="search-form" novalidate>
+      <form id="searchForm" class="search-form" method="POST" action="{{ url_for('find_matches') }}" novalidate>
         <input type="hidden" id="studentId" value="{{ session['student_id'] }}">
         <!-- Question 1: Subjects and Marks -->
         <div class="form-card" id="section-subjects">
@@ -196,6 +196,18 @@
                 <div class="radio-card-content">
                   <span class="radio-icon">💻</span>
                   <span class="radio-text">Distance (Online)</span>
+                </div>
+              </label>
+              <label class="radio-card">
+                <input
+                  type="radio"
+                  name="studyMode"
+                  value="hybrid"
+                  required
+                />
+                <div class="radio-card-content">
+                  <span class="radio-icon">💻</span>
+                  <span class="radio-text">Hybrid (Both)</span>
                 </div>
               </label>
             </div>

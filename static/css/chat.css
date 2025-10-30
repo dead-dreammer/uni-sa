@@ -42,7 +42,7 @@
 .chat-button-icon {
     width: 180px;
     height: 200px;
-    background: url(img/home/ATOM_LOGO.png) no-repeat center/cover;
+    background: url(../img/home/ATOM_LOGO.png) no-repeat center/cover;
     transition: transform 0.3s ease;
 }
 
@@ -142,7 +142,7 @@
 .header-icon {
     width: 60px;
     height: 60px;
-    background: url(img/home/ATOM_LOGO.png) no-repeat center/cover;
+    background: url(../img/home/ATOM_LOGO.png) no-repeat center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -230,7 +230,7 @@
 .bot .message-avatar {
     width:100px;
     height:100px;
-    background: url(img/home/ATOM_LOGO.png) no-repeat center/cover;
+    background: url(../img/home/ATOM_LOGO.png) no-repeat center/cover;
     color: white;
 }
 

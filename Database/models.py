@@ -60,6 +60,8 @@ class Program(db.Model):
     degree_type = db.Column(db.String(50))
     duration_years = db.Column(db.Integer)
     description = db.Column(db.Text)
+    location = db.Column(db.String(100))        # NEW
+    study_mode = db.Column(db.String(20))      # NEW
     __table_args__ = (db.UniqueConstraint('university_id', 'program_name', name='_program_name_uc'),)
     requirements = db.relationship('Requirement', backref='program', lazy=True)
     applications = db.relationship('Application', backref='program', lazy=True)
