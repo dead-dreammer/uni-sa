@@ -1,0 +1,130 @@
+/*about us----------------------------------------------------------------------------------------------------------------*/
+
+body.about-page {
+  background-color: #869ddb;
+  /* About Us background served from static/img/About Us/about_us_bg.png */
+  background-image: url('/static/img/About%20Us/about_us_bg.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.main-content_about {
+	padding: 3rem 1.5rem 0.5rem;
+	text-align:  center;
+	font-size: 1.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.main-content_about h1 {
+	font-size: 5rem;
+	color: #ffffff;
+	margin-top: 0.5rem;
+}
+
+.main-content_about p {
+	font-size: 1.5rem;
+	color: whitesmoke;
+  padding-bottom: 4rem;
+}
+
+/* Horizontal scrolling*/
+.image-marquee {
+    width: 100%;
+    overflow: hidden;
+    background-color: transparent;
+    padding: 1rem 0;
+    position: relative;
+}
+
+.marquee-track {
+    display: flex;
+    gap: 1rem;
+    animation: scroll-left 30s linear infinite;
+}
+
+.marquee-track img {
+    height: 250px; 
+    width: auto;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    flex-shrink: 0;
+}
+
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%); 
+    }
+}
+
+
+.image-marquee:hover .marquee-track {
+    animation-play-state: paused;
+}
+.info-block {
+    display: block;          
+    width: 80%;              
+    margin: 2rem auto;      
+    padding: 1rem 2rem;      
+    background-color: rgba(255, 255, 255, 0.1); 
+    border-radius: 10px;     
+    font-size: 1.2rem;      
+    line-height: 1.6;       
+    color: #fff;            
+}
+
+.mission-section {
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: rgba(153, 179, 252, 0.1); 
+}
+
+.mission-section h2 {
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+.mission-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap; 
+}
+
+.mission-card {
+  background-color: rgba(0,0,0,0.5);
+  color: #fff;
+  border-radius: 10px;
+  padding: 2rem;
+  width: 300px; 
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.mission-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(125, 46, 216, 0.4);
+}
+
+.mission-card img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 1rem;
+}
+
+.mission-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.mission-card p {
+  font-size: 1rem;
+  color: #ddd;
+}

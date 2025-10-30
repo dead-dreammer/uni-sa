@@ -1,5 +1,15 @@
-{% extends 'base.html' %} {% block title %}Start My Search | uni.sa{% endblock
-%} {% block content %}
+{% extends 'base.html' %} 
+
+{% block title %}Start My Search | uni.sa{% endblock%} 
+
+{% block head_extras %}
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/personal-info.css') }}"
+  />
+{% endblock %}
+
+{% block content %}
 <div class="search-page">
   <!-- Hero Section -->
   <div class="search-hero">

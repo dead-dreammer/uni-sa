@@ -1,5 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< HEAD
+=======
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}uni.sa{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/chat.css') }}">
+>>>>>>> 6af53601fb85a15bbf945c63d0a32a8a8d017c24
 
 <head>
   <meta charset="UTF-8" />
@@ -54,11 +74,50 @@
       {% else %}
       <li><a href="{{ url_for('login') }}" class="underline">Login</a></li>
       {% endif %}
+<<<<<<< HEAD
       <li>
         <a href="{{ url_for('start_search') }}" class="special-link">START MY SEARCH!</a>
       </li>
     </ul>
   </nav>
+=======
+      <ul>
+        <li><a href="{{ url_for('home_page') }}" class="underline">Home</a></li>
+        <li><a href="{{ url_for('about') }}" class="underline">About Us</a></li>
+        <li>
+          <a href="{{ url_for('how_it_works') }}" class="underline"
+            >How it Works</a
+          >
+        </li>
+        <li>
+          <a href="{{ url_for('admin') }}" class="underline"
+            >Admin</a
+          >
+        </li>
+         <li>
+          <a href="{{ url_for('matching_page') }}" class="underline"
+            >Matching Page</a
+          >
+        </li>
+        <li class="dropdown">
+          <a href="#">Student Tools</a>
+          <ul class="dropdown-content">
+            <li>
+              <a href="{{ url_for('admissions') }}" class="underline"
+                >Admissions Calendar</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('bursaries') }}" class="underline"
+                >Bursaries</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="{{ url_for('contact') }}" class="underline">Contact Us</a>
+        </li>
+>>>>>>> 6af53601fb85a15bbf945c63d0a32a8a8d017c24
 
   {% block content %}{% endblock %}
 

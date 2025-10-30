@@ -2,6 +2,13 @@
 
 {% block title %}Dashboard | uni.sa{% endblock %}
 
+{% block head_extras %}
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/start_search.css') }}"
+  />
+{% endblock %}
+
 {% block content %}
   <!-- Main Content -->
   <main class="main-container">

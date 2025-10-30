@@ -42,6 +42,10 @@ def contact():
 def course_management():
     return render_template('Admin/course_management.html')
 
+@app.route('/bursary-management')
+def bursary_management():
+    return render_template('Admin/bursary_management.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -58,20 +62,24 @@ def signup():
 @app.route('/admin/login', methods=['GET', 'POST'])
 def admin_login():
     if request.method == 'POST':
-        email = request.form.get('adminEmail')
-        password = request.form.get('adminPassword')
+        # Accept JSON if Content-Type is application/json
+        if request.is_json:
+            data = request.get_json()
+            email = data.get('email')
+            password = data.get('password')
+        else:
+            email = request.form.get('email')
+            password = request.form.get('password')
         
-        # TODO: Replace with your actual admin verification logic
-        # Example: Check against database or environment variables
         if email == 'admin@uni.sa' and password == 'admin123':  # CHANGE THESE CREDENTIALS!
             session['is_admin'] = True
             session['admin_email'] = email
-            return redirect(url_for('home_page'))  
+            return jsonify({"success": True})  # Respond to JS
         else:
-            # Invalid credentials - pass error message to template
-            return render_template('Login/admin_login.html', error='Invalid admin credentials')
+            return jsonify({"success": False, "error": "Invalid admin credentials"})
     
     return render_template('Login/admin_login.html')
+
 
 @app.route('/admin/logout')
 def admin_logout():
@@ -134,6 +142,14 @@ def terms():
 @app.route('/privacy')
 def privacy():
     return render_template('privacy.html')
+
+@app.route('/admin')
+def admin():
+    return render_template('Admin/admin.html')
+
+@app.route('/courses/add', methods=['GET', 'POST'])
+def add_course_page():
+    return render_template('Admin/admin.html')
 
 
 if __name__ == '__main__':

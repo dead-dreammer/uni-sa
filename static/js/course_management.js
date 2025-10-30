@@ -1,318 +1,210 @@
-// Course Management JavaScript
+// ===== Course Management JS =====
 
-// Modal functions
+// Modal controls
+const courseModal = document.getElementById('courseModal');
+const modalTitle = document.getElementById('modalTitle');
+const courseForm = document.getElementById('courseForm');
+const courseIdInput = document.getElementById('courseId');
+const nameInput = document.getElementById('courseTitle');
+const descInput = document.getElementById('courseDescription');
+const universityInput = document.getElementById('courseCollege');
+const durationInput = document.getElementById('courseDuration');
+const degreeTypeInput = document.getElementById('courseDegreeType');
+
+// Open Add Modal
 function openAddModal() {
-  document.getElementById('courseModal').style.display = 'flex';
-  document.getElementById('modalTitle').textContent = 'Add New Course';
-  document.getElementById('courseForm').reset();
+  modalTitle.textContent = 'Add Course';
+  courseForm.reset();
+  courseIdInput.value = '';
+  courseModal.style.display = 'flex';
 }
 
+// Close Modal
 function closeModal() {
-  document.getElementById('courseModal').style.display = 'none';
+  courseModal.style.display = 'none';
 }
 
-function editCourse(id) {
-  document.getElementById('courseModal').style.display = 'flex';
-  document.getElementById('modalTitle').textContent = 'Edit Course';
+// Add/Edit Course
+courseForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const id = courseIdInput.value;
+  const payload = {
+    program_name: nameInput.value,
+    description: descInput.value,
+    university_id: universityInput.value,
+    duration_years: durationInput.value,
+    degree_type: degreeTypeInput.value
+  };
+  const url = id ? `/courses/edit/${id}` : '/courses/add';
   
-  // TODO: Populate form with course data from database
-  // For now, this is a placeholder
-  console.log('Editing course with ID:', id);
-  
-  // Example of how you would populate the form:
-  // document.getElementById('collegeName').value = 'dut';
-  // document.getElementById('courseName').value = 'Bachelor of Engineering';
-  // etc.
-}
-
-function deleteCourse(id) {
-  // Show confirmation dialog
-  if (confirm('Are you sure you want to delete this course? This action cannot be undone.')) {
-    // TODO: Send delete request to backend
-    console.log('Deleting course with ID:', id);
-    
-    // Example AJAX call (uncomment and modify when backend is ready):
-    /*
-    fetch(`/api/courses/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        // Remove the card from DOM
-        const card = document.querySelector(`[data-course-id="${id}"]`);
-        if (card) {
-          card.style.opacity = '0';
-          setTimeout(() => card.remove(), 300);
-        }
-        showNotification('Course deleted successfully!', 'success');
-      } else {
-        showNotification('Failed to delete course.', 'error');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      showNotification('An error occurred.', 'error');
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     });
-    */
-    
-    // For demo purposes:
-    showNotification('Course deleted successfully!', 'success');
+    const data = await res.json();
+    if (data.success) location.reload();
+    else alert('Failed to save course: ' + (data.error || 'Unknown error'));
+  } catch (err) {
+    console.error(err);
+    alert('An error occurred while saving the course.');
   }
-}
+});
 
-// Filter functions
+// Edit Course
+document.querySelectorAll('.btn-edit').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.course-card');
+    courseIdInput.value = btn.dataset.id;
+    nameInput.value = card.querySelector('.course-title').textContent;
+    descInput.value = card.querySelector('.course-description').textContent;
+    universityInput.value = card.dataset.university;
+    durationInput.value = card.querySelector('.meta-duration')?.textContent || '';
+    degreeTypeInput.value = card.querySelector('.meta-degree')?.textContent || '';
+    modalTitle.textContent = 'Edit Course';
+    courseModal.style.display = 'flex';
+  });
+});
+
+// Delete Course
+document.querySelectorAll('.btn-delete').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    if (!confirm('Are you sure you want to delete this course?')) return;
+    const id = btn.dataset.id;
+    try {
+      const res = await fetch(`/courses/delete/${id}`, { method: 'POST' });
+      const data = await res.json();
+      if (data.success) location.reload();
+      else alert('Failed to delete course: ' + (data.error || 'Unknown error'));
+    } catch (err) {
+      console.error(err);
+      alert('An error occurred while deleting the course.');
+    }
+  });
+});
+
+// Close Modal Events
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('cancelBtn').addEventListener('click', closeModal);
+window.addEventListener('click', (e) => { if (e.target === courseModal) closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+// Filter & Search
 function filterCourses() {
   const filter = document.getElementById('collegeFilter').value;
-  const cards = document.querySelectorAll('.course-card');
-  
-  cards.forEach(card => {
-    if (filter === 'all' || card.dataset.college === filter) {
-      card.style.display = 'block';
-      setTimeout(() => {
-        card.style.opacity = '1';
-        card.style.transform = 'scale(1)';
-      }, 10);
-    } else {
-      card.style.opacity = '0';
-      card.style.transform = 'scale(0.9)';
-      setTimeout(() => {
-        card.style.display = 'none';
-      }, 300);
-    }
+  document.querySelectorAll('.course-card').forEach(card => {
+    card.style.display = (filter === '' || card.dataset.university === filter) ? 'block' : 'none';
   });
 }
 
 function searchCourses() {
   const input = document.getElementById('searchInput').value.toLowerCase();
-  const cards = document.querySelectorAll('.course-card');
-  
-  cards.forEach(card => {
-    const courseName = card.querySelector('.course-title').textContent.toLowerCase();
-    const description = card.querySelector('.course-description').textContent.toLowerCase();
-    const college = card.querySelector('.college-badge').textContent.toLowerCase();
-    
-    if (courseName.includes(input) || description.includes(input) || college.includes(input)) {
-      card.style.display = 'block';
-      setTimeout(() => {
-        card.style.opacity = '1';
-        card.style.transform = 'scale(1)';
-      }, 10);
-    } else {
-      card.style.opacity = '0';
-      card.style.transform = 'scale(0.9)';
-      setTimeout(() => {
-        card.style.display = 'none';
-      }, 300);
-    }
+  document.querySelectorAll('.course-card').forEach(card => {
+    const text = [
+      card.querySelector('.course-title').textContent,
+      card.querySelector('.course-description').textContent,
+      card.querySelector('.college-badge').textContent
+    ].join(' ').toLowerCase();
+    card.style.display = text.includes(input) ? 'block' : 'none';
   });
 }
 
-function showAllCourses() {
-  document.getElementById('collegeFilter').value = 'all';
-  document.getElementById('searchInput').value = '';
-  filterCourses();
-}
+document.getElementById('collegeFilter').addEventListener('change', filterCourses);
+document.getElementById('searchInput').addEventListener('input', searchCourses);
 
-// CSV Upload function
-function uploadCSV() {
-  // Create file input element
-  const fileInput = document.createElement('input');
-  fileInput.type = 'file';
-  fileInput.accept = '.csv';
-  
-  fileInput.onchange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      // TODO: Handle CSV file upload
-      console.log('Uploading CSV file:', file.name);
-      
-      // Example of how you would handle the upload:
-      /*
-      const formData = new FormData();
-      formData.append('file', file);
-      
-      fetch('/api/courses/upload-csv', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          showNotification(`Successfully imported ${data.count} courses!`, 'success');
-          // Reload the page or update the course list
-          location.reload();
-        } else {
-          showNotification('Failed to import CSV.', 'error');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        showNotification('An error occurred during upload.', 'error');
-      });
-      */
-      
-      // For demo purposes:
-      showNotification('CSV upload feature coming soon!', 'info');
-    }
-  };
-  
-  fileInput.click();
-}
-
-// Close modal when clicking outside
-window.onclick = function(event) {
-  const modal = document.getElementById('courseModal');
-  if (event.target === modal) {
-    closeModal();
-  }
-};
-
-// Close modal with Escape key
-document.addEventListener('keydown', function(event) {
-  if (event.key === 'Escape') {
-    closeModal();
-  }
-});
-
-// Form submission
-document.getElementById('courseForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  // Get form data
-  const formData = {
-    college: document.getElementById('collegeName').value,
-    courseName: document.getElementById('courseName').value,
-    description: document.getElementById('courseDescription').value,
-    duration: document.getElementById('courseDuration').value,
-    mode: document.getElementById('courseMode').value
-  };
-  
-  console.log('Form data:', formData);
-  
-  // TODO: Send data to backend
-  /*
-  fetch('/api/courses', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(formData)
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
-      showNotification('Course saved successfully!', 'success');
-      closeModal();
-      // Reload or update the course list
-      location.reload();
-    } else {
-      showNotification('Failed to save course.', 'error');
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    showNotification('An error occurred.', 'error');
-  });
-  */
-  
-  // For demo purposes:
-  showNotification('Course saved successfully!', 'success');
-  closeModal();
-});
-
-// Notification system
-function showNotification(message, type = 'info') {
-  // Remove existing notification if any
-  const existingNotification = document.querySelector('.notification');
-  if (existingNotification) {
-    existingNotification.remove();
-  }
-  
-  // Create notification element
-  const notification = document.createElement('div');
-  notification.className = `notification notification-${type}`;
-  notification.textContent = message;
-  
-  // Add styles
-  notification.style.position = 'fixed';
-  notification.style.top = '20px';
-  notification.style.right = '20px';
-  notification.style.padding = '16px 24px';
-  notification.style.borderRadius = '10px';
-  notification.style.color = 'white';
-  notification.style.fontWeight = '600';
-  notification.style.fontSize = '14px';
-  notification.style.zIndex = '10000';
-  notification.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.2)';
-  notification.style.animation = 'slideInRight 0.3s ease';
-  
-  // Set background color based on type
-  if (type === 'success') {
-    notification.style.background = 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)';
-  } else if (type === 'error') {
-    notification.style.background = 'linear-gradient(135deg, #eb3349 0%, #f45c43 100%)';
-  } else if (type === 'info') {
-    notification.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-  }
-  
-  // Add to body
-  document.body.appendChild(notification);
-  
-  // Remove after 3 seconds
-  setTimeout(() => {
-    notification.style.animation = 'slideOutRight 0.3s ease';
-    setTimeout(() => notification.remove(), 300);
-  }, 3000);
-}
-
-// Add animation styles
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes slideInRight {
-    from {
-      opacity: 0;
-      transform: translateX(100px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-  
-  @keyframes slideOutRight {
-    from {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateX(100px);
-    }
-  }
-  
-  .course-card {
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-`;
-document.head.appendChild(style);
-
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-  console.log('Course Management initialized');
-  
-  // Add smooth transitions to cards
-  const cards = document.querySelectorAll('.course-card');
-  cards.forEach((card, index) => {
+// Animate Cards on Load
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.course-card').forEach((card, i) => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(20px)';
     setTimeout(() => {
       card.style.transition = 'all 0.4s ease';
       card.style.opacity = '1';
       card.style.transform = 'translateY(0)';
-    }, index * 50);
+    }, i * 50);
   });
 });
+
+
+async function loadCourses() {
+  try {
+    const res = await fetch('/courses/all');
+    const courses = await res.json();
+    const grid = document.querySelector('.courses-grid');
+    grid.innerHTML = ''; // clear old content
+
+    courses.forEach(course => {
+      const card = document.createElement('div');
+      card.className = 'course-card';
+      card.dataset.college = course.university_id;       // store ID for dropdown
+      card.dataset.degree = course.degree_type || '';    // store degree type
+
+      card.innerHTML = `
+        <div class="card-header">
+          <span class="college-badge badge-${course.college?.toLowerCase() || 'unknown'}">
+            ${course.college || 'Unknown College'}
+          </span>
+          <div class="card-actions">
+            <button class="btn-icon btn-edit" data-id="${course.id}">✎</button>
+            <button class="btn-icon btn-delete" data-id="${course.id}">🗑</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <h3 class="course-title">${course.title}</h3>
+          <p class="course-description">${course.description || 'No description available.'}</p>
+          <div class="course-meta">
+            <div class="meta-item"><strong>Duration:</strong> ${course.duration || 'N/A'} years</div>
+            <div class="meta-item meta-degree" data-degree="${course.degree_type || ''}">
+              <strong>Degree Type:</strong> ${course.degree_type || 'N/A'}
+            </div>
+            <div class="meta-item"><strong>Fees:</strong> ${course.fees || 'N/A'}</div>
+          </div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    // Rebind edit/delete events after DOM update
+    bindCourseButtons();
+  } catch (err) {
+    console.error('Error loading courses:', err);
+  }
+}
+
+function bindCourseButtons() {
+  // Edit buttons
+  document.querySelectorAll('.btn-edit').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.course-card');
+      courseIdInput.value = btn.dataset.id;
+      nameInput.value = card.querySelector('.course-title').textContent;
+      descInput.value = card.querySelector('.course-description').textContent;
+      universityInput.value = card.dataset.college;           // set select dropdown
+      degreeTypeInput.value = card.dataset.degree;           // set degree type dropdown
+      durationInput.value = card.querySelector('.meta-item')?.textContent.replace(/\D/g, '') || '';
+      modalTitle.textContent = 'Edit Course';
+      courseModal.style.display = 'flex';
+    });
+  });
+
+  // Delete buttons
+  document.querySelectorAll('.btn-delete').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      if (!confirm('Are you sure you want to delete this course?')) return;
+      const id = btn.dataset.id;
+      try {
+        const res = await fetch(`/courses/delete/${id}`, { method: 'POST' });
+        const data = await res.json();
+        if (data.success) loadCourses(); // reload courses after delete
+        else alert('Failed to delete course: ' + (data.error || 'Unknown error'));
+      } catch (err) {
+        console.error(err);
+        alert('An error occurred while deleting the course.');
+      }
+    });
+  });
+}
+
+// Call on page load
+document.addEventListener('DOMContentLoaded', loadCourses);
