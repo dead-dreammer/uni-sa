@@ -7,9 +7,12 @@ from Database.__init__ import db, create_database, create_app
 from Database.models import Student, Preference, AcademicMark, Program, University, Requirement
 from Chatbot.bot import chatbot_response
 from Database.backup import backup_database, restore_latest_backup
+<<<<<<< HEAD
 import threading
 import webview
 import json
+=======
+>>>>>>> 5decf13ca5d5a68705e6e1312282e22f670bbe98
 
 app = create_app()
 
@@ -229,19 +232,7 @@ def admin():
 def add_course_page():
     return render_template('Admin/admin.html')
 
-@app.route('/find-matches', methods=['POST'])
-def find_matches():
-    return render_template('Search/matching_page.html')
-
-
-def start_flask():
-    app.run(host='127.0.0.1', port=5000)
-
 
 if __name__ == '__main__':
     # Runs the Flask development server
-    threading.Thread(target=start_flask).start()
-    
-    # Open your app in a native window
-    webview.create_window("uni.sa", "http://127.0.0.1:5000", width=1200, height=800)
-    webview.start()
+    app.run(host="0.0.0.0", port=5000, debug=True, threaded=True)
