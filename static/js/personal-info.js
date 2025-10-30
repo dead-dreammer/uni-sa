@@ -60,7 +60,9 @@ async function saveStudentData(event) {
 
     const result = await response.json();
     if (response.ok) {
-      alert(result.message || "Data saved successfully!");
+      // After saving successfully, go to the courses matches page to show results
+      // the courses blueprint exposes matching at /courses/matches
+      window.location.href = '/course';
     } else {
       alert(result.message || "Failed to save data");
     }
