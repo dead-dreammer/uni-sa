@@ -1,3 +1,6 @@
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
+
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from Database.auth import auth
 from Database.search import search
@@ -13,7 +16,6 @@ def add_header(response):
     # Prevent caching during development
     response.headers["Cache-Control"] = "no-store"
     return response
-
 
 # --- Routes for template pages ---
 @app.route('/')
