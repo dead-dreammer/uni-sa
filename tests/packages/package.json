@@ -1,0 +1,22 @@
+{
+  "name": "uni-sa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dead-dreammer/uni-sa.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dead-dreammer/uni-sa/issues"
+  },
+  "homepage": "https://github.com/dead-dreammer/uni-sa#readme",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.9.2"
+  }
+}

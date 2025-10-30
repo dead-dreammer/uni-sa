@@ -1,10 +1,6 @@
 {
   "data": [
     {
-      "question": "Hello",
-      "answer": "Hello! My name is ATOM, your Student Advisor.Welcome to the UNI.SA platform! You can ask me about universities such as UKZN, MUT, DUT, UNISA, Eduvos, or Richfield — including their courses, study durations, tuition fees in ZAR, entry requirements, matric subject mappings (APS), and how to apply."
-    },
-    {
       "question": "ukzn overview",
       "answer": "UKZN (University of KwaZulu-Natal) is a research-led public university with five campuses:\nHoward College, Westville, Pietermaritzburg, Edgewood and Nelson R. Mandela Medical School.\nIt offers undergraduate and postgraduate programmes across Agriculture, Engineering & Science, Health Sciences, Humanities, Law and Management.\nTypical intakes: February and July."
     },
@@ -5123,6 +5119,406 @@
     {
       "question": "Does UCT require the NBT and for which applicants?",
       "answer": "UCT requires NBTs for many undergraduate applicants; Health Sciences and some competitive programmes require NBTs regardless of residence. See the UCT admissions section for specific NBT requirements by programme."
+    },
+    {
+      "question": "What are the main undergraduate intakes and application closing dates for Durban University of Technology (DUT)?",
+      "answer": "DUT offers career-focused diplomas and degrees with an emphasis on WIL. Closing dates and entry requirements are published in DUT's prospectus and on dut.ac.za."
+    },
+    {
+      "question": "Which faculties or schools does Durban University of Technology (DUT) have?",
+      "answer": "DUT offers career-focused diplomas and degrees with an emphasis on WIL. Closing dates and entry requirements are published in DUT's prospectus and on dut.ac.za."
+    },
+    {
+      "question": "What are the typical tuition/fee ranges for undergraduate programmes at Durban University of Technology (DUT)?",
+      "answer": "DUT offers career-focused diplomas and degrees with an emphasis on WIL. Closing dates and entry requirements are published in DUT's prospectus and on dut.ac.za."
+    },
+    {
+      "question": "How can international students apply to Durban University of Technology (DUT) and what documents are required?",
+      "answer": "DUT offers career-focused diplomas and degrees with an emphasis on WIL. Closing dates and entry requirements are published in DUT's prospectus and on dut.ac.za."
+    },
+    {
+      "question": "What accommodation and residence options are available at Durban University of Technology (DUT)?",
+      "answer": "DUT offers career-focused diplomas and degrees with an emphasis on WIL. Closing dates and entry requirements are published in DUT's prospectus and on dut.ac.za."
+    },
+    {
+      "question": "What funding, bursary or scholarship options are available for students at Durban University of Technology (DUT)?",
+      "answer": "DUT offers career-focused diplomas and degrees with an emphasis on WIL. Closing dates and entry requirements are published in DUT's prospectus and on dut.ac.za."
+    },
+    {
+      "question": "Does Durban University of Technology (DUT) require English language proficiency tests and what are acceptable proofs?",
+      "answer": "DUT offers career-focused diplomas and degrees with an emphasis on WIL. Closing dates and entry requirements are published in DUT's prospectus and on dut.ac.za."
+    },
+    {
+      "question": "Are there bridging or access programmes at Durban University of Technology (DUT) for students who do not meet direct entry requirements?",
+      "answer": "DUT offers career-focused diplomas and degrees with an emphasis on WIL. Closing dates and entry requirements are published in DUT's prospectus and on dut.ac.za."
+    },
+    {
+      "question": "How are applicants selected at Durban University of Technology (DUT) (APS/FPS/WPS or other systems)?",
+      "answer": "DUT offers career-focused diplomas and degrees with an emphasis on WIL. Closing dates and entry requirements are published in DUT's prospectus and on dut.ac.za."
+    },
+    {
+      "question": "How can I contact the admissions office at Durban University of Technology (DUT) for queries about applications and fees?",
+      "answer": "DUT offers career-focused diplomas and degrees with an emphasis on WIL. Closing dates and entry requirements are published in DUT's prospectus and on dut.ac.za."
+    },
+    {
+      "question": "What are the main undergraduate intakes and application closing dates for Eduvos?",
+      "answer": "Eduvos offers campus-based and online programmes with flexible payments and bridging options. Consult Eduvos' admissions pages for exact intakes and entry requirements."
+    },
+    {
+      "question": "Which faculties or schools does Eduvos have?",
+      "answer": "Eduvos offers campus-based and online programmes with flexible payments and bridging options. Consult Eduvos' admissions pages for exact intakes and entry requirements."
+    },
+    {
+      "question": "What are the typical tuition/fee ranges for undergraduate programmes at Eduvos?",
+      "answer": "Eduvos offers campus-based and online programmes with flexible payments and bridging options. Consult Eduvos' admissions pages for exact intakes and entry requirements."
+    },
+    {
+      "question": "How can international students apply to Eduvos and what documents are required?",
+      "answer": "Eduvos offers campus-based and online programmes with flexible payments and bridging options. Consult Eduvos' admissions pages for exact intakes and entry requirements."
+    },
+    {
+      "question": "What accommodation and residence options are available at Eduvos?",
+      "answer": "Eduvos offers campus-based and online programmes with flexible payments and bridging options. Consult Eduvos' admissions pages for exact intakes and entry requirements."
+    },
+    {
+      "question": "What funding, bursary or scholarship options are available for students at Eduvos?",
+      "answer": "Eduvos offers campus-based and online programmes with flexible payments and bridging options. Consult Eduvos' admissions pages for exact intakes and entry requirements."
+    },
+    {
+      "question": "Does Eduvos require English language proficiency tests and what are acceptable proofs?",
+      "answer": "Eduvos offers campus-based and online programmes with flexible payments and bridging options. Consult Eduvos' admissions pages for exact intakes and entry requirements."
+    },
+    {
+      "question": "Are there bridging or access programmes at Eduvos for students who do not meet direct entry requirements?",
+      "answer": "Eduvos offers campus-based and online programmes with flexible payments and bridging options. Consult Eduvos' admissions pages for exact intakes and entry requirements."
+    },
+    {
+      "question": "How are applicants selected at Eduvos (APS/FPS/WPS or other systems)?",
+      "answer": "Eduvos offers campus-based and online programmes with flexible payments and bridging options. Consult Eduvos' admissions pages for exact intakes and entry requirements."
+    },
+    {
+      "question": "How can I contact the admissions office at Eduvos for queries about applications and fees?",
+      "answer": "Eduvos offers campus-based and online programmes with flexible payments and bridging options. Consult Eduvos' admissions pages for exact intakes and entry requirements."
+    },
+    {
+      "question": "What are the main undergraduate intakes and application closing dates for MANCOSA (Management College of Southern Africa)?",
+      "answer": "MANCOSA provides distance and online management qualifications; entry varies by level (Higher Certificate, Diploma, Bachelor's). Check MANCOSA's regional learning centre pages for intakes and fees."
+    },
+    {
+      "question": "Which faculties or schools does MANCOSA (Management College of Southern Africa) have?",
+      "answer": "MANCOSA provides distance and online management qualifications; entry varies by level (Higher Certificate, Diploma, Bachelor's). Check MANCOSA's regional learning centre pages for intakes and fees."
+    },
+    {
+      "question": "What are the typical tuition/fee ranges for undergraduate programmes at MANCOSA (Management College of Southern Africa)?",
+      "answer": "MANCOSA provides distance and online management qualifications; entry varies by level (Higher Certificate, Diploma, Bachelor's). Check MANCOSA's regional learning centre pages for intakes and fees."
+    },
+    {
+      "question": "How can international students apply to MANCOSA (Management College of Southern Africa) and what documents are required?",
+      "answer": "MANCOSA provides distance and online management qualifications; entry varies by level (Higher Certificate, Diploma, Bachelor's). Check MANCOSA's regional learning centre pages for intakes and fees."
+    },
+    {
+      "question": "What accommodation and residence options are available at MANCOSA (Management College of Southern Africa)?",
+      "answer": "MANCOSA provides distance and online management qualifications; entry varies by level (Higher Certificate, Diploma, Bachelor's). Check MANCOSA's regional learning centre pages for intakes and fees."
+    },
+    {
+      "question": "What funding, bursary or scholarship options are available for students at MANCOSA (Management College of Southern Africa)?",
+      "answer": "MANCOSA provides distance and online management qualifications; entry varies by level (Higher Certificate, Diploma, Bachelor's). Check MANCOSA's regional learning centre pages for intakes and fees."
+    },
+    {
+      "question": "Does MANCOSA (Management College of Southern Africa) require English language proficiency tests and what are acceptable proofs?",
+      "answer": "MANCOSA provides distance and online management qualifications; entry varies by level (Higher Certificate, Diploma, Bachelor's). Check MANCOSA's regional learning centre pages for intakes and fees."
+    },
+    {
+      "question": "Are there bridging or access programmes at MANCOSA (Management College of Southern Africa) for students who do not meet direct entry requirements?",
+      "answer": "MANCOSA provides distance and online management qualifications; entry varies by level (Higher Certificate, Diploma, Bachelor's). Check MANCOSA's regional learning centre pages for intakes and fees."
+    },
+    {
+      "question": "How are applicants selected at MANCOSA (Management College of Southern Africa) (APS/FPS/WPS or other systems)?",
+      "answer": "MANCOSA provides distance and online management qualifications; entry varies by level (Higher Certificate, Diploma, Bachelor's). Check MANCOSA's regional learning centre pages for intakes and fees."
+    },
+    {
+      "question": "How can I contact the admissions office at MANCOSA (Management College of Southern Africa) for queries about applications and fees?",
+      "answer": "MANCOSA provides distance and online management qualifications; entry varies by level (Higher Certificate, Diploma, Bachelor's). Check MANCOSA's regional learning centre pages for intakes and fees."
+    },
+    {
+      "question": "What are the main undergraduate intakes and application closing dates for Mangosuthu University of Technology (MUT)?",
+      "answer": "MUT focuses on applied STEM and typically requires NSC Diploma or Degree passes depending on the programme. Check MUT's prospectus and CAO listings for precise intakes and subject requirements."
+    },
+    {
+      "question": "Which faculties or schools does Mangosuthu University of Technology (MUT) have?",
+      "answer": "MUT focuses on applied STEM and typically requires NSC Diploma or Degree passes depending on the programme. Check MUT's prospectus and CAO listings for precise intakes and subject requirements."
+    },
+    {
+      "question": "What are the typical tuition/fee ranges for undergraduate programmes at Mangosuthu University of Technology (MUT)?",
+      "answer": "MUT focuses on applied STEM and typically requires NSC Diploma or Degree passes depending on the programme. Check MUT's prospectus and CAO listings for precise intakes and subject requirements."
+    },
+    {
+      "question": "How can international students apply to Mangosuthu University of Technology (MUT) and what documents are required?",
+      "answer": "MUT focuses on applied STEM and typically requires NSC Diploma or Degree passes depending on the programme. Check MUT's prospectus and CAO listings for precise intakes and subject requirements."
+    },
+    {
+      "question": "What accommodation and residence options are available at Mangosuthu University of Technology (MUT)?",
+      "answer": "MUT focuses on applied STEM and typically requires NSC Diploma or Degree passes depending on the programme. Check MUT's prospectus and CAO listings for precise intakes and subject requirements."
+    },
+    {
+      "question": "What funding, bursary or scholarship options are available for students at Mangosuthu University of Technology (MUT)?",
+      "answer": "MUT focuses on applied STEM and typically requires NSC Diploma or Degree passes depending on the programme. Check MUT's prospectus and CAO listings for precise intakes and subject requirements."
+    },
+    {
+      "question": "Does Mangosuthu University of Technology (MUT) require English language proficiency tests and what are acceptable proofs?",
+      "answer": "MUT focuses on applied STEM and typically requires NSC Diploma or Degree passes depending on the programme. Check MUT's prospectus and CAO listings for precise intakes and subject requirements."
+    },
+    {
+      "question": "Are there bridging or access programmes at Mangosuthu University of Technology (MUT) for students who do not meet direct entry requirements?",
+      "answer": "MUT focuses on applied STEM and typically requires NSC Diploma or Degree passes depending on the programme. Check MUT's prospectus and CAO listings for precise intakes and subject requirements."
+    },
+    {
+      "question": "How are applicants selected at Mangosuthu University of Technology (MUT) (APS/FPS/WPS or other systems)?",
+      "answer": "MUT focuses on applied STEM and typically requires NSC Diploma or Degree passes depending on the programme. Check MUT's prospectus and CAO listings for precise intakes and subject requirements."
+    },
+    {
+      "question": "How can I contact the admissions office at Mangosuthu University of Technology (MUT) for queries about applications and fees?",
+      "answer": "MUT focuses on applied STEM and typically requires NSC Diploma or Degree passes depending on the programme. Check MUT's prospectus and CAO listings for precise intakes and subject requirements."
+    },
+    {
+      "question": "What are the main undergraduate intakes and application closing dates for Regent Business School (RBS)?",
+      "answer": "Regent Business School runs accredited management and business programmes with regional centres. Intakes and admission steps are on RBS's website; international applicants should check visa guidance and SAQA requirements."
+    },
+    {
+      "question": "Which faculties or schools does Regent Business School (RBS) have?",
+      "answer": "Regent Business School runs accredited management and business programmes with regional centres. Intakes and admission steps are on RBS's website; international applicants should check visa guidance and SAQA requirements."
+    },
+    {
+      "question": "What are the typical tuition/fee ranges for undergraduate programmes at Regent Business School (RBS)?",
+      "answer": "Regent Business School runs accredited management and business programmes with regional centres. Intakes and admission steps are on RBS's website; international applicants should check visa guidance and SAQA requirements."
+    },
+    {
+      "question": "How can international students apply to Regent Business School (RBS) and what documents are required?",
+      "answer": "Regent Business School runs accredited management and business programmes with regional centres. Intakes and admission steps are on RBS's website; international applicants should check visa guidance and SAQA requirements."
+    },
+    {
+      "question": "What accommodation and residence options are available at Regent Business School (RBS)?",
+      "answer": "Regent Business School runs accredited management and business programmes with regional centres. Intakes and admission steps are on RBS's website; international applicants should check visa guidance and SAQA requirements."
+    },
+    {
+      "question": "What funding, bursary or scholarship options are available for students at Regent Business School (RBS)?",
+      "answer": "Regent Business School runs accredited management and business programmes with regional centres. Intakes and admission steps are on RBS's website; international applicants should check visa guidance and SAQA requirements."
+    },
+    {
+      "question": "Does Regent Business School (RBS) require English language proficiency tests and what are acceptable proofs?",
+      "answer": "Regent Business School runs accredited management and business programmes with regional centres. Intakes and admission steps are on RBS's website; international applicants should check visa guidance and SAQA requirements."
+    },
+    {
+      "question": "Are there bridging or access programmes at Regent Business School (RBS) for students who do not meet direct entry requirements?",
+      "answer": "Regent Business School runs accredited management and business programmes with regional centres. Intakes and admission steps are on RBS's website; international applicants should check visa guidance and SAQA requirements."
+    },
+    {
+      "question": "How are applicants selected at Regent Business School (RBS) (APS/FPS/WPS or other systems)?",
+      "answer": "Regent Business School runs accredited management and business programmes with regional centres. Intakes and admission steps are on RBS's website; international applicants should check visa guidance and SAQA requirements."
+    },
+    {
+      "question": "How can I contact the admissions office at Regent Business School (RBS) for queries about applications and fees?",
+      "answer": "Regent Business School runs accredited management and business programmes with regional centres. Intakes and admission steps are on RBS's website; international applicants should check visa guidance and SAQA requirements."
+    },
+    {
+      "question": "What are the main undergraduate intakes and application closing dates for Richfield Graduate Institute of Technology (Richfield)?",
+      "answer": "Richfield offers IT and business programmes, often with February and July intakes. Programmes and fee ranges are available on Richfield's site and the prospectus; check application fees and deposit requirements."
+    },
+    {
+      "question": "Which faculties or schools does Richfield Graduate Institute of Technology (Richfield) have?",
+      "answer": "Richfield offers IT and business programmes, often with February and July intakes. Programmes and fee ranges are available on Richfield's site and the prospectus; check application fees and deposit requirements."
+    },
+    {
+      "question": "What are the typical tuition/fee ranges for undergraduate programmes at Richfield Graduate Institute of Technology (Richfield)?",
+      "answer": "Richfield offers IT and business programmes, often with February and July intakes. Programmes and fee ranges are available on Richfield's site and the prospectus; check application fees and deposit requirements."
+    },
+    {
+      "question": "How can international students apply to Richfield Graduate Institute of Technology (Richfield) and what documents are required?",
+      "answer": "Richfield offers IT and business programmes, often with February and July intakes. Programmes and fee ranges are available on Richfield's site and the prospectus; check application fees and deposit requirements."
+    },
+    {
+      "question": "What accommodation and residence options are available at Richfield Graduate Institute of Technology (Richfield)?",
+      "answer": "Richfield offers IT and business programmes, often with February and July intakes. Programmes and fee ranges are available on Richfield's site and the prospectus; check application fees and deposit requirements."
+    },
+    {
+      "question": "What funding, bursary or scholarship options are available for students at Richfield Graduate Institute of Technology (Richfield)?",
+      "answer": "Richfield offers IT and business programmes, often with February and July intakes. Programmes and fee ranges are available on Richfield's site and the prospectus; check application fees and deposit requirements."
+    },
+    {
+      "question": "Does Richfield Graduate Institute of Technology (Richfield) require English language proficiency tests and what are acceptable proofs?",
+      "answer": "Richfield offers IT and business programmes, often with February and July intakes. Programmes and fee ranges are available on Richfield's site and the prospectus; check application fees and deposit requirements."
+    },
+    {
+      "question": "Are there bridging or access programmes at Richfield Graduate Institute of Technology (Richfield) for students who do not meet direct entry requirements?",
+      "answer": "Richfield offers IT and business programmes, often with February and July intakes. Programmes and fee ranges are available on Richfield's site and the prospectus; check application fees and deposit requirements."
+    },
+    {
+      "question": "How are applicants selected at Richfield Graduate Institute of Technology (Richfield) (APS/FPS/WPS or other systems)?",
+      "answer": "Richfield offers IT and business programmes, often with February and July intakes. Programmes and fee ranges are available on Richfield's site and the prospectus; check application fees and deposit requirements."
+    },
+    {
+      "question": "How can I contact the admissions office at Richfield Graduate Institute of Technology (Richfield) for queries about applications and fees?",
+      "answer": "Richfield offers IT and business programmes, often with February and July intakes. Programmes and fee ranges are available on Richfield's site and the prospectus; check application fees and deposit requirements."
+    },
+    {
+      "question": "What are the main undergraduate intakes and application closing dates for University of Cape Town (UCT)?",
+      "answer": "Refer to the UCT prospectus for exact dates and use the UCT application portal. Typical intakes: February and July; key dates (applications, NBTs, residence deadlines) are listed in the prospectus and on uct.ac.za."
+    },
+    {
+      "question": "Which faculties or schools does University of Cape Town (UCT) have?",
+      "answer": "Refer to the UCT prospectus for exact dates and use the UCT application portal. Typical intakes: February and July; key dates (applications, NBTs, residence deadlines) are listed in the prospectus and on uct.ac.za."
+    },
+    {
+      "question": "What are the typical tuition/fee ranges for undergraduate programmes at University of Cape Town (UCT)?",
+      "answer": "Refer to the UCT prospectus for exact dates and use the UCT application portal. Typical intakes: February and July; key dates (applications, NBTs, residence deadlines) are listed in the prospectus and on uct.ac.za."
+    },
+    {
+      "question": "How can international students apply to University of Cape Town (UCT) and what documents are required?",
+      "answer": "Refer to the UCT prospectus for exact dates and use the UCT application portal. Typical intakes: February and July; key dates (applications, NBTs, residence deadlines) are listed in the prospectus and on uct.ac.za."
+    },
+    {
+      "question": "What accommodation and residence options are available at University of Cape Town (UCT)?",
+      "answer": "Refer to the UCT prospectus for exact dates and use the UCT application portal. Typical intakes: February and July; key dates (applications, NBTs, residence deadlines) are listed in the prospectus and on uct.ac.za."
+    },
+    {
+      "question": "What funding, bursary or scholarship options are available for students at University of Cape Town (UCT)?",
+      "answer": "Refer to the UCT prospectus for exact dates and use the UCT application portal. Typical intakes: February and July; key dates (applications, NBTs, residence deadlines) are listed in the prospectus and on uct.ac.za."
+    },
+    {
+      "question": "Does University of Cape Town (UCT) require English language proficiency tests and what are acceptable proofs?",
+      "answer": "Refer to the UCT prospectus for exact dates and use the UCT application portal. Typical intakes: February and July; key dates (applications, NBTs, residence deadlines) are listed in the prospectus and on uct.ac.za."
+    },
+    {
+      "question": "Are there bridging or access programmes at University of Cape Town (UCT) for students who do not meet direct entry requirements?",
+      "answer": "Refer to the UCT prospectus for exact dates and use the UCT application portal. Typical intakes: February and July; key dates (applications, NBTs, residence deadlines) are listed in the prospectus and on uct.ac.za."
+    },
+    {
+      "question": "How are applicants selected at University of Cape Town (UCT) (APS/FPS/WPS or other systems)?",
+      "answer": "Refer to the UCT prospectus for exact dates and use the UCT application portal. Typical intakes: February and July; key dates (applications, NBTs, residence deadlines) are listed in the prospectus and on uct.ac.za."
+    },
+    {
+      "question": "How can I contact the admissions office at University of Cape Town (UCT) for queries about applications and fees?",
+      "answer": "Refer to the UCT prospectus for exact dates and use the UCT application portal. Typical intakes: February and July; key dates (applications, NBTs, residence deadlines) are listed in the prospectus and on uct.ac.za."
+    },
+    {
+      "question": "What are the main undergraduate intakes and application closing dates for University of KwaZulu-Natal (UKZN)?",
+      "answer": "UKZN generally has February and July intakes; use CAO where applicable and consult the UKZN prospectus or website for programme-specific closing dates and requirements."
+    },
+    {
+      "question": "Which faculties or schools does University of KwaZulu-Natal (UKZN) have?",
+      "answer": "UKZN generally has February and July intakes; use CAO where applicable and consult the UKZN prospectus or website for programme-specific closing dates and requirements."
+    },
+    {
+      "question": "What are the typical tuition/fee ranges for undergraduate programmes at University of KwaZulu-Natal (UKZN)?",
+      "answer": "UKZN generally has February and July intakes; use CAO where applicable and consult the UKZN prospectus or website for programme-specific closing dates and requirements."
+    },
+    {
+      "question": "How can international students apply to University of KwaZulu-Natal (UKZN) and what documents are required?",
+      "answer": "UKZN generally has February and July intakes; use CAO where applicable and consult the UKZN prospectus or website for programme-specific closing dates and requirements."
+    },
+    {
+      "question": "What accommodation and residence options are available at University of KwaZulu-Natal (UKZN)?",
+      "answer": "UKZN generally has February and July intakes; use CAO where applicable and consult the UKZN prospectus or website for programme-specific closing dates and requirements."
+    },
+    {
+      "question": "What funding, bursary or scholarship options are available for students at University of KwaZulu-Natal (UKZN)?",
+      "answer": "UKZN generally has February and July intakes; use CAO where applicable and consult the UKZN prospectus or website for programme-specific closing dates and requirements."
+    },
+    {
+      "question": "Does University of KwaZulu-Natal (UKZN) require English language proficiency tests and what are acceptable proofs?",
+      "answer": "UKZN generally has February and July intakes; use CAO where applicable and consult the UKZN prospectus or website for programme-specific closing dates and requirements."
+    },
+    {
+      "question": "Are there bridging or access programmes at University of KwaZulu-Natal (UKZN) for students who do not meet direct entry requirements?",
+      "answer": "UKZN generally has February and July intakes; use CAO where applicable and consult the UKZN prospectus or website for programme-specific closing dates and requirements."
+    },
+    {
+      "question": "How are applicants selected at University of KwaZulu-Natal (UKZN) (APS/FPS/WPS or other systems)?",
+      "answer": "UKZN generally has February and July intakes; use CAO where applicable and consult the UKZN prospectus or website for programme-specific closing dates and requirements."
+    },
+    {
+      "question": "How can I contact the admissions office at University of KwaZulu-Natal (UKZN) for queries about applications and fees?",
+      "answer": "UKZN generally has February and July intakes; use CAO where applicable and consult the UKZN prospectus or website for programme-specific closing dates and requirements."
+    },
+    {
+      "question": "What are the main undergraduate intakes and application closing dates for University of Pretoria (UP)?",
+      "answer": "UP typically opens applications in April for the following academic year; faculty closing dates vary (e.g., Veterinary Science may close earlier). Check UP's online application portal and faculty pages for exact intake and closing dates."
+    },
+    {
+      "question": "Which faculties or schools does University of Pretoria (UP) have?",
+      "answer": "UP typically opens applications in April for the following academic year; faculty closing dates vary (e.g., Veterinary Science may close earlier). Check UP's online application portal and faculty pages for exact intake and closing dates."
+    },
+    {
+      "question": "What are the typical tuition/fee ranges for undergraduate programmes at University of Pretoria (UP)?",
+      "answer": "UP typically opens applications in April for the following academic year; faculty closing dates vary (e.g., Veterinary Science may close earlier). Check UP's online application portal and faculty pages for exact intake and closing dates."
+    },
+    {
+      "question": "How can international students apply to University of Pretoria (UP) and what documents are required?",
+      "answer": "UP typically opens applications in April for the following academic year; faculty closing dates vary (e.g., Veterinary Science may close earlier). Check UP's online application portal and faculty pages for exact intake and closing dates."
+    },
+    {
+      "question": "What accommodation and residence options are available at University of Pretoria (UP)?",
+      "answer": "UP typically opens applications in April for the following academic year; faculty closing dates vary (e.g., Veterinary Science may close earlier). Check UP's online application portal and faculty pages for exact intake and closing dates."
+    },
+    {
+      "question": "What funding, bursary or scholarship options are available for students at University of Pretoria (UP)?",
+      "answer": "UP typically opens applications in April for the following academic year; faculty closing dates vary (e.g., Veterinary Science may close earlier). Check UP's online application portal and faculty pages for exact intake and closing dates."
+    },
+    {
+      "question": "Does University of Pretoria (UP) require English language proficiency tests and what are acceptable proofs?",
+      "answer": "UP typically opens applications in April for the following academic year; faculty closing dates vary (e.g., Veterinary Science may close earlier). Check UP's online application portal and faculty pages for exact intake and closing dates."
+    },
+    {
+      "question": "Are there bridging or access programmes at University of Pretoria (UP) for students who do not meet direct entry requirements?",
+      "answer": "UP typically opens applications in April for the following academic year; faculty closing dates vary (e.g., Veterinary Science may close earlier). Check UP's online application portal and faculty pages for exact intake and closing dates."
+    },
+    {
+      "question": "How are applicants selected at University of Pretoria (UP) (APS/FPS/WPS or other systems)?",
+      "answer": "UP typically opens applications in April for the following academic year; faculty closing dates vary (e.g., Veterinary Science may close earlier). Check UP's online application portal and faculty pages for exact intake and closing dates."
+    },
+    {
+      "question": "How can I contact the admissions office at University of Pretoria (UP) for queries about applications and fees?",
+      "answer": "UP typically opens applications in April for the following academic year; faculty closing dates vary (e.g., Veterinary Science may close earlier). Check UP's online application portal and faculty pages for exact intake and closing dates."
+    },
+    {
+      "question": "What are the main undergraduate intakes and application closing dates for University of South Africa (UNISA)?",
+      "answer": "UNISA is a distance-learning university with rolling module registrations. Module fees are charged per module—check UNISA's website for registration windows and fee schedules."
+    },
+    {
+      "question": "Which faculties or schools does University of South Africa (UNISA) have?",
+      "answer": "UNISA is a distance-learning university with rolling module registrations. Module fees are charged per module—check UNISA's website for registration windows and fee schedules."
+    },
+    {
+      "question": "What are the typical tuition/fee ranges for undergraduate programmes at University of South Africa (UNISA)?",
+      "answer": "UNISA is a distance-learning university with rolling module registrations. Module fees are charged per module—check UNISA's website for registration windows and fee schedules."
+    },
+    {
+      "question": "How can international students apply to University of South Africa (UNISA) and what documents are required?",
+      "answer": "UNISA is a distance-learning university with rolling module registrations. Module fees are charged per module—check UNISA's website for registration windows and fee schedules."
+    },
+    {
+      "question": "What accommodation and residence options are available at University of South Africa (UNISA)?",
+      "answer": "UNISA is a distance-learning university with rolling module registrations. Module fees are charged per module—check UNISA's website for registration windows and fee schedules."
+    },
+    {
+      "question": "What funding, bursary or scholarship options are available for students at University of South Africa (UNISA)?",
+      "answer": "UNISA is a distance-learning university with rolling module registrations. Module fees are charged per module—check UNISA's website for registration windows and fee schedules."
+    },
+    {
+      "question": "Does University of South Africa (UNISA) require English language proficiency tests and what are acceptable proofs?",
+      "answer": "UNISA is a distance-learning university with rolling module registrations. Module fees are charged per module—check UNISA's website for registration windows and fee schedules."
+    },
+    {
+      "question": "Are there bridging or access programmes at University of South Africa (UNISA) for students who do not meet direct entry requirements?",
+      "answer": "UNISA is a distance-learning university with rolling module registrations. Module fees are charged per module—check UNISA's website for registration windows and fee schedules."
+    },
+    {
+      "question": "How are applicants selected at University of South Africa (UNISA) (APS/FPS/WPS or other systems)?",
+      "answer": "UNISA is a distance-learning university with rolling module registrations. Module fees are charged per module—check UNISA's website for registration windows and fee schedules."
+    },
+    {
+      "question": "How can I contact the admissions office at University of South Africa (UNISA) for queries about applications and fees?",
+      "answer": "UNISA is a distance-learning university with rolling module registrations. Module fees are charged per module—check UNISA's website for registration windows and fee schedules."
     }
   ]
 }
