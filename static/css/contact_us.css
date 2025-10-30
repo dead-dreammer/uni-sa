@@ -16,14 +16,15 @@ body.contact-page {
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size: 4rem;
   margin-bottom: 1rem;
   color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .hero p {
   font-size: 1.2rem;
-  color: #f1f1f1;
+  color: #704792;
   max-width: 600px;
   margin: 0 auto;
 }
@@ -52,6 +53,7 @@ body.contact-page {
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
 }
 

@@ -13,12 +13,11 @@
 /* Hero Section */
 .hero-section {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 60px 20px 50px; /* Reduced padding */
+  padding: 60px 50px 40px; 
   text-align: center;
   position: relative;
   overflow: hidden;
   margin-bottom: 50px;
-
 }
 .hero-section::before {
   content: '';
@@ -48,8 +47,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 

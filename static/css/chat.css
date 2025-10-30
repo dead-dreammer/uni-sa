@@ -8,7 +8,7 @@
     height: 60px;
     border-radius: 50%;
     border: none;
-    box-shadow: 0 4px 20px rgb(79, 116, 238);
+    box-shadow: 0 4px 20px rgb(211, 206, 250);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -40,9 +40,9 @@
 }
 
 .chat-button-icon {
-    width: 180px;
+    width: 500px;
     height: 200px;
-    background: url(img/home/ATOM_LOGO.png) no-repeat center/cover;
+    background: url(../img/home/ATOM_LOGO.png) no-repeat center/cover;
     transition: transform 0.3s ease;
 }
 
@@ -55,7 +55,7 @@
     position: absolute;
     top: -5px;
     right: -5px;
-    background: rgba(79, 116, 238);
+    background: rgb(178, 142, 245);
     color: white;
     border-radius: 50%;
     width: 24px;
@@ -115,7 +115,7 @@
 }
 
 .chat-header {
-    background: rgb(79, 116, 238);
+    background: rgb(219, 188, 240);
     color: white;
     padding: 16px 20px;
     display: flex;
@@ -142,7 +142,7 @@
 .header-icon {
     width: 60px;
     height: 60px;
-    background: url(img/home/ATOM_LOGO.png) no-repeat center/cover;
+    background: url(..img/home/ATOM_LOGO.png) no-repeat center/cover;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -230,7 +230,7 @@
 .bot .message-avatar {
     width:100px;
     height:100px;
-    background: url(img/home/ATOM_LOGO.png) no-repeat center/cover;
+    background: url(../img/home/ATOM_LOGO.png) no-repeat center/cover;
     color: white;
 }
 
