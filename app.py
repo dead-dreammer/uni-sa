@@ -1,6 +1,3 @@
-import sys
-sys.stdout.reconfigure(encoding='utf-8')
-
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 from Database.auth import auth
 from Database.search import search
@@ -8,8 +5,6 @@ from Database.backup import backup_database
 from Database.__init__ import db, create_database, create_app
 from Chatbot.bot import chatbot_response
 from Database.backup import backup_database, restore_latest_backup
-import threading
-import webview
 
 app = create_app()
 
@@ -18,6 +13,7 @@ def add_header(response):
     # Prevent caching during development
     response.headers["Cache-Control"] = "no-store"
     return response
+
 
 # --- Routes for template pages ---
 @app.route('/')
@@ -155,19 +151,7 @@ def admin():
 def add_course_page():
     return render_template('Admin/admin.html')
 
-@app.route('/find-matches', methods=['POST'])
-def find_matches():
-    return render_template('Search/matching_page.html')
-
-
-def start_flask():
-    app.run(host='127.0.0.1', port=5000)
-
 
 if __name__ == '__main__':
     # Runs the Flask development server
-    threading.Thread(target=start_flask).start()
-    
-    # Open your app in a native window
-    webview.create_window("uni.sa", "http://127.0.0.1:5000", width=1200, height=800)
-    webview.start()
+    app.run(host="0.0.0.0", port=5000, debug=True, threaded=True)
