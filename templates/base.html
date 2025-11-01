@@ -1,30 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}uni.sa{% endblock %}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='styles.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/chat.css') }}"
-    />
-=======
->>>>>>> 428284546cc945cc617af634d98ccfc7ab2b1d92
 
 <head>
   <meta charset="UTF-8" />
@@ -76,47 +51,6 @@
       </li>
 
       {% if session.get('name') %}
-<<<<<<< HEAD
-      <a href="{{ url_for('personal_info') }}" class="underline0">
-        <i class="fas fa-user user-icon"></i>
-        {{ session.get('name') }}</a
-      >
-      {% endif %}
-      <ul>
-        <li><a href="{{ url_for('home_page') }}" class="underline">Home</a></li>
-        <li><a href="{{ url_for('about') }}" class="underline">About Us</a></li>
-        <li>
-          <a href="{{ url_for('how_it_works') }}" class="underline"
-            >How it Works</a
-          >
-        </li>
-        <li>
-          <a href="{{ url_for('admin') }}" class="underline">Admin</a>
-        </li>
-        <li>
-          <a href="{{ url_for('matching_page') }}" class="underline"
-            >Matching Page</a
-          >
-        </li>
-        <li class="dropdown">
-          <a href="#">Student Tools</a>
-          <ul class="dropdown-content">
-            <li>
-              <a href="{{ url_for('admissions') }}" class="underline"
-                >Admissions Calendar</a
-              >
-            </li>
-            <li>
-              <a href="{{ url_for('bursaries') }}" class="underline"
-                >Bursaries</a
-              >
-            </li>
-          </ul>
-        </li>
-        <li>
-          <a href="{{ url_for('contact') }}" class="underline">Contact Us</a>
-        </li>
-=======
       <li><a href="/#" class="underline" id="logoutBtn">Logout</a></li>
       {% else %}
       <li><a href="{{ url_for('login') }}" class="underline">Login</a></li>
@@ -126,81 +60,9 @@
       </li>
     </ul>
   </nav>
->>>>>>> 428284546cc945cc617af634d98ccfc7ab2b1d92
 
   {% block content %}{% endblock %}
 
-<<<<<<< HEAD
-    {% block content %}{% endblock %}
-
-    <!-- Floating chat button -->
-    <button class="chat-button" id="chatButton">
-      <svg
-        class="chat-button-icon"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-      ></svg>
-      <span class="chat-badge">1</span>
-    </button>
-
-    <!-- Chat widget -->
-    <div class="chat-widget" id="chatWidget">
-      <div class="chat-header">
-        <div class="menu-icon">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="header-icon"></div>
-        <div class="header-title">ATOM</div>
-        <div class="close-icon" id="closeChat">✕</div>
-      </div>
-
-      <div class="chat-messages" id="chatMessages">
-        <div class="timestamp" id="currentTime"></div>
-
-        <div class="welcome-message">
-          <div class="join-notice">
-            <div class="header-icon"></div>
-            <span class="text"
-              ><strong>ATOM Student Advisor</strong> joined •
-              <span id="joinTime"></span
-            ></span>
-          </div>
-
-          <div class="privacy-notice">
-            By continuing, you consent to this chat being monitored, recorded,
-            and stored in accordance with
-            <a href="#" class="privacy-link">ATOM's Privacy Policy</a>.
-          </div>
-
-          <div class="welcome-text">
-            Hello! 👋 I'm ATOM, your student advisor. Ask me about courses,
-            fees, or entry requirements?
-          </div>
-          <ul class="options-list">
-            <li>Get Support</li>
-            <li>Explore Course Information</li>
-            <li>Check Entry Requirements</li>
-            <li>Ask about Fees & Funding</li>
-            <li>Learn about Universities</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="chat-input-container">
-        <input
-          type="text"
-          class="chat-input"
-          id="userInput"
-          placeholder="Type your message..."
-          autocomplete="off"
-        />
-        <button class="send-button" id="sendButton">➤</button>
-      </div>
-=======
   <!-- Floating chat button -->
   <button class="chat-button" id="chatButton">
         <svg class="chat-button-icon" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2">
@@ -219,7 +81,6 @@
       <div class="header-icon"></div>
       <div class="header-title">ATOM</div>
       <div class="close-icon" id="closeChat">✕</div>
->>>>>>> 428284546cc945cc617af634d98ccfc7ab2b1d92
     </div>
 
     <div class="chat-messages" id="chatMessages">
@@ -310,21 +171,4 @@
   <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 </body>
 
-<<<<<<< HEAD
-    {% block scripts %}{% endblock %}
-
-    <!-- Global gradient module (initializes only if #gradient-canvas exists) -->
-    <script
-      type="module"
-      src="{{ url_for('static', filename='js/gradient.js') }}"
-    ></script>
-    <script
-      type="module"
-      src="{{ url_for('static', filename='js/logout.js') }}"
-    ></script>
-    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
-  </body>
 </html>
-=======
-</html>
->>>>>>> 428284546cc945cc617af634d98ccfc7ab2b1d92
