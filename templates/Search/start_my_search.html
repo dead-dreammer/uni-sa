@@ -1,104 +1,130 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block title %}Dashboard | uni.sa{% endblock %} {%
+block head_extras %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/start_search.css') }}"
+/>
+{% endblock %} {% block content %}
+<!-- Main Content -->
+<main class="main-container">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <h1>Dashboard</h1>
+    <p>Manage your university search and matched results</p>
+  </div>
 
-{% block title %}Dashboard | uni.sa{% endblock %}
+  <!-- Dashboard Grid -->
+  <div class="dashboard-grid">
+    <!-- Personal Information Section -->
+    <section class="dashboard-section personal-section">
+      <div class="section-header">
+        <h2>Personal Information and Preferences</h2>
+        <span class="section-icon">🎓</span>
+      </div>
+      <p class="section-description">
+        Update your profile details and preferences to receive better university
+        matches
+      </p>
+      <a href="{{ url_for('personal_info') }}" class="btn btn-primary">Edit </a>
+    </section>
 
-{% block head_extras %}
-  <link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='css/start_search.css') }}"
-  />
-{% endblock %}
-
-{% block content %}
-  <!-- Main Content -->
-  <main class="main-container">
-    <!-- Header -->
-    <div class="dashboard-header">
-      <h1>Dashboard</h1>
-      <p>Manage your university search and matched results</p>
-    </div>
-
-    <!-- Dashboard Grid -->
-    <div class="dashboard-grid">
-      
-      <!-- Personal Information Section -->
-      <section class="dashboard-section personal-section">
-        <div class="section-header">
-          <h2>Personal Information and Preferences</h2>
-          <span class="section-icon">🎓</span>
+    <!-- Reports Section -->
+    <section class="dashboard-section reports-section">
+      <div class="section-header">
+        <h2>Generated Reports</h2>
+        <span class="section-icon">📊</span>
+      </div>
+      <div class="reports-content">
+        <div id="reportsContainer">
+          <p class="empty-state">
+            No reports generated yet. Complete your profile to get started.
+          </p>
         </div>
-        <p class="section-description">Update your profile details and preferences to receive better university matches</p>
-        <a href="{{ url_for('personal_info') }}" class="btn btn-primary">Edit </a>
-      </section>
+      </div>
+    </section>
 
-      <!-- Reports Section -->
-      <section class="dashboard-section reports-section">
-        <div class="section-header">
-          <h2>Generated Reports</h2>
-          <span class="section-icon">📊</span>
-        </div>
-        <div class="reports-content">
-          <div id="reportsContainer">
-            <p class="empty-state">No reports generated yet. Complete your profile to get started.</p>
-          </div>
-        </div>
-      </section>
+    <!-- Matched Universities Section -->
+    <section class="dashboard-section matches-section">
+      <div class="section-header">
+        <h2>Matched Universities</h2>
+        <span class="section-icon">🎯</span>
+      </div>
+      <div id="matchesContainer" class="matches-container">
+        <p class="empty-state">
+          No matches available yet. Complete your profile to discover
+          universities.
+        </p>
+      </div>
+    </section>
 
-      <!-- Matched Universities Section -->
-      <section class="dashboard-section matches-section">
-        <div class="section-header">
-          <h2>Matched Universities</h2>
-          <span class="section-icon">🎯</span>
-        </div>
-        <div id="matchesContainer" class="matches-container">
-          <p class="empty-state">No matches available yet. Complete your profile to discover universities.</p>
-        </div>
-      </section>
+    <!-- Liked Universities Section -->
+    <section class="dashboard-section likes-section">
+      <div class="section-header">
+        <h2>Saved Universities</h2>
+        <span class="section-icon">❤️</span>
+      </div>
+      <div id="likesContainer" class="likes-container">
+        <p class="empty-state">You haven't saved any universities yet.</p>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock %} {% block scripts %}
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
 
-      <!-- Liked Universities Section -->
-      <section class="dashboard-section likes-section">
-        <div class="section-header">
-          <h2>Saved Universities</h2>
-          <span class="section-icon">❤️</span>
-        </div>
-        <div id="likesContainer" class="likes-container">
-          <p class="empty-state">You haven't saved any universities yet.</p>
-        </div>
-      </section>
+<script>
+  // Sample data structure
+  const userData = {
+    reports: [
+      { id: 1, title: "Profile Assessment Report", date: "Nov 15, 2024" },
+      { id: 2, title: "University Ranking Analysis", date: "Nov 20, 2024" },
+    ],
+    matches: [
+      {
+        id: 1,
+        name: "University of Cape Town",
+        province: "Western Cape",
+        ranking: 1,
+        matched: true,
+      },
+      {
+        id: 2,
+        name: "University of the Witwatersrand",
+        province: "Gauteng",
+        ranking: 2,
+        matched: true,
+      },
+      {
+        id: 3,
+        name: "Stellenbosch University",
+        province: "Western Cape",
+        ranking: 3,
+        matched: true,
+      },
+      {
+        id: 4,
+        name: "University of Pretoria",
+        province: "Gauteng",
+        ranking: 4,
+        matched: true,
+      },
+    ],
+    likes: [
+      { id: 1, name: "University of Cape Town", province: "Western Cape" },
+    ],
+  };
 
-    </div>
-  </main>
-{% endblock %}
-
-{% block scripts %}
-  <script src="{{ url_for('static', filename='js/search.js') }}"></script>
-
-  <script>
-    // Sample data structure
-    const userData = {
-      reports: [
-        { id: 1, title: 'Profile Assessment Report', date: 'Nov 15, 2024' },
-        { id: 2, title: 'University Ranking Analysis', date: 'Nov 20, 2024' }
-      ],
-      matches: [
-        { id: 1, name: 'University of Cape Town', province: 'Western Cape', ranking: 1, matched: true },
-        { id: 2, name: 'University of the Witwatersrand', province: 'Gauteng', ranking: 2, matched: true },
-        { id: 3, name: 'Stellenbosch University', province: 'Western Cape', ranking: 3, matched: true },
-        { id: 4, name: 'University of Pretoria', province: 'Gauteng', ranking: 4, matched: true }
-      ],
-      likes: [
-        { id: 1, name: 'University of Cape Town', province: 'Western Cape' }
-      ]
-    };
-
-    // Render Reports
-    function renderReports() {
-      const container = document.getElementById('reportsContainer');
-      if (userData.reports.length === 0) {
-        container.innerHTML = '<p class="empty-state">No reports generated yet. Complete your profile to get started.</p>';
-        return;
-      }
-      container.innerHTML = userData.reports.map(report => `
+  // Render Reports
+  function renderReports() {
+    const container = document.getElementById("reportsContainer");
+    if (userData.reports.length === 0) {
+      container.innerHTML =
+        '<p class="empty-state">No reports generated yet. Complete your profile to get started.</p>';
+      return;
+    }
+    container.innerHTML = userData.reports
+      .map(
+        (report) => `
         <div class="report-item">
           <div class="report-info">
             <h4>${report.title}</h4>
@@ -106,17 +132,22 @@
           </div>
           <a href="#" class="btn btn-small btn-secondary">Download</a>
         </div>
-      `).join('');
-    }
+      `
+      )
+      .join("");
+  }
 
-    // Render Matched Universities
-    function renderMatches() {
-      const container = document.getElementById('matchesContainer');
-      if (userData.matches.length === 0) {
-        container.innerHTML = '<p class="empty-state">No matches available yet. Complete your profile to discover universities.</p>';
-        return;
-      }
-      container.innerHTML = userData.matches.map(uni => `
+  // Render Matched Universities
+  function renderMatches() {
+    const container = document.getElementById("matchesContainer");
+    if (userData.matches.length === 0) {
+      container.innerHTML =
+        '<p class="empty-state">No matches available yet. Complete your profile to discover universities.</p>';
+      return;
+    }
+    container.innerHTML = userData.matches
+      .map(
+        (uni) => `
         <div class="match-item">
           <div class="match-info">
             <h4>${uni.name}</h4>
@@ -126,17 +157,22 @@
             <span class="heart">♡</span>
           </button>
         </div>
-      `).join('');
-    }
+      `
+      )
+      .join("");
+  }
 
-    // Render Liked Universities
-    function renderLikes() {
-      const container = document.getElementById('likesContainer');
-      if (userData.likes.length === 0) {
-        container.innerHTML = '<p class="empty-state">You haven\'t saved any universities yet.</p>';
-        return;
-      }
-      container.innerHTML = userData.likes.map((uni, index) => `
+  // Render Liked Universities
+  function renderLikes() {
+    const container = document.getElementById("likesContainer");
+    if (userData.likes.length === 0) {
+      container.innerHTML =
+        '<p class="empty-state">You haven\'t saved any universities yet.</p>';
+      return;
+    }
+    container.innerHTML = userData.likes
+      .map(
+        (uni, index) => `
         <div class="like-item">
           <div class="like-info">
             <h4>${uni.name}</h4>
@@ -146,28 +182,30 @@
             ✕
           </button>
         </div>
-      `).join('');
-    }
+      `
+      )
+      .join("");
+  }
 
-    // Add to Likes
-    function addToLikes(id, name, province) {
-      const alreadyLiked = userData.likes.some(uni => uni.id === id);
-      if (!alreadyLiked) {
-        userData.likes.push({ id, name, province });
-        renderLikes();
-        renderMatches();
-      }
-    }
-
-    // Remove from Likes
-    function removeFromLikes(index) {
-      userData.likes.splice(index, 1);
+  // Add to Likes
+  function addToLikes(id, name, province) {
+    const alreadyLiked = userData.likes.some((uni) => uni.id === id);
+    if (!alreadyLiked) {
+      userData.likes.push({ id, name, province });
       renderLikes();
+      renderMatches();
     }
+  }
 
-    // Initialize
-    renderReports();
-    renderMatches();
+  // Remove from Likes
+  function removeFromLikes(index) {
+    userData.likes.splice(index, 1);
     renderLikes();
-  </script>
+  }
+
+  // Initialize
+  renderReports();
+  renderMatches();
+  renderLikes();
+</script>
 {% endblock %}

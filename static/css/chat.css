@@ -8,7 +8,7 @@
     height: 60px;
     border-radius: 50%;
     border: none;
-    box-shadow: 0 4px 20px rgb(211, 206, 250);
+    box-shadow: 0 4px 20px #b28ef5;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -55,7 +55,7 @@
     position: absolute;
     top: -5px;
     right: -5px;
-    background: rgb(178, 142, 245);
+    background: #b28ef5;
     color: white;
     border-radius: 50%;
     width: 24px;
@@ -188,7 +188,7 @@
 
 .message {
     display: flex;
-    gap: 12px;
+    gap: 1px;
     animation: fadeIn 0.3s ease-in;
 }
 
@@ -235,7 +235,7 @@
 }
 
 .user .message-avatar {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    background: linear-gradient(135deg, #733bf6 0%, #77c7f5 100%);
     color: white;
 }
 
@@ -249,7 +249,7 @@
 }
 
 .bot .message-content {
-    background: rgb(79, 116, 238);
+    background: rgb(185, 142, 226);
     border-bottom-left-radius: 4px;
     color:white;
 }
