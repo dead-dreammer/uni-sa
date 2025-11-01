@@ -3,14 +3,14 @@
 {% block title %}Your Course Matches | uni.sa{% endblock %}
 
 {% block head_extras %}
-
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/matches.css') }}">
+  <script src="{{ url_for('static', filename='js/matches.js') }}" defer></script>
 {% endblock %}
 
 {% block content %}
 <div class="matches-wrapper">
-  
+
   <!-- Step Forward Section -->
   <div class="step-forward-section">
     <div class="container">
@@ -18,15 +18,16 @@
       
       <div class="profile-summary">
         <p class="profile-text">
-          <strong>Your Profile:</strong> This report has been generated based on your average grades, interest in Economics, Accounting, and Law, and location in Phoenix, KZN.
+          <strong>Your Profile:</strong> This report has been generated based on your academic performance
+          {% if preferences and preferences.focus_area %}, interest in {{ preferences.focus_area }}{% endif %}, and location in {{ preferences.location }}.
         </p>
         
         <p class="budget-status">
-          <strong>Budget Status:</strong> Self-Funded (No NSFAS)
+          <strong>Budget Status:</strong> {% if preferences and preferences.nsfas %}NSFAS Eligible{% else %}Self-Funded (No NSFAS){% endif %}
         </p>
         
         <p class="found-matches">
-          We Found: <strong>3 realistic options</strong> that match your profile.
+          We Found: <strong>{{ matches|length }} matching option{{ matches|length > 1 and 's' or '' }}</strong> that fit your profile.
         </p>
       </div>
     </div>
@@ -37,73 +38,75 @@
     <div class="container">
       <h2 class="section-title">Your Top Options</h2>
       
-      <!-- Course Counter -->
       <div class="course-counter">
-        Course <span id="currentCourse">1</span> of <span id="totalCourses">3</span>
+        Course <span id="currentCourse">1</span> of <span id="totalCourses">{{ matches|length }}</span>
       </div>
 
-      <!-- Course Navigation Container -->
       <div class="course-navigation">
-        <!-- Previous Button -->
         <button class="nav-button prev" id="prevBtn" disabled>‹</button>
-        
-        <!-- Next Button -->
         <button class="nav-button next" id="nextBtn">›</button>
 
-        <!-- Option 1 - Coastal TVET -->
-        <div class="option-card active" data-course-id="coastal-tvet">
+        {% for match in matches %}
+        <div class="option-card {% if loop.first %}active{% endif %}" data-course-id="{{ match.program.program_id }}">
+          
           <!-- Like Button -->
-          <button class="like-button" data-course-name="Coastal KZN TVET College - Finance, Economics, & Accounting">
-            ♡
-          </button>
+          <button class="like-button" data-course-name="{{ match.university.name }} - {{ match.program.program_name }}">♡</button>
 
           <div class="card-header">
             <div class="header-left">
-              <h3 class="institution-name">Coastal KZN TVET College</h3>
-              <p class="course-name">National Certificate (Vocational) in Finance, Economics, & Accounting</p>
+              <h3 class="institution-name">{{ match.university.name }}</h3>
+              <p class="course-name">{{ match.program.program_name }}</p>
             </div>
-            <span class="match-badge strong">Strong Match</span>
+            <span class="match-badge {% if match.match_score >= 90 %}strong{% elif match.match_score >= 70 %}good{% else %}moderate{% endif %}">
+              {% if match.match_score >= 90 %}Strong Match
+              {% elif match.match_score >= 70 %}Good Match
+              {% else %}Moderate Match{% endif %}
+            </span>
           </div>
-          
+
           <div class="card-body">
             <div class="info-grid">
               <div class="info-item">
                 <span class="info-label">Location:</span>
-                <span class="info-value">Verulam Campus (8km from Phoenix)</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Cost:</span>
-                <span class="info-value">R5,000 - R8,000/year</span>
+                <span class="info-value">{{ match.program.location }}</span>
               </div>
               <div class="info-item">
                 <span class="info-label">Duration:</span>
-                <span class="info-value">3 years (NCV Levels 2-4)</span>
+                <span class="info-value">{{ match.program.duration_years }} years</span>
               </div>
               <div class="info-item">
                 <span class="info-label">Mode:</span>
-                <span class="info-value">Full-time Contact</span>
+                <span class="info-value">{{ match.program.study_mode }}</span>
               </div>
             </div>
-            
+
             <div class="highlights">
+              {% for req in match.program.requirements %}
+                {% set grade = marks.get(req.required_subject, 0) %}
+                <div class="highlight-item {% if grade >= req.min_grade_percentage %}success{% else %}warning{% endif %}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  {{ req.required_subject }}: {{ grade|round|int }}% (Required: {{ req.min_grade_percentage|round|int }}%)
+                </div>
+              {% endfor %}
+
+              {% if preferences and not preferences.relocate and match.university.province_state == preferences.location %}
               <div class="highlight-item success">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                You qualify with your average grades!
+                Located in your preferred area
               </div>
-              <div class="highlight-item success">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                Very close to home - easy commute
-              </div>
+              {% endif %}
+
               <div class="highlight-item success">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
                 Affordable fees - within most budgets
               </div>
+
               <div class="highlight-item success">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <polyline points="20 6 9 17 4 12"></polyline>
@@ -111,398 +114,83 @@
                 Can progress to diploma or degree later
               </div>
             </div>
-            
+
+            {% if match.program.career_path %}
             <div class="career-path">
-              <strong>Career Path:</strong> Bookkeeper, Accounting Clerk, Junior Accountant, Financial Administrator
+              <strong>Career Path:</strong> {{ match.program.career_path }}
             </div>
-            
+            {% endif %}
+
+            {% if match.program.contact_info %}
             <div class="contact-info">
-              <span>031-xxx-xxxx</span>
-              <span>info@coastalkzn.co.za</span>
-              <span>www.coastalkzn.co.za</span>
-              <span class="deadline">Apply by: 30 October 2025</span>
+              {% for info in match.program.contact_info %}
+                <span>{{ info }}</span>
+              {% endfor %}
             </div>
+            {% endif %}
+
           </div>
         </div>
-
-        <!-- Option 2 - DUT -->
-        <div class="option-card" data-course-id="dut-accounting">
-          <!-- Like Button -->
-          <button class="like-button" data-course-name="Durban University of Technology - National Diploma in Accounting">
-            ♡
-          </button>
-
-          <div class="card-header">
-            <div class="header-left">
-              <h3 class="institution-name">Durban University of Technology (DUT)</h3>
-              <p class="course-name">National Diploma in Accounting</p>
-            </div>
-            <span class="match-badge strong">Strong Match</span>
-          </div>
-          
-          <div class="card-body">
-            <div class="info-grid">
-              <div class="info-item">
-                <span class="info-label">Location:</span>
-                <span class="info-value">ML Sultan Campus, Durban (18 km from Phoenix)</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Cost:</span>
-                <span class="info-value">R35,000 - R42,000/year</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Duration:</span>
-                <span class="info-value">3 years</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Mode:</span>
-                <span class="info-value">Full-time Contact</span>
-              </div>
-            </div>
-            
-            <div class="highlights">
-              <div class="highlight-item warning">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                  <line x1="12" y1="9" x2="12" y2="13"></line>
-                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                </svg>
-                Diploma pass or higher recommended (check minimum APS)
-              </div>
-              <div class="highlight-item success">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                Mathematics or Maths Literacy required
-              </div>
-              <div class="highlight-item warning">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                  <line x1="12" y1="9" x2="12" y2="13"></line>
-                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                </svg>
-                Higher fees - consider payment plans or bursaries
-              </div>
-              <div class="highlight-item success">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                Well-recognized diploma with strong career prospects
-              </div>
-            </div>
-            
-            <div class="career-path">
-              <strong>Career Path:</strong> Junior Accountant, Management Accountant, Cost Accountant, Bookkeeper, Auditor (with further studies)
-            </div>
-            
-            <div class="contact-info">
-              <span>031-xxx-xxxx</span>
-              <span>admissions@dut.ac.za</span>
-              <span>www.dut.ac.za</span>
-              <span class="deadline">Apply by: 30 September 2025</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Option 3 - INTEC -->
-        <div class="option-card" data-course-id="intec-bookkeeping">
-          <!-- Like Button -->
-          <button class="like-button" data-course-name="INTEC College - Diploma in Bookkeeping & Accounting">
-            ♡
-          </button>
-
-          <div class="card-header">
-            <div class="header-left">
-              <h3 class="institution-name">INTEC College (Distance Learning)</h3>
-              <p class="course-name">Diploma in Bookkeeping & Accounting</p>
-            </div>
-            <span class="match-badge good">Good Match</span>
-          </div>
-          
-          <div class="card-body">
-            <div class="info-grid">
-              <div class="info-item">
-                <span class="info-label">Location:</span>
-                <span class="info-value">Online/Distance from home</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Cost:</span>
-                <span class="info-value">R18,000 - R25,000/year</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Duration:</span>
-                <span class="info-value">18-24 months (self-paced)</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Mode:</span>
-                <span class="info-value">Distance/Online</span>
-              </div>
-            </div>
-            
-            <div class="highlights">
-              <div class="highlight-item success">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                You qualify with your average grades!
-              </div>
-              <div class="highlight-item success">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                Study from home - no travel costs
-              </div>
-              <div class="highlight-item success">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                Affordable fees - pay monthly installments
-              </div>
-              <div class="highlight-item warning">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                  <line x1="12" y1="9" x2="12" y2="13"></line>
-                  <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                </svg>
-                Self-discipline required for distance learning
-              </div>
-            </div>
-            
-            <div class="career-path">
-              <strong>Career Path:</strong> Bookkeeper, Accounting Clerk, Payroll Administrator
-            </div>
-            
-            <div class="contact-info">
-              <span>031-xxx-xxxx</span>
-              <span>info@intec.co.za</span>
-              <span>www.intec.co.za</span>
-              <span class="deadline">Apply by: Anytime (rolling admissions)</span>
-            </div>
-          </div>
-        </div>
-
+        {% endfor %}
       </div>
 
     </div>
   </div>
-
-  <!-- Quick Comparison Section -->
-  <div class="comparison-section">
-    <div class="container">
-      <h2 class="section-title">Quick Comparison</h2>
-      
-      <div class="comparison-table-wrapper">
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Coastal TVET</th>
-              <th>DUT</th>
-              <th>INTEC Distance</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="row-label">Cost/year</td>
-              <td>R5,000-R8,000</td>
-              <td>R35,000-R42,000</td>
-              <td>R18,000 total</td>
-            </tr>
-            <tr>
-              <td class="row-label">Duration</td>
-              <td>3 years</td>
-              <td>3 years</td>
-              <td>18-24 months</td>
-            </tr>
-            <tr>
-              <td class="row-label">Distance</td>
-              <td>8km</td>
-              <td>18km</td>
-              <td>Study from home</td>
-            </tr>
-            <tr>
-              <td class="row-label">Entry Level</td>
-              <td>Grade 9+</td>
-              <td>Diploma Pass</td>
-              <td>Grade 12</td>
-            </tr>
-            <tr>
-              <td class="row-label">Recognition</td>
-              <td>QCTO Certified</td>
-              <td>CHE Accredited</td>
-              <td>Industry Recognized</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-
 
 </div>
 {% endblock %}
 
 {% block scripts %}
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    let currentIndex = 0;
-    const cards = document.querySelectorAll('.option-card');
-    const totalCourses = cards.length;
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const currentCourseSpan = document.getElementById('currentCourse');
-    const totalCoursesSpan = document.getElementById('totalCourses');
-    const likeButtons = document.querySelectorAll('.like-button');
-    
-    // Store liked courses
-    let likedCourses = JSON.parse(localStorage.getItem('likedCourses') || '[]');
-    
-    // Update total courses display
-    totalCoursesSpan.textContent = totalCourses;
-    
-    // Function to show specific card
-    function showCard(index) {
-      cards.forEach((card, i) => {
-        card.classList.remove('active');
-        if (i === index) {
-          card.classList.add('active');
-        }
-      });
-      
-      currentCourseSpan.textContent = index + 1;
-      
-      // Update button states
-      prevBtn.disabled = index === 0;
-      nextBtn.disabled = index === totalCourses - 1;
-      
-      // Scroll to top of card
-      cards[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+document.addEventListener('DOMContentLoaded', function() {
+  let currentIndex = 0;
+  const cards = document.querySelectorAll('.option-card');
+  const totalCourses = cards.length;
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const currentCourseSpan = document.getElementById('currentCourse');
+  const totalCoursesSpan = document.getElementById('totalCourses');
+  const likeButtons = document.querySelectorAll('.like-button');
+  
+  let likedCourses = JSON.parse(localStorage.getItem('likedCourses') || '[]');
+  totalCoursesSpan.textContent = totalCourses;
+  
+  function showCard(index) {
+    cards.forEach((card, i) => card.classList.toggle('active', i === index));
+    currentCourseSpan.textContent = index + 1;
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === totalCourses - 1;
+    cards[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  prevBtn.addEventListener('click', () => { if(currentIndex>0){currentIndex--;showCard(currentIndex);} });
+  nextBtn.addEventListener('click', () => { if(currentIndex<totalCourses-1){currentIndex++;showCard(currentIndex);} });
+
+  likeButtons.forEach((btn, index) => {
+    const courseName = btn.getAttribute('data-course-name');
+    const courseId = cards[index].getAttribute('data-course-id');
+
+    if (likedCourses.some(course => course.id === courseId)) {
+      btn.classList.add('liked'); btn.textContent = '♥';
     }
-    
-    // Previous button
-    prevBtn.addEventListener('click', function() {
-      if (currentIndex > 0) {
-        currentIndex--;
-        showCard(currentIndex);
+
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if(btn.classList.contains('liked')) {
+        btn.classList.remove('liked'); btn.textContent='♡';
+        likedCourses = likedCourses.filter(c=>c.id!==courseId);
+      } else {
+        btn.classList.add('liked'); btn.textContent='♥';
+        likedCourses.push({id:courseId,name:courseName,timestamp:new Date().toISOString()});
       }
+      localStorage.setItem('likedCourses', JSON.stringify(likedCourses));
     });
-    
-    // Next button
-    nextBtn.addEventListener('click', function() {
-      if (currentIndex < totalCourses - 1) {
-        currentIndex++;
-        showCard(currentIndex);
-      }
-    });
-    
-    // Like button functionality
-    likeButtons.forEach((btn, index) => {
-      const courseName = btn.getAttribute('data-course-name');
-      const courseId = cards[index].getAttribute('data-course-id');
-      
-      // Check if already liked
-      if (likedCourses.some(course => course.id === courseId)) {
-        btn.classList.add('liked');
-        btn.textContent = '♥';
-      }
-      
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        
-        if (btn.classList.contains('liked')) {
-          // Unlike
-          btn.classList.remove('liked');
-          btn.textContent = '♡';
-          likedCourses = likedCourses.filter(course => course.id !== courseId);
-        } else {
-          // Like
-          btn.classList.add('liked');
-          btn.textContent = '♥';
-          likedCourses.push({
-            id: courseId,
-            name: courseName,
-            timestamp: new Date().toISOString()
-          });
-        }
-        
-        // Save to localStorage
-        localStorage.setItem('likedCourses', JSON.stringify(likedCourses));
-        
-        // Show feedback
-        showLikeFeedback(btn.classList.contains('liked'));
-      });
-    });
-    
-    // Show like feedback
-    function showLikeFeedback(isLiked) {
-      const feedback = document.createElement('div');
-      feedback.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${isLiked ? '#10B981' : '#EF4444'};
-        color: white;
-        padding: 12px 24px;
-        border-radius: 8px;
-        font-weight: 600;
-        z-index: 1000;
-        animation: slideIn 0.3s ease-out;
-      `;
-      feedback.textContent = isLiked ? 'Course saved! ♥' : 'Course removed';
-      document.body.appendChild(feedback);
-      
-      setTimeout(() => {
-        feedback.style.animation = 'slideOut 0.3s ease-in';
-        setTimeout(() => feedback.remove(), 300);
-      }, 2000);
-    }
-    
-    // Add CSS animations
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes slideIn {
-        from {
-          transform: translateX(100%);
-          opacity: 0;
-        }
-        to {
-          transform: translateX(0);
-          opacity: 1;
-        }
-      }
-      @keyframes slideOut {
-        from {
-          transform: translateX(0);
-          opacity: 1;
-        }
-        to {
-          transform: translateX(100%);
-          opacity: 0;
-        }
-      }
-    `;
-    document.head.appendChild(style);
-    
-    // Keyboard navigation
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'ArrowLeft' && currentIndex > 0) {
-        currentIndex--;
-        showCard(currentIndex);
-      } else if (e.key === 'ArrowRight' && currentIndex < totalCourses - 1) {
-        currentIndex++;
-        showCard(currentIndex);
-      }
-    });
-    
-    // Smooth scroll to top
-    const backToTop = document.querySelector('.back-to-top');
-    if (backToTop) {
-      backToTop.addEventListener('click', function(e) {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    }
   });
+
+  document.addEventListener('keydown', e => {
+    if(e.key==='ArrowLeft' && currentIndex>0){currentIndex--;showCard(currentIndex);}
+    else if(e.key==='ArrowRight' && currentIndex<totalCourses-1){currentIndex++;showCard(currentIndex);}
+  });
+});
 </script>
 {% endblock %}

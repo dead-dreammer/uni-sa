@@ -1,31 +1,27 @@
-
 const canvas = document.getElementById('atomCanvas');
 const ctx = canvas.getContext('2d');
-canvas.width = canvas.parentElement.offsetWidth;
-canvas.height = canvas.parentElement.offsetHeight;
 
-const centerX = canvas.width/2;
-const centerY = canvas.height/2;
+// Fixed size matching your container
+canvas.width = 320;
+canvas.height = 320;
+
+let centerX = canvas.width / 2;
+let centerY = canvas.height / 2;
 
 // ---------- Atom Settings ----------
 const nucleusRadius = 20;
 
-// Solid orbit rings with rotation speeds
 const rings = [
     { electrons: 2, radius: 80, color: '#6ec3f4', angleX: 0, angleY: 0, speedX: 0.004, speedY: 0.006 },
     { electrons: 2, radius: 120, color: '#eae2ff', angleX: 0, angleY: 0, speedX: 0.003, speedY: -0.005 },
-    { electrons: 1, radius: 160, color: '#b9beff', angleX: 0, angleY: 0, speedX: 0.005, speedY: 0.004 } // moving ring
+    { electrons: 1, radius: 160, color: '#b9beff', angleX: 0, angleY: 0, speedX: 0.005, speedY: 0.004 }
 ];
 
 let electrons = [];
 
-// Assign electrons to rings
 rings.forEach(ring => {
-    for(let i=0; i<ring.electrons; i++){
-        electrons.push({
-            ring: ring,
-            angle: (2*Math.PI / ring.electrons) * i,
-        });
+    for (let i = 0; i < ring.electrons; i++) {
+        electrons.push({ ring: ring, angle: (2 * Math.PI / ring.electrons) * i });
     }
 });
 
@@ -49,6 +45,7 @@ window.addEventListener('mousemove', e => {
         previousY = e.clientY;
     }
 });
+
 
 // ---------- Draw Functions ----------
 function drawRing(ring){
@@ -138,8 +135,4 @@ function animate(){
 
 animate();
 
-// ---------- Responsive ----------
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-});
+
