@@ -1,13 +1,108 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block title %}Dashboard | uni.sa{% endblock %} {%
+block head_extras %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/start_search.css') }}"
+/>
+<link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+{% endblock %} {% block content %}
+<!-- Main Content -->
+<main class="main-container">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <h1>Your Dashboard</h1>
+    <p>Manage your university search and track your journey</p>
+  </div>
 
-{% block title %}Dashboard | uni.sa{% endblock %}
+  <!-- Dashboard Grid -->
+  <div class="dashboard-grid">
+    <!-- Personal Information Section -->
+    <section class="dashboard-section personal-section">
+      <div class="section-icon-badge">🎓</div>
+      <div class="section-header">
+        <h2>Personal Information</h2>
+      </div>
+      <p class="section-description">
+        Update your profile details and preferences to receive better university
+        matches
+      </p>
+      <a href="{{ url_for('personal_info') }}" class="btn btn-primary">
+        <span>Edit Profile</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path
+            d="M6 12L10 8L6 4"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
+    </section>
 
-{% block head_extras %}
-  <link
-    rel="stylesheet"
-    href="{{ url_for('static', filename='css/start_search.css') }}"
-  />
+    <!-- Reports Section -->
+    <section class="dashboard-section reports-section">
+      <div class="section-icon-badge">📊</div>
+      <div class="section-header">
+        <h2>Generated Reports</h2>
+      </div>
+      <div class="reports-content">
+        <div id="reportsContainer">
+          <div class="empty-state">
+            <div class="empty-icon">📄</div>
+            <p>No reports generated yet</p>
+            <span class="empty-subtext"
+              >Complete your profile to get started</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Matched Universities Section -->
+    <section class="dashboard-section matches-section full-width">
+      <div class="section-icon-badge">🎯</div>
+      <div class="section-header">
+        <h2>Matched Universities</h2>
+        <span class="badge" id="matchesBadge">0 matches</span>
+      </div>
+      <div id="matchesContainer" class="matches-container">
+        <div class="empty-state">
+          <div class="empty-icon">🔍</div>
+          <p>No matches available yet</p>
+          <span class="empty-subtext"
+            >Complete your profile to discover universities</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Liked Universities Section -->
+    <section class="dashboard-section likes-section full-width">
+      <div class="section-icon-badge">❤️</div>
+      <div class="section-header">
+        <h2>Saved Universities</h2>
+        <span class="badge" id="likesBadge">0 saved</span>
+      </div>
+      <div id="likesContainer" class="likes-container">
+        <div class="empty-state">
+          <div class="empty-icon">💾</div>
+          <p>You haven't saved any universities yet</p>
+          <span class="empty-subtext"
+            >Click the heart icon to save your favorites</span
+          >
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock %} {% block scripts %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 {% endblock %}
+<<<<<<< HEAD
 
 {% block content %}
   <!-- Main Content -->
@@ -203,3 +298,5 @@
     renderLikes();
   </script>
 {% endblock %}
+=======
+>>>>>>> 7ce0ef82eb1c97a3d4079c9cabbb4324d7c9345d

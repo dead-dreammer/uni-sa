@@ -16,6 +16,10 @@
   position: relative;
   overflow: hidden;
   margin-bottom: 50px;
+  margin-top: -40px;
+    margin-left: -40px; /* Remove left margin */
+  margin-right: -20px; /* Remove right margin */
+  width: calc(100% + 40px); /* Extend full width */
 }
 
 .hero-section::before {
