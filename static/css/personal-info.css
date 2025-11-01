@@ -118,7 +118,7 @@
 }
 
 .question-number {
-    background: #556ee6;
+    background: #b170d6;
     color: #fff;
     font-weight: 700;
     padding: 0.5rem 1rem;
@@ -173,13 +173,14 @@
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  -webkit-user-select: none;
   user-select: none;
 }
 
 #preferred_degree_group input[type="checkbox"] {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
   width: 18px;
   height: 18px;
   border: 2px solid #556ee6;
@@ -395,4 +396,27 @@ textarea:focus {
         width: 100%;
         justify-content: center;
     }
+}
+
+.btn-remove-subject {
+    background: #e74c3c;       /* Red background */
+    color: #fff;               /* White X */
+    border: none;              /* No border */
+    border-radius: 50%;        /* Circular shape */
+    width: 28px;               /* Button width */
+    height: 28px;              /* Button height */
+    font-size: 16px;           /* X size */
+    font-weight: bold;         /* Bold X */
+    display: flex;
+    align-items: center;       /* Center vertically */
+    justify-content: center;   /* Center horizontally */
+    cursor: pointer;           /* Pointer cursor */
+    transition: all 0.2s ease; /* Smooth hover effect */
+    margin-left: 8px;          /* Space from input */
+    margin-top: 2rem;
+}
+
+.btn-remove-subject:hover {
+    background: #c0392b;       /* Darker red on hover */
+    transform: scale(1.1);     /* Slight zoom on hover */
 }

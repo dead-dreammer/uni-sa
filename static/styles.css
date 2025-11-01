@@ -1491,10 +1491,21 @@ footer {
 }
 
 
+.underline0{
+  text-decoration: none;
+  color: rgb(247, 247, 247);
+  font: Montserrat, sans-serif;
+  font-weight: 400;
+  text-shadow: 1px 1px 2px #8872af;
+}
 
-
-
-
+.user-icon {
+  font-size: 24px;      /* size of the icon */
+  color: #ffffff;       /* icon color */
+  margin-right: 0.5rem; /* space between icon and username */
+  margin-bottom: 3px;;
+  vertical-align: middle; /* aligns icon with text */
+}
 
 
 

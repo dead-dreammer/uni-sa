@@ -7,6 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
@@ -16,7 +20,8 @@
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/chat.css') }}">
+      href="{{ url_for('static', filename='css/chat.css') }}"
+    />
 
     {% block head_extras %}{% endblock %}
   </head>
@@ -30,8 +35,9 @@
           alt="uni.sa"
       /></a>
       {% if session.get('name') %}
-      <a href="/personal-info" class="underline0"
-        >{{ session.get('name') }}</a
+      <a href="{{ url_for('personal_info') }}" class="underline0">
+        <i class="fas fa-user user-icon"></i>
+        {{ session.get('name') }}</a
       >
       {% endif %}
       <ul>
@@ -43,11 +49,9 @@
           >
         </li>
         <li>
-          <a href="{{ url_for('admin') }}" class="underline"
-            >Admin</a
-          >
+          <a href="{{ url_for('admin') }}" class="underline">Admin</a>
         </li>
-         <li>
+        <li>
           <a href="{{ url_for('matching_page') }}" class="underline"
             >Matching Page</a
           >
@@ -86,65 +90,73 @@
 
     {% block content %}{% endblock %}
 
-        <!-- Floating chat button -->
+    <!-- Floating chat button -->
     <button class="chat-button" id="chatButton">
-        <svg class="chat-button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        
-        </svg>
-        <span class="chat-badge">1</span>
+      <svg
+        class="chat-button-icon"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      ></svg>
+      <span class="chat-badge">1</span>
     </button>
 
     <!-- Chat widget -->
     <div class="chat-widget" id="chatWidget">
-        <div class="chat-header">
-            <div class="menu-icon">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+      <div class="chat-header">
+        <div class="menu-icon">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="header-icon"></div>
+        <div class="header-title">ATOM</div>
+        <div class="close-icon" id="closeChat">✕</div>
+      </div>
+
+      <div class="chat-messages" id="chatMessages">
+        <div class="timestamp" id="currentTime"></div>
+
+        <div class="welcome-message">
+          <div class="join-notice">
             <div class="header-icon"></div>
-            <div class="header-title">ATOM</div>
-            <div class="close-icon" id="closeChat">✕</div>
-        </div>
+            <span class="text"
+              ><strong>ATOM Student Advisor</strong> joined •
+              <span id="joinTime"></span
+            ></span>
+          </div>
 
-        <div class="chat-messages" id="chatMessages">
-            <div class="timestamp" id="currentTime"></div>
-            
-            <div class="welcome-message">
-                <div class="join-notice">
-                    <div class="header-icon" style="width: 60px; height: 60px;"></div>
-                    <span><strong>ATOM Student Advisor</strong> joined • <span id="joinTime"></span></span>
-                </div>
-                
-                <div class="privacy-notice">
-                    By continuing, you consent to this chat being monitored, recorded, and stored in accordance with <a href="#" class="privacy-link">ATOM's Privacy Policy</a>.
-                </div>
-                
-                <div class="welcome-text">
-                    Hello! 👋 I'm ATOM, your student advisor. Ask me about courses, fees, or entry requirements?
-                </div>
-                <ul class="options-list">
-                    <li>Get Support</li>
-                    <li>Explore Course Information</li>
-                    <li>Check Entry Requirements</li>
-                    <li>Ask about Fees & Funding</li>
-                    <li>Learn about Universities</li>
-                </ul>
-            </div>
-        </div>
+          <div class="privacy-notice">
+            By continuing, you consent to this chat being monitored, recorded,
+            and stored in accordance with
+            <a href="#" class="privacy-link">ATOM's Privacy Policy</a>.
+          </div>
 
-        <div class="chat-input-container">
-            <input 
-                type="text" 
-                class="chat-input" 
-                id="userInput" 
-                placeholder="Type your message..."
-                autocomplete="off"
-            >
-            <button class="send-button" id="sendButton">
-                ➤
-            </button>
+          <div class="welcome-text">
+            Hello! 👋 I'm ATOM, your student advisor. Ask me about courses,
+            fees, or entry requirements?
+          </div>
+          <ul class="options-list">
+            <li>Get Support</li>
+            <li>Explore Course Information</li>
+            <li>Check Entry Requirements</li>
+            <li>Ask about Fees & Funding</li>
+            <li>Learn about Universities</li>
+          </ul>
         </div>
+      </div>
+
+      <div class="chat-input-container">
+        <input
+          type="text"
+          class="chat-input"
+          id="userInput"
+          placeholder="Type your message..."
+          autocomplete="off"
+        />
+        <button class="send-button" id="sendButton">➤</button>
+      </div>
     </div>
 
     <footer>
@@ -194,6 +206,7 @@
     </footer>
 
     {% block scripts %}{% endblock %}
+
     <!-- Global gradient module (initializes only if #gradient-canvas exists) -->
     <script
       type="module"
