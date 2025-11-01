@@ -21,7 +21,10 @@
     <a href="{{ url_for('home_page') }}"><img class="logo"
         src="{{ url_for('static', filename='img/atom-removebg-preview.png') }}" alt="uni.sa" /></a>
     {% if session.get('name') %}
-    <a href="/personal-info" class="underline0">{{ session.get('name') }}</a>
+        <a href="{{ url_for('personal_info') }}" class="underline0">
+        <i class="fas fa-user user-icon"></i>
+        {{ session.get('name') }}</a
+      >
     {% endif %}
     <ul>
       <li><a href="{{ url_for('home_page') }}" class="underline">Home</a></li>
