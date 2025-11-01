@@ -4,8 +4,10 @@ from flask_cors import CORS
 import os
 from os import path
 from Database.backup import backup_database, restore_latest_backup
+from flask_migrate import Migrate
 
 db = SQLAlchemy()
+
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 DB_PATH = os.path.join(BASE_DIR, "database.db")
@@ -40,16 +42,20 @@ def create_app():
     # Initialize SQLAlchemy with app
     db.init_app(app)
 
+    Migrate(app, db)
+
     # Import models AFTER db.init_app(app)
     from .models import Student, AcademicMark, Preference, University, Program, Requirement, Application
     from .auth import auth
     from .search import search
     from .courses import courses
+    from .bursary import bursary
 
     # Register blueprints
     app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(search, url_prefix='/search')
     app.register_blueprint(courses, url_prefix='/courses')
+    app.register_blueprint(bursary, url_prefix='/bursary')
 
     # Create or restore database
     create_database(app)

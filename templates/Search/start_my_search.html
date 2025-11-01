@@ -74,22 +74,36 @@
   <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 
   <script>
-    // Sample data structure
+    // Initialize data structure
     const userData = {
-      reports: [
-        { id: 1, title: 'Profile Assessment Report', date: 'Nov 15, 2024' },
-        { id: 2, title: 'University Ranking Analysis', date: 'Nov 20, 2024' }
-      ],
-      matches: [
-        { id: 1, name: 'University of Cape Town', province: 'Western Cape', ranking: 1, matched: true },
-        { id: 2, name: 'University of the Witwatersrand', province: 'Gauteng', ranking: 2, matched: true },
-        { id: 3, name: 'Stellenbosch University', province: 'Western Cape', ranking: 3, matched: true },
-        { id: 4, name: 'University of Pretoria', province: 'Gauteng', ranking: 4, matched: true }
-      ],
-      likes: [
-        { id: 1, name: 'University of Cape Town', province: 'Western Cape' }
-      ]
+      reports: [],
+      matches: [],
+      likes: JSON.parse(localStorage.getItem('likedCourses') || '[]')
     };
+
+    // Fetch matches from the server
+    async function fetchMatches() {
+      try {
+        const response = await fetch('/courses/debug_matches');
+        const data = await response.json();
+        if (data.matches) {
+          userData.matches = data.matches.map(match => ({
+            id: match.program.program_id,
+            name: match.university.name,
+            province: match.university.province_state,
+            programName: match.program.program_name,
+            matchScore: match.match_score,
+            ranking: match.match_score
+          }));
+          renderMatches();
+        }
+      } catch (error) {
+        console.error('Error fetching matches:', error);
+      }
+    }
+
+    // Call fetchMatches when page loads
+    fetchMatches();
 
     // Render Reports
     function renderReports() {
@@ -116,17 +130,26 @@
         container.innerHTML = '<p class="empty-state">No matches available yet. Complete your profile to discover universities.</p>';
         return;
       }
-      container.innerHTML = userData.matches.map(uni => `
-        <div class="match-item">
-          <div class="match-info">
-            <h4>${uni.name}</h4>
-            <p class="match-province">${uni.province}</p>
+      container.innerHTML = userData.matches.map(uni => {
+        const matchClass = uni.matchScore >= 90 ? 'strong-match' : 
+                         uni.matchScore >= 70 ? 'good-match' : 'moderate-match';
+        const isLiked = userData.likes.some(like => like.id === String(uni.id));
+        
+        return `
+          <div class="match-item ${matchClass}">
+            <div class="match-info">
+              <h4>${uni.name}</h4>
+              <p class="match-program">${uni.programName}</p>
+              <p class="match-province">${uni.province}</p>
+              <span class="match-score">Match Score: ${uni.matchScore}%</span>
+            </div>
+            <button class="btn btn-like ${isLiked ? 'liked' : ''}" 
+                    onclick="addToLikes('${uni.id}', '${uni.name} - ${uni.programName}', '${uni.province}')">
+              <span class="heart">${isLiked ? '♥' : '♡'}</span>
+            </button>
           </div>
-          <button class="btn btn-like" onclick="addToLikes(${uni.id}, '${uni.name}', '${uni.province}')">
-            <span class="heart">♡</span>
-          </button>
-        </div>
-      `).join('');
+        `;
+      }).join('');
     }
 
     // Render Liked Universities
@@ -153,10 +176,19 @@
     function addToLikes(id, name, province) {
       const alreadyLiked = userData.likes.some(uni => uni.id === id);
       if (!alreadyLiked) {
-        userData.likes.push({ id, name, province });
-        renderLikes();
-        renderMatches();
+        userData.likes.push({
+          id,
+          name,
+          province,
+          timestamp: new Date().toISOString()
+        });
+        localStorage.setItem('likedCourses', JSON.stringify(userData.likes));
+      } else {
+        userData.likes = userData.likes.filter(uni => uni.id !== id);
+        localStorage.setItem('likedCourses', JSON.stringify(userData.likes));
       }
+      renderLikes();
+      renderMatches();
     }
 
     // Remove from Likes

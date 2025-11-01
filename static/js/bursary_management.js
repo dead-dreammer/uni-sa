@@ -1,53 +1,28 @@
-// Sample bursary data (replace with actual database calls)
-let bursaries = [
-    {
-        id: 1,
-        title: "National Student Financial Aid Scheme (NSFAS)",
-        provider: "Department of Higher Education",
-        providerType: "government",
-        amount: "Full tuition & allowances",
-        deadline: "2025-11-30",
-        field: "All fields",
-        level: "Undergraduate",
-        description: "NSFAS provides financial assistance to eligible South African students who wish to study at public universities and TVET colleges.",
-        requirements: [
-            "South African citizen",
-            "Combined household income not exceeding R350,000 per annum",
-            "Admitted to a public university or TVET college",
-            "Studying towards first qualification"
-        ],
-        coverage: "Tuition fees, accommodation, learning materials, and living allowances",
-        url: "https://www.nsfas.org.za",
-        tags: ["Government", "Full Coverage", "Undergraduate"]
-    },
-    {
-        id: 2,
-        title: "Sasol Bursary Programme",
-        provider: "Sasol Limited",
-        providerType: "corporate",
-        amount: "Full tuition & allowances",
-        deadline: "2025-07-15",
-        field: "Science, Engineering, Commerce",
-        level: "Undergraduate, Postgraduate",
-        description: "Supports students in science, engineering, and commerce fields with comprehensive funding.",
-        requirements: [
-            "South African citizen",
-            "Excellent academic record (minimum 70%)",
-            "Studying relevant qualification at recognized institution",
-            "Leadership potential"
-        ],
-        coverage: "Full tuition, accommodation, meals, books, and pocket money",
-        url: "https://www.sasol.com/careers/bursaries",
-        tags: ["STEM", "Corporate", "Leadership"]
+// Fetch bursaries from the server
+async function fetchBursaries() {
+    try {
+        const response = await fetch('/bursary/api/bursaries');
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching bursaries:', error);
+        return [];
     }
-];
+}
+// Global bursaries array (populated from server)
+let bursaries = [];
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', function() {
-    renderBursaries();
-    updateStatistics();
+    loadBursaries();
     setupEventListeners();
 });
+
+// Load bursaries from server
+async function loadBursaries() {
+    bursaries = await fetchBursaries();
+    renderBursaries();
+    updateStatistics();
+}
 
 // Setup event listeners
 function setupEventListeners() {
@@ -76,10 +51,7 @@ function setupEventListeners() {
     // Form submission
     const form = document.getElementById('bursaryForm');
     if (form) {
-        form.onsubmit = (e) => {
-            e.preventDefault();
-            saveBursary();
-        };
+        form.onsubmit = saveBursary;
     }
 }
 
@@ -87,14 +59,14 @@ function setupEventListeners() {
 function renderBursaries(filteredBursaries = null) {
     const grid = document.getElementById('bursariesGrid');
     if (!grid) return;
-    
+
     const bursariesToRender = filteredBursaries || bursaries;
-    
+
     if (bursariesToRender.length === 0) {
-        grid.innerHTML = '<div style="text-align: center; padding: 40px; color: #6b7280;">No bursaries found</div>';
+        grid.innerHTML = `<div style="text-align: center; padding: 40px; color: #6b7280;">No bursaries found</div>`;
         return;
     }
-    
+
     grid.innerHTML = bursariesToRender.map(bursary => `
         <div class="bursary-card" data-provider-type="${bursary.providerType}" data-field="${bursary.field}">
             <div class="card-header">
@@ -137,18 +109,19 @@ function renderBursaries(filteredBursaries = null) {
 // Update statistics
 function updateStatistics() {
     document.getElementById('totalBursaries').textContent = bursaries.length;
-    
+
     const uniqueProviders = new Set(bursaries.map(b => b.provider)).size;
     document.getElementById('activeProviders').textContent = uniqueProviders;
-    
+
     const today = new Date();
     const thirtyDaysFromNow = new Date(today.getTime() + (30 * 24 * 60 * 60 * 1000));
     const upcomingDeadlines = bursaries.filter(b => {
+        if (!b.deadline) return false;
         const deadline = new Date(b.deadline);
         return deadline >= today && deadline <= thirtyDaysFromNow;
     }).length;
     document.getElementById('upcomingDeadlines').textContent = upcomingDeadlines;
-    
+
     // For demo purposes - in real app, this would come from backend
     document.getElementById('updatedToday').textContent = Math.floor(Math.random() * 10);
 }
@@ -208,35 +181,44 @@ function editBursary(id) {
     document.getElementById('bursaryModal').style.display = 'flex';
 }
 
-// Delete bursary
-function deleteBursary(id) {
-    if (confirm('Are you sure you want to delete this bursary?')) {
-        bursaries = bursaries.filter(b => b.id !== id);
-        renderBursaries();
-        updateStatistics();
-        
-        // In real app, make API call to delete from backend
-        console.log('Deleted bursary:', id);
+// Delete bursary (calls backend then reloads list)
+async function deleteBursary(id) {
+    if (!confirm('Are you sure you want to delete this bursary?')) return;
+
+    try {
+        const resp = await fetch(`/bursary/api/bursaries/${id}`, { method: 'DELETE' });
+        const result = await resp.json();
+        if (result.success) {
+            await loadBursaries();
+        } else {
+            alert('Error deleting bursary: ' + (result.error || 'Unknown error'));
+        }
+    } catch (err) {
+        console.error('Error deleting bursary:', err);
+        alert('An error occurred while deleting the bursary');
     }
 }
 
-// Save bursary
-function saveBursary() {
+// Save bursary (POST or PUT to backend)
+async function saveBursary(event) {
+    if (event && event.preventDefault) event.preventDefault();
+
     const id = document.getElementById('bursaryId').value;
     const requirements = document.getElementById('bursaryRequirements').value
         .split('\n')
-        .filter(req => req.trim() !== '');
+        .map(r => r.trim())
+        .filter(r => r !== '');
     const tags = document.getElementById('bursaryTags').value
         .split(',')
         .map(tag => tag.trim())
         .filter(tag => tag !== '');
-    
-    const bursaryData = {
+
+    const data = {
         title: document.getElementById('bursaryTitle').value,
         provider: document.getElementById('bursaryProvider').value,
         providerType: determineProviderType(document.getElementById('bursaryProvider').value),
         amount: document.getElementById('bursaryAmount').value,
-        deadline: document.getElementById('bursaryDeadline').value,
+        deadline: document.getElementById('bursaryDeadline').value || null,
         field: document.getElementById('bursaryField').value,
         level: document.getElementById('bursaryLevel').value,
         description: document.getElementById('bursaryDescription').value,
@@ -245,25 +227,26 @@ function saveBursary() {
         url: document.getElementById('bursaryUrl').value,
         tags: tags
     };
-    
-    if (id) {
-        // Update existing bursary
-        const index = bursaries.findIndex(b => b.id === parseInt(id));
-        if (index !== -1) {
-            bursaries[index] = { ...bursaries[index], ...bursaryData };
+
+    try {
+        const url = id ? `/bursary/api/bursaries/${id}` : '/bursary/api/bursaries';
+        const method = id ? 'PUT' : 'POST';
+        const resp = await fetch(url, {
+            method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        const result = await resp.json();
+        if (result.success) {
+            closeModal();
+            await loadBursaries();
+        } else {
+            alert('Error saving bursary: ' + (result.error || 'Unknown error'));
         }
-    } else {
-        // Add new bursary
-        const newId = Math.max(...bursaries.map(b => b.id), 0) + 1;
-        bursaries.push({ id: newId, ...bursaryData });
+    } catch (err) {
+        console.error('Error saving bursary:', err);
+        alert('An error occurred while saving the bursary');
     }
-    
-    renderBursaries();
-    updateStatistics();
-    closeModal();
-    
-    // In real app, make API call to save to backend
-    console.log('Saved bursary:', bursaryData);
 }
 
 // Close modal

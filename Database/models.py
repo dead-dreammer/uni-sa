@@ -76,6 +76,24 @@ class Requirement(db.Model):
     is_prerequisite = db.Column(db.Boolean, default=True)
 
 
+class Bursary(db.Model):
+    __tablename__ = 'bursary'
+    bursary_id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    provider = db.Column(db.String(200), nullable=False)
+    provider_type = db.Column(db.String(50))  # government, corporate, ngo, university
+    amount = db.Column(db.String(100))
+    deadline = db.Column(db.Date)
+    field_of_study = db.Column(db.String(100))
+    study_level = db.Column(db.String(50))
+    description = db.Column(db.Text)
+    requirements = db.Column(db.Text)  # Store as JSON array
+    coverage = db.Column(db.Text)
+    url = db.Column(db.String(500))
+    tags = db.Column(db.Text)  # Store as JSON array
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
 class Application(db.Model):
     __tablename__ = 'application'
     application_id = db.Column(db.Integer, primary_key=True)
