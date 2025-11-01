@@ -119,7 +119,7 @@ async function loadCourses() {
 
       card.innerHTML = `
         <div class="card-header">
-          <span class="college-badge badge-${course.college?.toLowerCase() || 'unknown'}">
+          <span class="college-badge badge-${course.college || 'unknown'}">
             ${course.college || 'Unknown College'}
           </span>
           <div class="card-actions">
