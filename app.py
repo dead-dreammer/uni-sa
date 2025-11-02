@@ -52,6 +52,10 @@ def course_management():
 def bursary_management():
     return render_template('Admin/bursary_management.html')
 
+@app.route('/admissions-calendar-management')
+def admissions_calendar_management():
+    return render_template('Admin/admissions_calendar_management.html')
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

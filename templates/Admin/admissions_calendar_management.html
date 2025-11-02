@@ -1,0 +1,363 @@
+{% extends 'Admin/admin.html' %} {% set active_page = 'admissions_calendar' %}
+{% block title %}Admissions Calendar | Admin Panel{% endblock %} {% block
+head_extras %}
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/admissions_calendar_management.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/admin.css') }}"
+/>
+{% endblock %} {% block admin_content %}
+<div class="admissions-calendar-wrapper">
+  <!-- Hero Section with Gradient Background -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <div class="hero-icon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="64"
+          height="64"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="16" y1="2" x2="16" y2="6"></line>
+          <line x1="8" y1="2" x2="8" y2="6"></line>
+          <line x1="3" y1="10" x2="21" y2="10"></line>
+        </svg>
+      </div>
+      <h1 class="hero-title">Admissions Calendar</h1>
+      <p class="hero-subtitle">
+        Manage university admission dates, deadlines, and important events
+      </p>
+    </div>
+  </div>
+
+  <!-- Main Content Container -->
+  <div class="content-container">
+    <!-- Control Panel -->
+    <div class="control-panel">
+      <div class="control-left">
+        <button class="btn-primary" onclick="openAddModal()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Add Event
+        </button>
+        <button class="btn-secondary" onclick="uploadCSV()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          Import CSV
+        </button>
+      </div>
+
+      <div class="control-right">
+        <div class="search-box">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search events..."
+            onkeyup="searchEvents()"
+          />
+        </div>
+        <select
+          id="universityFilter"
+          class="filter-select"
+          onchange="filterEvents()"
+          aria-label="Filter by University"
+        >
+          <option value="all">All Universities</option>
+          <option value="wits">University of Witwatersrand</option>
+          <option value="uct">University of Cape Town</option>
+          <option value="stellenbosch">Stellenbosch University</option>
+          <option value="pretoria">University of Pretoria</option>
+          <option value="kzn">University of KwaZulu-Natal</option>
+        </select>
+        <select
+          id="typeFilter"
+          class="filter-select"
+          onchange="filterEvents()"
+          aria-label="Event Type Filter"
+        >
+          <option value="all">All Types</option>
+          <option value="application_open">Application Opening</option>
+          <option value="application_close">Application Closing</option>
+          <option value="registration">Registration</option>
+          <option value="orientation">Orientation</option>
+          <option value="exam">Exam Period</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+      <div class="stat-card stat-primary">
+        <div class="stat-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <h3 class="stat-number" id="totalEvents">0</h3>
+          <p class="stat-label">Total Events</p>
+        </div>
+      </div>
+
+      <div class="stat-card stat-success">
+        <div class="stat-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <h3 class="stat-number" id="upcomingEvents">0</h3>
+          <p class="stat-label">Upcoming Events</p>
+        </div>
+      </div>
+
+      <div class="stat-card stat-warning">
+        <div class="stat-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <h3 class="stat-number" id="urgentDeadlines">0</h3>
+          <p class="stat-label">Urgent (< 7 Days)</p>
+        </div>
+      </div>
+
+      <div class="stat-card stat-info">
+        <div class="stat-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </div>
+        <div class="stat-info">
+          <h3 class="stat-number" id="activeUniversities">0</h3>
+          <p class="stat-label">Universities</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Events Grid -->
+    <div class="events-grid" id="eventsGrid">
+      <!-- Event cards will be inserted here by JavaScript -->
+    </div>
+  </div>
+
+  <!-- Add/Edit Event Modal -->
+  <div class="modal" id="eventModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Add Event</h2>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="eventForm">
+          <input type="hidden" id="eventId" value="" />
+
+          <div class="form-group">
+            <label for="eventTitle">Event Title</label>
+            <input
+              type="text"
+              id="eventTitle"
+              required
+              placeholder="e.g., Undergraduate Applications Open"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="eventUniversity">University</label>
+            <input
+              type="text"
+              id="eventUniversity"
+              required
+              placeholder="e.g., University of Cape Town"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="eventDescription">Description</label>
+            <textarea
+              id="eventDescription"
+              rows="3"
+              placeholder="Provide details about this event"
+            ></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="eventStartDate">Start Date</label>
+              <input type="date" id="eventStartDate" required />
+            </div>
+
+            <div class="form-group">
+              <label for="eventEndDate">End Date</label>
+              <input type="date" id="eventEndDate" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="eventType">Event Type</label>
+              <select id="eventType" required>
+                <option value="">Select Type</option>
+                <option value="Application Opening">Application Opening</option>
+                <option value="Application Closing">Application Closing</option>
+                <option value="Registration">Registration</option>
+                <option value="Orientation">Orientation</option>
+                <option value="Exam Period">Exam Period</option>
+                <option value="Open Day">Open Day</option>
+                <option value="Information Session">Information Session</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="eventPriority">Priority</label>
+              <select id="eventPriority" required>
+                <option value="">Select Priority</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="eventPrograms">Applicable Programs</label>
+            <textarea
+              id="eventPrograms"
+              rows="2"
+              placeholder="e.g., All undergraduate programs, Engineering only"
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="eventLocation">Location/Venue</label>
+            <input
+              type="text"
+              id="eventLocation"
+              placeholder="e.g., Online, Main Campus Hall"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="eventUrl">More Information URL</label>
+            <input
+              type="url"
+              id="eventUrl"
+              placeholder="https://example.com/admissions"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="eventContact">Contact Information</label>
+            <input
+              type="text"
+              id="eventContact"
+              placeholder="admissions@university.ac.za or +27 11 123 4567"
+            />
+          </div>
+
+          <div class="form-group checkbox-group">
+            <label>
+              <input type="checkbox" id="eventNotification" />
+              Send notification to students
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" id="cancelBtn">
+              Cancel
+            </button>
+            <button type="submit" class="btn-submit">Save Event</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/admissions_calendar_management.js') }}"></script>
+{% endblock %} {% block scripts %} {% endblock %}

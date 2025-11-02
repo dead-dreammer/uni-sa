@@ -99,13 +99,45 @@ let currentCalendarMonth = new Date().getMonth();
 let currentCalendarYear = new Date().getFullYear();
 let filteredEvents = [...eventsData];
 
+// Utility function to get today's date at midnight for fair comparison
+function getTodayMidnight() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return today;
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    populateFilters(); // New: Populate dropdowns
     updateInfoBar();
     renderGrid();
     renderCalendar();
     setupEventListeners();
 });
+
+// New: Populate Filters
+function populateFilters() {
+    // Populate University Filter
+    const universities = [...new Set(eventsData.map(e => e.university))].sort();
+    const universitySelect = document.getElementById('universitySelect');
+    universities.forEach(uni => {
+        const option = document.createElement('option');
+        option.value = uni.toLowerCase();
+        option.textContent = uni;
+        universitySelect.appendChild(option);
+    });
+
+    // Populate Type Filter
+    const types = [...new Set(eventsData.map(e => e.type))].sort();
+    const typeSelect = document.getElementById('typeSelect');
+    types.forEach(type => {
+        const option = document.createElement('option');
+        option.value = type;
+        // Capitalize first letter for display
+        option.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+        typeSelect.appendChild(option);
+    });
+}
 
 // Setup Event Listeners
 function setupEventListeners() {
@@ -125,19 +157,24 @@ function setupEventListeners() {
     
     // Modal
     document.getElementById('closeModal').addEventListener('click', closeModal);
-    document.querySelector('.modal-backdrop').addEventListener('click', closeModal);
+    // document.querySelector('.modal-backdrop') might not work if the element doesn't exist yet, 
+    // better to use a click handler on the modal container itself if possible, or assume 
+    // the backdrop class is applied correctly. Keeping original code for now.
+    const modalBackdrop = document.querySelector('.modal-backdrop');
+    if (modalBackdrop) {
+        modalBackdrop.addEventListener('click', closeModal);
+    }
 }
 
 // Update Info Bar
 function updateInfoBar() {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const today = getTodayMidnight();
     
     document.getElementById('totalEvents').textContent = eventsData.length;
     
-    // This week
+    // This week (Today through 6 days from now)
     const weekEnd = new Date(today);
-    weekEnd.setDate(weekEnd.getDate() + 7);
+    weekEnd.setDate(weekEnd.getDate() + 6); // Up to 6 days after today
     const thisWeek = eventsData.filter(e => {
         const eventDate = new Date(e.date);
         return eventDate >= today && eventDate <= weekEnd;
@@ -146,6 +183,7 @@ function updateInfoBar() {
     
     // This month
     const monthEnd = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+    monthEnd.setHours(23, 59, 59, 999); // Set to end of the day for robustness
     const thisMonth = eventsData.filter(e => {
         const eventDate = new Date(e.date);
         return eventDate >= today && eventDate <= monthEnd;
@@ -185,11 +223,12 @@ function applyFilters() {
     
     filteredEvents = eventsData.filter(event => {
         const matchesSearch = event.title.toLowerCase().includes(searchTerm) || 
-                            event.university.toLowerCase().includes(searchTerm) ||
-                            event.description.toLowerCase().includes(searchTerm);
+                              event.university.toLowerCase().includes(searchTerm) ||
+                              event.description.toLowerCase().includes(searchTerm);
         
+        // Note: University filter matches against the lowercase value, consistent with population
         const matchesUniversity = university === 'all' || 
-                                event.university.toLowerCase().includes(university);
+                                  event.university.toLowerCase() === university;
         
         const matchesType = type === 'all' || event.type === type;
         
@@ -202,6 +241,7 @@ function applyFilters() {
     if (currentView === 'grid') {
         renderGrid();
     } else {
+        // Re-render calendar to reflect filtered events
         renderCalendar();
     }
 }
@@ -210,6 +250,9 @@ function applyFilters() {
 function renderGrid() {
     const grid = document.getElementById('eventsGrid');
     
+    // Ensure container is fully cleared before rendering
+    grid.replaceChildren();
+
     if (filteredEvents.length === 0) {
         grid.innerHTML = `
             <div class="empty-state">
@@ -225,20 +268,23 @@ function renderGrid() {
         `;
         return;
     }
-    
-    // Sort by date
+
+    // Sort and render fresh
     const sorted = [...filteredEvents].sort((a, b) => new Date(a.date) - new Date(b.date));
-    
     grid.innerHTML = sorted.map(event => createEventCard(event)).join('');
 }
 
+
 // Create Event Card
 function createEventCard(event) {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const today = getTodayMidnight();
     const eventDate = new Date(event.date);
+    eventDate.setHours(0, 0, 0, 0); // Ensure eventDate is also at midnight for comparison consistency
+    
+    // daysUntil will be 0 for today, positive for future, negative for past
     const daysUntil = Math.ceil((eventDate - today) / (1000 * 60 * 60 * 24));
     const isUrgent = daysUntil >= 0 && daysUntil <= 7;
+    const isPast = daysUntil < 0;
     
     return `
         <div class="event-card" onclick="openModal(${event.id})">
@@ -260,7 +306,7 @@ function createEventCard(event) {
                 <p class="event-description">${event.description.substring(0, 120)}...</p>
             </div>
             <div class="event-footer">
-                ${daysUntil >= 0 ? `
+                ${!isPast ? `
                     <div class="days-left ${isUrgent ? 'urgent' : ''}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="12" cy="12" r="10"></circle>
@@ -291,15 +337,17 @@ function renderCalendar() {
     existingDays.forEach(day => day.remove());
     
     // Get calendar data
-    const firstDay = new Date(currentCalendarYear, currentCalendarMonth, 1).getDay();
+    // getDay() returns 0 for Sunday, 1 for Monday, etc. We want Monday=0 for offset.
+    const firstDayIndex = new Date(currentCalendarYear, currentCalendarMonth, 1).getDay(); // 0 (Sun) to 6 (Sat)
+    // Adjust index so Monday (1) becomes 0, Sunday (0) becomes 6
+    const startOffset = (firstDayIndex === 0) ? 6 : firstDayIndex - 1; 
+    
     const daysInMonth = new Date(currentCalendarYear, currentCalendarMonth + 1, 0).getDate();
     const daysInPrevMonth = new Date(currentCalendarYear, currentCalendarMonth, 0).getDate();
     
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
     // Previous month days
-    for (let i = firstDay - 1; i >= 0; i--) {
+    // Use the corrected startOffset
+    for (let i = startOffset - 1; i >= 0; i--) {
         const day = daysInPrevMonth - i;
         container.appendChild(createCalendarDay(day, currentCalendarMonth - 1, currentCalendarYear, true));
     }
@@ -310,8 +358,10 @@ function renderCalendar() {
     }
     
     // Next month days
-    const totalCells = container.children.length - 7;
-    const remainingCells = 42 - totalCells;
+    // Count current days rendered (startOffset + daysInMonth)
+    const totalCells = startOffset + daysInMonth;
+    const remainingCells = 42 - totalCells; // Max 6 rows (42 cells)
+    
     for (let day = 1; day <= remainingCells; day++) {
         container.appendChild(createCalendarDay(day, currentCalendarMonth + 1, currentCalendarYear, true));
     }
@@ -324,15 +374,16 @@ function createCalendarDay(day, month, year, isOtherMonth) {
     if (isOtherMonth) dayEl.classList.add('other-month');
     
     const date = new Date(year, month, day);
-    date.setHours(0, 0, 0, 0);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    date.setHours(0, 0, 0, 0); // Midnight for accurate comparison
+    const today = getTodayMidnight();
     
+    // Check if the date is Today
     if (date.getTime() === today.getTime()) {
         dayEl.classList.add('today');
     }
     
-    const dateString = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    // Format date string for filtering (YYYY-MM-DD)
+    const dateString = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
     const dayEvents = filteredEvents.filter(e => e.date === dateString);
     
     const typeMap = {
@@ -380,9 +431,9 @@ function openModal(eventId) {
     const event = eventsData.find(e => e.id === eventId);
     if (!event) return;
     
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const today = getTodayMidnight();
     const eventDate = new Date(event.date);
+    eventDate.setHours(0, 0, 0, 0);
     const daysUntil = Math.ceil((eventDate - today) / (1000 * 60 * 60 * 24));
     
     const modalBody = document.getElementById('modalBody');
@@ -418,12 +469,19 @@ function openModal(eventId) {
 
 // Open Multi-Event Modal
 function openMultiModal(events) {
+    // Sort events by type for better grouping in the multi-modal
+    const sortedEvents = [...events].sort((a, b) => a.type.localeCompare(b.type));
+
     const modalBody = document.getElementById('modalBody');
+    // Ensure you close the main modal first if it was open for a single event
+    closeModal(); 
+    
     modalBody.innerHTML = `
-        <h2 class="modal-title">Events on this day</h2>
+        <h2 class="modal-title">Events on ${formatDate(sortedEvents[0].date)}</h2>
+        <p style="margin-top: -10px; color: #6b7280; font-weight: 500;">Click an event to see full details.</p>
         <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 24px;">
-            ${events.map(event => `
-                <div style="padding: 20px; background: #f9fafb; border-radius: 12px; cursor: pointer; border: 2px solid #e5e7eb; transition: all 0.3s;" onclick="openModal(${event.id})">
+            ${sortedEvents.map(event => `
+                <div style="padding: 20px; background: #f9fafb; border-radius: 12px; cursor: pointer; border: 2px solid #e5e7eb; transition: all 0.3s; box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);" onclick="openModal(${event.id})">
                     <span class="event-type ${event.type}" style="margin-bottom: 8px;">${event.type}</span>
                     <h3 style="font-size: 18px; font-weight: 700; color: #1f2937; margin: 8px 0 4px;">${event.title}</h3>
                     <p style="font-size: 14px; color: #667eea; font-weight: 600;">${event.university}</p>
@@ -443,6 +501,14 @@ function closeModal() {
 // Format Date
 function formatDate(dateString) {
     const date = new Date(dateString);
+    // Add 1 to the day since the date string "YYYY-MM-DD" is treated as UTC midnight,
+    // which can sometimes push the date back a day in local time. 
+    // This is a common JavaScript Date object quirk when using date strings without timezones.
+    // The previous implementation was likely fine because it only used YYYY-MM-DD which is usually safe, 
+    // but setting the date from the parts is safer.
+    
+    // Instead of parsing the string again, use the existing date object (which was already corrected
+    // to midnight in createEventCard/openModal if needed)
     return date.toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
