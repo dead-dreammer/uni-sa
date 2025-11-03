@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Step Forward - College Report</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #6B46C1, #9333EA);
+            color: white;
+            padding: 40px 50px;
+            border-bottom: 5px solid #7C3AED;
+        }
+
+        .header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .profile-box {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 20px;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+
+        .profile-box p {
+            margin: 8px 0;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .profile-box strong {
+            font-weight: 600;
+        }
+
+        .container {
+            padding: 40px 50px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #6B46C1;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #6B46C1;
+        }
+
+        .college-card {
+            background: white;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            page-break-inside: avoid;
+        }
+
+        .college-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #F3F4F6;
+        }
+
+        .college-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #6B46C1;
+            margin-bottom: 5px;
+        }
+
+        .program-name {
+            font-size: 16px;
+            color: #9333EA;
+            font-weight: 500;
+        }
+
+        .match-badge {
+            background: #10B981;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .match-badge.good {
+            background: #F59E0B;
+        }
+
+        .college-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .detail-item {
+            font-size: 14px;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #4B5563;
+        }
+
+        .benefits-box {
+            background: #F0FDF4;
+            border-left: 4px solid #10B981;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+
+        .benefits-box.warning {
+            background: #FEF3C7;
+            border-left-color: #F59E0B;
+        }
+
+        .benefits-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .benefits-box li {
+            padding: 5px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 14px;
+        }
+
+        .benefits-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #10B981;
+            font-weight: bold;
+        }
+
+        .benefits-box.warning li:before {
+            content: "⚠";
+            color: #F59E0B;
+        }
+
+        .career-path {
+            background: #F9FAFB;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+
+        .career-path strong {
+            color: #6B46C1;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #E5E7EB;
+            font-size: 13px;
+        }
+
+        .contact-info span {
+            color: #6B7280;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            page-break-inside: avoid;
+        }
+
+        .comparison-table thead {
+            background: #5B21B6;
+            color: white;
+        }
+
+        .comparison-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border: 1px solid #E5E7EB;
+            background: white;
+        }
+
+        .comparison-table tbody tr:nth-child(even) td {
+            background: #F9FAFB;
+        }
+
+        .help-box {
+            background: #F5F3FF;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 40px;
+        }
+
+        .help-box h3 {
+            color: #6B46C1;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        .help-box p {
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 2px solid #E5E7EB;
+            text-align: center;
+            color: #6B7280;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Your Step Forward</h1>
+        <div class="profile-box">
+            <p><strong>Your Profile:</strong> This report has been generated based on your average grades, interest in {{ interests }}, and location in {{ location }}.</p>
+            <p><strong>Budget Status:</strong> {{ budget_status }}</p>
+            <p><strong>We Found:</strong> {{ num_options }} realistic options that match your profile.</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">Your Top Options</h2>
+
+        {% for college in colleges %}
+        <div class="college-card">
+            <div class="college-header">
+                <div>
+                    <div class="college-name">{{ college.name }}</div>
+                    <div class="program-name">{{ college.program }}</div>
+                </div>
+                <div class="match-badge {% if college.match_level == 'Good Match' %}good{% endif %}">
+                    {{ college.match_level }}
+                </div>
+            </div>
+
+            <div class="college-details">
+                <div class="detail-item">
+                    <span class="detail-label">Location:</span> {{ college.location }}
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Cost:</span> {{ college.cost }}
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Duration:</span> {{ college.duration }}
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Mode:</span> {{ college.mode }}
+                </div>
+            </div>
+
+            {% if college.benefits %}
+            <div class="benefits-box {% if 'recommended' in college.benefits[0].lower() or 'discipline' in college.benefits[0].lower() %}warning{% endif %}">
+                <ul>
+                    {% for benefit in college.benefits %}
+                    <li>{{ benefit }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="career-path">
+                <strong>Career Path:</strong> {{ college.career_path }}
+            </div>
+
+            <div class="contact-info">
+                <span>{{ college.contact }}</span>
+                <span>{{ college.email }}</span>
+                <span>{{ college.website }}</span>
+                <span><strong>Apply by:</strong> {{ college.deadline }}</span>
+            </div>
+        </div>
+        {% endfor %}
+
+        <h2 class="section-title">Quick Comparison</h2>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    {% for college in colleges[:3] %}
+                    <th>{{ college.name.split()[0] }} {{ college.name.split()[1] if college.name.split()|length > 1 else '' }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Cost/year</strong></td>
+                    {% for college in colleges[:3] %}
+                    <td>{{ college.cost }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td><strong>Duration</strong></td>
+                    {% for college in colleges[:3] %}
+                    <td>{{ college.duration.split('(')[0].strip() }}</td>
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td><strong>Distance</strong></td>
+                    {% for college in colleges[:3] %}
+                    <td>{{ college.location.split('(')[1].replace(')', '') if '(' in college.location else college.location }}</td>
+                    {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="help-box">
+            <h3>Need Help or Have Questions?</h3>
+            <p><strong>We're here to support you!</strong></p>
+            <p><strong>Email:</strong> uni.sa@gmail.com</p>
+            <p><strong>Career Guidance Hotline:</strong> 0800 872 222 (Department of Higher Education)</p>
+            <p><strong>Talk to our AI chatbot for more</strong></p>
+        </div>
+
+        <div class="footer">
+            <p>Generated by uni.sa | Helping South African students find their path forward</p>
+            <p>© 2025 uni.sa. This report is personalized for {{ student_name }}.</p>
+        </div>
+    </div>
+</body>
+</html>
