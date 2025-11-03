@@ -2,6 +2,11 @@ from flask import Blueprint, request, jsonify, render_template, session
 from Database.__init__ import db
 from Database.models import Program, Student, Preference, AcademicMark, Requirement, University
 import json
+from flask import send_file
+from weasyprint import HTML
+import tempfile
+import os
+from datetime import datetime
 
 courses = Blueprint('courses', __name__)
 
@@ -332,3 +337,43 @@ def get_all_courses():
         for c in all_courses
     ]
     return jsonify(courses_list)
+
+# report generation
+@courses.route('/download-report')
+def download_report():
+    """Generate and download a PDF report of course matches"""
+    student_id = session.get('student_id')
+    if not student_id:
+        return jsonify({'error': 'Not logged in'}), 401
+
+    # Use existing compute_matches function
+    matches, student_obj, pref_dict, marks_dict = compute_matches(student_id)
+    if matches is None:
+        return jsonify({'error': 'Missing preferences or academic marks'}), 400
+
+    # Get student info
+    student = Student.query.get(student_id)
+    
+    # Render the PDF template with all the data
+    rendered_html = render_template('Reports/course_report.html',
+                                    student=student,
+                                    matches=matches,
+                                    preferences=pref_dict,
+                                    marks=marks_dict,
+                                    now=datetime.now()
+                                    )
+
+    # Create temporary PDF file
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as pdf_file:
+        HTML(string=rendered_html).write_pdf(pdf_file.name)
+        
+        # Generate filename with student name
+        student_name = student.name.replace(' ', '_') if student and hasattr(student, 'name') and student.name else 'Student'
+        filename = f"{student_name}_Course_Matches_Report.pdf"
+        
+        return send_file(
+            pdf_file.name,
+            as_attachment=True,
+            download_name=filename,
+            mimetype='application/pdf'
+        )

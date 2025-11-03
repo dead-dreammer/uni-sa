@@ -1,34 +1,67 @@
-{% extends 'base.html' %}
-
-{% block title %}Your Course Matches | uni.sa{% endblock %}
-
-{% block head_extras %}
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/matches.css') }}">
-  <script src="{{ url_for('static', filename='js/matches.js') }}" defer></script>
-{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% block title %}Your Course Matches | uni.sa{%
+endblock %} {% block head_extras %}
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/matches.css') }}"
+/>
+{% endblock %} {% block content %}
 <div class="matches-wrapper">
-
   <!-- Step Forward Section -->
   <div class="step-forward-section">
     <div class="container">
       <h1 class="main-title">Your Step Forward</h1>
-      
+
       <div class="profile-summary">
         <p class="profile-text">
-          <strong>Your Profile:</strong> This report has been generated based on your academic performance
-          {% if preferences and preferences.focus_area %}, interest in {{ preferences.focus_area }}{% endif %}, and location in {{ preferences.location }}.
+          <strong>Your Profile:</strong> This report has been generated based on
+          your academic performance {% if preferences and preferences.focus_area
+          %}, interest in {{ preferences.focus_area }}{% endif %}, and location
+          in {{ preferences.location }}.
         </p>
-        
+
         <p class="budget-status">
-          <strong>Budget Status:</strong> {% if preferences and preferences.nsfas %}NSFAS Eligible{% else %}Self-Funded (No NSFAS){% endif %}
+          <strong>Budget Status:</strong>
+          {% if preferences and preferences.nsfas %} NSFAS Eligible {% else %}
+          Self-Funded (No NSFAS) {% endif %}
         </p>
-        
+
         <p class="found-matches">
-          We Found: <strong>{{ matches|length }} matching option{{ matches|length > 1 and 's' or '' }}</strong> that fit your profile.
+          We Found:
+          <strong
+            >{{ matches|length }} matching option{{ matches|length > 1 and 's'
+            or '' }}</strong
+          >
+          that fit your profile.
         </p>
+      </div>
+
+      <!-- Download Report Button -->
+      <div class="download-section">
+        <a
+          href="{{ url_for('courses.download_report') }}"
+          class="download-button"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download Your Matches Report (PDF)
+        </a>
       </div>
     </div>
   </div>
@@ -37,9 +70,10 @@
   <div class="top-options-section">
     <div class="container">
       <h2 class="section-title">Your Top Options</h2>
-      
+
       <div class="course-counter">
-        Course <span id="currentCourse">1</span> of <span id="totalCourses">{{ matches|length }}</span>
+        Course <span id="currentCourse">1</span> of
+        <span id="totalCourses">{{ matches|length }}</span>
       </div>
 
       <div class="course-navigation">
@@ -47,20 +81,29 @@
         <button class="nav-button next" id="nextBtn">›</button>
 
         {% for match in matches %}
-        <div class="option-card {% if loop.first %}active{% endif %}" data-course-id="{{ match.program.program_id }}">
-          
+        <div
+          class="option-card {% if loop.first %}active{% endif %}"
+          data-course-id="{{ match.program.program_id }}"
+        >
           <!-- Like Button -->
-          <button class="like-button" data-course-name="{{ match.university.name }} - {{ match.program.program_name }}">♡</button>
+          <button
+            class="like-button"
+            data-course-name="{{ match.university.name }} - {{ match.program.program_name }}"
+          >
+            ♡
+          </button>
 
           <div class="card-header">
             <div class="header-left">
               <h3 class="institution-name">{{ match.university.name }}</h3>
               <p class="course-name">{{ match.program.program_name }}</p>
             </div>
-            <span class="match-badge {% if match.match_score >= 90 %}strong{% elif match.match_score >= 70 %}good{% else %}moderate{% endif %}">
-              {% if match.match_score >= 90 %}Strong Match
-              {% elif match.match_score >= 70 %}Good Match
-              {% else %}Moderate Match{% endif %}
+            <span
+              class="match-badge {% if match.match_score >= 90 %}strong{% elif match.match_score >= 70 %}good{% else %}moderate{% endif %}"
+            >
+              {% if match.match_score >= 90 %} Strong Match {% elif
+              match.match_score >= 70 %} Good Match {% else %} Moderate Match {%
+              endif %}
             </span>
           </div>
 
@@ -72,7 +115,9 @@
               </div>
               <div class="info-item">
                 <span class="info-label">Duration:</span>
-                <span class="info-value">{{ match.program.duration_years }} years</span>
+                <span class="info-value"
+                  >{{ match.program.duration_years }} years</span
+                >
               </div>
               <div class="info-item">
                 <span class="info-label">Mode:</span>
@@ -81,19 +126,37 @@
             </div>
 
             <div class="highlights">
-              {% for req in match.program.requirements %}
-                {% set grade = marks.get(req.required_subject, 0) %}
-                <div class="highlight-item {% if grade >= req.min_grade_percentage %}success{% else %}warning{% endif %}">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  {{ req.required_subject }}: {{ grade|round|int }}% (Required: {{ req.min_grade_percentage|round|int }}%)
-                </div>
-              {% endfor %}
-
-              {% if preferences and not preferences.relocate and match.university.province_state == preferences.location %}
+              {% for req in match.program.requirements %} {% set grade =
+              marks.get(req.required_subject, 0) %}
+              <div
+                class="highlight-item {% if grade >= req.min_grade_percentage %}success{% else %}warning{% endif %}"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                {{ req.required_subject }}: {{ grade|round|int }}% (Required: {{
+                req.min_grade_percentage|round|int }}%)
+              </div>
+              {% endfor %} {% if preferences and not preferences.relocate and
+              match.university.province_state == preferences.location %}
               <div class="highlight-item success">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
                 Located in your preferred area
@@ -101,14 +164,30 @@
               {% endif %}
 
               <div class="highlight-item success">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
                 Affordable fees - within most budgets
               </div>
 
               <div class="highlight-item success">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
                 Can progress to diploma or degree later
@@ -119,78 +198,152 @@
             <div class="career-path">
               <strong>Career Path:</strong> {{ match.program.career_path }}
             </div>
-            {% endif %}
-
-            {% if match.program.contact_info %}
+            {% endif %} {% if match.program.contact_info %}
             <div class="contact-info">
               {% for info in match.program.contact_info %}
-                <span>{{ info }}</span>
+              <span>{{ info }}</span>
               {% endfor %}
             </div>
             {% endif %}
-
           </div>
         </div>
         {% endfor %}
       </div>
-
     </div>
   </div>
 
+  <!-- Comparison Table Section -->
+  <div class="comparison-section">
+    <div class="container">
+      <h2 class="section-title">Quick Comparison</h2>
+      <p class="comparison-intro">Compare all your matches at a glance</p>
+
+      <div class="comparison-table-wrapper">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th class="sticky-col">Criteria</th>
+              {% for match in matches[:5] %}
+              <th>
+                <div class="table-header-content">
+                  <span class="table-institution"
+                    >{{ match.university.name }}</span
+                  >
+                  <span class="table-program"
+                    >{{ match.program.program_name }}</span
+                  >
+                </div>
+              </th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Match Score Row -->
+            <tr>
+              <td class="row-label sticky-col">Match Score</td>
+              {% for match in matches[:5] %}
+              <td>
+                <span
+                  class="score-badge {% if match.match_score >= 90 %}strong{% elif match.match_score >= 70 %}good{% else %}moderate{% endif %}"
+                >
+                  {{ match.match_score }}%
+                </span>
+              </td>
+              {% endfor %}
+            </tr>
+
+            <!-- Location Row -->
+            <tr>
+              <td class="row-label sticky-col">Location</td>
+              {% for match in matches[:5] %}
+              <td>{{ match.program.location }}</td>
+              {% endfor %}
+            </tr>
+
+            <!-- Duration Row -->
+            <tr>
+              <td class="row-label sticky-col">Duration</td>
+              {% for match in matches[:5] %}
+              <td>{{ match.program.duration_years }} years</td>
+              {% endfor %}
+            </tr>
+
+            <!-- Study Mode Row -->
+            <tr>
+              <td class="row-label sticky-col">Study Mode</td>
+              {% for match in matches[:5] %}
+              <td>{{ match.program.study_mode }}</td>
+              {% endfor %}
+            </tr>
+
+            <!-- Degree Type Row -->
+            <tr>
+              <td class="row-label sticky-col">Qualification</td>
+              {% for match in matches[:5] %}
+              <td>{{ match.program.degree_type }}</td>
+              {% endfor %}
+            </tr>
+
+            <!-- Requirements Met Row -->
+            <tr>
+              <td class="row-label sticky-col">Requirements</td>
+              {% for match in matches[:5] %}
+              <td>
+                <div class="requirements-summary">
+                  {% set met_count = 0 %} {% for req in
+                  match.program.requirements %} {% set grade =
+                  marks.get(req.required_subject, 0) %} {% if grade >=
+                  req.min_grade_percentage %} {% set met_count = met_count + 1
+                  %} {% endif %} {% endfor %}
+                  <span class="req-fraction"
+                    >{{ met_count }}/{{ match.program.requirements|length
+                    }}</span
+                  >
+                  <span class="req-label">met</span>
+                </div>
+              </td>
+              {% endfor %}
+            </tr>
+
+            <!-- Key Subjects Row -->
+            <tr>
+              <td class="row-label sticky-col">Key Subjects</td>
+              {% for match in matches[:5] %}
+              <td>
+                <div class="subjects-list">
+                  {% for req in match.program.requirements[:3] %} {% set grade =
+                  marks.get(req.required_subject, 0) %}
+                  <div
+                    class="subject-item {% if grade >= req.min_grade_percentage %}met{% else %}not-met{% endif %}"
+                  >
+                    <span class="subject-check"
+                      >{% if grade >= req.min_grade_percentage %}✓{% else %}✗{%
+                      endif %}</span
+                    >
+                    {{ req.required_subject }}
+                  </div>
+                  {% endfor %} {% if match.program.requirements|length > 3 %}
+                  <span class="more-subjects"
+                    >+{{ match.program.requirements|length - 3 }} more</span
+                  >
+                  {% endif %}
+                </div>
+              </td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      {% if matches|length > 5 %}
+      <p class="comparison-note">
+        <strong>Note:</strong> Showing top 5 matches. Scroll horizontally to
+        view all details.
+      </p>
+      {% endif %}
+    </div>
+  </div>
 </div>
-{% endblock %}
-
-{% block scripts %}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  let currentIndex = 0;
-  const cards = document.querySelectorAll('.option-card');
-  const totalCourses = cards.length;
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const currentCourseSpan = document.getElementById('currentCourse');
-  const totalCoursesSpan = document.getElementById('totalCourses');
-  const likeButtons = document.querySelectorAll('.like-button');
-  
-  let likedCourses = JSON.parse(localStorage.getItem('likedCourses') || '[]');
-  totalCoursesSpan.textContent = totalCourses;
-  
-  function showCard(index) {
-    cards.forEach((card, i) => card.classList.toggle('active', i === index));
-    currentCourseSpan.textContent = index + 1;
-    prevBtn.disabled = index === 0;
-    nextBtn.disabled = index === totalCourses - 1;
-    cards[index].scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  prevBtn.addEventListener('click', () => { if(currentIndex>0){currentIndex--;showCard(currentIndex);} });
-  nextBtn.addEventListener('click', () => { if(currentIndex<totalCourses-1){currentIndex++;showCard(currentIndex);} });
-
-  likeButtons.forEach((btn, index) => {
-    const courseName = btn.getAttribute('data-course-name');
-    const courseId = cards[index].getAttribute('data-course-id');
-
-    if (likedCourses.some(course => course.id === courseId)) {
-      btn.classList.add('liked'); btn.textContent = '♥';
-    }
-
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      if(btn.classList.contains('liked')) {
-        btn.classList.remove('liked'); btn.textContent='♡';
-        likedCourses = likedCourses.filter(c=>c.id!==courseId);
-      } else {
-        btn.classList.add('liked'); btn.textContent='♥';
-        likedCourses.push({id:courseId,name:courseName,timestamp:new Date().toISOString()});
-      }
-      localStorage.setItem('likedCourses', JSON.stringify(likedCourses));
-    });
-  });
-
-  document.addEventListener('keydown', e => {
-    if(e.key==='ArrowLeft' && currentIndex>0){currentIndex--;showCard(currentIndex);}
-    else if(e.key==='ArrowRight' && currentIndex<totalCourses-1){currentIndex++;showCard(currentIndex);}
-  });
-});
-</script>
+{% endblock %} {% block scripts %}
+<script src="{{ url_for('static', filename='js/matches.js') }}"></script>
 {% endblock %}
