@@ -232,7 +232,7 @@ function renderGrid() {
     grid.innerHTML = sorted.map(event => createEventCard(event)).join('');
 }
 
-// Create Event Card
+// Create Event Card - REMOVED DESCRIPTION FROM CARD PREVIEW
 function createEventCard(event) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -257,7 +257,6 @@ function createEventCard(event) {
             <div class="event-body">
                 <h3 class="event-title">${event.title}</h3>
                 <p class="event-university">${event.university}</p>
-                <p class="event-description">${event.description.substring(0, 120)}...</p>
             </div>
             <div class="event-footer">
                 ${daysUntil >= 0 ? `
@@ -375,7 +374,7 @@ function changeCalendarMonth(direction) {
     renderCalendar();
 }
 
-// Open Modal
+// Open Modal - DESCRIPTION NOW ONLY SHOWS HERE
 function openModal(eventId) {
     const event = eventsData.find(e => e.id === eventId);
     if (!event) return;

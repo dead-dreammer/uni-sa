@@ -149,8 +149,7 @@ function addMessageToDOM(text, isUser = false, time = null) {
     messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
 
     const avatar = document.createElement('div');
-    avatar.className = 'message-avatar';
-    if (isUser) avatar.textContent = 'U';
+    if (isUser) avatar.textContent = 'Student:';
 
     const contentDiv = document.createElement('div');
     contentDiv.className = 'message-content';

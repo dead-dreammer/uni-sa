@@ -664,3 +664,347 @@
     padding: 10px 12px;
   }
 }
+
+/*download pdf button*/
+.download-section {
+  padding: 20px;
+  background: linear-gradient(135deg, #EDE9FE 0%, #F3E8FF 100%);
+  border-radius: 12px;
+  margin: 30px 0;
+}
+
+.download-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #5B21B6;
+  color: white;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(91, 33, 182, 0.2);
+}
+
+.download-button:hover {
+  background: #4C1D95;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(91, 33, 182, 0.3);
+}
+
+.download-button svg {
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+
+/*Quick comparison table*/
+/* Add this CSS to your matches.css file */
+
+/* Comparison Section */
+.comparison-section {
+  padding: 60px 20px;
+  background: transparent;
+  margin-top: 40px;
+}
+
+.comparison-intro {
+  color: white;
+  font-size: 18px;
+  margin-bottom: 30px;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.comparison-table-wrapper {
+  overflow-x: auto;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  background: white;
+  position: relative;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  min-width: 800px;
+}
+
+/* Table Header Styling */
+.comparison-table thead {
+  background: linear-gradient(135deg, #6B21A8 0%, #7C3AED 100%);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.comparison-table th {
+  padding: 20px 16px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 14px;
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  vertical-align: top;
+}
+
+.comparison-table th:last-child {
+  border-right: none;
+}
+
+.table-header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.table-institution {
+  font-size: 15px;
+  font-weight: 700;
+  display: block;
+}
+
+.table-program {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.9;
+  display: block;
+  line-height: 1.4;
+}
+
+/* Sticky First Column */
+.sticky-col {
+  position: sticky;
+  left: 0;
+  background: #F9FAFB;
+  z-index: 5;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.comparison-table thead .sticky-col {
+  background: linear-gradient(135deg, #6B21A8 0%, #7C3AED 100%);
+  z-index: 15;
+}
+
+/* Table Body Styling */
+.comparison-table tbody tr {
+  border-bottom: 1px solid #E5E7EB;
+  transition: background-color 0.2s ease;
+}
+
+.comparison-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.comparison-table tbody tr:hover {
+  background: #F9FAFB;
+}
+
+.comparison-table td {
+  padding: 16px;
+  font-size: 14px;
+  color: #374151;
+  border-right: 1px solid #E5E7EB;
+  vertical-align: top;
+}
+
+.comparison-table td:last-child {
+  border-right: none;
+}
+
+.row-label {
+  font-weight: 700;
+  color: #6B21A8;
+  background: #F9FAFB;
+  white-space: nowrap;
+  min-width: 140px;
+}
+
+/* Score Badge */
+.score-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.score-badge.strong {
+  background: #10B981;
+  color: white;
+}
+
+.score-badge.good {
+  background: #F59E0B;
+  color: white;
+}
+
+.score-badge.moderate {
+  background: #6B7280;
+  color: white;
+}
+
+/* Requirements Summary */
+.requirements-summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.req-fraction {
+  font-size: 18px;
+  font-weight: 700;
+  color: #6B21A8;
+}
+
+.req-label {
+  font-size: 13px;
+  color: #6B7280;
+}
+
+/* Subjects List */
+.subjects-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.subject-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  padding: 4px 0;
+}
+
+.subject-check {
+  font-weight: 700;
+  font-size: 14px;
+  width: 16px;
+  text-align: center;
+}
+
+.subject-item.met {
+  color: #065F46;
+}
+
+.subject-item.met .subject-check {
+  color: #10B981;
+}
+
+.subject-item.not-met {
+  color: #92400E;
+}
+
+.subject-item.not-met .subject-check {
+  color: #F59E0B;
+}
+
+.more-subjects {
+  font-size: 12px;
+  color: #6B7280;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+/* Comparison Note */
+.comparison-note {
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.comparison-note strong {
+  color: #F3E8FF;
+}
+
+/* Responsive Design for Comparison Table */
+@media (max-width: 768px) {
+  .comparison-section {
+    padding: 40px 16px;
+  }
+
+  .comparison-intro {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .comparison-table {
+    min-width: 600px;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+
+  .table-institution {
+    font-size: 14px;
+  }
+
+  .table-program {
+    font-size: 11px;
+  }
+
+  .row-label {
+    min-width: 120px;
+    font-size: 13px;
+  }
+
+  .score-badge {
+    padding: 5px 12px;
+    font-size: 13px;
+  }
+
+  .req-fraction {
+    font-size: 16px;
+  }
+
+  .subject-item {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .comparison-section {
+    padding: 30px 12px;
+  }
+
+  .comparison-table {
+    min-width: 500px;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 10px 8px;
+    font-size: 12px;
+  }
+
+  .table-institution {
+    font-size: 13px;
+  }
+
+  .table-program {
+    font-size: 10px;
+  }
+
+  .row-label {
+    min-width: 100px;
+    font-size: 12px;
+  }
+}
