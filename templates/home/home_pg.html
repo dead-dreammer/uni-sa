@@ -54,7 +54,12 @@
   </div>
 
 
-        <!-- Search Bar Section -->
+        <h1>UNI.SA</h1>
+        <p>University Matchmakers<br>
+            Match, Apply, Achieve
+        </p>
+
+          <!-- Search Bar Section -->
          <div class="search-bar-container">
         <form action="{{ url_for('start_search') }}" method="GET" class="search-form">
             <div class="search-wrapper">
@@ -78,11 +83,6 @@
             </div>
         </form>
     </div>
-
-        <h1>UNI.SA</h1>
-        <p>University Matchmakers<br>
-            Match, Apply, Achieve
-        </p>
         
     </div>
 
@@ -465,34 +465,6 @@
       </div>
     </section>
 
-    <!-- Meet the team section -->
-     <section class="team-section">
-    <h2>Meet the Team</h2>
-    <div class="team-container">
-        <div class="team-member">
-            <img src="{{ url_for('static', filename='img/home/alex.png') }}" alt="Member 1">
-            <h3>Alex Sarkhot</h3>
-            <p>Project Lead</p>
-        </div>
-        <div class="team-member">
-            <img src="{{ url_for('static', filename='img/home/thwisha.png') }}" alt="Member 2">
-            <h3>Thwisha Mothilall</h3>
-            <p>Frontend</p>
-        </div>
-        <div class="team-member">
-            <img src="{{ url_for('static', filename='img/home/osama.png') }}" alt="Member 3">
-            <h3>Osama Jeebhai</h3>
-            <p>Backend</p>
-        </div>
-        <div class="team-member">
-            <img src="{{ url_for('static', filename='img/home/mishaylin.png') }}" alt="Member 3">
-            <h3>Mishaylin Narainsamy</h3>
-            <p>Backend/Chatbot</p>
-        </div>
-       
-    </div>
-
-    </section>
     
 </div>
 {% endblock %}

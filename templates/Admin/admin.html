@@ -29,6 +29,11 @@ block head_extras %}
         class="nav-item {% if active_page == 'bursaries' %}active{% endif %}"
         >🎓 Bursary Management</a
       >
+      <a
+        href="{{ url_for('admissions_calendar_management') }}"
+        class="nav-item {% if active_page == 'admissions_calendar' %}active{% endif %}"
+        >🗓️ Admissions Calendar Management</a
+      >
       <a href="#" class="nav-item">📈 Reports</a>
     </nav>
   </aside>
@@ -50,6 +55,10 @@ block head_extras %}
       <div
         class="card"
         onclick="window.location.href='{{ url_for('bursary_management') }}'"
+      >
+      <div
+        class="card"
+        onclick="window.location.href='{{ url_for('admissions_calendar_management') }}'"
       >
         <h3>🎓 Bursary Management</h3>
         <p>View, add, and organize bursaries across institutions.</p>

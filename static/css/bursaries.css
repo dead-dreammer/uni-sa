@@ -23,9 +23,10 @@
 }
 
 .header p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    color: #2d2d44;
+font-size: 1.5rem;
+    color: #704792;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .container {

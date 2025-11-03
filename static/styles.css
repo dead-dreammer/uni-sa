@@ -174,13 +174,14 @@ ul.dropdown-content {
 .main-content h1 {
 	font-size: 7rem;
 	color: #ffffff;
-	margin-top: 10rem;
+	margin-top: 4rem;
 }
 
 .main-content p{
        font-size: 1.5rem;
        color: rgb(110, 65, 116);
-       padding-bottom: 25rem;
+       margin-bottom: -20px;
+       margin-top: -60px;
   }
 
 /* Search Bar Styling - Add this to your styles.css */
@@ -190,7 +191,7 @@ ul.dropdown-content {
   width: 100%;
   max-width: 700px;
   margin: 0 auto 1rem auto; /* keep it centered */
-
+  margin-bottom: 7rem;
   position: relative;
   top: 5rem; 
 }
@@ -230,7 +231,7 @@ ul.dropdown-content {
   flex: 1;
   border: none;
   background: transparent;
-  color: #ffffff;
+  color: #000000;
   font-size: 1.1rem;
   font-family: 'Montserrat', sans-serif;
   outline: none;
@@ -238,7 +239,7 @@ ul.dropdown-content {
 }
 
 .search-input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(95, 92, 92, 0.7);
   font-size: 1rem;
 }
 
