@@ -321,22 +321,23 @@ def delete_course(course_id):
 # Return all courses as JSON
 @courses.route('/all', methods=['GET'])
 def get_all_courses():
-    all_courses = Program.query.all()
+    all_courses = Program.query.join(University).all()  # Join University table
     courses_list = [
         {
             'id': c.program_id,
             'title': c.program_name,
             'description': c.description,
-            'college': c.university_id if c.university else '',
+            'college': c.university.name if c.university else 'N/A',  # ✅ University name
             'duration': c.duration_years,
             'degree_type': c.degree_type,
             'fees': getattr(c, 'fees', ''),
-            'location': getattr(c, 'location', ''),          # NEW
-            'study_mode': getattr(c, 'study_mode', '')       # NEW
+            'location': getattr(c, 'location', ''),
+            'study_mode': getattr(c, 'study_mode', '')
         }
         for c in all_courses
     ]
     return jsonify(courses_list)
+
 
 # report generation
 @courses.route('/download-report')

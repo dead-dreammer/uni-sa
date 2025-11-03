@@ -50,12 +50,14 @@ def create_app():
     from routes.search import search
     from routes.courses import courses
     from routes.bursary import bursary
+    from routes.web_scrapping import ws
 
     # Register blueprints
     app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(search, url_prefix='/search')
     app.register_blueprint(courses, url_prefix='/courses')
     app.register_blueprint(bursary, url_prefix='/bursary')
+    app.register_blueprint(ws, url_prefix='/ws')
 
     # Create or restore database
     create_database(app)
