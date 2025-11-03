@@ -46,10 +46,10 @@ def create_app():
 
     # Import models AFTER db.init_app(app)
     from .models import Student, AcademicMark, Preference, University, Program, Requirement, Application
-    from .auth import auth
-    from .search import search
-    from .courses import courses
-    from .bursary import bursary
+    from routes.auth import auth
+    from routes.search import search
+    from routes.courses import courses
+    from routes.bursary import bursary
 
     # Register blueprints
     app.register_blueprint(auth, url_prefix='/auth')
