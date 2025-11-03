@@ -12,15 +12,6 @@ import json
 
 app = create_app()
 
-
-
-@app.after_request
-def add_header(response):
-    # Prevent caching during development
-    response.headers["Cache-Control"] = "no-store"
-    return response
-
-
 # --- Routes for template pages ---
 @app.route('/')
 @app.route('/home')
@@ -123,7 +114,6 @@ def ask():
 @app.route('/start-search')
 def start_search():
     return render_template('Search/start_my_search.html')
-
 
 @app.route('/save_data', methods=['POST', 'GET'])
 def personal_info():

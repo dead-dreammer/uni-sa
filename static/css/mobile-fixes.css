@@ -1,0 +1,234 @@
+/* Mobile Fixes CSS - Complete Version */
+
+/* Prevent horizontal overflow */
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 1001;
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px);
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    /* Show hamburger button */
+    .mobile-menu-btn {
+        display: flex !important;
+    }
+    
+    /* Fix navbar layout */
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+        position: relative;
+    }
+    
+    .mobile-menu-btn {
+        order: 1;
+        margin-right: auto;
+    }
+    
+    .navbar a {
+        order: 2;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .navbar .logo {
+        height: 45px;
+        width: auto;
+    }
+    
+    /* Hide desktop menu */
+    .navbar > ul {
+        display: none !important;
+    }
+    
+    /* Mobile menu styling */
+    .mobile-menu {
+        list-style: none;
+        margin: 0;
+        padding: 1rem 0 !important;
+        gap: 0 !important;
+    }
+    
+    .mobile-menu li {
+        width: 100%;
+        margin: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .mobile-menu li:last-child {
+        border-bottom: none;
+    }
+    
+    .mobile-menu li a {
+        display: block;
+        padding: 15px 20px !important;
+        width: 100%;
+        color: white !important;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: background 0.2s;
+    }
+    
+    .mobile-menu li a:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .mobile-menu li a.special-link {
+        background: rgba(255, 255, 255, 0.2);
+        margin: 10px 20px;
+        width: calc(100% - 40px);
+        border-radius: 8px;
+        text-align: center;
+    }
+    
+    .mobile-menu li a.special-link:hover {
+        background: #b36ed8;
+    }
+    
+    /* Content adjustments */
+    .main-content {
+        padding: 1.5rem 1rem;
+        margin-top: 0;
+    }
+    
+    .main-content h1 {
+        font-size: 2.5rem !important;
+        margin-top: 1rem !important;
+    }
+    
+    .main-content p {
+        font-size: 1.2rem !important;
+        margin-top: -20px;
+    }
+    
+    .search-bar-container {
+        top: 2rem !important;
+        margin-bottom: 3rem !important;
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content h1 {
+        font-size: 2rem !important;
+    }
+    
+    .main-content p {
+        font-size: 1rem !important;
+    }
+    
+    .navbar {
+        padding: 1rem;
+    }
+    
+    .navbar .logo {
+        height: 40px;
+    }
+}
+
+/* Form elements - prevent iOS zoom */
+@media (max-width: 768px) {
+    input, textarea, select, button {
+        font-size: 16px !important;
+    }
+}
+/* Mobile dropdown inside mobile menu */
+.mobile-menu .dropdown-content {
+    display: block; /* force display */
+    position: static; /* prevent absolute positioning */
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-menu .dropdown-content li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-menu .dropdown-content li a {
+    padding-left: 30px; /* indent for submenus */
+    color: white;
+}
+/* Mobile side menu panel */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -250px; /* hidden by default on the left */
+    width: 250px;
+    height: 100%;
+    background-color: #8099dd;
+    padding-top: 80px; /* space for navbar */
+    flex-direction: column;
+    transition: left 0.3s ease;
+    z-index: 999;
+    overflow-y: auto;
+    display: flex;
+}
+
+.mobile-menu.show {
+    left: 0; /* slide in */
+}
+
+.mobile-menu li a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.mobile-menu li a:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Dropdown submenu inside side panel */
+.mobile-menu .dropdown-content {
+    display: none;
+    flex-direction: column;
+    padding-left: 10px;
+}
+
+.mobile-menu .dropdown-content.show {
+    display: flex;
+}
+

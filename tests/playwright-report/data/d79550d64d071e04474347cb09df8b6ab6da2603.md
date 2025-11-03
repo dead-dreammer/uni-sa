@@ -1,0 +1,118 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - navigation [ref=e2]:
+    - link "uni.sa" [ref=e3] [cursor=pointer]:
+      - /url: /home
+      - img "uni.sa" [ref=e4]
+    - list [ref=e5]:
+      - listitem [ref=e6]:
+        - link "Home" [ref=e7] [cursor=pointer]:
+          - /url: /home
+      - listitem [ref=e8]:
+        - link "About Us" [ref=e9] [cursor=pointer]:
+          - /url: /about
+      - listitem [ref=e10]:
+        - link "How it Works" [ref=e11] [cursor=pointer]:
+          - /url: /how-it-works
+      - listitem [ref=e12]:
+        - link "Course Management" [ref=e13] [cursor=pointer]:
+          - /url: /course-management
+      - listitem [ref=e14]:
+        - link "Matching Page" [ref=e15] [cursor=pointer]:
+          - /url: /matching-page
+      - listitem [ref=e16]:
+        - link "Student Tools" [ref=e17] [cursor=pointer]:
+          - /url: "#"
+      - listitem [ref=e18]:
+        - link "Contact Us" [ref=e19] [cursor=pointer]:
+          - /url: /contact
+      - listitem [ref=e20]:
+        - link "Login" [ref=e21] [cursor=pointer]:
+          - /url: /login
+      - listitem [ref=e22]:
+        - link "START MY SEARCH!" [ref=e23] [cursor=pointer]:
+          - /url: /start-search
+  - link "Admin Login" [ref=e24] [cursor=pointer]:
+    - /url: /admin/login
+    - img [ref=e25]
+    - text: Admin Login
+  - main [ref=e27]:
+    - generic [ref=e29]:
+      - heading "Welcome Back" [level=1] [ref=e30]
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - generic [ref=e35]: Email
+          - textbox "Email" [ref=e36]:
+            - /placeholder: Enter your email
+            - text: mishaylin@gmail.com
+        - generic [ref=e37]:
+          - generic [ref=e38]: Password
+          - textbox "Password" [ref=e39]:
+            - /placeholder: Enter your password
+            - text: "123467"
+        - button "Login" [active] [ref=e41] [cursor=pointer]
+      - generic [ref=e42]: Not a member? Sign up now!
+    - option "--Select Gender--" [selected]
+    - option "Male"
+    - option "Female"
+    - option "Other"
+  - button [ref=e43] [cursor=pointer]:
+    - img [ref=e44]
+  - text: • • • • •
+  - contentinfo [ref=e45]:
+    - generic [ref=e46]:
+      - generic [ref=e47]:
+        - heading "Contact Us" [level=3] [ref=e48]
+        - paragraph [ref=e49]:
+          - text: "Email:"
+          - link "info@uni.sa" [ref=e50] [cursor=pointer]:
+            - /url: mailto:tmothilall07@gmail.com
+        - paragraph [ref=e51]: "Phone: +27 62 933 0262"
+      - generic [ref=e52]:
+        - heading "Explore" [level=3] [ref=e53]
+        - list [ref=e54]:
+          - listitem [ref=e55]:
+            - link "Home" [ref=e56] [cursor=pointer]:
+              - /url: /home
+          - listitem [ref=e57]:
+            - link "About Us" [ref=e58] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e59]:
+            - link "How it Works" [ref=e60] [cursor=pointer]:
+              - /url: /how-it-works
+          - listitem [ref=e61]:
+            - link "Contact Us" [ref=e62] [cursor=pointer]:
+              - /url: /contact
+          - listitem [ref=e63]:
+            - link "Admissions Calendar" [ref=e64] [cursor=pointer]:
+              - /url: /admissions
+          - listitem [ref=e65]:
+            - link "Bursaries" [ref=e66] [cursor=pointer]:
+              - /url: /bursaries
+          - listitem [ref=e67]:
+            - link "Login" [ref=e68] [cursor=pointer]:
+              - /url: /login
+          - listitem [ref=e69]:
+            - link "START MY SEARCH!" [ref=e70] [cursor=pointer]:
+              - /url: /start-search
+          - listitem [ref=e71]:
+            - link "Personal Info" [ref=e72] [cursor=pointer]:
+              - /url: /save_data
+      - generic [ref=e73]:
+        - heading "Legal" [level=3] [ref=e74]
+        - list [ref=e75]:
+          - listitem [ref=e76]:
+            - link "Terms of Use" [ref=e77] [cursor=pointer]:
+              - /url: /terms
+          - listitem [ref=e78]:
+            - link "Privacy Policy" [ref=e79] [cursor=pointer]:
+              - /url: /privacy
+          - listitem [ref=e80]:
+            - link "Accessibility Statement" [ref=e81] [cursor=pointer]:
+              - /url: "#"
+    - paragraph [ref=e82]: Developed by ATOM for the Richfield IT Project (2025)
+    - link "Back to Top ↑" [ref=e83] [cursor=pointer]:
+      - /url: "#top"
+```
