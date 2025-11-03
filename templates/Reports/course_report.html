@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Matches Report</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      @page {
+        size: A4;
+        margin: 15mm;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 3px solid #5b21b6;
+      }
+
+      .header h1 {
+        color: #5b21b6;
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+
+      .header .subtitle {
+        color: #666;
+        font-size: 14px;
+      }
+
+      /* Step Forward Section */
+      .step-forward {
+        background: linear-gradient(135deg, #ede9fe 0%, #f3e8ff 100%);
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+      }
+
+      .step-forward h2 {
+        color: #5b21b6;
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 15px;
+      }
+
+      .profile-info {
+        background: white;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 10px;
+      }
+
+      .profile-info p {
+        margin-bottom: 8px;
+        font-size: 13px;
+      }
+
+      .profile-info strong {
+        color: #5b21b6;
+        font-weight: 600;
+      }
+
+      /* Top Options Section */
+      .top-options {
+        margin-top: 30px;
+      }
+
+      .top-options h2 {
+        color: #5b21b6;
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #5b21b6;
+      }
+
+      /* Option Card */
+      .option-card {
+        background: white;
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        page-break-inside: avoid;
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 15px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #e5e7eb;
+      }
+
+      .institution-name {
+        color: #5b21b6;
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+
+      .course-name {
+        color: #8b5cf6;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .match-badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .match-badge.strong {
+        background: #10b981;
+        color: white;
+      }
+
+      .match-badge.good {
+        background: #f59e0b;
+        color: white;
+      }
+
+      .match-badge.moderate {
+        background: #6b7280;
+        color: white;
+      }
+
+      /* Info Grid */
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        margin-bottom: 15px;
+      }
+
+      .info-item {
+        font-size: 12px;
+      }
+
+      .info-label {
+        color: #6b7280;
+        font-weight: 600;
+        display: block;
+        margin-bottom: 3px;
+      }
+
+      .info-value {
+        color: #111827;
+        font-weight: 500;
+      }
+
+      /* Highlights */
+      .highlights {
+        margin-top: 15px;
+      }
+
+      .highlight-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        margin-bottom: 6px;
+        border-radius: 6px;
+        font-size: 12px;
+      }
+
+      .highlight-item.success {
+        background: #d1fae5;
+        color: #065f46;
+      }
+
+      .highlight-item.warning {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      .highlight-item svg {
+        flex-shrink: 0;
+      }
+
+      /* Comparison Table */
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 30px;
+        page-break-inside: avoid;
+      }
+
+      .comparison-table thead {
+        background: #5b21b6;
+        color: white;
+      }
+
+      .comparison-table th {
+        padding: 12px;
+        text-align: left;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .comparison-table td {
+        padding: 10px 12px;
+        border-bottom: 1px solid #e5e7eb;
+        font-size: 12px;
+      }
+
+      .comparison-table tbody tr:hover {
+        background: #f9fafb;
+      }
+
+      /* Footer Section */
+      .footer {
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 2px solid #e5e7eb;
+        text-align: center;
+        page-break-inside: avoid;
+      }
+
+      .footer h3 {
+        color: #5b21b6;
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+
+      .footer p {
+        font-size: 12px;
+        color: #6b7280;
+        margin-bottom: 5px;
+      }
+
+      .footer .contact-info {
+        margin-top: 15px;
+        font-size: 11px;
+        color: #9ca3af;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <h1>uni.sa</h1>
+      <p class="subtitle">Your Personalized University Course Matches</p>
+    </div>
+
+    <!-- Step Forward Section -->
+    <div class="step-forward">
+      <h2>Your Step Forward</h2>
+
+      <div class="profile-info">
+        <p>
+          <strong>Your Profile:</strong> This report has been generated based on
+          your average grades, {% if preferences.focus_area %}interest in {{
+          preferences.focus_area }}, {% endif %} and location in {{
+          preferences.location }}.
+        </p>
+
+        <p>
+          <strong>Budget Status:</strong>
+          {% if preferences.nsfas %} NSFAS Eligible {% else %} Self-Funded (No
+          NSFAS) {% endif %}
+        </p>
+
+        <p>
+          <strong>We Found:</strong> {{ matches|length }} realistic option{{
+          matches|length != 1 and 's' or '' }} that match your profile.
+        </p>
+      </div>
+    </div>
+
+    <!-- Top Options Section -->
+    <div class="top-options">
+      <h2>Your Top Options</h2>
+
+      {% for match in matches[:10] %}
+      <div class="option-card">
+        <div class="card-header">
+          <div>
+            <h3 class="institution-name">{{ match.university.name }}</h3>
+            <p class="course-name">{{ match.program.program_name }}</p>
+          </div>
+          <span
+            class="match-badge {% if match.match_score >= 90 %}strong{% elif match.match_score >= 70 %}good{% else %}moderate{% endif %}"
+          >
+            {% if match.match_score >= 90 %}Strong Match {% elif
+            match.match_score >= 70 %}Good Match {% else %}Moderate Match{%
+            endif %}
+          </span>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Location:</span>
+            <span class="info-value"
+              >{{ match.program.location or 'N/A' }}</span
+            >
+          </div>
+          <div class="info-item">
+            <span class="info-label">Duration:</span>
+            <span class="info-value"
+              >{{ match.program.duration_years or 'N/A' }} years</span
+            >
+          </div>
+          <div class="info-item">
+            <span class="info-label">Mode:</span>
+            <span class="info-value"
+              >{{ match.program.study_mode or 'N/A' }}</span
+            >
+          </div>
+        </div>
+
+        <div class="highlights">
+          {% for req in match.program.requirements %} {% set grade =
+          marks.get(req.required_subject, 0) %}
+          <div
+            class="highlight-item {% if grade >= req.min_grade_percentage %}success{% else %}warning{% endif %}"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            {{ req.required_subject }}: {{ grade|round|int }}% (Required: {{
+            req.min_grade_percentage|round|int }}%)
+          </div>
+          {% endfor %} {% if not preferences.relocate and
+          match.university.province_state == preferences.location %}
+          <div class="highlight-item success">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Located in your preferred area
+          </div>
+          {% endif %}
+
+          <div class="highlight-item success">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Affordable fees - within most budgets
+          </div>
+
+          {% if match.program.degree_type %}
+          <div class="highlight-item success">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Can progress to {{ match.program.degree_type }} or higher
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Quick Comparison Table (if 3+ matches) -->
+    {% if matches|length >= 3 %}
+    <h2
+      style="
+        color: #5b21b6;
+        font-size: 22px;
+        margin-top: 40px;
+        margin-bottom: 15px;
+      "
+    >
+      Quick Comparison
+    </h2>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Institution</th>
+          <th>Course</th>
+          <th>Duration</th>
+          <th>Location</th>
+          <th>Mode</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for match in matches[:5] %}
+        <tr>
+          <td>{{ match.university.name }}</td>
+          <td>{{ match.program.program_name }}</td>
+          <td>{{ match.program.duration_years or 'N/A' }} years</td>
+          <td>{{ match.program.location or 'N/A' }}</td>
+          <td>{{ match.program.study_mode or 'N/A' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    <!-- Footer -->
+    <div class="footer">
+      <h3>Need Help or Have Questions?</h3>
+      <p>We're here to support you!</p>
+      <p>Email: info@uni.sa</p>
+      <p>
+        Career Guidance Hotline: 0800 872 222 (Department of Higher Education)
+      </p>
+      <p>Talk to our AI-bot chatbot for more</p>
+
+      <div class="contact-info">
+        <p>
+          © 2025 uni.sa - All Rights Reserved | Generated on {{ now.strftime('%d
+          %B %Y') }}
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
