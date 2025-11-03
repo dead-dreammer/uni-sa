@@ -1,0 +1,51 @@
+/* Hide mobile menu by default on desktop */
+.mobile-menu {
+  display: none;
+}
+
+/* Only show (and position) the menu on mobile devices */
+@media(max-width: 768px) {
+  .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: -260px; /* hidden by default */
+      width: 260px;
+      height: 100%;
+      background-color: #8099dd;
+      flex-direction: column;
+      transition: left 0.3s ease;
+      z-index: 9999;
+      padding-top: 80px; /* space for navbar */
+      display: flex; /* visi@media ble in mobile mode */
+      overflow-y: auto;
+  }
+
+  .mobile-menu.show {
+      left: 0; /* visible */
+  }
+
+  .mobile-menu li {
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .mobile-menu li a {
+      color: white;
+      padding: 15px 20px;
+      display: block;
+      text-decoration: none;
+  }
+
+  .mobile-menu li a:hover {
+      background-color: rgba(255,255,255,0.1);
+  }
+
+  .mobile-menu .dropdown-content {
+      display: none;
+      flex-direction: column;
+      padding-left: 10px;
+  }
+
+  .mobile-menu .dropdown-content.show {
+      display: flex;
+  }
+}

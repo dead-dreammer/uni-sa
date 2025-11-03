@@ -1,0 +1,301 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - navigation [ref=e2]:
+    - link "uni.sa" [ref=e3] [cursor=pointer]:
+      - /url: /home
+      - img "uni.sa" [ref=e4]
+    - list [ref=e5]:
+      - listitem [ref=e6]:
+        - link "Home" [ref=e7] [cursor=pointer]:
+          - /url: /home
+      - listitem [ref=e8]:
+        - link "About Us" [ref=e9] [cursor=pointer]:
+          - /url: /about
+      - listitem [ref=e10]:
+        - link "How it Works" [ref=e11] [cursor=pointer]:
+          - /url: /how-it-works
+      - listitem [ref=e12]:
+        - link "Course Management" [ref=e13] [cursor=pointer]:
+          - /url: /course-management
+      - listitem [ref=e14]:
+        - link "Matching Page" [ref=e15] [cursor=pointer]:
+          - /url: /matching-page
+      - listitem [ref=e16]:
+        - link "Student Tools" [ref=e17] [cursor=pointer]:
+          - /url: "#"
+      - listitem [ref=e18]:
+        - link "Contact Us" [ref=e19] [cursor=pointer]:
+          - /url: /contact
+      - listitem [ref=e20]:
+        - link "Login" [ref=e21] [cursor=pointer]:
+          - /url: /login
+      - listitem [ref=e22]:
+        - link "START MY SEARCH!" [ref=e23] [cursor=pointer]:
+          - /url: /start-search
+  - generic [ref=e24]:
+    - complementary [ref=e25]:
+      - heading "UNI.SA Admin" [level=2] [ref=e26]
+      - navigation [ref=e27]:
+        - link "🏠 Dashboard" [ref=e28] [cursor=pointer]:
+          - /url: /admin
+        - link "📚 Course Management" [ref=e29] [cursor=pointer]:
+          - /url: /course-management
+        - link "🎓 Bursary Management" [ref=e30] [cursor=pointer]:
+          - /url: /bursary-management
+        - link "🗓️ Admissions Calendar Management" [ref=e31] [cursor=pointer]:
+          - /url: /admissions-calendar-management
+        - link "📈 Reports" [ref=e32] [cursor=pointer]:
+          - /url: "#"
+    - main [ref=e33]:
+      - generic [ref=e34]:
+        - generic [ref=e36]:
+          - img [ref=e38]
+          - heading "Course Management" [level=1] [ref=e41]
+          - paragraph [ref=e42]: Manage and organize university courses across all institutions
+        - generic [ref=e43]:
+          - generic [ref=e44]:
+            - generic [ref=e45]:
+              - button "Add Course" [active] [ref=e46] [cursor=pointer]:
+                - img [ref=e47]
+                - text: Add Course
+              - button "Import CSV" [ref=e48] [cursor=pointer]:
+                - img [ref=e49]
+                - text: Import CSV
+            - generic [ref=e52]:
+              - generic [ref=e53]:
+                - img [ref=e54]
+                - textbox "Search courses..." [ref=e57]
+              - combobox "Filter" [ref=e58] [cursor=pointer]:
+                - option "All Institutions" [selected]
+                - option "DUT"
+                - option "UKZN"
+                - option "Stadio"
+                - option "Richfield"
+                - option "MUT"
+                - option "UNISA"
+          - generic [ref=e59]:
+            - generic [ref=e60]:
+              - img [ref=e62]
+              - generic [ref=e65]:
+                - heading "247" [level=3] [ref=e66]
+                - paragraph [ref=e67]: Total Courses
+            - generic [ref=e68]:
+              - img [ref=e70]
+              - generic [ref=e73]:
+                - heading "6" [level=3] [ref=e74]
+                - paragraph [ref=e75]: Institutions
+            - generic [ref=e76]:
+              - img [ref=e78]
+              - generic [ref=e81]:
+                - heading "42" [level=3] [ref=e82]
+                - paragraph [ref=e83]: Updated Today
+          - generic [ref=e84]:
+            - generic [ref=e85] [cursor=pointer]:
+              - generic [ref=e86]:
+                - generic [ref=e87]: "1"
+                - generic [ref=e88]:
+                  - button "✎" [ref=e89]
+                  - button "🗑" [ref=e90]
+              - generic [ref=e91]:
+                - heading "Bachelor of Science in Computer Science" [level=3] [ref=e92]
+                - paragraph [ref=e93]: A comprehensive program covering programming, algorithms, and software development
+                - generic [ref=e94]:
+                  - generic [ref=e95]:
+                    - strong [ref=e96]: "Duration:"
+                    - text: 3 years
+                  - generic [ref=e97]:
+                    - strong [ref=e98]: "Degree Type:"
+                    - text: BSc
+                  - generic [ref=e99]:
+                    - strong [ref=e100]: "Fees:"
+                    - text: N/A
+                  - generic [ref=e101]:
+                    - strong [ref=e102]: "Location:"
+                    - text: Westville Campus
+                  - generic [ref=e103]:
+                    - strong [ref=e104]: "Study Mode:"
+                    - text: Full-time
+            - generic [ref=e105] [cursor=pointer]:
+              - generic [ref=e106]:
+                - generic [ref=e107]: "1"
+                - generic [ref=e108]:
+                  - button "✎" [ref=e109]
+                  - button "🗑" [ref=e110]
+              - generic [ref=e111]:
+                - heading "Bachelor of Commerce in Accounting" [level=3] [ref=e112]
+                - paragraph [ref=e113]: Prepares students for careers in accounting and financial management
+                - generic [ref=e114]:
+                  - generic [ref=e115]:
+                    - strong [ref=e116]: "Duration:"
+                    - text: 3 years
+                  - generic [ref=e117]:
+                    - strong [ref=e118]: "Degree Type:"
+                    - text: BCom
+                  - generic [ref=e119]:
+                    - strong [ref=e120]: "Fees:"
+                    - text: N/A
+                  - generic [ref=e121]:
+                    - strong [ref=e122]: "Location:"
+                    - text: Westville Campus
+                  - generic [ref=e123]:
+                    - strong [ref=e124]: "Study Mode:"
+                    - text: Full-time
+            - generic [ref=e125] [cursor=pointer]:
+              - generic [ref=e126]:
+                - generic [ref=e127]: "2"
+                - generic [ref=e128]:
+                  - button "✎" [ref=e129]
+                  - button "🗑" [ref=e130]
+              - generic [ref=e131]:
+                - heading "Diploma in Information Technology" [level=3] [ref=e132]
+                - paragraph [ref=e133]: Practical IT program focusing on software development and systems analysis
+                - generic [ref=e134]:
+                  - generic [ref=e135]:
+                    - strong [ref=e136]: "Duration:"
+                    - text: 3 years
+                  - generic [ref=e137]:
+                    - strong [ref=e138]: "Degree Type:"
+                    - text: Diploma
+                  - generic [ref=e139]:
+                    - strong [ref=e140]: "Fees:"
+                    - text: N/A
+                  - generic [ref=e141]:
+                    - strong [ref=e142]: "Location:"
+                    - text: ML Sultan Campus
+                  - generic [ref=e143]:
+                    - strong [ref=e144]: "Study Mode:"
+                    - text: Full-time
+            - generic [ref=e145] [cursor=pointer]:
+              - generic [ref=e146]:
+                - generic [ref=e147]: "2"
+                - generic [ref=e148]:
+                  - button "✎" [ref=e149]
+                  - button "🗑" [ref=e150]
+              - generic [ref=e151]:
+                - heading "National Diploma in Civil Engineering" [level=3] [ref=e152]
+                - paragraph [ref=e153]: Hands-on program in civil engineering principles and practices
+                - generic [ref=e154]:
+                  - generic [ref=e155]:
+                    - strong [ref=e156]: "Duration:"
+                    - text: 3 years
+                  - generic [ref=e157]:
+                    - strong [ref=e158]: "Degree Type:"
+                    - text: Diploma
+                  - generic [ref=e159]:
+                    - strong [ref=e160]: "Fees:"
+                    - text: N/A
+                  - generic [ref=e161]:
+                    - strong [ref=e162]: "Location:"
+                    - text: Steve Biko Campus
+                  - generic [ref=e163]:
+                    - strong [ref=e164]: "Study Mode:"
+                    - text: Full-time
+          - generic [ref=e166]:
+            - generic [ref=e167]:
+              - heading "Add Course" [level=2] [ref=e168]
+              - button "×" [ref=e169] [cursor=pointer]
+            - generic [ref=e171]:
+              - generic [ref=e172]:
+                - generic [ref=e173]: Course Title
+                - textbox "Course Title" [ref=e174]
+              - generic [ref=e175]:
+                - generic [ref=e176]: Description
+                - textbox "Description" [ref=e177]
+              - generic [ref=e178]:
+                - generic [ref=e179]: College
+                - combobox "College" [ref=e180]:
+                  - option "Select College" [selected]
+                  - option "Unisa"
+                  - option "DUT"
+                  - option "UKZN"
+                  - option "Richfield"
+                  - option "Stadio"
+                  - option "MUT"
+              - generic [ref=e181]:
+                - generic [ref=e182]: Duration
+                - textbox "Duration" [ref=e183]
+              - generic [ref=e184]:
+                - generic [ref=e185]: Fees
+                - textbox "Fees" [ref=e186]
+              - generic [ref=e187]:
+                - generic [ref=e188]: Degree Type
+                - combobox "Degree Type" [ref=e189]:
+                  - option "Select Degree Type" [selected]
+                  - option "Honours"
+                  - option "Bachelor"
+                  - option "Diploma"
+                  - option "Certificate"
+              - generic [ref=e190]:
+                - generic [ref=e191]: Location
+                - textbox "Location" [ref=e192]:
+                  - /placeholder: Enter campus/location
+              - generic [ref=e193]:
+                - generic [ref=e194]: Study Mode
+                - combobox "Study Mode" [ref=e195]:
+                  - option "Select Study Mode" [selected]
+                  - option "Online"
+                  - option "Contact"
+                  - option "Hybrid"
+              - generic [ref=e196]:
+                - button "Cancel" [ref=e197] [cursor=pointer]
+                - button "Save" [ref=e198] [cursor=pointer]
+  - button [ref=e199] [cursor=pointer]:
+    - img [ref=e200]
+  - text: • • • • •
+  - contentinfo [ref=e201]:
+    - generic [ref=e202]:
+      - generic [ref=e203]:
+        - heading "Contact Us" [level=3] [ref=e204]
+        - paragraph [ref=e205]:
+          - text: "Email:"
+          - link "info@uni.sa" [ref=e206] [cursor=pointer]:
+            - /url: mailto:tmothilall07@gmail.com
+        - paragraph [ref=e207]: "Phone: +27 62 933 0262"
+      - generic [ref=e208]:
+        - heading "Explore" [level=3] [ref=e209]
+        - list [ref=e210]:
+          - listitem [ref=e211]:
+            - link "Home" [ref=e212] [cursor=pointer]:
+              - /url: /home
+          - listitem [ref=e213]:
+            - link "About Us" [ref=e214] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e215]:
+            - link "How it Works" [ref=e216] [cursor=pointer]:
+              - /url: /how-it-works
+          - listitem [ref=e217]:
+            - link "Contact Us" [ref=e218] [cursor=pointer]:
+              - /url: /contact
+          - listitem [ref=e219]:
+            - link "Admissions Calendar" [ref=e220] [cursor=pointer]:
+              - /url: /admissions
+          - listitem [ref=e221]:
+            - link "Bursaries" [ref=e222] [cursor=pointer]:
+              - /url: /bursaries
+          - listitem [ref=e223]:
+            - link "Login" [ref=e224] [cursor=pointer]:
+              - /url: /login
+          - listitem [ref=e225]:
+            - link "START MY SEARCH!" [ref=e226] [cursor=pointer]:
+              - /url: /start-search
+          - listitem [ref=e227]:
+            - link "Personal Info" [ref=e228] [cursor=pointer]:
+              - /url: /save_data
+      - generic [ref=e229]:
+        - heading "Legal" [level=3] [ref=e230]
+        - list [ref=e231]:
+          - listitem [ref=e232]:
+            - link "Terms of Use" [ref=e233] [cursor=pointer]:
+              - /url: /terms
+          - listitem [ref=e234]:
+            - link "Privacy Policy" [ref=e235] [cursor=pointer]:
+              - /url: /privacy
+          - listitem [ref=e236]:
+            - link "Accessibility Statement" [ref=e237] [cursor=pointer]:
+              - /url: "#"
+    - paragraph [ref=e238]: Developed by ATOM for the Richfield IT Project (2025)
+    - link "Back to Top ↑" [ref=e239] [cursor=pointer]:
+      - /url: "#top"
+```

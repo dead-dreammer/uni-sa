@@ -139,7 +139,6 @@ def ask():
 def start_search():
     return render_template('Search/start_my_search.html')
 
-
 @app.route('/save_data', methods=['POST', 'GET'])
 @login_required
 def personal_info():

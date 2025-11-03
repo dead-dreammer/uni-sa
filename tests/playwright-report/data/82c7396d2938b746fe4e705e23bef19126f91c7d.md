@@ -1,0 +1,121 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - link "uni.sa" [ref=e3] [cursor=pointer]:
+      - /url: /home
+      - img "uni.sa" [ref=e4]
+    - list [ref=e5]:
+      - listitem [ref=e6]:
+        - link "Home" [ref=e7] [cursor=pointer]:
+          - /url: /home
+      - listitem [ref=e8]:
+        - link "About Us" [ref=e9] [cursor=pointer]:
+          - /url: /about
+      - listitem [ref=e10]:
+        - link "How it Works" [ref=e11] [cursor=pointer]:
+          - /url: /how-it-works
+      - listitem [ref=e12]:
+        - link "Course Management" [ref=e13] [cursor=pointer]:
+          - /url: /course-management
+      - listitem [ref=e14]:
+        - link "Matching Page" [ref=e15] [cursor=pointer]:
+          - /url: /matching-page
+      - listitem [ref=e16]:
+        - link "Student Tools" [ref=e17] [cursor=pointer]:
+          - /url: "#"
+      - listitem [ref=e18]:
+        - link "Contact Us" [ref=e19] [cursor=pointer]:
+          - /url: /contact
+      - listitem [ref=e20]:
+        - link "Login" [ref=e21] [cursor=pointer]:
+          - /url: /login
+      - listitem [ref=e22]:
+        - link "START MY SEARCH!" [ref=e23] [cursor=pointer]:
+          - /url: /start-search
+  - main [ref=e24]:
+    - generic [ref=e25]:
+      - heading "Dashboard" [level=1] [ref=e26]
+      - paragraph [ref=e27]: Manage your university search and matched results
+    - generic [ref=e28]:
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - heading "Personal Information and Preferences" [level=2] [ref=e31]
+          - generic [ref=e32]: 🎓
+        - paragraph [ref=e33]: Update your profile details and preferences to receive better university matches
+        - link "Edit" [ref=e34] [cursor=pointer]:
+          - /url: /save_data
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - heading "Generated Reports" [level=2] [ref=e37]
+          - generic [ref=e38]: 📊
+        - paragraph [ref=e41]: No reports generated yet. Complete your profile to get started.
+      - generic [ref=e42]:
+        - generic [ref=e43]:
+          - heading "Matched Universities" [level=2] [ref=e44]
+          - generic [ref=e45]: 🎯
+        - paragraph [ref=e47]: No matches available yet. Complete your profile to discover universities.
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - heading "Saved Universities" [level=2] [ref=e50]
+          - generic [ref=e51]: ❤️
+        - paragraph [ref=e53]: You haven't saved any universities yet.
+  - button [ref=e54] [cursor=pointer]:
+    - img [ref=e55]
+  - text: • • • • •
+  - contentinfo [ref=e56]:
+    - generic [ref=e57]:
+      - generic [ref=e58]:
+        - heading "Contact Us" [level=3] [ref=e59]
+        - paragraph [ref=e60]:
+          - text: "Email:"
+          - link "info@uni.sa" [ref=e61] [cursor=pointer]:
+            - /url: mailto:tmothilall07@gmail.com
+        - paragraph [ref=e62]: "Phone: +27 62 933 0262"
+      - generic [ref=e63]:
+        - heading "Explore" [level=3] [ref=e64]
+        - list [ref=e65]:
+          - listitem [ref=e66]:
+            - link "Home" [ref=e67] [cursor=pointer]:
+              - /url: /home
+          - listitem [ref=e68]:
+            - link "About Us" [ref=e69] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e70]:
+            - link "How it Works" [ref=e71] [cursor=pointer]:
+              - /url: /how-it-works
+          - listitem [ref=e72]:
+            - link "Contact Us" [ref=e73] [cursor=pointer]:
+              - /url: /contact
+          - listitem [ref=e74]:
+            - link "Admissions Calendar" [ref=e75] [cursor=pointer]:
+              - /url: /admissions
+          - listitem [ref=e76]:
+            - link "Bursaries" [ref=e77] [cursor=pointer]:
+              - /url: /bursaries
+          - listitem [ref=e78]:
+            - link "Login" [ref=e79] [cursor=pointer]:
+              - /url: /login
+          - listitem [ref=e80]:
+            - link "START MY SEARCH!" [ref=e81] [cursor=pointer]:
+              - /url: /start-search
+          - listitem [ref=e82]:
+            - link "Personal Info" [ref=e83] [cursor=pointer]:
+              - /url: /save_data
+      - generic [ref=e84]:
+        - heading "Legal" [level=3] [ref=e85]
+        - list [ref=e86]:
+          - listitem [ref=e87]:
+            - link "Terms of Use" [ref=e88] [cursor=pointer]:
+              - /url: /terms
+          - listitem [ref=e89]:
+            - link "Privacy Policy" [ref=e90] [cursor=pointer]:
+              - /url: /privacy
+          - listitem [ref=e91]:
+            - link "Accessibility Statement" [ref=e92] [cursor=pointer]:
+              - /url: "#"
+    - paragraph [ref=e93]: Developed by ATOM for the Richfield IT Project (2025)
+    - link "Back to Top ↑" [ref=e94] [cursor=pointer]:
+      - /url: "#top"
+```
