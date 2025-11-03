@@ -53,6 +53,11 @@
         <div id="matchesContainer" class="matches-container">
           <p class="empty-state">No matches available yet. Complete your profile to discover universities.</p>
         </div>
+        <div class="section-footer" style="margin-top: 1rem; text-align: center;">
+          <a href="{{ url_for('courses.get_matches') }}" class="btn btn-primary">
+            View All Matches
+          </a>
+        </div>
       </section>
 
       <!-- Liked Universities Section -->

@@ -9,15 +9,15 @@ from Database.models import Student, Preference, AcademicMark, Program, Universi
 from Chatbot.bot import chatbot_response
 from Database.backup import backup_database, restore_latest_backup
 import json
+from functools import wraps
 
 app = create_app()
 
-
-
 @app.after_request
 def add_header(response):
-    # Prevent caching during development
-    response.headers["Cache-Control"] = "no-store"
+    response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
     return response
 
 
@@ -43,16 +43,35 @@ def how_it_works():
 def contact():
     return render_template('Contact us/contact_us.html')
 
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get('is_admin'):
+            return redirect(url_for('admin_login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get('name'):
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    return decorated_function
+
 
 @app.route('/course-management')
+@admin_required
 def course_management():
     return render_template('Admin/course_management.html')
 
 @app.route('/bursary-management')
+@admin_required
 def bursary_management():
     return render_template('Admin/bursary_management.html')
 
 @app.route('/admissions-calendar-management')
+@admin_required
 def admissions_calendar_management():
     return render_template('Admin/admissions_calendar_management.html')
 
@@ -61,6 +80,11 @@ def admissions_calendar_management():
 def login():
     # Combined login/signup page
     return render_template('Login/login_signup.html')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('home_page'))
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -97,10 +121,6 @@ def admin_logout():
     session.pop('admin_email', None)
     return redirect(url_for('home_page'))
 
-@app.route('/profile')
-def profile():
-    return render_template('profile.html')
-
 
 @app.route('/ask', methods=['POST'])
 def ask():
@@ -121,15 +141,18 @@ def ask():
     return jsonify({"reply": reply})
 
 @app.route('/start-search')
+@login_required
 def start_search():
     return render_template('Search/start_my_search.html')
 
 
 @app.route('/save_data', methods=['POST', 'GET'])
+@login_required
 def personal_info():
     return render_template('Search/personal_info.html')
 
 @app.route('/matching-page')
+@login_required
 def matching_page():
     student_id = session.get('student_id')
     if not student_id:
@@ -220,6 +243,10 @@ def bursaries():
 def terms():
     return render_template('terms.html')
 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
+
 
 @app.route('/privacy')
 def privacy():
@@ -232,6 +259,11 @@ def admin():
 @app.route('/courses/add', methods=['GET', 'POST'])
 def add_course_page():
     return render_template('Admin/admin.html')
+
+@app.route('/bursaries/add', methods=['GET', 'POST'])
+def add_bursary_page():
+    return render_template('Admin/admin.html')
+
 
 
 if __name__ == '__main__':
