@@ -46,16 +46,18 @@ def create_app():
 
     # Import models AFTER db.init_app(app)
     from .models import Student, AcademicMark, Preference, University, Program, Requirement, Application
-    from .auth import auth
-    from .search import search
-    from .courses import courses
-    from .bursary import bursary
+    from routes.auth import auth
+    from routes.search import search
+    from routes.courses import courses
+    from routes.bursary import bursary
+    from routes.web_scrapping import ws
 
     # Register blueprints
     app.register_blueprint(auth, url_prefix='/auth')
     app.register_blueprint(search, url_prefix='/search')
     app.register_blueprint(courses, url_prefix='/courses')
     app.register_blueprint(bursary, url_prefix='/bursary')
+    app.register_blueprint(ws, url_prefix='/ws')
 
     # Create or restore database
     create_database(app)

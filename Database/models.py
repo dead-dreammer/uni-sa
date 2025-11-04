@@ -100,3 +100,32 @@ class Application(db.Model):
     student_id = db.Column(db.Integer, db.ForeignKey('student.student_id'), nullable=False)
     program_id = db.Column(db.Integer, db.ForeignKey('program.program_id'), nullable=False)
     application_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+class WSUniversity(db.Model):
+    __tablename__ = 'ws_university'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150), nullable=False, unique=True)
+    location = db.Column(db.String(100))
+    website = db.Column(db.String(200))
+
+    # Corrected relationship
+    programs = db.relationship('WSProgram', backref='ws_university', lazy=True, cascade='all, delete-orphan')
+
+    def __repr__(self):
+        return f"<WSUniversity {self.name}>"
+
+class WSProgram(db.Model):
+    __tablename__ = 'ws_program'
+    id = db.Column(db.Integer, primary_key=True)
+    program_name = db.Column(db.String(150), nullable=False)
+    description = db.Column(db.Text)
+    duration_years = db.Column(db.Integer)
+    degree_type = db.Column(db.String(50))
+    location = db.Column(db.String(100))
+    study_mode = db.Column(db.String(50))
+    fees = db.Column(db.String(50))
+
+    university_id = db.Column(db.Integer, db.ForeignKey('ws_university.id'), nullable=False)
+
+    def __repr__(self):
+        return f"<WSProgram {self.program_name} at University ID {self.university_id}>"

@@ -1,0 +1,124 @@
+# safe_pdf_url_scraper.py
+import requests
+import io
+import pdfplumber
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+import re
+import contextlib
+
+# ---------------------- Flask App & DB Setup ----------------------
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///university.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+# ---------------------- Models ----------------------
+class University(db.Model):
+    university_id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    programs = db.relationship('Program', backref='university', lazy=True)
+
+class Program(db.Model):
+    program_id = db.Column(db.Integer, primary_key=True)
+    university_id = db.Column(db.Integer, db.ForeignKey('university.university_id'), nullable=False)
+    program_name = db.Column(db.String(200), nullable=False)
+    degree_type = db.Column(db.String(50))
+    duration_years = db.Column(db.Integer)
+    description = db.Column(db.Text)
+
+# ---------------------- Helper Function ----------------------
+def parse_program_lines(lines):
+    programs = []
+    current_program = {}
+    description_lines = []
+
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+
+        if re.match(r'^[A-Z][A-Za-z0-9\s]+$', line) and 'program_name' not in current_program:
+            if current_program:
+                current_program['description'] = " ".join(description_lines).strip()
+                programs.append(current_program)
+                current_program = {}
+                description_lines = []
+            current_program['program_name'] = line
+        elif re.search(r'Bachelor|Diploma|Master|Certificate|PhD', line, re.IGNORECASE):
+            current_program['degree_type'] = line
+        elif re.search(r'\d+\s*years?', line, re.IGNORECASE):
+            match = re.search(r'(\d+)', line)
+            current_program['duration_years'] = int(match.group(1))
+        else:
+            description_lines.append(line)
+
+    if current_program:
+        current_program['description'] = " ".join(description_lines).strip()
+        programs.append(current_program)
+
+    return programs
+
+# ---------------------- PDF Scraping Function from URL ----------------------
+def scrape_pdf_from_url(url, university_id):
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    }
+
+    response = requests.get(url, headers=headers)
+    if response.status_code != 200:
+        print(f"Failed to download PDF. Status code: {response.status_code}")
+        return
+
+    content_type = response.headers.get('Content-Type', '')
+    if 'pdf' not in content_type.lower():
+        print("Downloaded file is not a PDF. Saving for inspection...")
+        with open("downloaded_file.html", "wb") as f:
+            f.write(response.content)
+        print("Saved file as downloaded_file.html")
+        return
+
+    pdf_bytes = io.BytesIO(response.content)
+    lines = []
+
+    # Suppress pdfplumber warnings
+    with contextlib.redirect_stderr(io.StringIO()):
+        try:
+            with pdfplumber.open(pdf_bytes) as pdf:
+                for page in pdf.pages:
+                    text = page.extract_text()
+                    if text:
+                        lines.extend(text.split('\n'))
+        except Exception as e:
+            print(f"Failed to open PDF: {e}")
+            with open("downloaded_invalid.pdf", "wb") as f:
+                f.write(response.content)
+            print("Saved file as downloaded_invalid.pdf for inspection")
+            return
+
+    programs = parse_program_lines(lines)
+
+    if not programs:
+        print("No programs found. Check PDF layout.")
+        return
+
+    count = 0
+    for prog in programs:
+        program = Program(
+            university_id=university_id,
+            program_name=prog.get('program_name', 'N/A'),
+            degree_type=prog.get('degree_type'),
+            duration_years=prog.get('duration_years'),
+            description=prog.get('description')
+        )
+        db.session.add(program)
+        count += 1
+
+    db.session.commit()
+    print(f"Scraped and saved {count} programs!")
+
+# ---------------------- Main ----------------------
+if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
+        scrape_pdf_from_url("https://www.uct.ac.za/students/prospective-students/undergraduate-prospectus", university_id=1)

@@ -6,7 +6,7 @@ from pathlib import Path #Finds exact location of json file
 from difflib import get_close_matches #Checks which question in the dataset closely matches user input
 from sklearn.feature_extraction.text import TfidfVectorizer #Helps the chatbot understand the importance of words in question
 from sklearn.metrics.pairwise import cosine_similarity #This finds which stored question is most similar to the user's input
-
+from flask import url_for #Generates URLs for Flask routes
 # ----------------------------
 # NLTK setup
 # ----------------------------
@@ -135,6 +135,9 @@ def chatbot_response(user_input: str) -> str:
         return f"Oops! Something went wrong ({e})"
 
     if best_score < 0.12:
-        return "Sorry, I didn’t quite get that 🤔. Try asking about universities, courses, fees, or matric subjects."
+          return (
+        "Sorry, I didn’t quite get that 🤔. "
+        f"Try sending us your question on the <a href='{url_for('contact')}'>Contact us page</a>"
+    )
     else:
         return answers[best_idx]

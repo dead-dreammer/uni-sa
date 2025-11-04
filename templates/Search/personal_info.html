@@ -38,7 +38,7 @@
   <!-- Search Form Section -->
   <section class="search-section">
     <div class="search-form-container">
-      <form id="searchForm" class="search-form" method="POST" action="{{ url_for('search.find_matches') }}" novalidate>
+      <form id="searchForm" class="search-form" method="POST" action="{{ url_for('courses.get_matches') }}" novalidate>
         <input type="hidden" id="studentId" value="{{ session['student_id'] }}">
         <!-- Question 1: Subjects and Marks -->
         <div class="form-card" id="section-subjects">

@@ -339,7 +339,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(135deg, #f7f8fc 0%, #e5e7eb 100%);
+    background: linear-gradient(180deg, #667eea 0%, #773985 100%);
   border-bottom: 1px solid #e5e7eb;
 }
 
