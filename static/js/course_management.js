@@ -229,3 +229,32 @@ function bindCourseButtons() {
 }
 
 document.addEventListener('DOMContentLoaded', loadCourses);
+
+const importPDFInput = document.getElementById('importPDF');
+const uploadPDFBtn = document.getElementById('uploadPDFBtn');
+
+uploadPDFBtn.addEventListener('click', async () => {
+  const file = importPDFInput.files[0];
+  if (!file) return alert('Please select a PDF file.');
+
+  const formData = new FormData();
+  formData.append('pdf', file);
+
+  try {
+    const res = await fetch('/ws/import-pdf', {
+      method: 'POST',
+      body: formData
+    });
+    const data = await res.json();
+    if (data.success) {
+      alert('PDF imported successfully!');
+      loadCourses(); // reload courses after import
+    } else {
+      alert('Failed to import PDF: ' + (data.error || 'Unknown error'));
+    }
+  } catch (err) {
+    console.error(err);
+    alert('Error uploading PDF.');
+  }
+});
+

@@ -1,17 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}uni.sa{% endblock %}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
-<<<<<<< HEAD
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
@@ -26,7 +15,7 @@
   <link rel="stylesheet" href="{{url_for('static', filename='css/chat.css')}}" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile-fixes.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile-menu.css') }}">
-=======
+
     <!-- Font Awesome for Icons -->
     <link
       rel="stylesheet"
@@ -35,7 +24,6 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
->>>>>>> 461e91fbc44ea836015f8d09c0b91b75817b9dd5
 
     <link
       rel="stylesheet"
@@ -46,7 +34,7 @@
       href="{{url_for('static', filename='css/chat.css')}}"
     />
 
-<<<<<<< HEAD
+
 <body>
   <nav class="navbar">
     <canvas id="gradient-canvas" data-transition-in></canvas>
@@ -103,16 +91,19 @@
           alt="uni.sa"
       /></a>
       {% if session.get('name') %}
-      <a href="{{ url_for('personal_info') }}" class="underline0">
+      <a href="{{ url_for('profile') }}" class="underline0">
         <i class="fas fa-user user-icon"></i>
-        {{ session.get('name') }}</a
-      >
-      {% endif %} {% if session.get('is_admin')%}
-
+        {{session.get('name') }}</a>
+      {% elif session.get('is_admin')%}
       <a href="{{ url_for('course_management') }}" class="underline0">Admin</a>
->>>>>>> 461e91fbc44ea836015f8d09c0b91b75817b9dd5
-
       {% endif %}
+       <!--Adding a menu button-->
+    <button class="mobile-menu-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul>
       <ul>
         <li><a href="{{ url_for('home_page') }}" class="underline">Home</a></li>
         <li><a href="{{ url_for('about') }}" class="underline">About Us</a></li>
@@ -141,14 +132,6 @@
           <a href="{{ url_for('contact') }}" class="underline">Contact Us</a>
         </li>
 
-<<<<<<< HEAD
-  <!-- Floating chat button -->
-  <button class="chat-button" id="chatButton">
-    <svg class="chat-button-icon" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2">
-
-    </svg>
-  </button>
-=======
         {% if session.get('is_admin') %}
         <li>
           <a href="{{ url_for('admin_logout') }}" class="underline">Logout</a>
@@ -178,7 +161,6 @@
         stroke-width="2"
       ></svg>
     </button>
->>>>>>> 461e91fbc44ea836015f8d09c0b91b75817b9dd5
 
     <!-- Chat widget -->
     <div class="chat-widget" id="chatWidget">
@@ -278,54 +260,6 @@
         </div>
       </div>
 
-<<<<<<< HEAD
-      <!-- Explore Section -->
-      <div class="footer-section explore">
-        <h3>Explore</h3>
-        <ul>
-          <li><a href="{{ url_for('home_page') }}">Home</a></li>
-          <li><a href="{{ url_for('about') }}">About Us</a></li>
-          <li><a href="{{ url_for('how_it_works') }}">How it Works</a></li>
-          <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
-          <li>
-            <a href="{{ url_for('admissions') }}">Admissions Calendar</a>
-          </li>
-          <li><a href="{{ url_for('bursaries') }}">Bursaries</a></li>
-          <li><a href="{{ url_for('login') }}">Login</a></li>
-          <li>
-            <a href="{{ url_for('start_search') }}">START MY SEARCH!</a>
-          </li>
-          <li><a href="{{ url_for('personal_info') }}">Personal Info</a></li>
-        </ul>
-      </div>
-
-      <!-- Legal Section -->
-      <div class="footer-section legal">
-        <h3>Legal</h3>
-        <ul>
-          <li><a href="{{ url_for('terms') }}">Terms of Use</a></li>
-          <li><a href="{{ url_for('privacy') }}">Privacy Policy</a></li>
-          <li><a href="#">Accessibility Statement</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <p class="footer-bottom">
-      Developed by ATOM for the Richfield IT Project (2025)
-    </p>
-    <a href="#top" class="back-to-top">Back to Top ↑</a>
-  </footer>
-
-  {% block scripts %}{% endblock %}
-  <!-- Global gradient module (initializes only if #gradient-canvas exists) -->
-  <script type="module" src="{{ url_for('static', filename='js/gradient.js') }}"></script>
-  <script type="module" src="{{ url_for('static', filename='js/logout.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/mobile-menu.js') }}"></script><!--New js file-->
-
-</body>
-</html>
-=======
       <p class="footer-bottom">
         Developed by ATOM for the Richfield IT Project (2025)
       </p>
@@ -343,6 +277,6 @@
       src="{{ url_for('static', filename='js/logout.js') }}"
     ></script>
     <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/mobile-menu.js') }}"></script><!--New js file-->
   </body>
 </html>
->>>>>>> 461e91fbc44ea836015f8d09c0b91b75817b9dd5

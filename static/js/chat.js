@@ -155,7 +155,7 @@ function addMessageToDOM(text, isUser = false, time = null) {
     contentDiv.className = 'message-content';
 
     const p = document.createElement('p');
-    p.textContent = text;
+    p.innerHTML = text;
 
     const timeDiv = document.createElement('div');
     timeDiv.className = 'message-time';

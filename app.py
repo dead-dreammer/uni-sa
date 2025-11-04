@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_file
-from Database.auth import auth
-from Database.search import search
-from Database.courses import courses
-from Database.bursary import bursary
+from routes.auth import auth
+from routes.search import search
+from routes.courses import courses
+from routes.bursary import bursary
 from Database.backup import backup_database
 from Database.__init__ import db, create_database, create_app
 from Database.models import Student, Preference, AcademicMark, Program, University, Requirement, Bursary
@@ -255,6 +255,7 @@ def add_course_page():
 @app.route('/bursaries/add', methods=['GET', 'POST'])
 def add_bursary_page():
     return render_template('Admin/admin.html')
+
 
 
 

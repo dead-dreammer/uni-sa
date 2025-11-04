@@ -13,11 +13,11 @@
   position: fixed;
   bottom: 32px;
   right: 32px;
-  width: 64px;
+  width: 70px;
   height: 64px;
   border: none;
   border-radius: 50%;
-  background: var(--atom-gradient);
+  background: transparent;
   box-shadow: 0 0 15px var(--atom-glow);
   display: flex;
   align-items: center;
@@ -33,7 +33,7 @@
 }
 
 .chat-button-icon {
-  width: 80px;
+  width: 100px;
   height: 70px;
   background: url(../img/home/ATOM_LOGO.png) no-repeat center/cover;
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
