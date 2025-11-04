@@ -227,34 +227,57 @@ function bindCourseButtons() {
     });
   });
 }
-
 document.addEventListener('DOMContentLoaded', loadCourses);
 
-const importPDFInput = document.getElementById('importPDF');
+const pdfInput = document.getElementById('pdfUpload');
 const uploadPDFBtn = document.getElementById('uploadPDFBtn');
+const fileNameDisplay = document.getElementById('fileName');
 
+// Show selected file name
+pdfInput.addEventListener('change', () => {
+  if (pdfInput.files.length > 0) {
+    fileNameDisplay.textContent = pdfInput.files[0].name;
+    uploadPDFBtn.disabled = false; // enable upload once file selected
+  } else {
+    fileNameDisplay.textContent = 'No file selected';
+    uploadPDFBtn.disabled = true;
+  }
+});
+
+// Handle PDF upload
 uploadPDFBtn.addEventListener('click', async () => {
-  const file = importPDFInput.files[0];
-  if (!file) return alert('Please select a PDF file.');
+  const file = pdfInput.files[0];
+  if (!file) {
+    alert('Please select a PDF file first.');
+    return;
+  }
 
   const formData = new FormData();
   formData.append('pdf', file);
 
   try {
+    uploadPDFBtn.textContent = 'Uploading...';
+    uploadPDFBtn.disabled = true;
+
     const res = await fetch('/ws/import-pdf', {
       method: 'POST',
       body: formData
     });
+
     const data = await res.json();
     if (data.success) {
-      alert('PDF imported successfully!');
-      loadCourses(); // reload courses after import
+      alert('✅ PDF imported successfully!');
+      loadCourses(); // reload course list
+      fileNameDisplay.textContent = 'No file selected';
+      pdfInput.value = ''; // reset file input
     } else {
-      alert('Failed to import PDF: ' + (data.error || 'Unknown error'));
+      alert('❌ Failed to import PDF: ' + (data.error || 'Unknown error'));
     }
   } catch (err) {
     console.error(err);
-    alert('Error uploading PDF.');
+    alert('⚠️ Error uploading PDF.');
+  } finally {
+    uploadPDFBtn.textContent = 'Upload PDF';
+    uploadPDFBtn.disabled = false;
   }
 });
-

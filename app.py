@@ -12,6 +12,7 @@ from weasyprint import HTML
 import tempfile
 import json
 from functools import wraps
+from flask import flash
 
 app = create_app()
 
@@ -180,21 +181,49 @@ def add_bursary_page():
     return render_template('Admin/admin.html')
 
 @app.route('/edit-profile', methods=['GET', 'POST'])
+@login_required
 def edit_profile():
-    if request.method == 'POST':
-        # Save updated info into session (or database if you have one)
-        session['name'] = request.form.get('name')
-        session['email'] = request.form.get('email')
-        session['number'] = request.form.get('number')
-        session['age'] = request.form.get('age')
-        session['company_name'] = request.form.get('company_name')
-        return redirect(url_for('profile'))  # go back to profile page
+    # Get the currently logged-in student's email from session
+    student_email = session.get('email')
     
-    # GET request - show form pre-filled with current data
-    return render_template('edit_profile.html', session=session)
+    if not student_email:
+        flash("No student logged in.", "error")
+        return redirect(url_for('login'))
 
+    # Fetch student record from DB
+    student = Student.query.filter_by(email=student_email).first()
+    if not student:
+        flash("Student record not found.", "error")
+        return redirect(url_for('profile'))
 
+    if request.method == 'POST':
+        # Get updated data from form
+        student.name = request.form.get('name')
+        student.email = request.form.get('email')
+        student.number = request.form.get('number')
+        student.dob = request.form.get('dob')  # Make sure form uses date input
+        student.gender = request.form.get('gender')
+        student.location = request.form.get('location')
+        
+        try:
+            db.session.commit()  # Save changes to DB
+            # Update session data too
+            session['name'] = student.name
+            session['email'] = student.email
+            session['number'] = student.number
+            flash("Profile updated successfully.", "success")
+            return redirect(url_for('profile'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f"Error updating profile: {e}", "error")
+            return redirect(url_for('edit_profile'))
 
+    # GET request: show form pre-filled
+    return render_template('edit_profile.html', student=student)
+
+@app.route('/forget-password', methods=['GET', 'POST'])
+def forget_password():
+    return render_template('Login/forgot_password.html', show_chatbot = False)
 
 if __name__ == '__main__':
     # Runs the Flask development server
