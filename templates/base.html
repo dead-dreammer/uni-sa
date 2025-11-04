@@ -3,7 +3,7 @@
   <head>
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes"> <!--Added this so it can fit onto the mobile app-->
   <meta name="mobile-web-app-capable" content="yes">
   <title>{% block title %}uni.sa{% endblock %}</title>
@@ -40,12 +40,14 @@
   <body>
     <nav class="navbar">
       <canvas id="gradient-canvas" data-transition-in></canvas>
-      <a href="{{ url_for('home_page') }}"
-        ><img
+      <a href="{{ url_for('home_page') }}">
+        <img
           class="logo"
           src="{{ url_for('static', filename='img/atom-removebg-preview.png') }}"
           alt="uni.sa"
-      /></a>
+        />
+      </a>
+
       {% if session.get('name') %}
       <a href="{{ url_for('profile') }}" class="underline0">
         <i class="fas fa-user user-icon"></i>
@@ -54,7 +56,7 @@
       <a href="{{ url_for('admin') }}" class="underline0">Admin</a>
       {% endif %}
        <!--Adding a menu button-->
-    <button class="mobile-menu-btn" >
+    <button class="mobile-menu-btn" aria-label="mobilemenubtn">
       <span></span>
       <span></span>
       <span></span>
@@ -83,6 +85,7 @@
             </li>
           </ul>
         </li>
+
         <li>
           <a href="{{ url_for('contact') }}" class="underline">Contact Us</a>
         </li>
@@ -96,6 +99,7 @@
         {% else %}
         <li><a href="{{ url_for('login') }}" class="underline">Login</a></li>
         {% endif %}
+
         <li>
           <a href="{{ url_for('start_search') }}" class="special-link"
             >START MY SEARCH!</a
@@ -136,10 +140,10 @@
         <div class="welcome-message">
           <div class="join-notice">
             <div class="header-icon" style="width: 60px; height: 60px"></div>
-            <span
-              ><strong>ATOM Student Advisor</strong> <br /><br />
-              joined • <span id="joinTime"></span
-            ></span>
+            <span>
+              <strong>ATOM Student Advisor</strong> <br /><br />
+              joined • <span id="joinTime"></span>
+            </span>
           </div>
           
 
@@ -153,6 +157,7 @@
             Hello! 👋 I'm ATOM, your student advisor. Ask me about courses,
             fees, or entry requirements?
           </div>
+
           <ul class="options-list">
             <li>Get Support</li>
             <li>Explore Course Information</li>
@@ -225,7 +230,8 @@
     </footer>
 
     {% block scripts %}{% endblock %}
-    <!-- Global gradient module (initializes only if #gradient-canvas exists) -->
+
+    <!-- Global scripts -->
     <script
       type="module"
       src="{{ url_for('static', filename='js/gradient.js') }}"
