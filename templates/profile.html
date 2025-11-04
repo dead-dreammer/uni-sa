@@ -1,179 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>User Profile</title>
-  {% extends "base.html" %}
-  {% block extra_styles %}
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+{% extends "base.html" %}
 
-    * {
-      box-sizing: border-box;
-    }
+{% block head_extras %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+</style>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/profile.css') }}"/>
+{% endblock  %}
 
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 80px 20px 20px; /* space at top for nav */
-       color: #00FFB3;
-    }
+{% block content %}
 
+<a href="javascript:history.back()" class="back-button">← Back</a>
+<div class="profile-page">
+<!-- Profile Card -->
 
+  <div class="profile-logo">
+    {% if session.get('name') %}{{ session.get('name')[0] }}{% else %}U{% endif %}
+  </div>
 
-    .profile-container {
-    
-      border-radius: 20px;
-      padding: 40px 30px;
-      max-width: 520px;
-      width: 100%;
-      box-shadow:
-        0 4px 30px rgb(0, 255, 179),
+  {% if session.get('name') %}
+  <h2>{{ session.get('name') }}</h2>
 
-        inset 0 0 10px rgb(0, 255, 179);
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      text-align: center;
-       color: #00FFB3;
-       margin-top: 20px;
-    }
-
-
-
-    h2 {
-      font-weight: 600;
-      font-size: 1.8rem;
-      margin: 10px 0 5px;
-    }
-
-    p {
-      margin: 5px 0;
-      font-size: 1rem;
-      opacity: 0.9;
-    }
-
-    .profile-logo {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;          /* circle shape */
-  background: linear-gradient(135deg, #556ee6, #00ffb3);
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 36px;
-  font-weight: bold;
-  color: white;
-  text-transform: uppercase;   /* makes initials uppercase */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-    .info-card {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 15px;
-      padding: 20px;
-      margin-top: 25px;
-      text-align: left;
-      box-shadow: inset 0 0 8px rgb(0, 255, 179)
-;
-    }
-
-    .info-row {
-      display: flex;
-      justify-content: space-between;
-      margin: 12px 0;
-      font-size: 1rem;
-    }
-
-    .info-label {
-      font-weight: 600;
-    }
-
-    .edit-button {
-      margin-top: 25px;
-      background: linear-gradient(135deg, #556ee6, #3747a8);
-      padding: 12px 20px;
-      border: none;
-      border-radius: 14px;
-      color: white;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 6px 15px rgba(55, 71, 168, 0.6);
-    }
-
-    .edit-button:hover {
-      background: linear-gradient(135deg, #3747a8, #556ee6);
-      box-shadow: 0 10px 20px rgba(55, 71, 168, 0.85);
-    }
-
-    @media (max-width: 560px) {
-      .profile-container {
-        padding: 30px 20px;
-      }
-      h2 {
-        font-size: 1.5rem;
-      }
-    }
-  </style>
-  {% endblock extra_styles %}
-</head>
-<body>
-  {% block content %}
-  <!-- Back button -->
-  <a href="javascript:history.back()" class="back-button">← Back</a>
-
-  <!-- Profile Card -->
-  <div class="profile-container">
-    <!-- Profile Picture -->
-    <div class="profile-logo">
-      {% if session.get('username') %}
-        {{ session.get('username')[0] }}
-      {% else %}
-        U
-      {% endif %}
+  <div class="info-card">
+    <div class="info-row">
+      <span class="info-label">Email:</span>
+      <span>{{ session.get('email') }}</span>
     </div>
+    <div class="info-row">
+      <span class="info-label">Phone:</span>
+      <span>{{ session.get('number') }}</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Location:</span>
+      <span>Cape Town, South Africa</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Age:</span>
+      <span>{{ session.get('age') }} years old</span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Company:</span>
+      <span>{{ session.get('company_name') }}</span>
+    </div>
+  </div>
+  {% endif %}
 
-{% if session.get('username') %}
-<!-- User Info -->
-<h2>{{ session.get('username') }}</h2>
-
-
-<!-- Info Card -->
-<div class="info-card">
-  <div class="info-row">
-    <span class="info-label">Email:</span>
-    <span>{{ session.get('email') }}</span>
-  </div>
-  <div class="info-row">
-    <span class="info-label">Phone:</span>
-    <span>{{ session.get('number') }}</span>
-  </div>
-  <div class="info-row">
-    <span class="info-label">Location:</span>
-    <span>Cape Town, South Africa</span>
-  </div>
-  <div class="info-row">
-    <span class="info-label">Age:</span>
-    <span>{{ session.get('age') }} years old</span>
-  </div>
-  <div class="info-row">
-    <span class="info-label">Company:</span>
-    <span>{{ session.get('company_name') }}</span>
-  </div>
-</div>
+  {% if session.get('name') %}
+<form action="{{ url_for('edit_profile') }}" method="GET">
+    <button type="submit" class="edit-button">Edit Profile</button>
+</form>
 {% endif %}
 
 
-  </div>
-  {% endblock content %}
-</body>
-</html>
+</div>
+{% endblock content %}

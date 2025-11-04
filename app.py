@@ -179,6 +179,20 @@ def add_course_page():
 def add_bursary_page():
     return render_template('Admin/admin.html')
 
+@app.route('/edit-profile', methods=['GET', 'POST'])
+def edit_profile():
+    if request.method == 'POST':
+        # Save updated info into session (or database if you have one)
+        session['name'] = request.form.get('name')
+        session['email'] = request.form.get('email')
+        session['number'] = request.form.get('number')
+        session['age'] = request.form.get('age')
+        session['company_name'] = request.form.get('company_name')
+        return redirect(url_for('profile'))  # go back to profile page
+    
+    # GET request - show form pre-filled with current data
+    return render_template('edit_profile.html', session=session)
+
 
 
 

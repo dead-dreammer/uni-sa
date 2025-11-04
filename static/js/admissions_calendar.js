@@ -1,111 +1,130 @@
-// Admissions Calendar JavaScript
+// Admissions Calendar JavaScript - User View (Connected to Backend)
 
-// Sample Events Data
-const eventsData = [
-    {
-        id: 1,
-        title: "Undergraduate Applications Open",
-        university: "University of Cape Town",
-        date: "2025-04-01",
-        type: "application",
-        description: "Online applications for all undergraduate programs are now open. Make sure you have all required documents including ID, academic transcripts, and proof of residence ready before starting your application.",
-        link: "https://www.uct.ac.za/apply"
-    },
-    {
-        id: 2,
-        title: "NSFAS Applications Deadline",
-        university: "National Student Financial Aid Scheme",
-        date: "2025-11-30",
-        type: "bursary",
-        description: "Final deadline for NSFAS bursary applications for the 2026 academic year. Ensure all supporting documents are uploaded and your application is complete.",
-        link: "https://www.nsfas.org.za"
-    },
-    {
-        id: 3,
-        title: "First Year Registration",
-        university: "University of Witwatersrand",
-        date: "2026-01-20",
-        type: "registration",
-        description: "All first-year students must complete registration and collect student cards. Bring proof of payment and acceptance letter.",
-        link: "https://www.wits.ac.za"
-    },
-    {
-        id: 4,
-        title: "Orientation Week",
-        university: "Stellenbosch University",
-        date: "2026-02-03",
-        type: "orientation",
-        description: "Welcome week for all new students. Campus tours, faculty introductions, meet your mentors, and social events to help you settle in.",
-        link: "https://www.sun.ac.za"
-    },
-    {
-        id: 5,
-        title: "Postgraduate Applications Close",
-        university: "University of Pretoria",
-        date: "2025-10-31",
-        type: "application",
-        description: "Final deadline for postgraduate program applications including Honours, Masters, and PhD programs. Late applications will not be accepted.",
-        link: "https://www.up.ac.za"
-    },
-    {
-        id: 6,
-        title: "Late Applications Window",
-        university: "University of KwaZulu-Natal",
-        date: "2025-12-15",
-        type: "application",
-        description: "Extended application period for selected programs. Limited spaces available. Additional application fee applies.",
-        link: "https://www.ukzn.ac.za"
-    },
-    {
-        id: 7,
-        title: "Faculty Bursary Applications",
-        university: "University of Johannesburg",
-        date: "2025-09-30",
-        type: "bursary",
-        description: "Apply for faculty-specific bursaries and scholarships. Available for Engineering, Business, and Health Sciences students with strong academic records.",
-        link: "https://www.uj.ac.za"
-    },
-    {
-        id: 8,
-        title: "Online Registration Opens",
-        university: "University of Cape Town",
-        date: "2025-12-01",
-        type: "registration",
-        description: "Online registration portal opens for all accepted students. Register early to secure your spot and avoid last-minute rush.",
-        link: "https://www.uct.ac.za"
-    },
-    {
-        id: 9,
-        title: "Engineering Applications Close",
-        university: "University of Witwatersrand",
-        date: "2025-09-15",
-        type: "application",
-        description: "Specific deadline for all Engineering faculty programs. Ensure your Mathematics and Physical Science marks meet minimum requirements.",
-        link: "https://www.wits.ac.za"
-    },
-    {
-        id: 10,
-        title: "Residence Applications",
-        university: "Stellenbosch University",
-        date: "2025-08-31",
-        type: "registration",
-        description: "Submit your residence application if you need on-campus accommodation. Limited spaces fill up quickly.",
-        link: "https://www.sun.ac.za"
-    }
-];
-
+let eventsData = [];
 let currentView = 'grid';
 let currentCalendarMonth = new Date().getMonth();
 let currentCalendarYear = new Date().getFullYear();
-let filteredEvents = [...eventsData];
+let filteredEvents = [];
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
-    updateInfoBar();
-    renderGrid();
-    renderCalendar();
+    loadAdmissions();
     setupEventListeners();
 });
+
+// Load admissions from backend
+async function loadAdmissions() {
+    try {
+        showLoading();
+        const response = await fetch('/admissions/api/admissions');
+        if (!response.ok) {
+            throw new Error('Failed to fetch admissions');
+        }
+        const data = await response.json();
+        
+        // Transform backend data to frontend format
+        eventsData = data.map(admission => ({
+            id: admission.id,
+            title: admission.title,
+            university: admission.institution,
+            date: admission.applicationDeadline || admission.registrationDeadline,
+            endDate: admission.registrationDeadline,
+            type: mapEventType(admission),
+            description: admission.description || '',
+            link: admission.url || admission.applicationPortalUrl,
+            programName: admission.programName,
+            studyLevel: admission.studyLevel,
+            studyMode: admission.studyMode,
+            applicationFee: admission.applicationFee,
+            tuitionFee: admission.tuitionFee,
+            contactEmail: admission.contactEmail,
+            contactPhone: admission.contactPhone,
+            fieldOfStudy: admission.fieldOfStudy,
+            academicYear: admission.academicYear,
+            intakePeriod: admission.intakePeriod,
+            requirements: parseRequirements(admission.requirements)
+        }));
+        
+        // Filter out events without dates
+        eventsData = eventsData.filter(e => e.date);
+        
+        filteredEvents = [...eventsData];
+        hideLoading();
+        updateInfoBar();
+        renderGrid();
+        renderCalendar();
+    } catch (error) {
+        console.error('Error loading admissions:', error);
+        showError();
+    }
+}
+
+// Parse requirements (they come as JSON string from backend)
+function parseRequirements(requirements) {
+    if (!requirements) return [];
+    try {
+        return typeof requirements === 'string' ? JSON.parse(requirements) : requirements;
+    } catch (e) {
+        return [];
+    }
+}
+
+// Map backend fields to event type for display
+function mapEventType(admission) {
+    const title = (admission.title || '').toLowerCase();
+    
+    if (title.includes('bursary') || title.includes('scholarship') || title.includes('financial aid') || title.includes('nsfas')) {
+        return 'bursary';
+    } else if (title.includes('registration') || title.includes('register')) {
+        return 'registration';
+    } else if (title.includes('orientation') || title.includes('welcome') || title.includes('induction')) {
+        return 'orientation';
+    } else if (title.includes('application') || title.includes('apply')) {
+        return 'application';
+    }
+    
+    // Default based on dates - if has application deadline, likely an application
+    if (admission.applicationDeadline) {
+        return 'application';
+    } else if (admission.registrationDeadline) {
+        return 'registration';
+    }
+    
+    return 'application'; // Default
+}
+
+// Show loading state
+function showLoading() {
+    const grid = document.getElementById('eventsGrid');
+    grid.innerHTML = `
+        <div class="loading-state" style="grid-column: 1 / -1;">
+            <div class="spinner"></div>
+            <p>Loading admissions calendar...</p>
+        </div>
+    `;
+}
+
+// Hide loading state
+function hideLoading() {
+    // Loading will be replaced by actual content
+}
+
+// Show error state
+function showError() {
+    const grid = document.getElementById('eventsGrid');
+    grid.innerHTML = `
+        <div class="empty-state" style="grid-column: 1 / -1;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <h3>Unable to Load Events</h3>
+            <p>There was an error loading the admissions calendar. Please try again.</p>
+            <button class="retry-btn" onclick="loadAdmissions()">Retry</button>
+        </div>
+    `;
+}
 
 // Setup Event Listeners
 function setupEventListeners() {
@@ -232,7 +251,7 @@ function renderGrid() {
     grid.innerHTML = sorted.map(event => createEventCard(event)).join('');
 }
 
-// Create Event Card - REMOVED DESCRIPTION FROM CARD PREVIEW
+// Create Event Card
 function createEventCard(event) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -374,7 +393,7 @@ function changeCalendarMonth(direction) {
     renderCalendar();
 }
 
-// Open Modal - DESCRIPTION NOW ONLY SHOWS HERE
+// Open Modal
 function openModal(eventId) {
     const event = eventsData.find(e => e.id === eventId);
     if (!event) return;
@@ -385,6 +404,58 @@ function openModal(eventId) {
     const daysUntil = Math.ceil((eventDate - today) / (1000 * 60 * 60 * 24));
     
     const modalBody = document.getElementById('modalBody');
+    
+    // Build additional info section
+    let additionalInfo = '';
+    if (event.programName || event.studyLevel || event.studyMode || 
+        event.applicationFee || event.tuitionFee || event.contactEmail || 
+        event.contactPhone || event.fieldOfStudy || event.academicYear ||
+        event.intakePeriod || (event.requirements && event.requirements.length > 0)) {
+        
+        additionalInfo = '<div class="modal-additional-info">';
+        
+        if (event.programName) {
+            additionalInfo += `<div class="modal-info-item"><strong>Program:</strong> ${event.programName}</div>`;
+        }
+        if (event.fieldOfStudy) {
+            additionalInfo += `<div class="modal-info-item"><strong>Field of Study:</strong> ${event.fieldOfStudy}</div>`;
+        }
+        if (event.studyLevel) {
+            additionalInfo += `<div class="modal-info-item"><strong>Study Level:</strong> ${event.studyLevel}</div>`;
+        }
+        if (event.studyMode) {
+            additionalInfo += `<div class="modal-info-item"><strong>Study Mode:</strong> ${event.studyMode}</div>`;
+        }
+        if (event.academicYear) {
+            additionalInfo += `<div class="modal-info-item"><strong>Academic Year:</strong> ${event.academicYear}</div>`;
+        }
+        if (event.intakePeriod) {
+            additionalInfo += `<div class="modal-info-item"><strong>Intake Period:</strong> ${event.intakePeriod}</div>`;
+        }
+        if (event.applicationFee) {
+            additionalInfo += `<div class="modal-info-item"><strong>Application Fee:</strong> ${event.applicationFee}</div>`;
+        }
+        if (event.tuitionFee) {
+            additionalInfo += `<div class="modal-info-item"><strong>Tuition Fee:</strong> ${event.tuitionFee}</div>`;
+        }
+        if (event.requirements && event.requirements.length > 0) {
+            additionalInfo += `<div class="modal-info-item"><strong>Requirements:</strong><ul>`;
+            event.requirements.forEach(req => {
+                const reqText = typeof req === 'string' ? req : (req.requirement || req.name || JSON.stringify(req));
+                additionalInfo += `<li>${reqText}</li>`;
+            });
+            additionalInfo += `</ul></div>`;
+        }
+        if (event.contactEmail) {
+            additionalInfo += `<div class="modal-info-item"><strong>Email:</strong> <a href="mailto:${event.contactEmail}">${event.contactEmail}</a></div>`;
+        }
+        if (event.contactPhone) {
+            additionalInfo += `<div class="modal-info-item"><strong>Phone:</strong> ${event.contactPhone}</div>`;
+        }
+        
+        additionalInfo += '</div>';
+    }
+    
     modalBody.innerHTML = `
         <span class="modal-event-type event-type ${event.type}">${event.type}</span>
         <h2 class="modal-title">${event.title}</h2>
@@ -397,9 +468,11 @@ function openModal(eventId) {
                 <line x1="3" y1="10" x2="21" y2="10"></line>
             </svg>
             ${formatDate(event.date)}
+            ${event.endDate && event.endDate !== event.date ? ` - ${formatDate(event.endDate)}` : ''}
             ${daysUntil >= 0 ? ` • ${daysUntil === 0 ? 'Today' : daysUntil === 1 ? 'Tomorrow' : daysUntil + ' days left'}` : ' • Past event'}
         </div>
-        <p class="modal-description">${event.description}</p>
+        ${event.description ? `<p class="modal-description">${event.description}</p>` : ''}
+        ${additionalInfo}
         ${event.link ? `
             <a href="${event.link}" target="_blank" class="modal-link-btn">
                 Visit Website
@@ -422,7 +495,7 @@ function openMultiModal(events) {
         <h2 class="modal-title">Events on this day</h2>
         <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 24px;">
             ${events.map(event => `
-                <div style="padding: 20px; background: #f9fafb; border-radius: 12px; cursor: pointer; border: 2px solid #e5e7eb; transition: all 0.3s;" onclick="openModal(${event.id})">
+                <div style="padding: 20px; background: #f9fafb; border-radius: 12px; cursor: pointer; border: 2px solid #e5e7eb; transition: all 0.3s;" onclick="openModal(${event.id})" onmouseover="this.style.borderColor='#667eea'" onmouseout="this.style.borderColor='#e5e7eb'">
                     <span class="event-type ${event.type}" style="margin-bottom: 8px;">${event.type}</span>
                     <h3 style="font-size: 18px; font-weight: 700; color: #1f2937; margin: 8px 0 4px;">${event.title}</h3>
                     <p style="font-size: 14px; color: #667eea; font-weight: 600;">${event.university}</p>
@@ -441,6 +514,7 @@ function closeModal() {
 
 // Format Date
 function formatDate(dateString) {
+    if (!dateString) return '';
     const date = new Date(dateString);
     return date.toLocaleDateString('en-ZA', { year: 'numeric', month: 'long', day: 'numeric' });
 }

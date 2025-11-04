@@ -51,6 +51,7 @@ def create_app():
     from routes.courses import courses
     from routes.bursary import bursary
     from routes.web_scrapping import ws
+    from routes.admissions_calendar import admissions_bp
 
     # Register blueprints
     app.register_blueprint(auth, url_prefix='/auth')
@@ -58,6 +59,7 @@ def create_app():
     app.register_blueprint(courses, url_prefix='/courses')
     app.register_blueprint(bursary, url_prefix='/bursary')
     app.register_blueprint(ws, url_prefix='/ws')
+    app.register_blueprint(admissions_bp, url_prefix='/admissions')
 
     # Create or restore database
     create_database(app)
