@@ -91,6 +91,13 @@ if (chatButton) {
         const isOpen = chatWidget.classList.toggle('open');
         chatButton.classList.toggle('active');
         
+        // Add/remove body class for mobile
+        if (isOpen) {
+            document.body.classList.add('chat-open');
+        } else {
+            document.body.classList.remove('chat-open');
+        }
+        
         try {
             localStorage.setItem('chatOpen', isOpen);
         } catch (e) {
@@ -111,6 +118,9 @@ if (closeChat) {
         
         chatWidget.classList.remove('open');
         chatButton.classList.remove('active');
+        
+        // Remove body class for mobile
+        document.body.classList.remove('chat-open');
         
         try {
             localStorage.setItem('chatOpen', 'false');
