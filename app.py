@@ -20,22 +20,22 @@ app = create_app()
 @app.route('/home')
 def home_page():
     # root serves the main home page (template under templates/home/home_pg.html)
-    return render_template('home/home_pg.html')
+    return render_template('home/home_pg.html', show_chatbot = True)
 
 
 @app.route('/about')
 def about():
-    return render_template('About Us/about_us.html')
+    return render_template('About Us/about_us.html', show_chatbot = True)
 
 
 @app.route('/how-it-works')
 def how_it_works():
-    return render_template('how_it_works.html')
+    return render_template('how_it_works.html', show_chatbot = True)
 
 
 @app.route('/contact')
 def contact():
-    return render_template('Contact us/contact_us.html')
+    return render_template('Contact us/contact_us.html', show_chatbot = True)
 
 def admin_required(f):
     @wraps(f)
@@ -57,34 +57,34 @@ def login_required(f):
 @app.route('/course-management')
 @admin_required
 def course_management():
-    return render_template('Admin/course_management.html')
+    return render_template('Admin/course_management.html', show_chatbot = False)
 
 @app.route('/bursary-management')
 @admin_required
 def bursary_management():
-    return render_template('Admin/bursary_management.html')
+    return render_template('Admin/bursary_management.html', show_chatbot = False)
 
 @app.route('/admissions-calendar-management')
 @admin_required
 def admissions_calendar_management():
-    return render_template('Admin/admissions_calendar_management.html')
+    return render_template('Admin/admissions_calendar_management.html', show_chatbot = False)
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     # Combined login/signup page
-    return render_template('Login/login_signup.html')
+    return render_template('Login/login_signup.html', show_chatbot = False)
 
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('home_page'))
+    return redirect(url_for('home_page'), show_chatbot = False)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     # same template contains signup UI
-    return render_template('Login/login_signup.html')
+    return render_template('Login/login_signup.html', show_chatbot = False)
 
 # Admin login route
 @app.route('/admin/login', methods=['GET', 'POST'])
@@ -106,14 +106,14 @@ def admin_login():
         else:
             return jsonify({"success": False, "error": "Invalid admin credentials"})
     
-    return render_template('Login/admin_login.html')
+    return render_template('Login/admin_login.html', show_chatbot = False)
 
 
 @app.route('/admin/logout')
 def admin_logout():
     session.pop('is_admin', None)
     session.pop('admin_email', None)
-    return redirect(url_for('home_page'))
+    return redirect(url_for('home_page'), show_chatbot = False)
 
 
 @app.route('/ask', methods=['POST'])
@@ -137,21 +137,21 @@ def ask():
 @app.route('/start-search')
 @login_required
 def start_search():
-    return render_template('Search/start_my_search.html')
+    return render_template('Search/start_my_search.html', show_chatbot = True)
 
 @app.route('/save_data', methods=['POST', 'GET'])
 @login_required
 def personal_info():
-    return render_template('Search/personal_info.html')
+    return render_template('Search/personal_info.html', show_chatbot = True)
 
 @app.route('/admissions')
 def admissions():
-    return render_template('Student Tools/admissions.html')
+    return render_template('Student Tools/admissions.html', show_chatbot = True)
 
 
 @app.route('/bursaries')
 def bursaries():
-    return render_template('Student Tools/bursaries.html')
+    return render_template('Student Tools/bursaries.html', show_chatbot = True)
 
 
 @app.route('/terms')

@@ -105,7 +105,7 @@
     </nav>
 
     {% block content %}{% endblock %}
-
+{% if show_chatbot %}
     <!-- Floating chat button -->
     <button class="chat-button" id="chatButton" aria-label="chatbutton">
       <svg
@@ -141,6 +141,7 @@
               joined • <span id="joinTime"></span
             ></span>
           </div>
+          
 
           <div class="privacy-notice">
             By continuing, you consent to this chat being monitored, recorded,
@@ -173,6 +174,8 @@
         <button class="send-button" id="sendButton">➤</button>
       </div>
     </div>
+
+    {% endif %}
 
     <!-- Footer Section -->
     <footer>
@@ -231,7 +234,9 @@
       type="module"
       src="{{ url_for('static', filename='js/logout.js') }}"
     ></script>
-    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+
+  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+
       <script src="{{ url_for('static', filename='js/mobile-menu.js') }}"></script><!--New js file-->
   </body>
 </html>
