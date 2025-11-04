@@ -1,4 +1,4 @@
-/* BURSARY MANAGEMENT */
+/* BURSARY MANAGEMENT - OPTIMIZED RESPONSIVE VERSION */
 
 .bursary-management-wrapper {
   min-height: auto;
@@ -17,9 +17,9 @@
   overflow: hidden;
   margin-bottom: 50px;
   margin-top: -40px;
-    margin-left: -40px; /* Remove left margin */
-  margin-right: -20px; /* Remove right margin */
-  width: calc(100% + 40px); /* Extend full width */
+  margin-left: -40px;
+  margin-right: -20px;
+  width: calc(100% + 60px);
 }
 
 .hero-section::before {
@@ -103,6 +103,7 @@
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .control-right {
@@ -110,6 +111,7 @@
   gap: 12px;
   align-items: center;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 /* Buttons */
@@ -126,6 +128,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: 'Montserrat', sans-serif;
+  white-space: nowrap;
 }
 
 .btn-primary {
@@ -169,7 +172,8 @@
   border-radius: 10px;
   border: 2px solid transparent;
   transition: all 0.3s ease;
-  min-width: 300px;
+  flex: 1;
+  min-width: 200px;
 }
 
 .search-box:focus-within {
@@ -209,7 +213,8 @@
   background: white;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 180px;
+  flex: 1;
+  min-width: 150px;
 }
 
 .filter-select:hover {
@@ -288,13 +293,7 @@
   color: white;
 }
 
-.stat-info h3 {
-  margin: 0 0 4px;
-  font-size: 28px;
-  font-weight: 700;
-  color: #1f2937;
-}
-
+.stat-info h3,
 .stat-number {
   margin: 0 0 4px;
   font-size: 28px;
@@ -339,7 +338,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-    background: linear-gradient(180deg, #667eea 0%, #773985 100%);
+  background: linear-gradient(180deg, #667eea 0%, #773985 100%);
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -582,6 +581,7 @@
   font-family: 'Montserrat', sans-serif;
   transition: all 0.3s ease;
   color: #1f2937;
+  box-sizing: border-box;
 }
 
 .form-group input:focus,
@@ -610,6 +610,7 @@
   margin-top: 28px;
   padding-top: 20px;
   border-top: 1px solid #e5e7eb;
+  flex-wrap: wrap;
 }
 
 .btn-cancel,
@@ -648,94 +649,564 @@
   transform: translateY(0);
 }
 
-/* Responsive Design */
+/* ============================================
+   MOBILE RESPONSIVE - ULTRA COMPACT
+   ============================================ */
+
 @media (max-width: 1024px) {
   .bursaries-grid {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
 }
 
 @media (max-width: 768px) {
+  /* Ultra Compact Hero */
+  .hero-section {
+    padding: 25px 12px 20px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: 20px;
+    width: calc(100% + 40px);
+  }
+
+  .hero-icon {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 8px;
+  }
+
+  .hero-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
   .hero-title {
-    font-size: 32px;
+    font-size: 20px;
+    margin: 0 0 4px;
+    line-height: 1.2;
   }
 
   .hero-subtitle {
-    font-size: 15px;
+    font-size: 11px;
+    line-height: 1.3;
   }
 
-  .hero-section {
-    padding: 50px 20px 40px;
-  }
-
+  /* Ultra Compact Control Panel */
   .control-panel {
-    flex-direction: column;
-    align-items: stretch;
+    padding: 8px;
+    margin-bottom: 12px;
+    gap: 6px;
+    border-radius: 12px;
   }
 
   .control-left,
   .control-right {
     width: 100%;
     flex-direction: column;
+    gap: 6px;
   }
 
+  /* Ultra Compact Buttons */
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    justify-content: center;
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .btn-primary svg,
+  .btn-secondary svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Ultra Compact Search and Filters */
   .search-box {
-    min-width: 100%;
+    width: 100%;
+    min-width: auto;
+    padding: 7px 10px;
+    border-radius: 8px;
+  }
+
+  .search-box svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .search-box input {
+    font-size: 12px;
   }
 
   .filter-select {
     width: 100%;
+    min-width: auto;
+    padding: 7px 10px;
+    font-size: 12px;
+    border-radius: 8px;
   }
 
+  /* Hide Stats on Mobile for Space */
   .stats-grid {
-    grid-template-columns: 1fr;
+    display: none;
   }
 
+  /* Ultra Compact Bursaries Grid */
   .bursaries-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 
+  .bursary-card {
+    border-radius: 12px;
+  }
+
+  .card-header {
+    padding: 10px;
+  }
+
+  .provider-badge {
+    font-size: 9px;
+    padding: 3px 8px;
+    border-radius: 12px;
+  }
+
+  .btn-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    border-radius: 6px;
+  }
+
+  .card-body {
+    padding: 12px;
+  }
+
+  .bursary-title {
+    font-size: 14px;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .bursary-provider {
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+
+  .bursary-description {
+    font-size: 12px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .bursary-meta {
+    gap: 6px;
+    padding-top: 10px;
+  }
+
+  .meta-item {
+    font-size: 10px;
+  }
+
+  .meta-item svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .tag {
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 8px;
+  }
+
+  /* Ultra Compact Modal */
   .form-row {
     grid-template-columns: 1fr;
   }
 
   .modal-content {
-    max-height: 95vh;
+    max-height: 90vh;
+    margin: 8px;
+    border-radius: 16px;
   }
 
   .modal-header {
-    padding: 20px;
+    padding: 12px;
+  }
+
+  .modal-header h2 {
+    font-size: 16px;
+  }
+
+  .modal-close {
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
   }
 
   .modal-body {
-    padding: 20px;
+    padding: 12px;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 8px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+  }
+
+  .form-group textarea {
+    min-height: 80px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    margin-top: 12px;
+    padding-top: 12px;
+    gap: 6px;
+  }
+
+  .btn-cancel,
+  .btn-submit {
+    width: 100%;
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  /* Ultra Compact Content Container */
+  .content-container {
+    padding: 0 10px 10px;
+    margin-top: -15px;
   }
 }
 
 @media (max-width: 480px) {
   .hero-title {
-    font-size: 26px;
+    font-size: 18px;
+  }
+
+  .hero-subtitle {
+    font-size: 10px;
   }
 
   .hero-icon {
-    width: 56px;
-    height: 56px;
+    width: 36px;
+    height: 36px;
   }
 
-  .hero-icon svg {
-    width: 32px;
-    height: 32px;
+  .control-panel {
+    padding: 6px;
+  }
+}
+
+/* ============================================
+   BURSARY MANAGEMENT - MOBILE RESPONSIVE FIX
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* MOBILE: Hero Section - Complete Fix */
+  .bursary-management-wrapper .hero-section {
+    padding: 40px 16px 30px !important;
+    margin: -20px -20px 20px -20px !important;
+    width: calc(100% + 40px) !important;
+    min-height: auto !important;
   }
 
-  .stat-number {
-    font-size: 24px;
+  .bursary-management-wrapper .hero-icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 60px !important;
+    height: 60px !important;
+    margin: 0 auto 16px !important;
+    background: rgba(255, 255, 255, 0.25) !important;
+    border-radius: 50% !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .bursary-management-wrapper .hero-icon svg {
+    display: block !important;
+    color: white !important;
+    width: 28px !important;
+    height: 28px !important;
+    stroke-width: 2 !important;
+  }
+
+  .bursary-management-wrapper .hero-content {
+    text-align: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .bursary-management-wrapper .hero-title {
+    font-size: 26px !important;
+    margin: 0 0 8px !important;
+    line-height: 1.3 !important;
+    padding: 0 10px !important;
+    font-weight: 700 !important;
+    color: white !important;
+  }
+
+  .bursary-management-wrapper .hero-subtitle {
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+    padding: 0 10px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+  }
+
+  /* Ultra Compact Control Panel */
+  .control-panel {
+    padding: 8px;
+    margin-bottom: 12px;
+    gap: 6px;
+    border-radius: 12px;
+  }
+
+  .control-left,
+  .control-right {
+    width: 100%;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  /* Ultra Compact Buttons */
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    justify-content: center;
+    padding: 8px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  .btn-primary svg,
+  .btn-secondary svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Ultra Compact Search and Filters */
+  .search-box {
+    width: 100%;
+    min-width: auto;
+    padding: 7px 10px;
+    border-radius: 8px;
+  }
+
+  .search-box svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .search-box input {
+    font-size: 12px;
+  }
+
+  .filter-select {
+    width: 100%;
+    min-width: auto;
+    padding: 7px 10px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+
+  /* Hide Stats on Mobile for Space */
+  .stats-grid {
+    display: none;
+  }
+
+  /* Ultra Compact Bursaries Grid */
+  .bursaries-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .bursary-card {
+    border-radius: 12px;
+  }
+
+  .card-header {
+    padding: 10px;
+  }
+
+  .provider-badge {
+    font-size: 9px;
+    padding: 3px 8px;
+    border-radius: 12px;
+  }
+
+  .btn-icon {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    border-radius: 6px;
+  }
+
+  .card-body {
+    padding: 12px;
   }
 
   .bursary-title {
+    font-size: 14px;
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .bursary-provider {
+    font-size: 10px;
+    margin-bottom: 6px;
+  }
+
+  .bursary-description {
+    font-size: 12px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .bursary-meta {
+    gap: 6px;
+    padding-top: 10px;
+  }
+
+  .meta-item {
+    font-size: 10px;
+  }
+
+  .meta-item svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .tag {
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 8px;
+  }
+
+  /* Ultra Compact Modal */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    max-height: 90vh;
+    margin: 8px;
+    border-radius: 16px;
+  }
+
+  .modal-header {
+    padding: 12px;
+  }
+
+  .modal-header h2 {
     font-size: 16px;
   }
 
+  .modal-close {
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+  }
+
+  .modal-body {
+    padding: 12px;
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+  }
+
+  .form-group label {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 8px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+  }
+
+  .form-group textarea {
+    min-height: 80px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    margin-top: 12px;
+    padding-top: 12px;
+    gap: 6px;
+  }
+
+  .btn-cancel,
+  .btn-submit {
+    width: 100%;
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  /* Ultra Compact Content Container */
   .content-container {
-    padding: 0 16px 16px;
+    padding: 0 10px 10px;
+    margin-top: -15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bursary-management-wrapper .hero-title {
+    font-size: 22px !important;
+  }
+
+  .bursary-management-wrapper .hero-subtitle {
+    font-size: 13px !important;
+  }
+
+  .bursary-management-wrapper .hero-icon {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .bursary-management-wrapper .hero-icon svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+
+  .control-panel {
+    padding: 6px;
+  }
+}
+
+@media (max-width: 360px) {
+  .bursary-management-wrapper .hero-title {
+    font-size: 20px !important;
+  }
+
+  .bursary-management-wrapper .hero-subtitle {
+    font-size: 12px !important;
+  }
+
+  .bursary-management-wrapper .hero-icon {
+    width: 45px !important;
+    height: 45px !important;
+  }
+
+  .bursary-management-wrapper .hero-icon svg {
+    width: 22px !important;
+    height: 22px !important;
   }
 }
