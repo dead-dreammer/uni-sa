@@ -333,6 +333,7 @@ textarea {
     box-sizing: border-box !important;
     font-size: 16px !important;
     -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 /* iOS safe area and prevent content under fixed elements */
@@ -757,7 +758,9 @@ body {
     .dashboard-content { padding: 4.5rem 0.75rem 1.5rem; }
     .dashboard-content h1 { font-size: 1.5rem; }
     /* small-screen visual tweak for admin button */
-    .admin-menu-btn { top: 0.9rem; left: 0.7rem; padding: 0.6rem; background: rgba(255,255,255,0.06); backdrop-filter: blur(4px); }
+    .admin-menu-btn { top: 0.9rem; left: 0.7rem; padding: 0.6rem; background: rgba(255,255,255,0.06); 
+      -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px); }
 }
 
 /* Tiny screens */
@@ -1266,8 +1269,8 @@ body {
     margin: 0 auto 12px !important;
     background: rgba(255, 255, 255, 0.25) !important;
     border-radius: 50% !important;
-    backdrop-filter: blur(10px) !important;
     -webkit-backdrop-filter: blur(10px) !important;
+    backdrop-filter: blur(10px) !important;
   }
   
   .hero-icon svg {
