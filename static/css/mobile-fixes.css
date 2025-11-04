@@ -711,6 +711,7 @@ body {
     height: 100vh;
     background: rgba(0,0,0,0.5);
     z-index: 9999;
+    -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -793,6 +794,7 @@ body {
     left: 1.2rem; /* keep alignment with visual */
     padding: 0.65rem;
     background: rgba(85, 76, 219, 0.884);
+    -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
   }
 
