@@ -861,81 +861,293 @@ body {
    then move it into the pop-out red-box only while menu is open.
    Append/replace at end of static/css/mobile-fixes.css.
 */
+/* -------------------------
+  Mobile menu button: closed (header) + popped/open visuals
+  Append this at the end of static/css/mobile-fixes.css
+  Works with your mobile-menu.js which toggles:
+    - menuBtn.classList.add('floating-pos','closed') initially
+    - menuBtn.classList.remove('closed') & .classList.add('active') when opening
+    - menuBtn.classList.remove('active') then .classList.add('closed') when closing
+    - document.body.classList.add/remove('mobile-menu-open')
+------------------------- */
+/* >>> Fix: use only middle span for X; hide extra bars when popped
+   Append this to the very end of static/css/mobile-fixes.css
+   Overrides earlier floating / pop-out rules so you won't get 6 lines.
+*/
 
-* Ensure transitions match JS timing */
-.mobile-menu-btn,
-.mobile-menu-btn span {
-  transition: transform 220ms cubic-bezier(.2,.9,.2,1), left 220ms ease, top 220ms ease, box-shadow 220ms ease, background 220ms ease;
-  will-change: transform, left, top, box-shadow, background;
-}
-
-/* Mobile-scoped defaults: ensure button sits in the header top-left */
 @media (max-width: 768px) {
 
-  .mobile-menu-btn.floating-pos.closed {
-    /* Default header position (original top-left spot) */
-    position: fixed;
-    top: 0.9rem;     /* tweak for exact header alignment */
-    left: 0.9rem;    /* tweak to line up with logo/gutter */
-    width: 38px;
-    height: 38px;
-    padding: 8px 8px;
-    border-radius: 8px;
-    background: linear-gradient(135deg, #4b6cb7, #182848);
-    box-shadow: none;
-    z-index: 10010;
+  /* Make sure default three-bar hamburger is visible when closed */
+  .mobile-menu-btn.floating-pos.closed span {
+    display: block;
+    background: #fff;
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    position: relative;
+  }
+  .mobile-menu-btn.floating-pos.closed span:nth-child(1),
+  .mobile-menu-btn.floating-pos.closed span:nth-child(3) {
+    /* top and bottom bars are positioned via pseudo elements already in your CSS;
+       ensure real spans are visible and reset any transforms */
+    opacity: 1;
     transform: none;
   }
 
-  /* Keep span bars visible as hamburger in closed state */
-  .mobile-menu-btn.floating-pos.closed span {
+  /* Remove any previously applied pseudo bars on all spans */
+  .mobile-menu-btn.floating-pos span::before,
+  .mobile-menu-btn.floating-pos span::after {
+    display: none !important;
+  }
+
+  /* Create X only from the middle span's pseudo elements */
+  .mobile-menu-btn.floating-pos span:nth-child(2)::before,
+  .mobile-menu-btn.floating-pos span:nth-child(2)::after {
+    display: block;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 18px;
+    height: 2px;
     background: #fff;
-    width: 20px;
-    height: 2px;
+    border-radius: 2px;
+    transform-origin: center;
+    transition: transform 200ms ease, opacity 140ms ease;
   }
 
-  /* When the mobile menu opens, JS adds body.mobile-menu-open and active class.
-     Move the button into the pop-out red-box location and apply the popped styling. */
-  body.mobile-menu-open .mobile-menu-btn.floating-pos {
-    position: fixed;
-    /* place just outside the mobile panel (adjust 250px if your menu width differs) */
-    left: calc(250px + 12px);
-    top: 1.8rem;               /* vertical position matching red-box */
-    width: 52px;
-    height: 52px;
-    border-radius: 12px;
-    padding: 0;
-    background: linear-gradient(180deg, rgba(131,58,180,1), rgba(88,64,198,1));
-    box-shadow: 0 12px 24px rgba(27,30,62,0.36);
-    z-index: 10010;
-    transform: translateY(0) scale(1);
+  /* Middle span pseudo initial (closed): move them out to act as top/bottom when closed */
+  .mobile-menu-btn.floating-pos.closed span:nth-child(2)::before {
+    transform: translateY(-7.5px) rotate(0deg);
+    opacity: 1;
+  }
+  .mobile-menu-btn.floating-pos.closed span:nth-child(2)::after {
+    transform: translateY(7.5px) rotate(0deg);
+    opacity: 1;
   }
 
-  /* maintain X/hamburger transitions inside popped state */
-  body.mobile-menu-open .mobile-menu-btn.floating-pos span {
-    width: 20px;
-    height: 2px;
-    background: transparent;
+  /* While menu open, hide the actual first & third spans and use middle span pseudo elements as X */
+  body.mobile-menu-open .mobile-menu-btn.floating-pos span:nth-child(1),
+  body.mobile-menu-open .mobile-menu-btn.floating-pos span:nth-child(3) {
+    opacity: 0;
+    transform: translateX(-6px); /* move slightly to avoid visual artifacts */
+    pointer-events: none;
+  }
+
+  /* Position and rotate middle pseudo elements to form X when active/open */
+  body.mobile-menu-open .mobile-menu-btn.floating-pos span:nth-child(2)::before {
+    transform: translateY(-50%) rotate(45deg);
+    opacity: 1;
+  }
+  body.mobile-menu-open .mobile-menu-btn.floating-pos span:nth-child(2)::after {
+    transform: translateY(-50%) rotate(-45deg);
+    opacity: 1;
+  }
+
+  /* Ensure when closed again the first/third spans return */
+  .mobile-menu-btn.floating-pos.closed span:nth-child(1),
+  .mobile-menu-btn.floating-pos.closed span:nth-child(3) {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  /* Keep baseline handle for closed only */
+  .mobile-menu-btn.floating-pos.closed::after {
+    opacity: 0.15;
+  }
+  body.mobile-menu-open .mobile-menu-btn.floating-pos::after {
+    opacity: 0 !important;
+    transform: translateY(-6px);
+  }
+
+  /* Minor visual tune on very small screens */
+  @media (max-width: 420px) {
+    .mobile-menu-btn.floating-pos span:nth-child(2)::before,
+    .mobile-menu-btn.floating-pos span:nth-child(2)::after { width: 14px; }
   }
 }
-
-/* Small screens tuning */
-@media (max-width: 420px) {
-  .mobile-menu-btn.floating-pos.closed {
-    top: 0.85rem;
-    left: 0.75rem;
-    width: 36px;
-    height: 36px;
-  }
-
-  body.mobile-menu-open .mobile-menu-btn.floating-pos {
-    left: calc(220px + 10px);
-    top: 2.0rem;
-    width: 48px;
-    height: 48px;
-  }
-}
-
 /*Another gappppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp*/
 
+/* -------------------------
+  Mobile menu close button (side-of-panel) styles
+  Append at end of mobile-fixes.css
+  - close button sits to the RIGHT edge of the sliding panel (outside panel area)
+  - does NOT overlay menu items
+  - mobile-scoped
+------------------------- */
 
+@media (max-width: 768px) {
+  /* Allow the cloned panel to show the close button outside its box */
+  .mobile-menu {
+    overflow-x: visible;     /* allow the close button to be visible outside the panel */
+    overflow-y: auto;        /* keep vertical scrolling for menu items */
+  }
+
+  /* Close button (rounded square) that sits on panel's right edge */
+  .mobile-menu-close {
+    position: absolute;
+    right: -62px;            /* move outside the panel: adjust if you change panel width */
+    top: 20px;               /* aligns with header/menu items; tweak as needed */
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    padding: 0;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #7e48da, #5a3cc6);
+    box-shadow: 0 12px 26px rgba(20,24,54,0.36);
+    z-index: 10020;          /* above the mobile-menu but below modals if any */
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* X icon inside close button */
+  .mobile-menu-close span {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+  }
+  .mobile-menu-close span::before,
+  .mobile-menu-close span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 18px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transform-origin: center;
+    transition: transform 200ms ease, opacity 160ms ease;
+  }
+  .mobile-menu-close span::before { transform: translateY(-50%) rotate(45deg); }
+  .mobile-menu-close span::after  { transform: translateY(-50%) rotate(-45deg); }
+
+  /* When menu is closed (no .show), hide/position close button out of sight */
+  .mobile-menu:not(.show) .mobile-menu-close {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-6px);
+  }
+
+  /* When menu open, show close button (CSS animated) */
+  .mobile-menu.show .mobile-menu-close {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+    transition: transform 240ms cubic-bezier(.2,.9,.2,1), opacity 180ms ease;
+  }
+
+  /* Prevent the close button from overlapping nav items:
+     place it outside the panel area using right: negative value.
+     If you change .mobile-menu width from 250px, adjust right value accordingly:
+       right: -(button width + desired gap) e.g. -62px above (48px button + 14px gap)
+  */
+
+  /* Small screens adjustments */
+  @media (max-width: 420px) {
+    .mobile-menu-close { right: -56px; top: 22px; width: 44px; height: 44px; border-radius: 10px; }
+    .mobile-menu-close span::before,
+    .mobile-menu-close span::after { width: 16px; }
+  }
+}
+
+/*gapppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp*/
+
+/* ===========================================
+   APPEND: Prevent admin button overlapping mobile menu
+   - Mobile-scoped overrides
+   - Paste/append at the very end of static/css/mobile-fixes.css
+   =========================================== */
+
+@media (max-width: 768px) {
+  /* Ensure the mobile hamburger/close button and the dedicated mobile close sit above admin */
+  .mobile-menu-btn,
+  .mobile-menu-close {
+    z-index: 10040 !important;
+  }
+
+  /* Keep admin slightly below by default (so mobile controls visually win) */
+  .admin-menu-btn {
+    z-index: 10020;
+    transition: left 0.28s ease, top 0.28s ease, opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  body.mobile-menu-open .admin-menu-btn {
+    left: calc(250px + 1rem) !important; /* panel width + gap */
+    top: 1.2rem !important;               /* fine tune to match header */
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Defensive: ensure admin button does not cover the left edge of the panel
+     if for any reason it is positioned inside the panel area */
+  .mobile-menu { overflow-x: visible; }
+
+  /* Small screen fine-tuning */
+  @media (max-width: 420px) {
+    body.mobile-menu-open .admin-menu-btn {
+      left: calc(220px + 10px) !important;
+      top: 1.9rem !important;
+    }
+  }
+}
+
+/**//* ============================================
+   MOBILE FIXES
+   ============================================ */
+
+@media (max-width: 768px) {
+  /* Make sure the admin sidebar and its overlay sit above other UI */
+  .sidebar,
+  .sidebar.show {
+    z-index: 10080 !important;
+  }
+  .sidebar-overlay {
+    z-index: 10075 !important;
+  }
+
+  /* Keep the mobile cloned panel and its controls under the admin sidebar */
+  .mobile-menu,
+  .mobile-menu.show {
+    z-index: 10030 !important; /* lower than .sidebar */
+  }
+
+  /* Mobile controls (hamburger / floating close) should be above the panel but below the admin sidebar */
+  .mobile-menu-btn,
+  .mobile-menu-close {
+    z-index: 10040 !important;
+    transition: left 0.28s ease, transform 0.28s ease, opacity 0.18s ease;
+  }
+
+  /* When the admin sidebar is open, push mobile controls to the right of the sidebar
+     and prevent them from overlapping or intercepting clicks on the menu.
+     Adjust the 260px value to your actual sidebar width if it differs. */
+  body.sidebar-open .mobile-menu-btn,
+  body.sidebar-open .mobile-menu-close {
+    left: calc(260px + 1rem) !important;
+    /* keep them visible but out of the left panel area */
+    pointer-events: none !important; /* disable to avoid accidental clicks */
+    opacity: 0.98;
+    z-index: 10035 !important; /* still below the sidebar */
+  }
+
+  /* Keep mobile panel visible under the sidebar edge (if the sidebar covers it) */
+  body.sidebar-open .mobile-menu,
+  body.sidebar-open .mobile-menu.show {
+    z-index: 10025 !important;
+  }
+
+  /* Small-screen tuning */
+  @media (max-width: 420px) {
+    body.sidebar-open .mobile-menu-btn,
+    body.sidebar-open .mobile-menu-close {
+      left: calc(220px + 8px) !important;
+    }
+    .mobile-menu { z-index: 10020 !important; }
+  }
+}
