@@ -909,3 +909,117 @@ body {
     text-decoration: underline;
     color: #764ba2;
 }
+/* Add these to your existing @media blocks or create new ones */
+
+/* Adjustments for Tablets/Small Laptops (Around 768px) */
+@media (max-width: 1024px) {
+    .hero-text h1 {
+        font-size: 3.5rem; /* Slightly smaller than original desktop */
+    }
+
+    .info-bar {
+        /* Ensure it stacks vertically or in 2 columns if needed, the existing 'auto-fit' should handle this well */
+        gap: 15px;
+    }
+    
+    .controls-bar {
+        /* Ensure filters group stacks underneath view switcher on small tablets */
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filters-group {
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .search-container, .filter-select {
+        width: 100%;
+        max-width: 100%; /* Remove max-width constraint */
+    }
+    
+    .search-container {
+        min-width: auto; 
+    }
+}
+
+/* Adjustments for Phones (Refining your existing < 640px block) */
+@media (max-width: 640px) {
+    .hero-text h1 {
+        font-size: 2.2rem; /* Adjusted for better fit */
+    }
+    
+    .hero-tag {
+        font-size: 12px;
+        padding: 8px 18px;
+    }
+
+    .info-bar {
+        grid-template-columns: repeat(2, 1fr); /* Already present, confirmed good */
+    }
+    
+    .controls-bar {
+        padding: 16px; /* Less padding */
+    }
+    
+    .view-switcher {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .view-btn {
+        flex: 1; /* Already present, confirmed good */
+    }
+    
+    .calendar-view {
+        padding: 15px;
+    }
+
+    .calendar-header h2 {
+        font-size: 22px;
+    }
+
+    .calendar-container {
+        gap: 4px; /* Reduced gap */
+    }
+    
+    .weekday {
+        font-size: 11px; /* Smaller weekday labels */
+    }
+
+    .cal-day {
+        aspect-ratio: 1 / 1.1; /* A little more vertical space for event dots if needed */
+        padding: 4px 2px;
+    }
+    
+    .cal-date {
+        font-size: 13px;
+    }
+    
+    .cal-events {
+        justify-content: center; /* Center dots if only one */
+    }
+}
+
+/* Modal Scaling */
+@media (max-width: 500px) {
+    .modal-dialog {
+        max-width: 95vw; /* Use more viewport width on small screens */
+        max-height: 90vh;
+    }
+    
+    .modal-close-btn {
+        top: 10px;
+        right: 10px;
+    }
+
+    .modal-body {
+        padding: 30px 15px; /* Reduced padding */
+    }
+    
+    .modal-link-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
