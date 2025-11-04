@@ -2,9 +2,13 @@
 
 {% block head_extras %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/styles.css') }}"/>
 {% endblock %}
 
 {% block content %}
+<a href="{{ url_for('profile') }}"  class="back-button">← Back</a>
 <div class="profile-page">
     <h2>Edit Profile</h2>
     <form action="{{ url_for('edit_profile') }}" method="POST">
@@ -26,8 +30,12 @@
                 <input type="number" name="age" id="age" value="{{ session.get('age', '') }}">
             </div>
             <div class="info-row">
-                <label class="info-label" for="company_name">Company:</label>
-                <input type="text" name="company_name" id="company_name" value="{{ session.get('company_name', '') }}">
+                <label class="info-label" for="location">Location:</label>
+                <input type="text" name="location" id="location" value="{{ session.get('location', '') }}">
+            </div>
+            <div class="info-row">
+                <label class="info-label" for="gender">Gender:</label>
+                <input type="text" name="gender" id="gender" value="{{ session.get('location', '') }}">
             </div>
         </div>
         <button type="submit" class="edit-button">Save Changes</button>

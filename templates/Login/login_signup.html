@@ -37,6 +37,10 @@
               <div class="form-group" style="text-align: center; margin-top: 1rem;">
                 <button type="submit" class="button" style="width: 150px;" >Login</button>
               </div>
+              <div class="form-group" style="text-align: center; margin-top: 0.5rem;">
+  <a href='{{url_for("auth.forgot_password")}}' class="forgot-password-link">Forgot Password?</a>
+</div>
+
             </div>
           </div>
         </form>
@@ -47,69 +51,74 @@
       </div>
     </div>
 
-    <!-- SIGNUP FORM -->
-    <div id="signupForm" class="form-container hidden">
-      <div class="container">
-        <h1>Sign Up</h1>
-        <form id="signupFormElement">
-          <div class="form-wrapper">
-            <!-- Left Column -->
-            <div class="form-column">
-              <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" class="form-input" placeholder="Choose a username" required />
-              </div>
-
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required />
-              </div>
-
-              <div class="form-group">
-                <label for="number">Phone Number</label>
-                <input type="text" id="number" name="number" class="form-input" placeholder="10 digit number" required />
-              </div>
-            </div>
-
-            <!-- Right Column -->
-            <div class="form-column">
-              <div class="form-group">
-                <label for="dob">Date of Birth</label>
-                <input type="date" id="dob" name="dob" class="form-input" required />
-              </div>
-
-              <div class="form-group">
-                <label for="gender">Gender</label>
-                <select id="gender" name="gender" class="form-input" required>
-                  <option value="">--Select Gender--</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-input" placeholder="Min 6 characters" required />
-              </div>
-
-              <div class="form-group">
-                <label for="confirmPassword">Re-enter Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="Confirm password" required />
-              </div>
-            </div>
+ <!-- SIGNUP FORM -->
+<div id="signupForm" class="form-container hidden signup-form">
+  <div class="container">
+    <h1>Sign Up</h1>
+    <form id="signupFormElement">
+      <div class="form-wrapper">
+        <!-- Left Column -->
+        <div class="form-column">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" class="form-input" placeholder="Choose a username" required />
           </div>
 
-          <div class="form-group" style="text-align: center; margin-top: 1rem;">
-            <button type="submit" class="button" style="width: 150px;">Sign Up</button>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required />
           </div>
-        </form>
 
-        <div class="toggle-text">
-          Already a member? <a onclick="toggleForms()">Login here!</a>
+          <div class="form-group">
+            <label for="number">Phone Number</label>
+            <input type="text" id="number" name="number" class="form-input" placeholder="10 digit number" required />
+          </div>
+
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" name="location" class="form-input" placeholder="Enter Location" required />
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="form-column">
+          <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" name="dob" class="form-input" required />
+          </div>
+
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" class="form-input" required>
+              <option value="">--Select Gender--</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-input" placeholder="Min 6 characters" required />
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Re-enter Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="Confirm password" required />
+          </div>
         </div>
       </div>
+
+      <div class="form-group" style="text-align: center; margin-top: 1rem;">
+        <button type="submit" class="button" style="width: 150px;">Sign Up</button>
+      </div>
+    </form>
+
+    <div class="toggle-text">
+      Already a member? <a onclick="toggleForms()">Login here!</a>
     </div>
+  </div>
+</div>
   </main>
 {% endblock %}
 

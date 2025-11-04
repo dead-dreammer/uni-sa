@@ -7,11 +7,14 @@
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='css/profile.css') }}"/>
+  <link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/styles.css') }}"/>
 {% endblock  %}
 
 {% block content %}
-
-<a href="javascript:history.back()" class="back-button">← Back</a>
+<main class="main-content">
+<a href="{{ url_for('home_page') }}"  class="back-button">← Back</a>
 <div class="profile-page">
 <!-- Profile Card -->
 
@@ -33,15 +36,15 @@
     </div>
     <div class="info-row">
       <span class="info-label">Location:</span>
-      <span>Cape Town, South Africa</span>
+      <span>{{ session.get('age') }} </span>
     </div>
     <div class="info-row">
       <span class="info-label">Age:</span>
-      <span>{{ session.get('age') }} years old</span>
+      <span>{{ session.get('location') }} years old</span>
     </div>
     <div class="info-row">
-      <span class="info-label">Company:</span>
-      <span>{{ session.get('company_name') }}</span>
+      <span class="info-label">Gender</span>
+      <span>{{ session.get('gender') }}</span>
     </div>
   </div>
   {% endif %}
@@ -54,4 +57,5 @@
 
 
 </div>
+</main>
 {% endblock content %}

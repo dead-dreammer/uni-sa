@@ -11,6 +11,7 @@ class Student(db.Model):
     dob = db.Column(db.Date)
     gender = db.Column(db.String(10))
     password = db.Column(db.String(200), nullable=False)
+    location = db.Column(db.String(100))
 
     academic_marks = db.relationship('AcademicMark', backref='student', lazy=True)
     preferences = db.relationship('Preference', backref='student', lazy=True)
