@@ -3,7 +3,7 @@
   <head>
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes"> <!--Added this so it can fit onto the mobile app-->
   <meta name="mobile-web-app-capable" content="yes">
   <title>{% block title %}uni.sa{% endblock %}</title>
@@ -34,6 +34,50 @@
       href="{{url_for('static', filename='css/chat.css')}}"
     />
 
+
+<body>
+  <nav class="navbar">
+    <canvas id="gradient-canvas" data-transition-in></canvas>
+    <a href="{{ url_for('home_page') }}"><img class="logo"
+        src="{{ url_for('static', filename='img/atom-removebg-preview.png') }}" alt="uni.sa" /></a>
+    {% if session.get('name') %}
+    <a href="{{ url_for('personal_info') }}" class="underline0">
+      <i class="fas fa-user user-icon"></i>
+      {{ session.get('name') }}</a>
+    {% endif %}
+    <!--Adding a menu button-->
+    <button class="mobile-menu-btn" aria-label="menumobile">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul>
+      <li><a href="{{ url_for('home_page') }}" class="underline">Home</a></li>
+      <li><a href="{{ url_for('about') }}" class="underline">About Us</a></li>
+      <li>
+        <a href="{{ url_for('how_it_works') }}" class="underline">How it Works</a>
+      </li>
+      <li>
+        <a href="{{ url_for('course_management') }}" class="underline">Course Management</a>
+      </li>
+      <li>
+        <a href="{{ url_for('matching_page') }}" class="underline">Matching Page</a>
+      </li>
+      <li class="dropdown">
+        <a href="#">Student Tools</a>
+        <ul class="dropdown-content">
+          <li>
+            <a href="{{ url_for('admissions') }}" class="underline">Admissions Calendar</a>
+          </li>
+          <li>
+            <a href="{{ url_for('bursaries') }}" class="underline">Bursaries</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <a href="{{ url_for('contact') }}" class="underline">Contact Us</a>
+      </li>
+=======
     {% block head_extras %}{% endblock %}
   </head>
 
@@ -54,7 +98,7 @@
       <a href="{{ url_for('course_management') }}" class="underline0">Admin</a>
       {% endif %}
        <!--Adding a menu button-->
-    <button class="mobile-menu-btn">
+    <button class="mobile-menu-btn" aria-label="menumobilebtn">
       <span></span>
       <span></span>
       <span></span>
