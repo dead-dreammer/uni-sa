@@ -119,26 +119,35 @@ block head_extras %}
   // Call fetchMatches when page loads
   fetchMatches();
 
-  // Render Reports
+  // Render Reports (uses download_url when available)
   function renderReports() {
     const container = document.getElementById("reportsContainer");
-    if (userData.reports.length === 0) {
+    if (!container) return;
+    if (!userData.reports || userData.reports.length === 0) {
       container.innerHTML =
         '<p class="empty-state">No reports generated yet. Complete your profile to get started.</p>';
       return;
     }
+
     container.innerHTML = userData.reports
-      .map(
-        (report) => `
+      .map((report) => {
+        const downloadUrl =
+          report.download_url || `/reports/${report.id}/download`;
+        const displayDate = report.created_at
+          ? new Date(report.created_at).toLocaleString()
+          : report.date
+          ? new Date(report.date).toLocaleString()
+          : "";
+        return `
         <div class="report-item">
           <div class="report-info">
-            <h4>${report.title}</h4>
-            <p class="report-date">${report.date}</p>
+            <h4>${escapeHtml(report.title || "Report")}</h4>
+            <p class="report-date">${escapeHtml(displayDate)}</p>
           </div>
-          <a href="#" class="btn btn-small btn-secondary">Download</a>
+          <a href="${downloadUrl}" class="btn btn-small btn-secondary" target="_blank" rel="noopener">Download</a>
         </div>
-      `
-      )
+      `;
+      })
       .join("");
   }
 
@@ -232,31 +241,92 @@ block head_extras %}
     renderLikes();
   }
 
-  // Initialize
+  // Utility to escape HTML
+  function escapeHtml(s) {
+    if (!s) return "";
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  // Initialize reports/matches/likes rendering
   renderReports();
   renderMatches();
   renderLikes();
 
-  // Fetch saved reports from server and populate dashboard
-  (async function loadSavedReports() {
+  // --- dashboard_reports.js logic inlined below ---
+
+  // Fetch saved reports from API
+  async function fetchSavedReports() {
     try {
       const res = await fetch("/api/reports", { credentials: "same-origin" });
-      if (!res.ok) {
-        console.warn("Could not fetch reports:", res.status);
-        return;
-      }
+      if (!res.ok) throw new Error("Failed to fetch reports");
       const data = await res.json();
-      if (data && Array.isArray(data.reports)) {
-        userData.reports = data.reports.map((r) => ({
-          id: r.id || r.report_id || r.reportId || r.report_id,
-          title: r.title,
-          date: r.created_at || r.createdAt || r.date || "",
-        }));
-        renderReports();
+      return data.reports || [];
+    } catch (err) {
+      console.error("Error fetching reports:", err);
+      return [];
+    }
+  }
+
+  // On load populate reports and listen for generated events
+  (async function initDashboardReports() {
+    // Fetch reports from server and render
+    const reports = await fetchSavedReports();
+    // Normalize returned reports: ensure download_url exists
+    userData.reports = reports.map((r) => ({
+      id: r.id || r.report_id,
+      title: r.title,
+      created_at: r.created_at,
+      download_url:
+        r.download_url || `/reports/${r.id || r.report_id}/download`,
+    }));
+    renderReports();
+
+    // If a recently-generated report exists in localStorage (from matches page), show it immediately
+    try {
+      const raw = localStorage.getItem("latest_report");
+      if (raw) {
+        const rep = JSON.parse(raw);
+        if (rep) {
+          const download_url = `/reports/${rep.id}/download`;
+          // Prepend the new report if it's not already present
+          if (!userData.reports.some((r) => String(r.id) === String(rep.id))) {
+            userData.reports.unshift({
+              id: rep.id,
+              title: rep.title,
+              created_at: rep.created_at,
+              download_url,
+            });
+            renderReports();
+          }
+        }
+        localStorage.removeItem("latest_report");
       }
     } catch (err) {
-      console.error("Error loading reports:", err);
+      console.warn("Could not apply latest_report from localStorage", err);
     }
+
+    // Listen for in-window report generation events
+    window.addEventListener("report:generated", async (e) => {
+      const rep = e.detail;
+      if (!rep) return;
+      // Refresh list from server to get authoritative data
+      const list = await fetchSavedReports();
+      userData.reports = list.map((r) => ({
+        id: r.id || r.report_id,
+        title: r.title,
+        created_at: r.created_at,
+        download_url:
+          r.download_url || `/reports/${r.id || r.report_id}/download`,
+      }));
+      renderReports();
+    });
   })();
+
+  // Fetch saved reports from server and populate dashboard (legacy loader removed)
 </script>
 {% endblock %}
