@@ -93,6 +93,8 @@ class Bursary(db.Model):
     tags = db.Column(db.Text)  # Store as JSON array
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+
 
 class Application(db.Model):
     __tablename__ = 'application'
