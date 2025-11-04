@@ -1,3 +1,5 @@
+// Updated chat.js — fixes null checks to avoid "Cannot read properties of null (reading 'querySelector')"
+
 const chatButton = document.getElementById('chatButton');
 const chatWidget = document.getElementById('chatWidget');
 const closeChat = document.getElementById('closeChat');
@@ -10,7 +12,7 @@ function initializeChat() {
     // Restore chat open state on load
     try {
         const wasOpen = localStorage.getItem('chatOpen') === 'true';
-        if (wasOpen) {
+        if (wasOpen && chatWidget && chatButton) {
             chatWidget.classList.add('open');
             chatButton.classList.add('active');
             if (userInput) userInput.focus();
@@ -26,13 +28,19 @@ function initializeChat() {
 
 // === Load messages from localStorage ===
 function loadMessages() {
+    if (!chatMessages) {
+        // Nothing to load into — silently return but log for debugging
+        console.warn('chatMessages element not found; skipping loadMessages');
+        return;
+    }
+
     try {
         const savedMessages = localStorage.getItem('chatMessages');
         if (savedMessages) {
             const messages = JSON.parse(savedMessages);
             
             // Clear current messages except welcome message
-            const welcomeMessage = chatMessages.querySelector('.welcome-message');
+            const welcomeMessage = chatMessages.querySelector ? chatMessages.querySelector('.welcome-message') : null;
             chatMessages.innerHTML = '';
             
             // Re-add timestamp and welcome message
@@ -57,14 +65,22 @@ function loadMessages() {
 
 // === Save messages to localStorage ===
 function saveMessages() {
+    if (!chatMessages) {
+        console.warn('chatMessages element not found; skipping saveMessages');
+        return;
+    }
+
     try {
-        const messageElements = chatMessages.querySelectorAll('.message:not(#typingIndicator)');
+        // exclude typing indicator if present
+        const messageElements = Array.from(chatMessages.querySelectorAll('.message:not(#typingIndicator)'));
         const messages = [];
         
         messageElements.forEach(msgEl => {
             const isUser = msgEl.classList.contains('user');
-            const text = msgEl.querySelector('.message-content p').textContent;
-            const time = msgEl.querySelector('.message-time').textContent;
+            const contentP = msgEl.querySelector('.message-content p');
+            const timeEl = msgEl.querySelector('.message-time');
+            const text = contentP ? contentP.textContent : '';
+            const time = timeEl ? timeEl.textContent : '';
             
             messages.push({ text, isUser, time });
         });
@@ -88,7 +104,7 @@ if (chatButton) {
         e.preventDefault();
         e.stopPropagation();
         
-        const isOpen = chatWidget.classList.toggle('open');
+        const isOpen = chatWidget ? chatWidget.classList.toggle('open') : false;
         chatButton.classList.toggle('active');
         
         // Add/remove body class for mobile
@@ -116,8 +132,8 @@ if (closeChat) {
         e.preventDefault();
         e.stopPropagation();
         
-        chatWidget.classList.remove('open');
-        chatButton.classList.remove('active');
+        if (chatWidget) chatWidget.classList.remove('open');
+        if (chatButton) chatButton.classList.remove('active');
         
         // Remove body class for mobile
         document.body.classList.remove('chat-open');
@@ -155,6 +171,11 @@ function getCurrentTime() {
 
 // === Add message to DOM (used for both new and loaded messages) ===
 function addMessageToDOM(text, isUser = false, time = null) {
+    if (!chatMessages) {
+        console.warn('chatMessages element not found; cannot append message');
+        return;
+    }
+
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
 
@@ -188,6 +209,11 @@ function addMessage(text, isUser = false) {
 
 // === Typing indicator ===
 function showTypingIndicator() {
+    if (!chatMessages) return;
+
+    // Avoid duplicate typing indicators
+    if (document.getElementById('typingIndicator')) return;
+
     const typingDiv = document.createElement('div');
     typingDiv.className = 'message bot';
     typingDiv.id = 'typingIndicator';

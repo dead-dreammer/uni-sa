@@ -1,9 +1,6 @@
 /* ============================================
    GLOBAL MOBILE RESPONSIVE FIXES
-<<<<<<< HEAD
    Cleaned / deduplicated version
-=======
->>>>>>> 98853aef510ff9a535cfef71f630a7b474be970c
    ============================================ */
 
 /* Prevent horizontal overflow */
@@ -34,11 +31,7 @@ body {
    MOBILE MENU COMPONENTS
    ============================================ */
 
-<<<<<<< HEAD
 /* Mobile Menu Button (generic mobile) */
-=======
-/* Mobile Menu Button */
->>>>>>> 98853aef510ff9a535cfef71f630a7b474be970c
 .mobile-menu-btn {
     display: none;
     background: none;
@@ -49,7 +42,6 @@ body {
     gap: 5px;
     z-index: 1001;
 }
-
 .mobile-menu-btn span {
     display: block;
     width: 28px;
@@ -57,17 +49,13 @@ body {
     background: white;
     border-radius: 2px;
     transition: all 0.3s ease;
-<<<<<<< HEAD
 }
-
 .mobile-menu-btn.active span:nth-child(1) {
     transform: rotate(45deg) translate(6px, 6px);
 }
-
 .mobile-menu-btn.active span:nth-child(2) {
     opacity: 0;
 }
-
 .mobile-menu-btn.active span:nth-child(3) {
     transform: rotate(-45deg) translate(8px, -8px);
 }
@@ -90,21 +78,17 @@ body {
     margin: 0;
     padding: 1rem 0;
 }
-
 .mobile-menu.show {
     left: 0;
 }
-
 .mobile-menu li {
     width: 100%;
     margin: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .mobile-menu li:last-child {
     border-bottom: none;
 }
-
 .mobile-menu li a {
     display: block;
     padding: 15px 20px;
@@ -112,11 +96,9 @@ body {
     text-decoration: none;
     font-size: 1rem;
 }
-
 .mobile-menu li a:hover {
     background: rgba(255, 255, 255, 0.1);
 }
-
 .mobile-menu .dropdown-content {
     display: none;
     flex-direction: column;
@@ -125,15 +107,12 @@ body {
     background: transparent;
     box-shadow: none;
 }
-
 .mobile-menu .dropdown-content.show {
     display: flex;
 }
-
 .mobile-menu .dropdown-content li {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .mobile-menu .dropdown-content li a {
     padding-left: 30px;
     color: white;
@@ -158,7 +137,6 @@ body {
     flex-direction: column;
     overflow: hidden;
 }
-
 .chat-button {
     position: fixed;
     bottom: 30px;
@@ -173,12 +151,10 @@ body {
     align-items: center;
     justify-content: center;
 }
-
 .chat-button-icon {
     width: 28px;
     height: 28px;
 }
-
 .chat-header {
     display: flex;
     align-items: center;
@@ -187,32 +163,27 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     flex-shrink: 0;
 }
-
 .header-icon {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
 }
-
 .menu-icon {
     display: flex;
     flex-direction: column;
     gap: 3px;
     cursor: pointer;
 }
-
 .menu-icon span {
     width: 20px;
     height: 2px;
     background: currentColor;
     border-radius: 2px;
 }
-
 .header-title {
     font-weight: 600;
 }
-
 .close-icon {
     cursor: pointer;
     font-size: 1.5rem;
@@ -220,11 +191,9 @@ body {
     padding: 0.25rem;
     transition: opacity 0.3s ease;
 }
-
 .close-icon:hover {
     opacity: 0.7;
 }
-
 .chat-messages {
     flex: 1;
     overflow-y: auto;
@@ -233,7 +202,6 @@ body {
     flex-direction: column;
     gap: 1rem;
 }
-
 .chat-input-container {
     display: flex;
     padding: 1rem 1.5rem;
@@ -241,7 +209,6 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     flex-shrink: 0;
 }
-
 .chat-input {
     flex: 1;
     padding: 0.75rem 1rem;
@@ -251,11 +218,9 @@ body {
     color: inherit;
     font-size: 14px;
 }
-
 .chat-input::placeholder {
     opacity: 0.6;
 }
-
 .send-button {
     padding: 0.75rem 1rem;
     border-radius: 8px;
@@ -266,11 +231,9 @@ body {
     align-items: center;
     justify-content: center;
 }
-
 .send-button:hover {
     opacity: 0.8;
 }
-
 .send-button:active {
     transform: scale(0.95);
 }
@@ -282,13 +245,11 @@ body {
     opacity: 0.7;
     margin-bottom: 0.5rem;
 }
-
 .welcome-message {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
-
 .join-notice {
     display: flex;
     align-items: center;
@@ -297,11 +258,9 @@ body {
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.05);
 }
-
 .join-notice span {
     line-height: 1.4;
 }
-
 .privacy-notice {
     padding: 1rem;
     border-radius: 12px;
@@ -309,23 +268,19 @@ body {
     line-height: 1.5;
     font-size: 0.9rem;
 }
-
 .privacy-link {
     color: inherit;
     text-decoration: underline;
 }
-
 .privacy-link:hover {
     opacity: 0.8;
 }
-
 .welcome-text {
     padding: 1rem;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.05);
     line-height: 1.6;
 }
-
 .options-list {
     list-style: none;
     padding: 0;
@@ -334,7 +289,6 @@ body {
     flex-direction: column;
     gap: 0.5rem;
 }
-
 .options-list li {
     padding: 0.75rem 1rem;
     border-radius: 8px;
@@ -344,15 +298,12 @@ body {
     transition: all 0.3s ease;
     text-align: center;
 }
-
 .options-list li:hover {
     background: rgba(255, 255, 255, 0.1);
 }
-
 .options-list li:active {
     transform: scale(0.98);
 }
-
 /* Make all images in chat responsive */
 .chat-widget img,
 .chat-header img,
@@ -401,1180 +352,6 @@ body {
    ============================================ */
 
 /* Tablet and small desktop adjustments */
-=======
-}
-
-.mobile-menu-btn.active span:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-}
-
-.mobile-menu-btn.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.mobile-menu-btn.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(8px, -8px);
-}
-
-/* Mobile side menu panel */
-.mobile-menu {
-    position: fixed;
-    top: 0;
-    left: -250px;
-    width: 250px;
-    height: 100%;
-    background-color: #8099dd;
-    padding-top: 80px;
-    flex-direction: column;
-    transition: left 0.3s ease;
-    z-index: 999;
-    overflow-y: auto;
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 1rem 0;
-}
-
-.mobile-menu.show {
-    left: 0;
-}
-
-.mobile-menu li {
-    width: 100%;
-    margin: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mobile-menu li:last-child {
-    border-bottom: none;
-}
-
-.mobile-menu li a {
-    display: block;
-    padding: 15px 20px;
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
-}
-
-.mobile-menu li a:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-/* Mobile dropdown inside mobile menu */
-.mobile-menu .dropdown-content {
-    display: none;
-    flex-direction: column;
-    padding-left: 10px;
-    position: static;
-    background: transparent;
-    box-shadow: none;
-}
-
-.mobile-menu .dropdown-content.show {
-    display: flex;
-}
-
-.mobile-menu .dropdown-content li {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.mobile-menu .dropdown-content li a {
-    padding-left: 30px;
-    color: white;
-}
-
-/* ============================================
-   DESKTOP CHAT WIDGET STYLES (Default)
-   ============================================ */
-.chat-widget {
-    position: fixed;
-    bottom: 110px;
-    right: 30px;
-    width: 380px;
-    height: 550px;
-    background: var(--atom-bg);
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.chat-button {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    z-index: 999;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.chat-button-icon {
-    width: 28px;
-    height: 28px;
-}
-
-.chat-header {
-    display: flex;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    gap: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    flex-shrink: 0;
-}
-
-/* Header icon container - responsive by default */
-.header-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.menu-icon {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    cursor: pointer;
-}
-
-.menu-icon span {
-    width: 20px;
-    height: 2px;
-    background: currentColor;
-    border-radius: 2px;
-}
-
-.header-title {
-    font-weight: 600;
-}
-
-.close-icon {
-    cursor: pointer;
-    font-size: 1.5rem;
-    line-height: 1;
-    padding: 0.25rem;
-    transition: opacity 0.3s ease;
-}
-
-.close-icon:hover {
-    opacity: 0.7;
-}
-
-.chat-messages {
-    flex: 1;
-    overflow-y: auto;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.chat-input-container {
-    display: flex;
-    padding: 1rem 1.5rem;
-    gap: 0.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    flex-shrink: 0;
-}
-
-.chat-input {
-    flex: 1;
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.05);
-    color: inherit;
-    font-size: 14px;
-}
-
-.chat-input::placeholder {
-    opacity: 0.6;
-}
-
-.send-button {
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.send-button:hover {
-    opacity: 0.8;
-}
-
-.send-button:active {
-    transform: scale(0.95);
-}
-
-/* Chat content elements */
-.timestamp {
-    font-size: 0.85rem;
-    text-align: center;
-    opacity: 0.7;
-    margin-bottom: 0.5rem;
-}
-
-.welcome-message {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.join-notice {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-}
-
-.join-notice span {
-    line-height: 1.4;
-}
-
-.privacy-notice {
-    padding: 1rem;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    line-height: 1.5;
-    font-size: 0.9rem;
-}
-
-.privacy-link {
-    color: inherit;
-    text-decoration: underline;
-}
-
-.privacy-link:hover {
-    opacity: 0.8;
-}
-
-.welcome-text {
-    padding: 1rem;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.05);
-    line-height: 1.6;
-}
-
-.options-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.options-list li {
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-}
-
-.options-list li:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.options-list li:active {
-    transform: scale(0.98);
-}
-
-/* Make all images in chat responsive - applies to all screen sizes */
-.chat-widget img,
-.chat-header img,
-.header-icon img,
-.join-notice img {
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-}
-
-/* ============================================
-   MOBILE STYLES (768px and below)
-   ============================================ */
-@media (max-width: 768px) {
-
-    /* Show hamburger button */
-    .mobile-menu-btn {
-        display: flex !important;
-        position: absolute;
-        left: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-    }
-
-    /* Fix navbar layout */
-    .navbar {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem 1.5rem;
-        position: relative;
-        min-height: 70px;
-    }
-
-    /* Center the logo */
-    .navbar a {
-        position: relative;
-        left: auto;
-        transform: none;
-        margin: 0 auto;
-    }
-
-    .navbar .logo {
-        height: 45px;
-        width: auto;
-    }
-
-    /* Hide desktop menu */
-    .navbar>ul {
-        display: none !important;
-    }
-
-    /* Mobile menu styling */
-    .mobile-menu {
-        padding: 1rem 0 !important;
-    }
-
-    .mobile-menu li a {
-        padding: 15px 20px !important;
-        font-size: 1.1rem;
-    }
-
-    .mobile-menu li a.special-link {
-        background: rgba(255, 255, 255, 0.2);
-        margin: 10px 20px;
-        width: calc(100% - 40px);
-        border-radius: 8px;
-        text-align: center;
-    }
-
-    .mobile-menu li a.special-link:hover {
-        background: #b36ed8;
-    }
-
-    /* HOME PAGE - Atom Container */
-    .atom-container {
-        width: 200px !important;
-        height: 200px !important;
-        margin: 10px auto 20px auto !important;
-    }
-
-    #atomCanvas {
-        width: 100% !important;
-        height: 100% !important;
-    }
-
-    /* HOME PAGE - Main Content */
-    .main-content {
-        padding: 1.5rem 1rem;
-        margin-top: 0;
-        padding-bottom: 100px;
-    }
-
-    .main-content h1 {
-        font-size: 3rem !important;
-        margin-top: 1rem !important;
-        line-height: 1.2;
-        padding: 0 1rem;
-    }
-
-    .main-content p {
-        font-size: 1rem !important;
-        margin-top: -30px !important;
-        margin-bottom: 10px !important;
-        padding: 0 1rem;
-    }
-
-    /* Search Bar */
-    .search-bar-container {
-        top: 1rem !important;
-        margin-bottom: 2rem !important;
-        padding: 0 1rem;
-        max-width: 100%;
-    }
-
-    .search-wrapper {
-        padding: 0.5rem 1rem !important;
-    }
-
-    .search-input {
-        font-size: 0.95rem !important;
-    }
-
-    .search-input::placeholder {
-        font-size: 0.85rem !important;
-    }
-
-    /* HOME PAGE - About Section */
-    .home-about-section {
-        padding: 60px 16px 40px !important;
-    }
-
-    .home-about-container {
-        gap: 40px !important;
-        padding: 0 !important;
-        max-width: 100% !important;
-        overflow: hidden !important;
-    }
-
-    .home-about-content {
-        padding: 0 !important;
-    }
-
-    .home-about-title {
-        font-size: 32px !important;
-        line-height: 1.3 !important;
-        padding: 0 !important;
-    }
-
-    .home-about-description {
-        font-size: 15px !important;
-        line-height: 1.6 !important;
-        margin-bottom: 24px !important;
-        padding: 0 !important;
-    }
-
-    /* HOME PAGE - CTA Buttons */
-    .about-cta-buttons {
-        flex-direction: column;
-        width: 100%;
-        gap: 12px !important;
-        padding: 0 1rem;
-    }
-
-    .btn-primary-about,
-    .btn-secondary-about {
-        width: 100% !important;
-        text-align: center;
-        justify-content: center;
-        padding: 14px 24px !important;
-        font-size: 15px !important;
-    }
-
-    .btn-primary-about svg,
-    .btn-secondary-about svg {
-        width: 18px !important;
-        height: 18px !important;
-    }
-
-    /* HOME PAGE - Features */
-    .about-features {
-        padding: 0 1rem;
-        gap: 16px !important;
-    }
-
-    .about-feature-item {
-        padding: 16px !important;
-    }
-
-    .feature-icon {
-        width: 40px !important;
-        height: 40px !important;
-    }
-
-    .feature-text h4 {
-        font-size: 16px !important;
-    }
-
-    .feature-text p {
-        font-size: 14px !important;
-    }
-
-    /* HOME PAGE - Trust Badges */
-    .trust-badges {
-        grid-template-columns: 1fr !important;
-        gap: 12px !important;
-        margin-top: 40px !important;
-        padding-top: 40px !important;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
-    .trust-badge {
-        padding: 12px 16px !important;
-        font-size: 13px !important;
-    }
-
-    .trust-badge svg {
-        width: 20px !important;
-        height: 20px !important;
-    }
-
-    .trust-badge span {
-        font-size: 13px !important;
-    }
-
-    .about-badge {
-        font-size: 12px !important;
-        padding: 6px 14px !important;
-    }
-
-    .about-badge svg {
-        width: 16px !important;
-        height: 16px !important;
-    }
-
-    /* Hero sections across all pages */
-    .hero-section,
-    .hero-banner,
-    .hero,
-    .search-hero {
-        padding: 3rem 1rem 2rem !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        width: 100% !important;
-    }
-
-    .hero-section h1,
-    .hero-banner h1,
-    .hero h1,
-    .search-hero h1,
-    .dashboard-header h1 {
-        font-size: 2rem !important;
-    }
-
-    .hero-text h1,
-    .hero-title,
-    .main-title {
-        font-size: 2rem !important;
-    }
-
-    /* Management pages hero sections */
-    .course-management-wrapper .hero-section,
-    .bursary-management-wrapper .hero-section,
-    .admissions-calendar-wrapper .hero-section {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        width: 100% !important;
-        padding: 3rem 1rem 2rem !important;
-    }
-
-    /* Content containers */
-    .content-container,
-    .container {
-        padding: 0 1rem !important;
-        max-width: 100% !important;
-    }
-
-    /* Control panels */
-    .control-panel {
-        flex-direction: column;
-        padding: 1rem !important;
-    }
-
-    .control-left,
-    .control-right {
-        width: 100%;
-        flex-direction: column;
-    }
-
-    /* Search boxes and filters */
-    .search-box {
-        min-width: 100% !important;
-        width: 100% !important;
-    }
-
-    .filter-select {
-        width: 100% !important;
-        min-width: 100% !important;
-    }
-
-    /* Grids */
-    .events-grid,
-    .bursaries-grid,
-    .courses-grid,
-    .stats-grid,
-    .dashboard-grid {
-        grid-template-columns: 1fr !important;
-        gap: 1rem !important;
-    }
-
-    /* Cards */
-    .event-card,
-    .bursary-card,
-    .course-card,
-    .option-card {
-        margin-bottom: 1rem;
-    }
-
-    /* Forms */
-    .form-row {
-        grid-template-columns: 1fr !important;
-    }
-
-    .form-wrapper {
-        flex-direction: column;
-    }
-
-    .form-column {
-        width: 100%;
-    }
-
-    /* Tables */
-    .comparison-table-wrapper {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .comparison-table {
-        min-width: 600px;
-    }
-
-    /* CONTACT PAGE - Hero */
-    .contact-page {
-        background-size: cover;
-        background-attachment: scroll;
-    }
-
-    .contact-page .hero h1 {
-        font-size: 2.5rem !important;
-        margin-bottom: 1rem;
-        line-height: 1.2;
-    }
-
-    .contact-page .hero p {
-        font-size: 1rem !important;
-        padding: 0 1rem;
-        max-width: 100%;
-    }
-
-    /* CONTACT PAGE - Main Content */
-    .contact-page main {
-        padding: 2rem 1rem !important;
-        display: block;
-    }
-
-    /* CONTACT PAGE - Top Sections */
-    .top-sections {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 1.5rem !important;
-        max-width: 100% !important;
-        margin: 0 auto 2rem auto !important;
-        padding: 0 !important;
-        grid-template-columns: 1fr !important;
-    }
-
-    /* CONTACT PAGE - Form Section */
-    .contact-form-section {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 1.5rem !important;
-        box-sizing: border-box !important;
-        margin: 0 !important;
-    }
-
-    .contact-form-section h2 {
-        font-size: 1.75rem !important;
-        margin-bottom: 1.25rem !important;
-    }
-
-    .contact-form-section form {
-        width: 100% !important;
-        box-sizing: border-box;
-    }
-
-    .contact-form-section form div {
-        margin-bottom: 1rem !important;
-        width: 100% !important;
-        box-sizing: border-box;
-    }
-
-    .contact-form-section label {
-        font-size: 0.95rem !important;
-        margin-bottom: 0.4rem;
-        display: block;
-    }
-
-    .contact-form-section input,
-    .contact-form-section select,
-    .contact-form-section textarea {
-        width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-        padding: 0.75rem !important;
-        font-size: 16px !important;
-        border-radius: 6px !important;
-        border: none !important;
-        margin: 0 !important;
-    }
-
-    .contact-form-section textarea {
-        min-height: 120px !important;
-        resize: vertical;
-    }
-
-    .contact-form-section button[type="submit"] {
-        width: 100% !important;
-        padding: 1rem !important;
-        font-size: 1rem !important;
-        margin-top: 0.5rem;
-    }
-
-    /* CONTACT PAGE - Info Section */
-    .info-section {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 1.5rem !important;
-        box-sizing: border-box !important;
-        margin: 0 !important;
-    }
-
-    .info-section h2 {
-        font-size: 1.75rem !important;
-        margin-bottom: 1.25rem !important;
-    }
-
-    .info-block {
-        margin-bottom: 1rem !important;
-        font-size: 0.95rem;
-    }
-
-    .info-block .icon {
-        font-size: 1.25rem !important;
-    }
-
-    .info-block .details {
-        flex: 1;
-        word-wrap: break-word;
-    }
-
-    .office-hours {
-        font-size: 0.9rem !important;
-        margin: 1.25rem 0 !important;
-    }
-
-    /* CONTACT PAGE - Map */
-    .map {
-        width: 100% !important;
-        height: 200px !important;
-        margin: 1rem 0 !important;
-        border-radius: 8px;
-        overflow: hidden;
-    }
-
-    .map iframe {
-        width: 100% !important;
-        height: 100% !important;
-        border: none;
-    }
-
-    /* CONTACT PAGE - FAQ */
-    .faq {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 1.5rem !important;
-        box-sizing: border-box !important;
-        margin: 0 auto !important;
-        max-height: 500px !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .faq h3 {
-        font-size: 1.75rem !important;
-        margin-bottom: 1rem !important;
-        padding: 0.75rem 0 1rem 0 !important;
-        position: sticky;
-        top: 0;
-        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.15) 85%, rgba(255, 255, 255, 0) 100%);
-        backdrop-filter: blur(10px);
-        z-index: 10;
-    }
-
-    .faq-item {
-        margin-bottom: 1.25rem !important;
-        padding-bottom: 1rem !important;
-    }
-
-    .faq-item strong {
-        font-size: 1rem !important;
-        line-height: 1.4;
-        margin-bottom: 0.5rem;
-        display: block;
-    }
-
-    .faq-item span {
-        font-size: 0.9rem !important;
-        line-height: 1.5;
-        display: block;
-    }
-
-    .faq::-webkit-scrollbar {
-        width: 6px;
-    }
-
-    .faq::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.05);
-    }
-
-    .faq::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 3px;
-    }
-
-    /* Contact Links */
-    .contact-link {
-        display: inline-block;
-        padding: 0.25rem 0;
-        word-break: break-all;
-    }
-
-    a[href^="tel:"],
-    a[href^="mailto:"] {
-        min-height: 44px;
-        display: inline-flex;
-        align-items: center;
-    }
-
-    /* Matches page */
-    .course-navigation {
-        padding: 0 1rem;
-    }
-
-    .nav-button.prev {
-        left: 10px !important;
-    }
-
-    .nav-button.next {
-        right: 10px !important;
-    }
-
-    .like-button {
-        top: 15px !important;
-        left: 15px !important;
-        width: 40px;
-        height: 40px;
-    }
-
-    /* MOBILE CHAT WIDGET - FULLSCREEN */
-    .chat-widget {
-        width: 100% !important;
-        height: 100dvh !important;
-        bottom: 0 !important;
-        right: 0 !important;
-        left: 0 !important;
-        top: 0 !important;
-        border-radius: 0 !important;
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .chat-widget.hidden {
-        transform: translateY(100%);
-        pointer-events: none;
-    }
-
-    .chat-widget.visible {
-        transform: translateY(0);
-        pointer-events: auto;
-    }
-
-    .chat-header {
-        padding: 1rem !important;
-        min-height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.75rem;
-        flex-shrink: 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .header-title {
-        flex: 1;
-        font-size: 1.1rem;
-        font-weight: 600;
-        text-align: center;
-    }
-
-    .close-icon {
-        flex-shrink: 0;
-        cursor: pointer;
-        font-size: 1.5rem;
-        padding: 0.5rem;
-        line-height: 1;
-    }
-
-    .chat-messages {
-        flex: 1;
-        overflow-y: auto;
-        overflow-x: hidden;
-        padding: 1rem !important;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        max-height: calc(100dvh - 140px);
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .join-notice .header-icon {
-        width: 50px !important;
-        height: 50px !important;
-        flex-shrink: 0;
-    }
-
-    .join-notice span {
-        font-size: 0.9rem;
-        line-height: 1.4;
-    }
-
-    .privacy-notice {
-        font-size: 0.85rem;
-        padding: 1rem;
-    }
-
-    .welcome-text {
-        font-size: 1rem;
-        padding: 1rem;
-    }
-
-    .options-list {
-        gap: 0.75rem;
-    }
-
-    .options-list li {
-        padding: 1rem;
-        font-size: 0.95rem;
-    }
-
-    .chat-input-container {
-        display: flex;
-        padding: 1rem !important;
-        gap: 0.75rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        flex-shrink: 0;
-        background: inherit;
-    }
-
-    .chat-input {
-        flex: 1;
-        padding: 0.875rem 1rem !important;
-        border-radius: 12px;
-        font-size: 16px !important;
-        min-height: 44px;
-    }
-
-    .send-button {
-        padding: 0.875rem 1.25rem !important;
-        border-radius: 12px;
-        font-size: 1.25rem;
-        min-width: 50px;
-        min-height: 44px;
-    }
-
-    .chat-button {
-        bottom: 20px !important;
-        right: 20px !important;
-        width: 60px !important;
-        height: 60px !important;
-        z-index: 998;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    body.chat-open {
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-    }
-
-    /* About Us page */
-    .main-content_about h1 {
-        font-size: 2.5rem !important;
-    }
-
-    .main-content_about p {
-        font-size: 1.2rem !important;
-    }
-
-    .mission-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .mission-card {
-        width: 100% !important;
-        max-width: 350px;
-    }
-
-    /* How It Works page */
-    .steps-container {
-        padding: 0 1rem;
-    }
-
-    .step-card {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .step-number {
-        margin: 0 auto 1rem;
-    }
-
-    /* Bursaries page */
-    .bursary-grid {
-        grid-template-columns: 1fr !important;
-    }
-
-    .filter-group {
-        flex-direction: column;
-    }
-
-    .filter-group input,
-    .filter-group select {
-        width: 100% !important;
-        min-width: 100% !important;
-    }
-
-    /* Admissions page */
-    .controls-bar {
-        flex-direction: column;
-    }
-
-    .view-switcher {
-        width: 100%;
-    }
-
-    .view-btn {
-        flex: 1;
-    }
-
-    .filters-group {
-        width: 100%;
-        flex-direction: column;
-    }
-
-    .search-container {
-        max-width: 100% !important;
-        width: 100% !important;
-    }
-
-    /* Personal Info page */
-    .search-form-container {
-        padding: 0 1rem;
-    }
-
-    .form-card {
-        padding: 1.5rem !important;
-    }
-
-    .subject-row {
-        flex-direction: column;
-    }
-
-    .radio-group-modern {
-        flex-direction: column;
-    }
-
-    /* Admin Dashboard */
-    .admin-dashboard {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        padding: 1rem;
-    }
-
-    .dashboard-content {
-        padding: 1rem;
-    }
-
-    /* Modals */
-    .modal-content {
-        width: 95% !important;
-        max-width: 95% !important;
-        margin: 1rem;
-    }
-
-    .modal-body {
-        padding: 1.5rem !important;
-    }
-
-    .modal-header {
-        padding: 1rem !important;
-    }
-
-    /* Global text overflow fixes */
-    * {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-    }
-
-    body,
-    html {
-        overflow-x: hidden !important;
-        max-width: 100vw !important;
-    }
-
-    .home-about-section::before,
-    .home-about-section::after {
-        display: none;
-    }
-
-    .stats-container {
-        max-width: 100% !important;
-        overflow: hidden !important;
-    }
-
-    /* Form elements - proper sizing */
-    input[type="text"],
-    input[type="email"],
-    input[type="tel"],
-    select,
-    textarea {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        box-sizing: border-box !important;
-        font-size: 16px !important;
-        -webkit-text-size-adjust: 100%;
-    }
-
-    /* iOS safe area */
-    body {
-        padding-bottom: env(safe-area-inset-bottom);
-    }
-
-    /* Prevent content under fixed elements */
-    body {
-        padding-bottom: 80px;
-    }
-
-    .admin-lock-icon,
-    .back-button {
-        top: 80px !important;
-        left: 15px !important;
-    }
-}
-
-/* ============================================
-   HOME PAGE - VISUAL CARDS (max-width: 968px)
-   ============================================ */
->>>>>>> 98853aef510ff9a535cfef71f630a7b474be970c
 @media (max-width: 968px) {
     .home-about-visual {
         height: 400px !important;
@@ -1583,1876 +360,264 @@ body {
         max-width: 100%;
         padding: 0 20px;
     }
-
     .visual-card {
         width: 160px !important;
         padding: 20px !important;
     }
-
     .card-icon {
         width: 48px !important;
         height: 48px !important;
         margin-bottom: 12px !important;
     }
-
     .card-icon svg {
         width: 24px !important;
         height: 24px !important;
     }
-
-    .visual-card h4 {
-        font-size: 28px !important;
-    }
-
-    .visual-card p {
-        font-size: 13px !important;
-    }
-
-    .card-1 {
-        top: 20px !important;
-        left: 10px !important;
-    }
-
-    .card-2 {
-        top: 80px !important;
-        right: 10px !important;
-        width: 170px !important;
-    }
-
-    .card-3 {
-        bottom: 20px !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-    }
-
-    .floating-shape {
-        display: none;
-<<<<<<< HEAD
-    }
+    .visual-card h4 { font-size: 28px !important; }
+    .visual-card p { font-size: 13px !important; }
+    .card-1 { top: 20px !important; left: 10px !important; }
+    .card-2 { top: 80px !important; right: 10px !important; width: 170px !important; }
+    .card-3 { bottom: 20px !important; left: 50% !important; transform: translateX(-50%) !important; }
+    .floating-shape { display: none; }
 
     /* Landscape variant */
-    .chat-widget {
-        width: 100% !important;
-        height: 100dvh !important;
-    }
-
-    .chat-messages {
-        max-height: calc(100dvh - 120px);
-    }
-
-    .chat-button {
-        bottom: 15px !important;
-        right: 15px !important;
-    }
-
-    .atom-container {
-        width: 150px !important;
-        height: 150px !important;
-        margin: 5px auto 10px auto !important;
-    }
-
-    .main-content h1 {
-        font-size: 2.5rem !important;
-        margin-top: 0.5rem !important;
-    }
-
-    .main-content p {
-        margin-top: -20px !important;
-    }
-
-    .home-about-visual {
-        height: 300px !important;
-        min-height: 300px !important;
-    }
-
-    .visual-card {
-        width: 130px !important;
-        padding: 14px !important;
-    }
-
-    .card-1 {
-        top: 10px !important;
-    }
-
-    .card-2 {
-        top: 60px !important;
-    }
-
-    .card-3 {
-        bottom: 10px !important;
-    }
-
-    .contact-page .hero {
-        padding: 2rem 1.5rem !important;
-    }
-
-    .faq {
-        max-height: 300px !important;
-    }
+    .chat-widget { width: 100% !important; height: 100dvh !important; }
+    .chat-messages { max-height: calc(100dvh - 120px); }
+    .chat-button { bottom: 15px !important; right: 15px !important; }
+    .atom-container { width: 150px !important; height: 150px !important; margin: 5px auto 10px auto !important; }
+    .main-content h1 { font-size: 2.5rem !important; margin-top: 0.5rem !important; }
+    .main-content p { margin-top: -20px !important; }
+    .home-about-visual { height: 300px !important; min-height: 300px !important; }
+    .visual-card { width: 130px !important; padding: 14px !important; }
+    .card-1 { top: 10px !important; }
+    .card-2 { top: 60px !important; }
+    .card-3 { bottom: 10px !important; }
+    .contact-page .hero { padding: 2rem 1.5rem !important; }
+    .faq { max-height: 300px !important; }
 }
 
 /* Tablet chat widget specific */
 @media (max-width: 968px) and (min-width: 769px) {
-    .chat-widget {
-        width: 360px;
-        height: 500px;
-        bottom: 100px;
-        right: 20px;
-    }
-
-    .chat-button {
-        bottom: 25px;
-        right: 25px;
-        width: 56px;
-        height: 56px;
-    }
-
-    .home-about-visual {
-        height: 450px !important;
-        min-height: 450px !important;
-        max-width: 450px;
-    }
-
-    .visual-card {
-        width: 180px !important;
-        padding: 24px !important;
-    }
-
-    .card-icon {
-        width: 56px !important;
-        height: 56px !important;
-    }
-
-    .visual-card h4 {
-        font-size: 32px !important;
-    }
-
-    .atom-container {
-        width: 250px !important;
-        height: 250px !important;
-    }
-
-    .main-content h1 {
-        font-size: 4.5rem !important;
-    }
-
-    .main-content p {
-        font-size: 1.3rem !important;
-    }
-
-    .top-sections {
-        grid-template-columns: 1fr !important;
-        gap: 2rem;
-        padding: 0 2rem;
-    }
-
-    .contact-form-section,
-    .info-section {
-        max-width: 600px;
-        margin: 0 auto;
-    }
+    .chat-widget { width: 360px; height: 500px; bottom: 100px; right: 20px; }
+    .chat-button { bottom: 25px; right: 25px; width: 56px; height: 56px; }
+    .home-about-visual { height: 450px !important; min-height: 450px !important; max-width: 450px; }
+    .visual-card { width: 180px !important; padding: 24px !important; }
+    .card-icon { width: 56px !important; height: 56px !important; }
+    .visual-card h4 { font-size: 32px !important; }
+    .atom-container { width: 250px !important; height: 250px !important; }
+    .main-content h1 { font-size: 4.5rem !important; }
+    .main-content p { font-size: 1.3rem !important; }
+    .top-sections { grid-template-columns: 1fr !important; gap: 2rem; padding: 0 2rem; }
+    .contact-form-section, .info-section { max-width: 600px; margin: 0 auto; }
 }
 
 /* Small devices and mobile-specific rules */
 @media (max-width: 768px) {
 
     /* Show generic mobile hamburger for navs */
-    .mobile-menu-btn {
-        display: flex !important;
-        position: absolute;
-        left: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-    }
+    .mobile-menu-btn { display: flex !important; position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); }
 
     /* Navbar fixes */
-    .navbar {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1rem 1.5rem;
-        position: relative;
-        min-height: 70px;
-    }
-
-    .navbar a {
-        position: relative;
-        left: auto;
-        transform: none;
-        margin: 0 auto;
-    }
-
-    .navbar .logo {
-        height: 45px;
-        width: auto;
-    }
-
-    .navbar>ul {
-        display: none !important;
-    }
+    .navbar { display: flex; align-items: center; justify-content: center; padding: 1rem 1.5rem; position: relative; min-height: 70px; }
+    .navbar a { position: relative; left: auto; transform: none; margin: 0 auto; }
+    .navbar .logo { height: 45px; width: auto; }
+    .navbar>ul { display: none !important; }
 
     /* Mobile menu adjustments */
-    .mobile-menu {
-        padding: 1rem 0 !important;
-    }
-
-    .mobile-menu li a {
-        padding: 15px 20px !important;
-        font-size: 1.1rem;
-    }
-
-    .mobile-menu li a.special-link {
-        background: rgba(255, 255, 255, 0.2);
-        margin: 10px 20px;
-        width: calc(100% - 40px);
-        border-radius: 8px;
-        text-align: center;
-    }
-
-    .mobile-menu li a.special-link:hover {
-        background: #b36ed8;
-    }
+    .mobile-menu { padding: 1rem 0 !important; }
+    .mobile-menu li a { padding: 15px 20px !important; font-size: 1.1rem; }
+    .mobile-menu li a.special-link { background: rgba(255,255,255,0.2); margin: 10px 20px; width: calc(100% - 40px); border-radius: 8px; text-align: center; }
+    .mobile-menu li a.special-link:hover { background: #b36ed8; }
 
     /* HOME PAGE - Atom */
-    .atom-container {
-        width: 200px !important;
-        height: 200px !important;
-        margin: 10px auto 20px auto !important;
-    }
-
-    #atomCanvas {
-        width: 100% !important;
-        height: 100% !important;
-    }
+    .atom-container { width: 200px !important; height: 200px !important; margin: 10px auto 20px auto !important; }
+    #atomCanvas { width: 100% !important; height: 100% !important; }
 
     /* Main content sizing */
-    .main-content {
-        padding: 1.5rem 1rem;
-        margin-top: 0;
-        padding-bottom: 100px;
-        text-align: center;
-    }
-
-    .main-content h1 {
-        font-size: 3rem !important;
-        margin-top: 1rem !important;
-        line-height: 1.2;
-        padding: 0 1rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .main-content p {
-        font-size: 1rem !important;
-        margin-top: -30px !important;
-        margin-bottom: 10px !important;
-        padding: 0 1rem;
-    }
+    .main-content { padding: 1.5rem 1rem; margin-top: 0; padding-bottom: 100px; text-align: center; }
+    .main-content h1 { font-size: 3rem !important; margin-top: 1rem !important; line-height: 1.2; padding: 0 1rem; margin-bottom: 0.5rem; }
+    .main-content p { font-size: 1rem !important; margin-top: -30px !important; margin-bottom: 10px !important; padding: 0 1rem; }
 
     /* Search bar */
-    .search-bar-container {
-        top: 1rem !important;
-        margin-bottom: 2rem !important;
-        padding: 0 1rem;
-        max-width: 100%;
-    }
-
-    .search-wrapper {
-        padding: 0.5rem 1rem !important;
-    }
-
-    .search-input {
-        font-size: 0.95rem !important;
-    }
-
-    .search-input::placeholder {
-        font-size: 0.85rem !important;
-    }
+    .search-bar-container { top: 1rem !important; margin-bottom: 2rem !important; padding: 0 1rem; max-width: 100%; }
+    .search-wrapper { padding: 0.5rem 1rem !important; }
+    .search-input { font-size: 0.95rem !important; }
+    .search-input::placeholder { font-size: 0.85rem !important; }
 
     /* About & CTA */
-    .home-about-section {
-        padding: 60px 16px 40px !important;
-    }
-
-    .home-about-container {
-        gap: 40px !important;
-        padding: 0 !important;
-        max-width: 100% !important;
-        overflow: hidden !important;
-    }
-
-    .home-about-title {
-        font-size: 32px !important;
-        line-height: 1.3 !important;
-        padding: 0 !important;
-    }
-
-    .home-about-description {
-        font-size: 15px !important;
-        line-height: 1.6 !important;
-        margin-bottom: 24px !important;
-        padding: 0 !important;
-    }
-
-    .about-cta-buttons {
-        flex-direction: column;
-        width: 100%;
-        gap: 12px !important;
-        padding: 0 1rem;
-    }
-
-    .btn-primary-about,
-    .btn-secondary-about {
-        width: 100% !important;
-        text-align: center;
-        justify-content: center;
-        padding: 14px 24px !important;
-        font-size: 15px !important;
-    }
-
-    .btn-primary-about svg,
-    .btn-secondary-about svg {
-        width: 18px !important;
-        height: 18px !important;
-    }
+    .home-about-section { padding: 60px 16px 40px !important; }
+    .home-about-container { gap: 40px !important; padding: 0 !important; max-width: 100% !important; overflow: hidden !important; }
+    .home-about-title { font-size: 32px !important; line-height: 1.3 !important; padding: 0 !important; }
+    .home-about-description { font-size: 15px !important; line-height: 1.6 !important; margin-bottom: 24px !important; padding: 0 !important; }
+    .about-cta-buttons { flex-direction: column; width: 100%; gap: 12px !important; padding: 0 1rem; }
+    .btn-primary-about, .btn-secondary-about { width: 100% !important; text-align: center; justify-content: center; padding: 14px 24px !important; font-size: 15px !important; }
+    .btn-primary-about svg, .btn-secondary-about svg { width: 18px !important; height: 18px !important; }
 
     /* Grids / cards / forms / tables */
-    .events-grid,
-    .bursaries-grid,
-    .courses-grid,
-    .stats-grid,
-    .dashboard-grid {
-        grid-template-columns: 1fr !important;
-        gap: 1rem !important;
-    }
-
-    .event-card,
-    .bursary-card,
-    .course-card,
-    .option-card {
-        margin-bottom: 1rem;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr !important;
-    }
-
-    .form-wrapper {
-        flex-direction: column;
-=======
->>>>>>> 98853aef510ff9a535cfef71f630a7b474be970c
-    }
-
-<<<<<<< HEAD
-    .form-column {
-        width: 100%;
-    }
-
-    .comparison-table-wrapper {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .comparison-table {
-        min-width: 600px;
-    }
+    .events-grid, .bursaries-grid, .courses-grid, .stats-grid, .dashboard-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+    .event-card, .bursary-card, .course-card, .option-card { margin-bottom: 1rem; }
+    .form-row { grid-template-columns: 1fr !important; }
+    .form-wrapper { flex-direction: column; }
+    .form-column { width: 100%; }
+    .comparison-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .comparison-table { min-width: 600px; }
 
     /* Contact page */
-    .contact-page {
-        background-size: cover;
-        background-attachment: scroll;
-    }
+    .contact-page { background-size: cover; background-attachment: scroll; }
+    .contact-page .hero h1 { font-size: 2.5rem !important; margin-bottom: 1rem; line-height: 1.2; }
+    .contact-page .hero p { font-size: 1rem !important; padding: 0 1rem; max-width: 100%; }
+    .contact-page main { padding: 2rem 1rem !important; display: block; }
 
-    .contact-page .hero h1 {
-        font-size: 2.5rem !important;
-        margin-bottom: 1rem;
-        line-height: 1.2;
-    }
+    .top-sections { display: flex !important; flex-direction: column !important; gap: 1.5rem !important; max-width: 100% !important; margin: 0 auto 2rem auto !important; padding: 0 !important; grid-template-columns: 1fr !important; }
+    .contact-form-section { width: 100% !important; max-width: 100% !important; padding: 1.5rem !important; box-sizing: border-box !important; margin: 0 !important; }
+    .contact-form-section h2 { font-size: 1.75rem !important; margin-bottom: 1.25rem !important; }
+    .contact-form-section form { width: 100% !important; box-sizing: border-box; }
+    .contact-form-section form div { margin-bottom: 1rem !important; width: 100% !important; box-sizing: border-box; }
+    .contact-form-section label { font-size: 0.95rem !important; margin-bottom: 0.4rem; display: block; }
+    .contact-form-section input, .contact-form-section select, .contact-form-section textarea { width: 100% !important; max-width: 100% !important; box-sizing: border-box !important; padding: 0.75rem !important; font-size: 16px !important; border-radius: 6px !important; border: none !important; margin: 0 !important; }
+    .contact-form-section textarea { min-height: 120px !important; resize: vertical; }
+    .contact-form-section button[type="submit"] { width: 100% !important; padding: 1rem !important; font-size: 1rem !important; margin-top: 0.5rem; }
 
-    .contact-page .hero p {
-        font-size: 1rem !important;
-        padding: 0 1rem;
-        max-width: 100%;
-    }
+    .info-section { width: 100% !important; max-width: 100% !important; padding: 1.5rem !important; box-sizing: border-box !important; margin: 0 !important; }
+    .info-section h2 { font-size: 1.75rem !important; margin-bottom: 1.25rem !important; }
+    .info-block { margin-bottom: 1rem !important; font-size: 0.95rem; }
+    .info-block .icon { font-size: 1.25rem !important; }
+    .info-block .details { flex: 1; word-wrap: break-word; }
+    .office-hours { font-size: 0.9rem !important; margin: 1.25rem 0 !important; }
 
-    .contact-page main {
-        padding: 2rem 1rem !important;
-        display: block;
-    }
+    .map { width: 100% !important; height: 200px !important; margin: 1rem 0 !important; border-radius: 8px; overflow: hidden; }
+    .map iframe { width: 100% !important; height: 100% !important; border: none; }
 
-    .top-sections {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 1.5rem !important;
-        max-width: 100% !important;
-        margin: 0 auto 2rem auto !important;
-        padding: 0 !important;
-        grid-template-columns: 1fr !important;
-    }
-
-    .contact-form-section {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 1.5rem !important;
-        box-sizing: border-box !important;
-        margin: 0 !important;
-    }
-
-    .contact-form-section h2 {
-        font-size: 1.75rem !important;
-        margin-bottom: 1.25rem !important;
-    }
-
-    .contact-form-section form {
-        width: 100% !important;
-        box-sizing: border-box;
-    }
-
-    .contact-form-section form div {
-        margin-bottom: 1rem !important;
-        width: 100% !important;
-        box-sizing: border-box;
-    }
-
-    .contact-form-section label {
-        font-size: 0.95rem !important;
-        margin-bottom: 0.4rem;
-        display: block;
-    }
-
-    .contact-form-section input,
-    .contact-form-section select,
-    .contact-form-section textarea {
-        width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-        padding: 0.75rem !important;
-        font-size: 16px !important;
-        border-radius: 6px !important;
-        border: none !important;
-        margin: 0 !important;
-    }
-
-    .contact-form-section textarea {
-        min-height: 120px !important;
-        resize: vertical;
-    }
-
-    .contact-form-section button[type="submit"] {
-        width: 100% !important;
-        padding: 1rem !important;
-        font-size: 1rem !important;
-        margin-top: 0.5rem;
-    }
-
-    .info-section {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 1.5rem !important;
-        box-sizing: border-box !important;
-        margin: 0 !important;
-    }
-
-    .info-section h2 {
-        font-size: 1.75rem !important;
-        margin-bottom: 1.25rem !important;
-    }
-
-    .info-block {
-        margin-bottom: 1rem !important;
-        font-size: 0.95rem;
-    }
-
-    .info-block .icon {
-        font-size: 1.25rem !important;
-    }
-
-    .info-block .details {
-        flex: 1;
-        word-wrap: break-word;
-    }
-
-    .office-hours {
-        font-size: 0.9rem !important;
-        margin: 1.25rem 0 !important;
-    }
-
-    .map {
-        width: 100% !important;
-        height: 200px !important;
-        margin: 1rem 0 !important;
-        border-radius: 8px;
-        overflow: hidden;
-    }
-
-    .map iframe {
-        width: 100% !important;
-        height: 100% !important;
-        border: none;
-    }
-
-    .faq {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 1.5rem !important;
-        box-sizing: border-box !important;
-        margin: 0 auto !important;
-        max-height: 500px !important;
-        overflow-y: auto !important;
-        overflow-x: hidden !important;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .faq h3 {
-        font-size: 1.75rem !important;
-        margin-bottom: 1rem !important;
-        padding: 0.75rem 0 1rem 0 !important;
-        position: sticky;
-        top: 0;
-        background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.15) 85%, rgba(255, 255, 255, 0) 100%);
-        backdrop-filter: blur(10px);
-        z-index: 10;
-    }
-
-    .faq-item {
-        margin-bottom: 1.25rem !important;
-        padding-bottom: 1rem !important;
-    }
-
-    .faq-item strong {
-        font-size: 1rem !important;
-        line-height: 1.4;
-        margin-bottom: 0.5rem;
-        display: block;
-    }
-
-    .faq-item span {
-        font-size: 0.9rem !important;
-        line-height: 1.5;
-        display: block;
-    }
-
-    .faq::-webkit-scrollbar {
-        width: 6px;
-    }
-
-    .faq::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.05);
-    }
-
-    .faq::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 3px;
-=======
-/* ============================================
-   TABLET - CHAT WIDGET (769px - 968px)
-   ============================================ */
-@media (max-width: 968px) and (min-width: 769px) {
-    .chat-widget {
-        width: 360px;
-        height: 500px;
-        bottom: 100px;
-        right: 20px;
-    }
-
-    .chat-button {
-        bottom: 25px;
-        right: 25px;
-        width: 56px;
-        height: 56px;
-    }
-
-    /* Home page adjustments */
-    .home-about-visual {
-        height: 450px !important;
-        min-height: 450px !important;
-        max-width: 450px;
-    }
-
-    .visual-card {
-        width: 180px !important;
-        padding: 24px !important;
-    }
-
-    .card-icon {
-        width: 56px !important;
-        height: 56px !important;
-    }
-
-    .visual-card h4 {
-        font-size: 32px !important;
-    }
-
-    .atom-container {
-        width: 250px !important;
-        height: 250px !important;
-    }
-
-    .main-content h1 {
-        font-size: 4.5rem !important;
-    }
-
-    .main-content p {
-        font-size: 1.3rem !important;
-    }
-
-    /* Contact Page Tablet */
-    .top-sections {
-        grid-template-columns: 1fr !important;
-        gap: 2rem;
-        padding: 0 2rem;
-    }
-
-    .contact-form-section,
-    .info-section {
-        max-width: 600px;
-        margin: 0 auto;
->>>>>>> 98853aef510ff9a535cfef71f630a7b474be970c
-    }
+    .faq { width: 100% !important; max-width: 100% !important; padding: 1.5rem !important; box-sizing: border-box !important; margin: 0 auto !important; max-height: 500px !important; overflow-y: auto !important; overflow-x: hidden !important; -webkit-overflow-scrolling: touch; }
+    .faq h3 { font-size: 1.75rem !important; margin-bottom: 1rem !important; padding: 0.75rem 0 1rem 0 !important; position: sticky; top: 0; background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.15) 85%, rgba(255,255,255,0) 100%); backdrop-filter: blur(10px); z-index: 10; }
+    .faq-item { margin-bottom: 1.25rem !important; padding-bottom: 1rem !important; }
+    .faq-item strong { font-size: 1rem !important; line-height: 1.4; margin-bottom: 0.5rem; display: block; }
+    .faq-item span { font-size: 0.9rem !important; line-height: 1.5; display: block; }
+    .faq::-webkit-scrollbar { width: 6px; }
+    .faq::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+    .faq::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.3); border-radius: 3px; }
 
     /* Misc */
-    .contact-link {
-        display: inline-block;
-        padding: 0.25rem 0;
-        word-break: break-all;
-    }
+    .contact-link { display: inline-block; padding: 0.25rem 0; word-break: break-all; }
+    a[href^="tel:"], a[href^="mailto:"] { min-height: 44px; display: inline-flex; align-items: center; }
 
-    a[href^="tel:"],
-    a[href^="mailto:"] {
-        min-height: 44px;
-        display: inline-flex;
-        align-items: center;
-    }
-
-    .course-navigation {
-        padding: 0 1rem;
-    }
-
-    .nav-button.prev {
-        left: 10px !important;
-    }
-
-    .nav-button.next {
-        right: 10px !important;
-    }
-
-    .like-button {
-        top: 15px !important;
-        left: 15px !important;
-        width: 40px;
-        height: 40px;
-    }
+    .course-navigation { padding: 0 1rem; }
+    .nav-button.prev { left: 10px !important; }
+    .nav-button.next { right: 10px !important; }
+    .like-button { top: 15px !important; left: 15px !important; width: 40px; height: 40px; }
 
     /* Chat widget - mobile fullscreen handling */
-    .chat-widget {
-        width: 100% !important;
-        height: 100dvh !important;
-        bottom: 0 !important;
-        right: 0 !important;
-        left: 0 !important;
-        top: 0 !important;
-        border-radius: 0 !important;
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-    }
+    .chat-widget { width: 100% !important; height: 100dvh !important; bottom: 0 !important; right: 0 !important; left: 0 !important; top: 0 !important; border-radius: 0 !important; z-index: 9999; display: flex; flex-direction: column; }
+    .chat-widget.hidden { transform: translateY(100%); pointer-events: none; }
+    .chat-widget.visible { transform: translateY(0); pointer-events: auto; }
+    .chat-header { padding: 1rem !important; min-height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-shrink: 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .header-title { flex: 1; font-size: 1.1rem; font-weight: 600; text-align: center; }
+    .close-icon { flex-shrink: 0; cursor: pointer; font-size: 1.5rem; padding: 0.5rem; line-height: 1; }
+    .chat-messages { flex: 1; overflow-y: auto; overflow-x: hidden; padding: 1rem !important; display: flex; flex-direction: column; gap: 1rem; max-height: calc(100dvh - 140px); -webkit-overflow-scrolling: touch; }
+    .join-notice .header-icon { width: 50px !important; height: 50px !important; flex-shrink: 0; }
+    .join-notice span { font-size: 0.9rem; line-height: 1.4; }
+    .privacy-notice { font-size: 0.85rem; padding: 1rem; }
+    .welcome-text { font-size: 1rem; padding: 1rem; }
+    .options-list { gap: 0.75rem; }
+    .options-list li { padding: 1rem; font-size: 0.95rem; }
+    .chat-input-container { display: flex; padding: 1rem !important; gap: 0.75rem; border-top: 1px solid rgba(255,255,255,0.1); flex-shrink: 0; background: inherit; }
+    .chat-input { flex: 1; padding: 0.875rem 1rem !important; border-radius: 12px; font-size: 16px !important; min-height: 44px; }
+    .send-button { padding: 0.875rem 1.25rem !important; border-radius: 12px; font-size: 1.25rem; min-width: 50px; min-height: 44px; }
 
-    .chat-widget.hidden {
-        transform: translateY(100%);
-        pointer-events: none;
-    }
-
-    .chat-widget.visible {
-        transform: translateY(0);
-        pointer-events: auto;
-    }
-
-    .chat-header {
-        padding: 1rem !important;
-        min-height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.75rem;
-        flex-shrink: 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .header-title {
-        flex: 1;
-        font-size: 1.1rem;
-        font-weight: 600;
-        text-align: center;
-    }
-
-    .close-icon {
-        flex-shrink: 0;
-        cursor: pointer;
-        font-size: 1.5rem;
-        padding: 0.5rem;
-        line-height: 1;
-    }
-
-    .chat-messages {
-        flex: 1;
-        overflow-y: auto;
-        overflow-x: hidden;
-        padding: 1rem !important;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        max-height: calc(100dvh - 140px);
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .join-notice .header-icon {
-        width: 50px !important;
-        height: 50px !important;
-        flex-shrink: 0;
-    }
-
-    .join-notice span {
-        font-size: 0.9rem;
-        line-height: 1.4;
-    }
-
-    .privacy-notice {
-        font-size: 0.85rem;
-        padding: 1rem;
-    }
-
-    .welcome-text {
-        font-size: 1rem;
-        padding: 1rem;
-    }
-
-    .options-list {
-        gap: 0.75rem;
-    }
-
-    .options-list li {
-        padding: 1rem;
-        font-size: 0.95rem;
-    }
-
-    .chat-input-container {
-        display: flex;
-        padding: 1rem !important;
-        gap: 0.75rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        flex-shrink: 0;
-        background: inherit;
-    }
-
-    .chat-input {
-        flex: 1;
-        padding: 0.875rem 1rem !important;
-        border-radius: 12px;
-        font-size: 16px !important;
-        min-height: 44px;
-    }
-
-    .send-button {
-        padding: 0.875rem 1.25rem !important;
-        border-radius: 12px;
-        font-size: 1.25rem;
-        min-width: 50px;
-        min-height: 44px;
-    }
-
-    body.chat-open {
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-    }
+    body.chat-open { overflow: hidden; position: fixed; width: 100%; height: 100%; }
 
     /* Admin dashboard mobile adjustments */
-    .admin-dashboard {
-        flex-direction: column;
-    }
+    .admin-dashboard { flex-direction: column; }
+    .sidebar { width: 100%; padding: 1rem; }
+    .dashboard-content { padding: 1rem; }
+    .modal-content { width: 95% !important; max-width: 95% !important; margin: 1rem; }
+    .modal-body { padding: 1.5rem !important; }
+    .modal-header { padding: 1rem !important; }
 
-    .sidebar {
-        width: 100%;
-        padding: 1rem;
-    }
-
-    .dashboard-content {
-        padding: 1rem;
-    }
-
-    .modal-content {
-        width: 95% !important;
-        max-width: 95% !important;
-        margin: 1rem;
-    }
-
-    .modal-body {
-        padding: 1.5rem !important;
-    }
-
-    .modal-header {
-        padding: 1rem !important;
-    }
-
-    .admin-lock-icon,
-    .back-button {
-        top: 80px !important;
-        left: 15px !important;
-    }
+    .admin-lock-icon, .back-button { top: 80px !important; left: 15px !important; }
 }
 
-<<<<<<< HEAD
 /* Smaller mobile */
-=======
-/* ============================================
-   LANDSCAPE ORIENTATION (max-width: 968px)
-   ============================================ */
-@media (max-width: 968px) and (orientation: landscape) {
-
-    .hero-section,
-    .hero-banner {
-        padding: 2rem 1rem !important;
-    }
-
-    .navbar {
-        min-height: 60px;
-    }
-
-    .chat-widget {
-        width: 100% !important;
-        height: 100dvh !important;
-    }
-
-    .chat-messages {
-        max-height: calc(100dvh - 120px);
-    }
-
-    .chat-button {
-        bottom: 15px !important;
-        right: 15px !important;
-    }
-
-    .atom-container {
-        width: 150px !important;
-        height: 150px !important;
-        margin: 5px auto 10px auto !important;
-    }
-
-    .main-content h1 {
-        font-size: 2.5rem !important;
-        margin-top: 0.5rem !important;
-    }
-
-    .main-content p {
-        margin-top: -20px !important;
-    }
-
-    .home-about-visual {
-        height: 300px !important;
-        min-height: 300px !important;
-    }
-
-    .visual-card {
-        width: 130px !important;
-        padding: 14px !important;
-    }
-
-    .card-1 {
-        top: 10px !important;
-    }
-
-    .card-2 {
-        top: 60px !important;
-    }
-
-    .card-3 {
-        bottom: 10px !important;
-    }
-
-    .contact-page .hero {
-        padding: 2rem 1.5rem !important;
-    }
-
-    .faq {
-        max-height: 300px !important;
-    }
-}
-
-/* ============================================
-   SMALLER MOBILE DEVICES (max-width: 480px)
-   ============================================ */
->>>>>>> 98853aef510ff9a535cfef71f630a7b474be970c
 @media (max-width: 480px) {
-    .navbar {
-        padding: 1rem;
-    }
-
-    .navbar .logo {
-        height: 40px;
-    }
-
-    .main-content h1 {
-        font-size: 2.5rem !important;
-    }
-
-    .main-content p {
-        font-size: 0.95rem !important;
-    }
-
-    .hero-section h1,
-    .hero-banner h1,
-    .hero h1 {
-        font-size: 1.75rem !important;
-    }
-
-    .event-card,
-    .bursary-card,
-    .course-card {
-        font-size: 0.9rem;
-    }
-
-    .btn-primary,
-    .btn-secondary {
-        padding: 0.75rem 1rem;
-        font-size: 0.9rem;
-    }
-
-    .comparison-table th,
-    .comparison-table td {
-        padding: 8px;
-        font-size: 0.85rem;
-    }
+    .navbar { padding: 1rem; }
+    .navbar .logo { height: 40px; }
+    .main-content h1 { font-size: 2.5rem !important; }
+    .main-content p { font-size: 0.95rem !important; }
+    .hero-section h1, .hero-banner h1, .hero h1 { font-size: 1.75rem !important; }
+    .event-card, .bursary-card, .course-card { font-size: 0.9rem; }
+    .btn-primary, .btn-secondary { padding: 0.75rem 1rem; font-size: 0.9rem; }
+    .comparison-table th, .comparison-table td { padding: 8px; font-size: 0.85rem; }
 
     /* Chat adjustments */
-    .chat-button {
-        bottom: 15px !important;
-        right: 15px !important;
-        width: 56px !important;
-        height: 56px !important;
-    }
+    .chat-button { bottom: 15px !important; right: 15px !important; width: 56px !important; height: 56px !important; }
+    .chat-button-icon { width: 26px; height: 26px; }
+    .chat-header { padding: 0.875rem !important; min-height: 56px; }
+    .header-title { font-size: 1rem; }
+    .chat-messages { padding: 0.875rem !important; }
+    .join-notice .header-icon { width: 45px !important; height: 45px !important; }
+    .join-notice span, .privacy-notice, .welcome-text { font-size: 0.85rem; }
+    .options-list li { padding: 0.875rem; font-size: 0.9rem; }
+    .chat-input-container { padding: 0.875rem !important; }
 
-    .chat-button-icon {
-        width: 26px;
-        height: 26px;
-    }
-
-    .chat-header {
-        padding: 0.875rem !important;
-        min-height: 56px;
-    }
-
-    .header-title {
-        font-size: 1rem;
-    }
-
-    .chat-messages {
-        padding: 0.875rem !important;
-    }
-
-    .join-notice .header-icon {
-        width: 45px !important;
-        height: 45px !important;
-    }
-
-    .join-notice span,
-    .privacy-notice,
-    .welcome-text {
-        font-size: 0.85rem;
-    }
-
-    .options-list li {
-        padding: 0.875rem;
-        font-size: 0.9rem;
-    }
-
-    .chat-input-container {
-        padding: 0.875rem !important;
-    }
-
-<<<<<<< HEAD
-=======
-    /* Contact Page */
->>>>>>> 98853aef510ff9a535cfef71f630a7b474be970c
-    .contact-page .hero h1 {
-        font-size: 2rem !important;
-    }
-
-    .contact-page .hero p {
-        font-size: 0.95rem !important;
-    }
-
-    .contact-page main {
-        padding: 1.5rem 0.75rem !important;
-    }
-
-    .contact-form-section,
-    .info-section {
-        padding: 1.25rem !important;
-    }
-
-    .contact-form-section h2,
-    .info-section h2 {
-        font-size: 1.5rem !important;
-    }
-
-    .contact-form-section input,
-    .contact-form-section select,
-    .contact-form-section textarea {
-        padding: 0.65rem !important;
-        font-size: 16px !important;
-    }
-<<<<<<< HEAD
+    .contact-page .hero h1 { font-size: 2rem !important; }
+    .contact-page .hero p { font-size: 0.95rem !important; }
+    .contact-page main { padding: 1.5rem 0.75rem !important; }
+    .contact-form-section, .info-section { padding: 1.25rem !important; }
+    .contact-form-section h2, .info-section h2 { font-size: 1.5rem !important; }
+    .contact-form-section input, .contact-form-section select, .contact-form-section textarea { padding: 0.65rem !important; font-size: 16px !important; }
 }
 
 /* Very small devices */
-=======
-
-    .faq {
-        padding: 1.25rem !important;
-        max-height: 400px !important;
-    }
-
-    .faq h3 {
-        font-size: 1.5rem !important;
-    }
-
-    .faq-item strong {
-        font-size: 0.95rem !important;
-    }
-
-    .faq-item span {
-        font-size: 0.85rem !important;
-    }
-
-    /* Home Page */
-    .atom-container {
-        width: 180px !important;
-        height: 180px !important;
-    }
-
-    .home-about-title {
-        font-size: 28px !important;
-    }
-
-    .home-about-description {
-        font-size: 14px !important;
-    }
-
-    .visual-card {
-        width: 140px !important;
-        padding: 16px !important;
-    }
-
-    .visual-card h4 {
-        font-size: 24px !important;
-    }
-
-    .visual-card p {
-        font-size: 12px !important;
-    }
-
-    .card-icon {
-        width: 40px !important;
-        height: 40px !important;
-    }
-
-    .home-about-visual {
-        height: 350px !important;
-        min-height: 350px !important;
-    }
-
-    .btn-primary-about,
-    .btn-secondary-about {
-        padding: 12px 20px !important;
-        font-size: 14px !important;
-    }
-}
-
-/* ============================================
-   VERY SMALL DEVICES (max-width: 460px)
-   ============================================ */
-@media (max-width: 460px) {
-    .main-content h1 {
-        font-size: 2rem !important;
-    }
-
-    .main-content p {
-        font-size: 0.95rem !important;
-    }
-
-    .navbar {
-        padding: 0.75rem;
-    }
-
-    .navbar .logo {
-        height: 35px;
-    }
-
-    .mobile-menu {
-        width: 220px;
-        left: -220px;
-    }
-
-    .main-content {
-        padding: 1rem 0.75rem;
-    }
-
-    .search-bar-container {
-        padding: 0 0.75rem;
-    }
-
-    .mobile-menu li a {
-        padding: 12px 15px !important;
-        font-size: 0.95rem;
-    }
-
-    .mobile-menu .dropdown-content li a {
-        padding-left: 25px !important;
-    }
-
-    .hero-section h1,
-    .hero-title {
-        font-size: 1.5rem !important;
-    }
-
-    .modal-content {
-        width: 98% !important;
-    }
-
-    /* Chat adjustments */
-    .chat-header {
-        padding: 0.75rem !important;
-        min-height: 52px;
-    }
-
-    .header-title {
-        font-size: 0.95rem;
-    }
-
-    .close-icon {
-        font-size: 1.25rem;
-    }
-
-    .chat-messages {
-        padding: 0.75rem !important;
-        gap: 0.75rem;
-    }
-
-    .join-notice {
-        padding: 0.875rem;
-        gap: 0.75rem;
-    }
-
-    .join-notice .header-icon {
-        width: 40px !important;
-        height: 40px !important;
-    }
-
-    .privacy-notice,
-    .welcome-text {
-        padding: 0.875rem;
-        font-size: 0.8rem;
-    }
-
-    .options-list {
-        gap: 0.5rem;
-    }
-
-    .options-list li {
-        padding: 0.75rem;
-        font-size: 0.85rem;
-    }
-
-    /* Home Page */
-    .main-content h1 {
-        font-size: 1.75rem !important;
-    }
-}
-
-/* ============================================
-   EXTRA SMALL DEVICES (max-width: 360px)
-   ============================================ */
->>>>>>> 98853aef510ff9a535cfef71f630a7b474be970c
 @media (max-width: 360px) {
-    .chat-button {
-        width: 52px !important;
-        height: 52px !important;
-    }
-
-    .chat-button-icon {
-        width: 24px;
-        height: 24px;
-    }
-
-    .contact-page .hero h1 {
-        font-size: 1.75rem !important;
-    }
-
-    .contact-form-section,
-    .info-section,
-    .faq {
-        padding: 1rem !important;
-    }
-
-    .contact-form-section h2,
-    .info-section h2,
-    .faq h3 {
-        font-size: 1.35rem !important;
-    }
-
-    .atom-container {
-        width: 160px !important;
-        height: 160px !important;
-    }
-
-    .main-content h1 {
-        font-size: 2rem !important;
-    }
-
-    .main-content p {
-        font-size: 0.9rem !important;
-    }
-
-    .search-wrapper {
-        padding: 0.4rem 0.8rem !important;
-    }
-
-    .home-about-title {
-        font-size: 24px !important;
-    }
-
-    .visual-card {
-        width: 120px !important;
-        padding: 12px !important;
-    }
-
-    .visual-card h4 {
-        font-size: 20px !important;
-    }
-
-    .visual-card p {
-        font-size: 11px !important;
-    }
-
-    .home-about-visual {
-        height: 320px !important;
-        min-height: 320px !important;
-    }
+    .chat-button { width: 52px !important; height: 52px !important; }
+    .chat-button-icon { width: 24px; height: 24px; }
+    .contact-page .hero h1 { font-size: 1.75rem !important; }
+    .contact-form-section, .info-section, .faq { padding: 1rem !important; }
+    .contact-form-section h2, .info-section h2, .faq h3 { font-size: 1.35rem !important; }
+    .atom-container { width: 160px !important; height: 160px !important; }
+    .main-content h1 { font-size: 2rem !important; }
+    .main-content p { font-size: 0.9rem !important; }
+    .search-wrapper { padding: 0.4rem 0.8rem !important; }
+    .home-about-title { font-size: 24px !important; }
+    .visual-card { width: 120px !important; padding: 12px !important; }
+    .visual-card h4 { font-size: 20px !important; }
+    .visual-card p { font-size: 11px !important; }
+    .home-about-visual { height: 320px !important; min-height: 320px !important; }
 }
 
-<<<<<<< HEAD
 /* Very small / extra adjustments */
 @media (max-width: 468px) {
-
     /* Mobile tweaks for components that need slight behavior adjustments */
-    .mobile-menu {
-        width: 220px;
-        left: -220px;
-    }
-
-    .mobile-menu li a {
-        padding: 12px 15px !important;
-        font-size: 0.95rem;
-    }
-
-    .mobile-menu .dropdown-content li a {
-        padding-left: 25px !important;
-=======
-/* ============================================
-   HOME PAGE - HEADER & BUTTONS FIX
-   ============================================ */
-
-/* Fix header spacing and alignment */
-.main-content {
-    text-align: center;
-    padding-top: 2rem;
-}
-
-.main-content h1 {
-    margin-bottom: 0.5rem;
-    line-height: 1.1;
-}
-
-.main-content p {
-    margin-top: 0.5rem;
-    margin-bottom: 2rem;
-}
-
-/* Fix CTA Buttons - Learn More & Start Your Search */
-.about-cta-buttons,
-.cta-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-.btn-primary-about,
-.btn-secondary-about,
-.cta-button,
-.primary-button,
-.secondary-button {
-    width: 100%;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    border-radius: 12px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.btn-primary-about,
-.primary-button {
-    background: linear-gradient(135deg, #a855f7, #7c3aed);
-    color: white;
-}
-
-.btn-secondary-about,
-.secondary-button {
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    color: white;
-}
-
-.btn-primary-about:hover,
-.primary-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(168, 85, 247, 0.4);
-}
-
-.btn-secondary-about:hover,
-.secondary-button:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.5);
+    .mobile-menu { width: 220px; left: -220px; }
+    .mobile-menu li a { padding: 12px 15px !important; font-size: 0.95rem; }
+    .mobile-menu .dropdown-content li a { padding-left: 25px !important; }
 }
 
 /* ============================================
-   CHAT WIDGET - MESSAGE BUBBLES FIX
-   ============================================ */
-
-/* Fix message bubble sizing and spacing */
-.chat-messages .message {
-    max-width: 85%;
-    padding: 12px 16px;
-    margin-bottom: 8px;
-    border-radius: 18px;
-    font-size: 15px;
-    line-height: 1.5;
-    word-wrap: break-word;
-    clear: both;
-}
-
-.chat-messages .message.user {
-    float: right;
-    background: linear-gradient(135deg, #7f5aff, #5ac3ff);
-    color: white;
-    border-bottom-right-radius: 4px;
-    margin-left: auto;
-}
-
-.chat-messages .message.bot {
-    float: left;
-    background: white;
-    color: #2b2b50;
-    border-bottom-left-radius: 4px;
-    margin-right: auto;
-}
-
-.chat-messages .message .timestamp {
-    font-size: 11px;
-    opacity: 0.7;
-    margin-top: 4px;
-    display: block;
-}
-
-/* Fix chat messages container */
-.chat-messages {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 16px;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-/* Ensure messages clear floats */
-.chat-messages::after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-/* ============================================
-   MOBILE RESPONSIVE FIXES (max-width: 768px)
-   ============================================ */
-@media (max-width: 768px) {
-
-    /* HOME PAGE - Header Spacing */
-    .main-content {
-        padding-top: 1rem;
-    }
-
-    .main-content h1 {
-        font-size: 2.5rem !important;
-        margin-bottom: 0.5rem !important;
-        line-height: 1.1;
-    }
-
-    .main-content p {
-        font-size: 1rem !important;
-        margin-top: 0.5rem !important;
-        margin-bottom: 1.5rem !important;
-    }
-
-    /* CTA Buttons - Mobile Responsive */
-    .about-cta-buttons,
-    .cta-buttons {
-        flex-direction: column;
-        width: 100%;
-        max-width: 100%;
-        gap: 0.75rem;
-        padding: 0 1rem;
-        margin-top: 1rem;
-    }
-
-    .btn-primary-about,
-    .btn-secondary-about,
-    .cta-button,
-    .primary-button,
-    .secondary-button {
-        width: 100%;
-        padding: 0.875rem 1.5rem;
-        font-size: 1rem;
-        border-radius: 10px;
-    }
-
-    /* CHAT BUTTON - Mobile Responsive */
-    .chat-button {
-        bottom: 20px !important;
-        right: 20px !important;
-        width: 64px !important;
-        height: 64px !important;
-        z-index: 998;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    }
-
-    .chat-button-icon {
-        width: 90px !important;
-        height: 64px !important;
-    }
-
-    /* CHAT WIDGET - Fullscreen Mobile */
-    .chat-widget {
-        width: 100% !important;
-        height: 100dvh !important;
-        bottom: 0 !important;
-        right: 0 !important;
-        left: 0 !important;
-        top: 0 !important;
-        border-radius: 0 !important;
-        z-index: 9999;
-    }
-
-    .chat-widget.open {
-        display: flex;
-    }
-
-    /* Chat Header - Mobile */
-    .chat-header {
-        padding: 1rem !important;
-        min-height: 60px;
-        flex-shrink: 0;
-    }
-
-    .header-icon {
-        width: 48px !important;
-        height: 48px !important;
-    }
-
-    .header-title {
-        font-size: 1.1rem;
-        flex: 1;
-        text-align: center;
-    }
-
-    .close-icon {
-        font-size: 1.5rem;
-        padding: 0.5rem;
-    }
-
-    /* Chat Messages - Mobile Responsive Sizing */
-    .chat-messages {
-        flex: 1;
-        overflow-y: auto;
-        overflow-x: hidden;
-        padding: 1rem !important;
-        max-height: calc(100dvh - 140px);
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .chat-messages .message {
-        max-width: 80%;
-        padding: 10px 14px;
-        font-size: 14px;
-        margin-bottom: 8px;
-    }
-
-    .chat-messages .message.user {
-        margin-left: 20%;
-    }
-
-    .chat-messages .message.bot {
-        margin-right: 20%;
-    }
-
-    /* Welcome Message - Mobile */
-    .welcome-message {
-        padding: 14px;
-        font-size: 14px;
-        max-width: 100%;
-    }
-
-    .join-notice {
-        padding: 12px;
-        gap: 10px;
-    }
-
-    .join-notice .header-icon {
-        width: 48px !important;
-        height: 48px !important;
-    }
-
-    .join-notice span {
-        font-size: 0.875rem;
-        line-height: 1.4;
-    }
-
-    .privacy-notice {
-        font-size: 0.8rem;
-        padding: 12px;
-        line-height: 1.4;
-    }
-
-    .welcome-text {
-        font-size: 0.95rem;
-        padding: 12px;
-        line-height: 1.5;
-    }
-
-    /* Options List - Mobile */
-    .options-list {
-        gap: 0.5rem;
-        flex-wrap: wrap;
-    }
-
-    .options-list li {
-        padding: 10px 16px;
-        font-size: 0.9rem;
-        flex: 1 1 100%;
-        text-align: center;
-    }
-
-    /* Chat Input - Mobile Responsive */
-    .chat-input-container {
-        padding: 1rem !important;
-        gap: 0.75rem;
-        flex-shrink: 0;
-    }
-
-    .chat-input {
-        flex: 1;
-        padding: 0.875rem 1rem !important;
-        font-size: 16px !important;
-        border-radius: 12px;
-        min-height: 44px;
-    }
-
-    .send-button {
-        width: 48px !important;
-        height: 48px !important;
-        min-width: 48px;
-        min-height: 48px;
-        flex-shrink: 0;
-    }
-
-    /* Prevent body scroll when chat is open */
-    body.chat-open {
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-        height: 100%;
->>>>>>> 98853aef510ff9a535cfef71f630a7b474be970c
-    }
-}
-
-/* ============================================
-<<<<<<< HEAD
    HIGH DPI / PRINT / ACCESSIBILITY
    ============================================ */
 
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .contact-form-section, .info-section { border: 1px solid rgba(255,255,255,0.1); }
+    .chat-button { box-shadow: 0 4px 20px rgba(0,0,0,0.35); }
+    .chat-button { position: fixed; bottom: 32px; right: 32px; width: 70px; height: 70px; border: none; border-radius: 50%; background: transparent; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.3s ease; z-index: 998; padding: 0; }
+    .chat-button-icon { width: 100px !important; height: 70px !important; background: url(../img/home/ATOM_LOGO.png) no-repeat center/cover; filter: drop-shadow(0 0 6px rgba(255,255,255,0.3)); object-fit: contain; }
+    .chat-header .header-icon { width: 42px !important; height: 42px !important; background: url(../img/home/ATOM_LOGO.png) no-repeat center/cover; border-radius: 50%; flex-shrink: 0; }
+    .join-notice .header-icon { width: 60px !important; height: 60px !important; background: url(../img/home/ATOM_LOGO.png) no-repeat center/cover; border-radius: 50%; flex-shrink: 0; }
 
-    .contact-form-section,
-    .info-section {
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .chat-button {
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-    }
-
-    .chat-button {
-        position: fixed;
-        bottom: 32px;
-        right: 32px;
-        width: 70px;
-        height: 70px;
-        border: none;
-        border-radius: 50%;
-        background: transparent;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        z-index: 998;
-        padding: 0;
-    }
-
-    .chat-button-icon {
-        width: 100px !important;
-        height: 70px !important;
-        background: url(../img/home/ATOM_LOGO.png) no-repeat center/cover;
-        filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
-        object-fit: contain;
-    }
-
-    .chat-header .header-icon {
-        width: 42px !important;
-        height: 42px !important;
-        background: url(../img/home/ATOM_LOGO.png) no-repeat center/cover;
-        border-radius: 50%;
-        flex-shrink: 0;
-    }
-
-    .join-notice .header-icon {
-        width: 60px !important;
-        height: 60px !important;
-        background: url(../img/home/ATOM_LOGO.png) no-repeat center/cover;
-        border-radius: 50%;
-        flex-shrink: 0;
-    }
-
-    .chat-messages .message {
-        max-width: 75%;
-        padding: 12px 16px;
-        margin-bottom: 12px;
-        border-radius: 18px;
-        font-size: 15px;
-        line-height: 1.5;
-        word-wrap: break-word;
-        display: block;
-        clear: both;
-    }
-
-    .chat-messages .message.user {
-        float: right;
-        background: linear-gradient(135deg, #7f5aff, #5ac3ff);
-        color: white;
-        border-bottom-right-radius: 4px;
-        margin-left: auto;
-        text-align: left;
-    }
-
-    .chat-messages .message.bot {
-        float: left;
-        background: linear-gradient(135deg, #ffffff, #dbe3ff);
-        color: #1a1a2e;
-        border-bottom-left-radius: 4px;
-        margin-right: auto;
-        box-shadow: 0 2px 8px rgba(173, 130, 255, 0.3);
-    }
-
-    .chat-messages .message .timestamp {
-        display: block;
-        text-align: right;
-        font-size: 11px;
-        opacity: 0.7;
-        margin-top: 4px;
-    }
+    .chat-messages .message { max-width: 75%; padding: 12px 16px; margin-bottom: 12px; border-radius: 18px; font-size: 15px; line-height: 1.5; word-wrap: break-word; display: block; clear: both; }
+    .chat-messages .message.user { float: right; background: linear-gradient(135deg,#7f5aff,#5ac3ff); color: white; border-bottom-right-radius: 4px; margin-left: auto; text-align: left; }
+    .chat-messages .message.bot { float: left; background: linear-gradient(135deg,#ffffff,#dbe3ff); color: #1a1a2e; border-bottom-left-radius: 4px; margin-right: auto; box-shadow: 0 2px 8px rgba(173,130,255,0.3); }
+    .chat-messages .message .timestamp { display: block; text-align: right; font-size: 11px; opacity: 0.7; margin-top: 4px; }
 }
 
 /* Print */
-=======
-   SMALLER MOBILE - Additional Adjustments
-   ============================================ */
-@media (max-width: 480px) {
-
-    /* Header */
-    .main-content h1 {
-        font-size: 2rem !important;
-        padding: 0 0.5rem;
-    }
-
-    .main-content p {
-        font-size: 0.95rem !important;
-        padding: 0 0.5rem;
-    }
-
-    /* Buttons */
-    .btn-primary-about,
-    .btn-secondary-about,
-    .cta-button,
-    .primary-button,
-    .secondary-button {
-        padding: 0.75rem 1.25rem;
-        font-size: 0.95rem;
-    }
-
-    /* Chat Button */
-    .chat-button {
-        bottom: 16px !important;
-        right: 16px !important;
-        width: 60px !important;
-        height: 60px !important;
-    }
-
-    .chat-button-icon {
-        width: 80px !important;
-        height: 56px !important;
-    }
-
-    /* Chat Messages */
-    .chat-messages {
-        padding: 0.875rem !important;
-    }
-
-    .chat-messages .message {
-        max-width: 85%;
-        padding: 9px 12px;
-        font-size: 13.5px;
-    }
-
-    .welcome-message {
-        padding: 12px;
-    }
-
-    .join-notice .header-icon {
-        width: 44px !important;
-        height: 44px !important;
-    }
-
-    .options-list li {
-        padding: 9px 14px;
-        font-size: 0.85rem;
-    }
-
-    /* Chat Input */
-    .chat-input {
-        padding: 0.75rem 0.875rem !important;
-        font-size: 16px !important;
-    }
-
-    .send-button {
-        width: 44px !important;
-        height: 44px !important;
-        min-width: 44px;
-        min-height: 44px;
-    }
-}
-
-/* ============================================
-   VERY SMALL DEVICES
-   ============================================ */
-@media (max-width: 360px) {
-    .main-content h1 {
-        font-size: 1.75rem !important;
-    }
-
-    .main-content p {
-        font-size: 0.9rem !important;
-    }
-
-    .btn-primary-about,
-    .btn-secondary-about {
-        padding: 0.65rem 1rem;
-        font-size: 0.9rem;
-    }
-
-    .chat-button {
-        width: 56px !important;
-        height: 56px !important;
-    }
-
-    .chat-button-icon {
-        width: 72px !important;
-        height: 50px !important;
-    }
-
-    .chat-messages .message {
-        max-width: 90%;
-        font-size: 13px;
-        padding: 8px 11px;
-    }
-
-    .join-notice .header-icon {
-        width: 40px !important;
-        height: 40px !important;
-    }
-
-    .send-button {
-        width: 42px !important;
-        height: 42px !important;
-    }
-}
-
-/* ============================================
-   LANDSCAPE MODE ADJUSTMENTS
-   ============================================ */
-@media (max-width: 968px) and (orientation: landscape) {
-    .chat-widget {
-        height: 100dvh !important;
-    }
-
-    .chat-messages {
-        max-height: calc(100dvh - 130px);
-    }
-
-    .main-content h1 {
-        font-size: 2.2rem !important;
-    }
-}
-
-/* ============================================
-   PRINT STYLES
-   ============================================ */
->>>>>>> 98853aef510ff9a535cfef71f630a7b474be970c
 @media print {
-
-    .contact-form-section,
-    .info-section,
-    .faq {
-        page-break-inside: avoid;
-    }
-
-    .chat-button,
-    .chat-widget {
-        display: none !important;
-    }
+    .contact-form-section, .info-section, .faq { page-break-inside: avoid; }
+    .chat-button, .chat-widget { display: none !important; }
 }
 
 /* ============================================
-<<<<<<< HEAD
    ADMIN DASHBOARD (DESKTOP + MOBILE) - DEDUPED
    ============================================ */
 
@@ -3461,7 +626,6 @@ body {
     display: flex;
     min-height: 100vh;
 }
-
 .sidebar {
     width: 260px;
     min-height: 100vh;
@@ -3472,7 +636,6 @@ body {
     flex-shrink: 0;
     z-index: 1000;
 }
-
 .sidebar .logo {
     font-size: 1.5rem;
     font-weight: 700;
@@ -3480,32 +643,18 @@ body {
     margin: 0 1.5rem 2rem;
     text-align: center;
 }
-
-.sidebar-nav {
-    display: flex;
-    flex-direction: column;
-}
-
+.sidebar-nav { display: flex; flex-direction: column; }
 .sidebar-nav .nav-item {
     display: block;
     padding: 1rem 1.5rem;
     color: white;
     text-decoration: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
     transition: all 0.3s ease;
     font-size: 1rem;
 }
-
-.sidebar-nav .nav-item:hover {
-    background: rgba(255, 255, 255, 0.1);
-    padding-left: 2rem;
-}
-
-.sidebar-nav .nav-item.active {
-    background: rgba(255, 255, 255, 0.2);
-    border-left: 4px solid #fff;
-    font-weight: 600;
-}
+.sidebar-nav .nav-item:hover { background: rgba(255,255,255,0.1); padding-left: 2rem; }
+.sidebar-nav .nav-item.active { background: rgba(255,255,255,0.2); border-left: 4px solid #fff; font-weight: 600; }
 
 /* Dashboard content */
 .dashboard-content {
@@ -3529,12 +678,11 @@ body {
     gap: 5px;
     z-index: 10001;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     transition: all 0.3s ease;
     align-items: center;
     justify-content: center;
 }
-
 .admin-menu-btn span {
     display: block;
     width: 26px;
@@ -3543,27 +691,14 @@ body {
     border-radius: 2px;
     transition: all 0.3s ease;
 }
-
-.admin-menu-btn.active span:nth-child(1) {
-    transform: rotate(45deg) translate(7px, 7px);
-}
-
-.admin-menu-btn.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.admin-menu-btn.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-}
-
-.admin-menu-btn:hover {
-    transform: scale(1.05);
-}
-
+.admin-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(7px, 7px); }
+.admin-menu-btn.active span:nth-child(2) { opacity: 0; }
+.admin-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+.admin-menu-btn:hover { transform: scale(1.05); }
 .admin-menu-btn:focus {
-    outline: 2px solid rgba(255, 255, 255, 0.18);
+    outline: 2px solid rgba(255,255,255,0.18);
     outline-offset: 2px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
 /* Sidebar overlay (single definition) */
@@ -3574,23 +709,17 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0,0,0,0.5);
     z-index: 9999;
     backdrop-filter: blur(2px);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
-
-.sidebar-overlay.show {
-    display: block;
-    opacity: 1;
-}
+.sidebar-overlay.show { display: block; opacity: 1; }
 
 /* Mobile sidebar behaviour - single mobile override */
 @media (max-width: 768px) {
-    .admin-menu-btn {
-        display: flex !important;
-    }
+    .admin-menu-btn { display: flex !important; }
 
     /* Sidebar off-canvas for mobile */
     .sidebar {
@@ -3601,597 +730,424 @@ body {
         height: 100vh;
         padding-top: 5rem;
         z-index: 10000;
-        box-shadow: 4px 0 20px rgba(0, 0, 0, 0.4);
+        box-shadow: 4px 0 20px rgba(0,0,0,0.4);
         transition: left 0.3s ease;
         overflow-y: auto;
     }
+    .sidebar.show { left: 0; }
 
-    .sidebar.show {
-        left: 0;
-    }
+    .admin-dashboard { flex-direction: column; position: relative; }
+    .dashboard-content { width: 100%; padding: 5rem 1rem 2rem; margin-top: 0; }
 
-    .admin-dashboard {
-        flex-direction: column;
-        position: relative;
-    }
+    body.sidebar-open { overflow: hidden; position: fixed; width: 100%; height: 100%; }
 
-    .dashboard-content {
-        width: 100%;
-        padding: 5rem 1rem 2rem;
-        margin-top: 0;
-    }
-
-    body.sidebar-open {
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-    }
-
-    .sidebar .logo {
-        font-size: 1.3rem;
-        margin: 0 1rem 2rem;
-    }
-
-    .sidebar-nav .nav-item {
-        padding: 1.125rem 1.5rem;
-        font-size: 1rem;
-    }
-
-    .sidebar-nav .nav-item:hover {
-        padding-left: 1.5rem;
-        background: rgba(255, 255, 255, 0.15);
-    }
+    .sidebar .logo { font-size: 1.3rem; margin: 0 1rem 2rem; }
+    .sidebar-nav .nav-item { padding: 1.125rem 1.5rem; font-size: 1rem; }
+    .sidebar-nav .nav-item:hover { padding-left: 1.5rem; background: rgba(255,255,255,0.15); }
 }
 
 /* Smaller mobile screens adjustments */
 @media (max-width: 480px) {
-    .admin-menu-btn {
-        top: 0.75rem;
-        left: 0.75rem;
-        padding: 0.65rem;
-    }
-
-    .admin-menu-btn span {
-        width: 24px;
-    }
-
-    .sidebar {
-        width: 240px;
-        left: -260px;
-    }
-
-    .sidebar.show {
-        left: 0;
-    }
-
-    .sidebar .logo {
-        font-size: 1.2rem;
-    }
-
-    .sidebar-nav .nav-item {
-        padding: 1rem 1.25rem;
-        font-size: 0.95rem;
-    }
-
-    .dashboard-content {
-        padding: 4.5rem 0.75rem 1.5rem;
-    }
-
-    .dashboard-content h1 {
-        font-size: 1.5rem;
-    }
-
+    .admin-menu-btn { top: 0.75rem; left: 0.75rem; padding: 0.65rem; }
+    .admin-menu-btn span { width: 24px; }
+    .sidebar { width: 240px; left: -260px; }
+    .sidebar.show { left: 0; }
+    .sidebar .logo { font-size: 1.2rem; }
+    .sidebar-nav .nav-item { padding: 1rem 1.25rem; font-size: 0.95rem; }
+    .dashboard-content { padding: 4.5rem 0.75rem 1.5rem; }
+    .dashboard-content h1 { font-size: 1.5rem; }
     /* small-screen visual tweak for admin button */
-    .admin-menu-btn {
-        top: 0.9rem;
-        left: 0.7rem;
-        padding: 0.6rem;
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(4px);
-    }
+    .admin-menu-btn { top: 0.9rem; left: 0.7rem; padding: 0.6rem; background: rgba(255,255,255,0.06); backdrop-filter: blur(4px); }
 }
 
 /* Tiny screens */
 @media (max-width: 360px) {
-    .admin-menu-btn {
-        top: 0.6rem;
-        left: 0.6rem;
-        padding: 0.55rem;
-    }
-
-    .admin-menu-btn span {
-        width: 22px;
-    }
+    .admin-menu-btn { top: 0.6rem; left: 0.6rem; padding: 0.55rem; }
+    .admin-menu-btn span { width: 22px; }
 }
-
 /* Move admin mobile hamburger slightly lower (to match screenshot red box)
    Scoped inside mobile breakpoints so desktop is unaffected. */
 
 @media (max-width: 768px) {
+  /* keep the button visible on mobile and move it down a bit */
+  .admin-menu-btn {
+    display: flex !important;
+    top: 2.2rem; /* moved down from 1rem to ~2.2rem */
+    left: 1rem;
+    padding: 0.75rem;
+  }
 
-    /* keep the button visible on mobile and move it down a bit */
-    .admin-menu-btn {
-        display: flex !important;
-        top: 2.2rem;
-        /* moved down from 1rem to ~2.2rem */
-        left: 1rem;
-        padding: 0.75rem;
-    }
-
-    /* when sidebar is open, keep page locked (existing rule) */
-    body.sidebar-open {
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-    }
+  /* when sidebar is open, keep page locked (existing rule) */
+  body.sidebar-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 @media (max-width: 480px) {
+  /* small-screen visual tweak: nudge down a little more if needed */
+  .admin-menu-btn {
+    top: 7.0rem; /* slightly different nudge for very small screens */
+    left: 1.2rem; /* keep alignment with visual */
+    padding: 0.65rem;
+    background: rgba(85, 76, 219, 0.884);
+    backdrop-filter: blur(4px);
+  }
 
-    /* small-screen visual tweak: nudge down a little more if needed */
-    .admin-menu-btn {
-        top: 7.1rem;
-        /* slightly different nudge for very small screens */
-        left: 1.3rem;
-        /* keep alignment with visual */
-        padding: 0.65rem;
-        background: rgba(118, 116, 221, 0.973);
-        backdrop-filter: blur(4px);
-    }
-
-    /* make bar icon slightly smaller on tiny screens */
-    .admin-menu-btn span {
-        width: 22px;
-    }
-
-    /* --------------------------------------------
+  /* make bar icon slightly smaller on tiny screens */
+  .admin-menu-btn span {
+    width: 22px;
+  }
+}
+/* --------------------------------------------
    Prevent admin hamburger overlapping sidebar
    - Moves the button to the right when sidebar is open
    - Scoped to mobile breakpoints only (does not affect desktop)
    -------------------------------------------- */
 
-    @media (max-width: 768px) {
+@media (max-width: 768px) {
+  /* Ensure button transitions smoothly when moving */
+  .admin-menu-btn {
+    transition: left 0.28s ease, transform 0.18s ease;
+    left: 1rem; /* default mobile left offset */
+  }
 
-        /* Ensure button transitions smoothly when moving */
-        .admin-menu-btn {
-            transition: left 0.28s ease, transform 0.18s ease;
-            left: 1rem;
-            /* default mobile left offset */
-        }
-
-        /* When the sidebar is open (JS adds body.sidebar-open), push the button right.
+  /* When the sidebar is open (JS adds body.sidebar-open), push the button right.
      This prevents overlap and keeps the button visible and clickable. */
-        body.sidebar-open .admin-menu-btn {
-            /* Sidebar width used on mobile is 260px in your CSS; add a small gap */
-            left: calc(260px + 1rem);
-        }
+  body.sidebar-open .admin-menu-btn {
+    /* Sidebar width used on mobile is 260px in your CSS; add a small gap */
+    left: calc(260px + 1rem);
+  }
 
-        /* If you have a smaller sidebar on very small screens (240px), handle that case:
+  /* If you have a smaller sidebar on very small screens (240px), handle that case:
      Use a max-width override so if viewport <= 480px the button shifts by 240px instead. */
-        @media (max-width: 480px) {
-            body.sidebar-open .admin-menu-btn {
-                left: calc(240px + 0.8rem);
-            }
-        }
+  @media (max-width: 480px) {
+    body.sidebar-open .admin-menu-btn {
+      left: calc(240px + 0.8rem);
     }
+  }
+}
 
-    /* Extra: keep the button on top of overlay/sidebar */
-    .admin-menu-btn {
-        z-index: 10002;
+/* Extra: keep the button on top of overlay/sidebar */
+.admin-menu-btn {
+  z-index: 10002;
+}
+/* Add this near the end of your mobile-fixes.css (or within your mobile menu area).
+   It ensures transitions match the JS delay (300ms) and smooth icon transform timing. */
+
+/* hamburger icon transform timing */
+.mobile-menu-btn span,
+.admin-menu-btn span,
+.admin-menu-btn {
+  transition: transform 0.28s ease, opacity 0.2s ease, left 0.28s ease;
+}
+
+/* mobile menu slide timing (left) - should match TRANSITION_MS in JS (300ms) */
+.mobile-menu {
+  transition: left 0.3s ease;
+}
+
+/* dropdown slide / submenu show consistency */
+.mobile-menu .dropdown-content {
+  transition: height 0.22s ease, opacity 0.18s ease;
+}
+
+
+/*gappppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp*/
+
+/* -------- Keep mobile menu button at header top-left by default,
+   then move it into the pop-out red-box only while menu is open.
+   Append/replace at end of static/css/mobile-fixes.css.
+*/
+/* -------------------------
+  Mobile menu button: closed (header) + popped/open visuals
+  Append this at the end of static/css/mobile-fixes.css
+  Works with your mobile-menu.js which toggles:
+    - menuBtn.classList.add('floating-pos','closed') initially
+    - menuBtn.classList.remove('closed') & .classList.add('active') when opening
+    - menuBtn.classList.remove('active') then .classList.add('closed') when closing
+    - document.body.classList.add/remove('mobile-menu-open')
+------------------------- */
+/* >>> Fix: use only middle span for X; hide extra bars when popped
+   Append this to the very end of static/css/mobile-fixes.css
+   Overrides earlier floating / pop-out rules so you won't get 6 lines.
+*/
+
+@media (max-width: 768px) {
+
+  /* Make sure default three-bar hamburger is visible when closed */
+  .mobile-menu-btn.floating-pos.closed span {
+    display: block;
+    background: #fff;
+    width: 18px;
+    height: 2px;
+    border-radius: 2px;
+    position: relative;
+  }
+  .mobile-menu-btn.floating-pos.closed span:nth-child(1),
+  .mobile-menu-btn.floating-pos.closed span:nth-child(3) {
+    /* top and bottom bars are positioned via pseudo elements already in your CSS;
+       ensure real spans are visible and reset any transforms */
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Remove any previously applied pseudo bars on all spans */
+  .mobile-menu-btn.floating-pos span::before,
+  .mobile-menu-btn.floating-pos span::after {
+    display: none !important;
+  }
+
+  /* Create X only from the middle span's pseudo elements */
+  .mobile-menu-btn.floating-pos span:nth-child(2)::before,
+  .mobile-menu-btn.floating-pos span:nth-child(2)::after {
+    display: block;
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 18px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transform-origin: center;
+    transition: transform 200ms ease, opacity 140ms ease;
+  }
+
+  /* Middle span pseudo initial (closed): move them out to act as top/bottom when closed */
+  .mobile-menu-btn.floating-pos.closed span:nth-child(2)::before {
+    transform: translateY(-7.5px) rotate(0deg);
+    opacity: 1;
+  }
+  .mobile-menu-btn.floating-pos.closed span:nth-child(2)::after {
+    transform: translateY(7.5px) rotate(0deg);
+    opacity: 1;
+  }
+
+  /* While menu open, hide the actual first & third spans and use middle span pseudo elements as X */
+  body.mobile-menu-open .mobile-menu-btn.floating-pos span:nth-child(1),
+  body.mobile-menu-open .mobile-menu-btn.floating-pos span:nth-child(3) {
+    opacity: 0;
+    transform: translateX(-6px); /* move slightly to avoid visual artifacts */
+    pointer-events: none;
+  }
+
+  /* Position and rotate middle pseudo elements to form X when active/open */
+  body.mobile-menu-open .mobile-menu-btn.floating-pos span:nth-child(2)::before {
+    transform: translateY(-50%) rotate(45deg);
+    opacity: 1;
+  }
+  body.mobile-menu-open .mobile-menu-btn.floating-pos span:nth-child(2)::after {
+    transform: translateY(-50%) rotate(-45deg);
+    opacity: 1;
+  }
+
+  /* Ensure when closed again the first/third spans return */
+  .mobile-menu-btn.floating-pos.closed span:nth-child(1),
+  .mobile-menu-btn.floating-pos.closed span:nth-child(3) {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  /* Keep baseline handle for closed only */
+  .mobile-menu-btn.floating-pos.closed::after {
+    opacity: 0.15;
+  }
+  body.mobile-menu-open .mobile-menu-btn.floating-pos::after {
+    opacity: 0 !important;
+    transform: translateY(-6px);
+  }
+
+  /* Minor visual tune on very small screens */
+  @media (max-width: 420px) {
+    .mobile-menu-btn.floating-pos span:nth-child(2)::before,
+    .mobile-menu-btn.floating-pos span:nth-child(2)::after { width: 14px; }
+  }
+}
+/*Another gappppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp*/
+
+/* -------------------------
+  Mobile menu close button (side-of-panel) styles
+  Append at end of mobile-fixes.css
+  - close button sits to the RIGHT edge of the sliding panel (outside panel area)
+  - does NOT overlay menu items
+  - mobile-scoped
+------------------------- */
+
+@media (max-width: 768px) {
+  /* Allow the cloned panel to show the close button outside its box */
+  .mobile-menu {
+    overflow-x: visible;     /* allow the close button to be visible outside the panel */
+    overflow-y: auto;        /* keep vertical scrolling for menu items */
+  }
+
+  /* Close button (rounded square) that sits on panel's right edge */
+  .mobile-menu-close {
+    position: absolute;
+    right: -62px;            /* move outside the panel: adjust if you change panel width */
+    top: 20px;               /* aligns with header/menu items; tweak as needed */
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    padding: 0;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #7e48da, #5a3cc6);
+    box-shadow: 0 12px 26px rgba(20,24,54,0.36);
+    z-index: 10020;          /* above the mobile-menu but below modals if any */
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* X icon inside close button */
+  .mobile-menu-close span {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+  }
+  .mobile-menu-close span::before,
+  .mobile-menu-close span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 18px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transform-origin: center;
+    transition: transform 200ms ease, opacity 160ms ease;
+  }
+  .mobile-menu-close span::before { transform: translateY(-50%) rotate(45deg); }
+  .mobile-menu-close span::after  { transform: translateY(-50%) rotate(-45deg); }
+
+  /* When menu is closed (no .show), hide/position close button out of sight */
+  .mobile-menu:not(.show) .mobile-menu-close {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-6px);
+  }
+
+  /* When menu open, show close button (CSS animated) */
+  .mobile-menu.show .mobile-menu-close {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(0);
+    transition: transform 240ms cubic-bezier(.2,.9,.2,1), opacity 180ms ease;
+  }
+
+  /* Prevent the close button from overlapping nav items:
+     place it outside the panel area using right: negative value.
+     If you change .mobile-menu width from 250px, adjust right value accordingly:
+       right: -(button width + desired gap) e.g. -62px above (48px button + 14px gap)
+  */
+
+  /* Small screens adjustments */
+  @media (max-width: 420px) {
+    .mobile-menu-close { right: -56px; top: 22px; width: 44px; height: 44px; border-radius: 10px; }
+    .mobile-menu-close span::before,
+    .mobile-menu-close span::after { width: 16px; }
+  }
+}
+
+/*gapppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp*/
+
+/* ===========================================
+   APPEND: Prevent admin button overlapping mobile menu
+   - Mobile-scoped overrides
+   - Paste/append at the very end of static/css/mobile-fixes.css
+   =========================================== */
+
+@media (max-width: 768px) {
+  /* Ensure the mobile hamburger/close button and the dedicated mobile close sit above admin */
+  .mobile-menu-btn,
+  .mobile-menu-close {
+    z-index: 10040 !important;
+  }
+
+  /* Keep admin slightly below by default (so mobile controls visually win) */
+  .admin-menu-btn {
+    z-index: 10020;
+    transition: left 0.28s ease, top 0.28s ease, opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  body.mobile-menu-open .admin-menu-btn {
+    left: calc(250px + 1rem) !important; /* panel width + gap */
+    top: 1.2rem !important;               /* fine tune to match header */
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  /* Defensive: ensure admin button does not cover the left edge of the panel
+     if for any reason it is positioned inside the panel area */
+  .mobile-menu { overflow-x: visible; }
+
+  /* Small screen fine-tuning */
+  @media (max-width: 420px) {
+    body.mobile-menu-open .admin-menu-btn {
+      left: calc(220px + 10px) !important;
+      top: 1.9rem !important;
     }
+  }
+}
 
-    /* hamburger icon transform timing */
-    .mobile-menu-btn span,
-    .admin-menu-btn span,
-    .admin-menu-btn {
-        transition: transform 0.28s ease, opacity 0.2s ease, left 0.28s ease;
-    }
-
-    /* mobile menu slide timing (left) - should match TRANSITION_MS in JS (300ms) */
-    .mobile-menu {
-        transition: left 0.3s ease;
-    }
-
-    /* dropdown slide / submenu show consistency */
-    .mobile-menu .dropdown-content {
-        transition: height 0.22s ease, opacity 0.18s ease;
-=======
-   HIGH DPI SCREENS
-   ============================================ */
-@media (-webkit-min-device-pixel-ratio: 2),
-(min-resolution: 192dpi) {
-
-    .contact-form-section,
-    .info-section {
-        border: 1px solid rgba(255, 255, 255, 0.1);
->>>>>>> 98853aef510ff9a535cfef71f630a7b474be970c
-    }
-
-    .chat-button {
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-    }
-
-    /* ============================================
-   CHATBOT BUTTON & WIDGET FIXES
-   ============================================ */
-
-    /* Fix chat button icon sizing and positioning */
-    .chat-button {
-        position: fixed;
-        bottom: 32px;
-        right: 32px;
-        width: 70px;
-        height: 70px;
-        border: none;
-        border-radius: 50%;
-        background: transparent;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        z-index: 998;
-        padding: 0;
-    }
-
-    .chat-button-icon {
-        width: 100px !important;
-        height: 70px !important;
-        background: url(../img/home/ATOM_LOGO.png) no-repeat center/cover;
-        filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
-        object-fit: contain;
-    }
-
-    /* Fix chat widget header icon */
-    .chat-header .header-icon {
-        width: 42px !important;
-        height: 42px !important;
-        background: url(../img/home/ATOM_LOGO.png) no-repeat center/cover;
-        border-radius: 50%;
-        flex-shrink: 0;
-    }
-
-    /* Fix welcome message header icon */
-    .join-notice .header-icon {
-        width: 60px !important;
-        height: 60px !important;
-        background: url(../img/home/ATOM_LOGO.png) no-repeat center/cover;
-        border-radius: 50%;
-        flex-shrink: 0;
-    }
-
-    /* Fix message bubble alignment and sizing */
-    .chat-messages .message {
-        max-width: 75%;
-        padding: 12px 16px;
-        margin-bottom: 12px;
-        border-radius: 18px;
-        font-size: 15px;
-        line-height: 1.5;
-        word-wrap: break-word;
-        display: block;
-        clear: both;
-    }
-
-    .chat-messages .message.user {
-        float: right;
-        background: linear-gradient(135deg, #7f5aff, #5ac3ff);
-        color: white;
-        border-bottom-right-radius: 4px;
-        margin-left: auto;
-        text-align: left;
-    }
-
-    .chat-messages .message.bot {
-        float: left;
-        background: linear-gradient(135deg, #ffffff, #dbe3ff);
-        color: #1a1a2e;
-        border-bottom-left-radius: 4px;
-        margin-right: auto;
-        box-shadow: 0 2px 8px rgba(173, 130, 255, 0.3);
-    }
-
-    .chat-messages .message .timestamp {
-        display: block;
-        text-align: right;
-        font-size: 11px;
-        opacity: 0.7;
-        margin-top: 4px;
-    }
-
-    /* Ensure proper message container flow */
-    .chat-messages {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        padding: 16px;
-    }
-
-    /* Clear floats after each message */
-    .chat-messages::after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-
-    /* ============================================
-   MOBILE RESPONSIVE FIXES (max-width: 768px)
-   ============================================ */
-    @media (max-width: 768px) {
-
-        /* Chat Button - Mobile */
-        .chat-button {
-            bottom: 20px !important;
-            right: 20px !important;
-            width: 70px !important;
-            height: 70px !important;
-            z-index: 998;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-        }
-
-        .chat-button-icon {
-            width: 100px !important;
-            height: 70px !important;
-        }
-
-        /* Chat Widget - Fullscreen Mobile */
-        .chat-widget {
-            width: 100% !important;
-            height: 100dvh !important;
-            bottom: 0 !important;
-            right: 0 !important;
-            left: 0 !important;
-            top: 0 !important;
-            border-radius: 0 !important;
-            z-index: 9999;
-        }
-
-        /* Chat Header - Mobile */
-        .chat-header {
-            padding: 1rem !important;
-            min-height: 60px;
-            flex-shrink: 0;
-        }
-
-        .chat-header .header-icon {
-            width: 48px !important;
-            height: 48px !important;
-        }
-
-        /* Chat Messages - Mobile */
-        .chat-messages {
-            flex: 1;
-            overflow-y: auto;
-            overflow-x: hidden;
-            padding: 1rem !important;
-            max-height: calc(100dvh - 140px);
-            -webkit-overflow-scrolling: touch;
-            background: #cad5f5;
-        }
-
-        .chat-messages .message {
-            max-width: 80%;
-            padding: 10px 14px;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        .chat-messages .message.user {
-            margin-left: 20%;
-        }
-
-        .chat-messages .message.bot {
-            margin-right: 20%;
-        }
-
-        /* Welcome Message - Mobile */
-        .join-notice .header-icon {
-            width: 50px !important;
-            height: 50px !important;
-        }
-
-        /* Chat Input - Mobile */
-        .chat-input-container {
-            padding: 1rem !important;
-            gap: 0.75rem;
-            flex-shrink: 0;
-            background: transparent;
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-        }
-
-        .chat-input {
-            flex: 1;
-            padding: 0.875rem 1rem !important;
-            font-size: 16px !important;
-            border-radius: 12px;
-            min-height: 44px;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-            color: inherit;
-        }
-
-        .chat-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .send-button {
-            width: 48px !important;
-            height: 48px !important;
-            min-width: 48px;
-            min-height: 48px;
-            flex-shrink: 0;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #b28ef5, #8ab4f8);
-        }
-    }
-
-    /* ============================================
-   SMALLER MOBILE ADJUSTMENTS
-   ============================================ */
-    @media (max-width: 480px) {
-        .chat-button {
-            bottom: 16px !important;
-            right: 16px !important;
-            width: 64px !important;
-            height: 64px !important;
-        }
-
-        .chat-button-icon {
-            width: 90px !important;
-            height: 64px !important;
-        }
-
-        .chat-header .header-icon {
-            width: 44px !important;
-            height: 44px !important;
-        }
-
-        .join-notice .header-icon {
-            width: 46px !important;
-            height: 46px !important;
-        }
-
-        .chat-messages .message {
-            max-width: 85%;
-            font-size: 13.5px;
-            padding: 9px 12px;
-        }
-    }
-
-    @media (max-width: 360px) {
-        .chat-button {
-            width: 60px !important;
-            height: 60px !important;
-        }
-
-        .chat-button-icon {
-            width: 85px !important;
-            height: 60px !important;
-        }
-
-        .chat-header .header-icon {
-            width: 40px !important;
-            height: 40px !important;
-        }
-
-        .join-notice .header-icon {
-            width: 42px !important;
-            height: 42px !important;
-        }
-    }
-
-    /* ... existing code ... */
-
-    @media (max-width: 360px) {
-        .chat-button {
-            width: 60px !important;
-            height: 60px !important;
-        }
-
-        /* ... rest of existing code ... */
-    }
-
-    /* ============================================
-   CHATBOT BOX & BUTTON FIXES - ADD BELOW THIS LINE
+/**//* ============================================
+   MOBILE FIXES
    ============================================ */
 
-    /* Fix welcome message and options list */
-    .welcome-message {
-        background: white;
-        border: 1px solid #b28ef5;
-        border-radius: 12px;
-        padding: 16px;
-        color: #2b2b50;
-        margin-bottom: 12px;
-        width: 100%;
-        box-sizing: border-box;
+@media (max-width: 768px) {
+  /* Make sure the admin sidebar and its overlay sit above other UI */
+  .sidebar,
+  .sidebar.show {
+    z-index: 10080 !important;
+  }
+  .sidebar-overlay {
+    z-index: 10075 !important;
+  }
+
+  /* Keep the mobile cloned panel and its controls under the admin sidebar */
+  .mobile-menu,
+  .mobile-menu.show {
+    z-index: 10030 !important; /* lower than .sidebar */
+  }
+
+  /* Mobile controls (hamburger / floating close) should be above the panel but below the admin sidebar */
+  .mobile-menu-btn,
+  .mobile-menu-close {
+    z-index: 10040 !important;
+    transition: left 0.28s ease, transform 0.28s ease, opacity 0.18s ease;
+  }
+
+  /* When the admin sidebar is open, push mobile controls to the right of the sidebar
+     and prevent them from overlapping or intercepting clicks on the menu.
+     Adjust the 260px value to your actual sidebar width if it differs. */
+  body.sidebar-open .mobile-menu-btn,
+  body.sidebar-open .mobile-menu-close {
+    left: calc(260px + 1rem) !important;
+    /* keep them visible but out of the left panel area */
+    pointer-events: none !important; /* disable to avoid accidental clicks */
+    opacity: 0.98;
+    z-index: 10035 !important; /* still below the sidebar */
+  }
+
+  /* Keep mobile panel visible under the sidebar edge (if the sidebar covers it) */
+  body.sidebar-open .mobile-menu,
+  body.sidebar-open .mobile-menu.show {
+    z-index: 10025 !important;
+  }
+
+  /* Small-screen tuning */
+  @media (max-width: 420px) {
+    body.sidebar-open .mobile-menu-btn,
+    body.sidebar-open .mobile-menu-close {
+      left: calc(220px + 8px) !important;
     }
-
-    /* Fix options list - prevent overflow and ensure proper sizing */
-    .options-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    .options-list li {
-        font-size: 13px;
-        color: #fff;
-        background: linear-gradient(135deg, #7f5aff, #5ac3ff);
-        border-radius: 20px;
-        padding: 8px 14px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        flex: 1 1 calc(50% - 5px);
-        /* Two columns with gap */
-        min-width: 140px;
-        text-align: center;
-        box-sizing: border-box;
-        white-space: normal;
-        word-wrap: break-word;
-        line-height: 1.3;
-    }
-
-    .options-list li:hover {
-        background: linear-gradient(135deg, #5ac3ff, #7f5aff);
-        transform: translateY(-2px);
-    }
-
-    /* Hide chat button when widget is open */
-    .chat-widget.open~.chat-button {
-        display: none;
-    }
-
-    /* Fix chat widget z-index and layering */
-    .chat-widget {
-        pointer-events: auto;
-    }
-
-    /* Ensure send button is always clickable */
-    .chat-input-container {
-        position: relative;
-        z-index: 10;
-    }
-
-    .send-button {
-        flex-shrink: 0;
-        pointer-events: auto;
-        z-index: 11;
-    }
-
-    .send-button:active {
-        transform: scale(0.95);
-    }
-
-    /* ============================================
-   MOBILE RESPONSIVE FIXES FOR CHATBOT
-   ============================================ */
-    @media (max-width: 768px) {
-
-        /* Hide chat button when widget is open on mobile */
-        body.chat-open .chat-button {
-            display: none !important;
-        }
-
-        /* Options List - Mobile */
-        .options-list {
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .options-list li {
-            flex: 1 1 100%;
-            min-width: 100%;
-            padding: 12px 16px;
-            font-size: 14px;
-        }
-    }
+    .mobile-menu { z-index: 10020 !important; }
+  }
 }
