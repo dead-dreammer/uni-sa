@@ -8,8 +8,8 @@ from Database.__init__ import db, create_database, create_app
 from Database.models import Student, Preference, AcademicMark, Program, University, Requirement, Bursary
 from Chatbot.bot import chatbot_response
 from Database.backup import backup_database, restore_latest_backup
-#from weasyprint import HTML
-#import tempfile
+from weasyprint import HTML
+import tempfile
 import json
 from functools import wraps
 
