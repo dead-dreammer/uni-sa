@@ -49,7 +49,7 @@ def manage_courses():
 # endpoints used by the UI are implemented below (add/edit/delete with
 # distinct URLs). Keeping a single set avoids Flask endpoint collisions.
 
-@courses.route('/matches')
+@courses.route('/matches', methods=['GET', 'POST'])
 def get_matches():
     # Delegate to shared matcher function
     student_id = session.get('student_id')
