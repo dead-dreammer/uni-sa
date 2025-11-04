@@ -78,7 +78,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('home_page'), show_chatbot = False)
+    return redirect(url_for('home_page'))
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -113,7 +113,7 @@ def admin_login():
 def admin_logout():
     session.pop('is_admin', None)
     session.pop('admin_email', None)
-    return redirect(url_for('home_page'), show_chatbot = False)
+    return redirect(url_for('home_page'))
 
 
 @app.route('/ask', methods=['POST'])
