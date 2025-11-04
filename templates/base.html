@@ -3,7 +3,7 @@
   <head>
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes"> <!--Added this so it can fit onto the mobile app-->
   <meta name="mobile-web-app-capable" content="yes">
   <title>{% block title %}uni.sa{% endblock %}</title>
@@ -46,7 +46,7 @@
       {{ session.get('name') }}</a>
     {% endif %}
     <!--Adding a menu button-->
-    <button class="mobile-menu-btn">
+    <button class="mobile-menu-btn" aria-label="menumobile">
       <span></span>
       <span></span>
       <span></span>
@@ -98,7 +98,7 @@
       <a href="{{ url_for('course_management') }}" class="underline0">Admin</a>
       {% endif %}
        <!--Adding a menu button-->
-    <button class="mobile-menu-btn">
+    <button class="mobile-menu-btn" aria-label="menumobilebtn">
       <span></span>
       <span></span>
       <span></span>
