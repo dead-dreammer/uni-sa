@@ -7,6 +7,7 @@ from weasyprint import HTML
 import tempfile
 import os
 from datetime import datetime
+import shutil
 
 courses = Blueprint('courses', __name__)
 
@@ -342,7 +343,7 @@ def get_all_courses():
 # report generation
 @courses.route('/download-report')
 def download_report():
-    """Generate and download a PDF report of course matches"""
+    """Generate and download a PDF report of course matches and save it to disk/DB."""
     student_id = session.get('student_id')
     if not student_id:
         return jsonify({'error': 'Not logged in'}), 401
@@ -370,8 +371,34 @@ def download_report():
         
         # Generate filename with student name
         student_name = student.name.replace(' ', '_') if student and hasattr(student, 'name') and student.name else 'Student'
-        filename = f"{student_name}_Course_Matches_Report.pdf"
-        
+        filename = f"{student_name}_Course_Matches_Report_{int(datetime.utcnow().timestamp())}.pdf"
+
+        # Determine persistent reports directory (routes/uploads/reports/<student_id>/)
+        base_reports_dir = os.path.join(os.path.dirname(__file__), 'uploads', 'reports')
+        os.makedirs(base_reports_dir, exist_ok=True)
+        student_dir = os.path.join(base_reports_dir, str(student_id))
+        os.makedirs(student_dir, exist_ok=True)
+
+        dest_path = os.path.join(student_dir, filename)
+        try:
+            # Copy temp file to persistent location
+            shutil.copy(pdf_file.name, dest_path)
+
+            # Create DB record
+            new_report = Report(
+                student_id=student_id,
+                title=f"Course Matches Report",
+                filename=filename,
+                created_at=datetime.utcnow()
+            )
+            db.session.add(new_report)
+            db.session.commit()
+        except Exception as e:
+            # Log error but still return the generated PDF (don't fail user if save fails)
+            print("Error saving report:", e)
+            db.session.rollback()
+
+        # Send the temporary file as download (user receives file immediately)
         return send_file(
             pdf_file.name,
             as_attachment=True,

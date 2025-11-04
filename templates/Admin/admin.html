@@ -1,40 +1,33 @@
-{% extends 'base.html' %} {% block title %}Admin Panel | Uni.sa{% endblock %} {%
-block head_extras %}
-<link
-  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
-  rel="stylesheet"
-/>
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/admin.css') }}"
-/>
+{% extends 'base.html' %}
+{% block title %}Admin Panel | Uni.sa{% endblock %}
+{% block head_extras %}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/mobile-fixes.css') }}" />
+{% endblock %}
 
-{% endblock %} {% block content %}
+{% block content %}
 <div class="admin-dashboard">
+
+  <!-- Mobile menu button (visible on mobile only) -->
+  <!-- added aria-expanded for accessibility (JS can update it on toggle) -->
+  <button class="admin-menu-btn" aria-label="Toggle admin menu" aria-expanded="false" type="button">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- Overlay for mobile (dims background when sidebar is open) -->
+  <div class="sidebar-overlay"></div>
+
   <!-- Sidebar -->
   <aside class="sidebar">
     <h2 class="logo">UNI.SA Admin</h2>
     <nav class="sidebar-nav">
-      <a
-        href="{{ url_for('admin') }}"
-        class="nav-item {% if active_page == 'dashboard' %}active{% endif %}"
-        >🏠 Dashboard</a
-      >
-      <a
-        href="{{ url_for('course_management') }}"
-        class="nav-item {% if active_page == 'courses' %}active{% endif %}"
-        >📚 Course Management</a
-      >
-      <a
-        href="{{ url_for('bursary_management') }}"
-        class="nav-item {% if active_page == 'bursaries' %}active{% endif %}"
-        >🎓 Bursary Management</a
-      >
-      <a
-        href="{{ url_for('admissions_calendar_management') }}"
-        class="nav-item {% if active_page == 'admissions_calendar' %}active{% endif %}"
-        >🗓️ Admissions Calendar Management</a
-      >
+      <a href="{{ url_for('admin') }}" class="nav-item">🏠 Dashboard</a>
+      <a href="{{ url_for('course_management') }}" class="nav-item">📚 Course Management</a>
+      <a href="{{ url_for('bursary_management') }}" class="nav-item">🎓 Bursary Management</a>
+      <a href="{{ url_for('admissions_calendar_management') }}" class="nav-item">🗓️ Admissions Calendar Management</a>
       <a href="#" class="nav-item">📈 Reports</a>
     </nav>
   </aside>
@@ -44,36 +37,10 @@ block head_extras %}
     {% block admin_content %}
     <h1>Welcome, Admin 👋</h1>
     <p>Select a management module from the sidebar to get started.</p>
-
-    <div class="dashboard-cards">
-      <div
-        class="card"
-        onclick="window.location.href='{{ url_for('course_management') }}'"
-      >
-        <h3>📚 Course Management</h3>
-        <p>View, add, and organize courses across institutions.</p>
-      </div>
-      <div
-        class="card"
-        onclick="window.location.href='{{ url_for('bursary_management') }}'"
-      >
-      <div
-        class="card"
-        onclick="window.location.href='{{ url_for('admissions_calendar_management') }}'"
-      >
-        <h3>🎓 Bursary Management</h3>
-        <p>View, add, and organize bursaries across institutions.</p>
-      </div>
-      <div class="card">
-        <h3>👥 User Management</h3>
-        <p>Manage user accounts and permissions.</p>
-      </div>
-      <div class="card">
-        <h3>🏫 Institution Management</h3>
-        <p>Update and maintain partner universities.</p>
-      </div>
-    </div>
     {% endblock %}
   </main>
 </div>
+
+<!-- load the mobile menu script that matches the file you provided -->
+<script src="{{ url_for('static', filename='js/admin-mobile-menu.js') }}"></script>
 {% endblock %}

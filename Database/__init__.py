@@ -45,13 +45,18 @@ def create_app():
     Migrate(app, db)
 
     # Import models AFTER db.init_app(app)
-    from .models import Student, AcademicMark, Preference, University, Program, Requirement, Application
+    # include Report model so DB model is known before DB.create_all / migrations
+    from .models import Student, AcademicMark, Preference, University, Program, Requirement, Application, Report
+
+    # Import blueprints
     from routes.auth import auth
     from routes.search import search
     from routes.courses import courses
     from routes.bursary import bursary
     from routes.web_scrapping import ws
     from routes.admissions_calendar import admissions_bp
+    # add the reports blueprint import
+    from routes.reports import reports
 
     # Register blueprints
     app.register_blueprint(auth, url_prefix='/auth')
@@ -60,6 +65,9 @@ def create_app():
     app.register_blueprint(bursary, url_prefix='/bursary')
     app.register_blueprint(ws, url_prefix='/ws')
     app.register_blueprint(admissions_bp, url_prefix='/admissions')
+
+    # Register reports blueprint (no prefix so endpoints keep the paths defined in routes/reports.py)
+    app.register_blueprint(reports)
 
     # Create or restore database
     create_database(app)
