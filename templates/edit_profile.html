@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block head_extras %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-page">
+    <h2>Edit Profile</h2>
+    <form action="{{ url_for('edit_profile') }}" method="POST">
+        <div class="info-card">
+            <div class="info-row">
+                <label class="info-label" for="name">Name:</label>
+                <input type="text" name="name" id="name" value="{{ session.get('name', '') }}">
+            </div>
+            <div class="info-row">
+                <label class="info-label" for="email">Email:</label>
+                <input type="email" name="email" id="email" value="{{ session.get('email', '') }}">
+            </div>
+            <div class="info-row">
+                <label class="info-label" for="number">Phone:</label>
+                <input type="text" name="number" id="number" value="{{ session.get('number', '') }}">
+            </div>
+            <div class="info-row">
+                <label class="info-label" for="age">Age:</label>
+                <input type="number" name="age" id="age" value="{{ session.get('age', '') }}">
+            </div>
+            <div class="info-row">
+                <label class="info-label" for="company_name">Company:</label>
+                <input type="text" name="company_name" id="company_name" value="{{ session.get('company_name', '') }}">
+            </div>
+        </div>
+        <button type="submit" class="edit-button">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

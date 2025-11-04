@@ -8,6 +8,30 @@
   --atom-gradient: linear-gradient(135deg, #b28ef5, #8ab4f8);
 }
 
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  padding: 6px;
+  align-items: center;
+}
+
+.typing-dot {
+  width: 8px;
+  height: 8px;
+  background: #b28ef5;
+  border-radius: 50%;
+  animation: bounce 1.2s infinite;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+
 /* Floating button */
 .chat-button {
   position: fixed;

@@ -10,19 +10,21 @@
 {% endblock %}
 
 {% block content %}
-  <!-- Main Content -->
   <main class="main-container">
-    <!-- Header -->
-    <div class="dashboard-header">
-      <h1>Dashboard</h1>
-      <p>Manage your university search and matched results</p>
-    </div>
+  <!-- Header -->
+  <div class="dashboard-header">
+    <h1>Dashboard</h1>
+    <p>Manage your university search and matched results</p>
+  </div>
 
-    <!-- Dashboard Grid -->
-    <div class="dashboard-grid">
-      
-      <!-- Personal Information Section -->
-      <section class="dashboard-section personal-section">
+  <!-- Dashboard Grid -->
+  <div class="dashboard-grid two-columns">
+
+    <!-- Left Column -->
+    <div class="left-column">
+
+      <!-- Personal Info / DIT Container -->
+      <section class="dashboard-section full-width personal-section">
         <div class="section-header">
           <h2>Personal Information and Preferences</h2>
           <span class="section-icon">🎓</span>
@@ -31,8 +33,8 @@
         <a href="{{ url_for('personal_info') }}" class="btn btn-primary">Edit </a>
       </section>
 
-      <!-- Reports Section -->
-      <section class="dashboard-section reports-section">
+      <!-- Generated Reports -->
+      <section class="dashboard-section scrollable">
         <div class="section-header">
           <h2>Generated Reports</h2>
           <span class="section-icon">📊</span>
@@ -44,24 +46,8 @@
         </div>
       </section>
 
-      <!-- Matched Universities Section -->
-      <section class="dashboard-section matches-section">
-        <div class="section-header">
-          <h2>Matched Universities</h2>
-          <span class="section-icon">🎯</span>
-        </div>
-        <div id="matchesContainer" class="matches-container">
-          <p class="empty-state">No matches available yet. Complete your profile to discover universities.</p>
-        </div>
-        <div class="section-footer" style="margin-top: 1rem; text-align: center;">
-          <a href="{{ url_for('courses.get_matches') }}" class="btn btn-primary">
-            View All Matches
-          </a>
-        </div>
-      </section>
-
-      <!-- Liked Universities Section -->
-      <section class="dashboard-section likes-section">
+      <!-- Saved Universities -->
+      <section class="dashboard-section scrollable">
         <div class="section-header">
           <h2>Saved Universities</h2>
           <span class="section-icon">❤️</span>
@@ -72,7 +58,26 @@
       </section>
 
     </div>
-  </main>
+
+    <!-- Right Column -->
+    <div class="right-column scrollable">
+      <section class="dashboard-section">
+        <div class="section-header">
+          <h2>Matched Universities</h2>
+          <span class="section-icon">🎯</span>
+        </div>
+        <div id="matchesContainer" class="matches-container">
+          <p class="empty-state">No matches available yet. Complete your profile to discover universities.</p>
+        </div>
+        <div class="section-footer" style="margin-top: 1rem; text-align: center;">
+          <a href="{{ url_for('courses.get_matches') }}" class="btn btn-primary">View All Matches</a>
+        </div>
+      </section>
+    </div>
+
+  </div>
+</main>
+
 {% endblock %}
 
 {% block scripts %}
