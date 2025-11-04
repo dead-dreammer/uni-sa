@@ -1,0 +1,147 @@
+/* profile.css */
+
+/* Reset + Base for profile-page only */
+.profile-page * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 60px;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  /* background for container handled separately if needed */
+}
+
+/* Back Button */
+.profile-page .back-button {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  text-decoration: none;
+  color: #00FFB3;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+  z-index: 10;
+}
+
+.profile-page .back-button:hover {
+  color: #00e0a2;
+}
+
+/* Profile Logo */
+.profile-page .profile-logo {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #556ee6, #00ffb3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 42px;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(0, 255, 179, 0.4);
+  user-select: none;
+  margin-bottom: 20px;
+}
+
+/* User Name */
+.profile-page h2 {
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #00FFB3;
+}
+
+/* Info Card */
+.profile-page .info-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 25px 20px;
+  margin-top: 25px;
+  text-align: left;
+  width: 100%;
+  box-shadow: inset 0 0 10px rgba(0, 255, 179, 0.2);
+  border: 1px solid rgba(0, 255, 179, 0.3);
+}
+
+/* Info Rows */
+.profile-page .info-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0;
+  font-size: 1rem;
+  color: #d9fff3;
+}
+
+.profile-page .info-label {
+  font-weight: 600;
+  color: #00FFB3;
+}
+
+/* Edit Button (optional if added later) */
+.profile-page .edit-button {
+  margin-top: 25px;
+  background: linear-gradient(135deg, #556ee6, #3747a8);
+  padding: 12px 22px;
+  border: none;
+  border-radius: 14px;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px rgba(55, 71, 168, 0.5);
+}
+
+.profile-page .edit-button:hover {
+  background: linear-gradient(135deg, #3747a8, #556ee6);
+  box-shadow: 0 10px 25px rgba(55, 71, 168, 0.8);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 560px) {
+  .profile-page {
+    padding: 60px 20px 40px;
+  }
+  .profile-page h2 {
+    font-size: 1.5rem;
+  }
+  .profile-page .info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  .profile-page .back-button {
+    top: 10px;
+    left: 15px;
+    font-size: 1rem;
+  }
+}
+
+.profile-page input {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 255, 179, 0.3);
+    background: rgba(0,0,0,0.1);
+    color: #00FFB3;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+.profile-page input:focus {
+    outline: none;
+    border-color: #556ee6;
+    box-shadow: 0 0 8px rgba(85, 110, 230, 0.5);
+}
+
