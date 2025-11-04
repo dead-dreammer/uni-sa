@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+<<<<<<< HEAD
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -30,6 +31,22 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/mobile-menu.css') }}"
     />
+=======
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="apple-mobile-web-app-capable" content="yes"> <!--Added this so it can fit onto the mobile app-->
+  <meta name="mobile-web-app-capable" content="yes">
+  <title>{% block title %}uni.sa{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  <link rel="stylesheet" href="{{url_for('static', filename='css/chat.css')}}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile-fixes.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile-menu.css') }}">
+>>>>>>> dd0cdcbf051f3e2725bce0f3f989d9ab0c77b2e2
 
     <!-- Font Awesome for Icons -->
     <link
@@ -40,6 +57,18 @@
       referrerpolicy="no-referrer"
     />
 
+<<<<<<< HEAD
+=======
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/chat.css')}}"
+    />
+
+>>>>>>> dd0cdcbf051f3e2725bce0f3f989d9ab0c77b2e2
     {% block head_extras %}{% endblock %}
   </head>
 
@@ -57,6 +86,7 @@
       {% if session.get('name') %}
       <a href="{{ url_for('profile') }}" class="underline0">
         <i class="fas fa-user user-icon"></i>
+<<<<<<< HEAD
         {{ session.get('name') }}
       </a>
       {% elif session.get('is_admin') %}
@@ -71,6 +101,19 @@
       </button>
 
       <ul>
+=======
+        {{session.get('name') }}</a>
+      {% elif session.get('is_admin')%}
+      <a href="{{ url_for('admin') }}" class="underline0">Admin</a>
+      {% endif %}
+       <!--Adding a menu button-->
+    <button class="mobile-menu-btn" >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul>
+>>>>>>> dd0cdcbf051f3e2725bce0f3f989d9ab0c77b2e2
         <li><a href="{{ url_for('home_page') }}" class="underline">Home</a></li>
         <li><a href="{{ url_for('about') }}" class="underline">About Us</a></li>
         <li>
@@ -118,7 +161,7 @@
     </nav>
 
     {% block content %}{% endblock %}
-
+{% if show_chatbot %}
     <!-- Floating chat button -->
     <button class="chat-button" id="chatButton" aria-label="chatbutton">
       <svg
@@ -154,6 +197,7 @@
               joined • <span id="joinTime"></span>
             </span>
           </div>
+          
 
           <div class="privacy-notice">
             By continuing, you consent to this chat being monitored, recorded,
@@ -187,6 +231,8 @@
         <button class="send-button" id="sendButton">➤</button>
       </div>
     </div>
+
+    {% endif %}
 
     <!-- Footer Section -->
     <footer>
@@ -246,7 +292,14 @@
       type="module"
       src="{{ url_for('static', filename='js/logout.js') }}"
     ></script>
+<<<<<<< HEAD
     <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
     <script src="{{ url_for('static', filename='js/mobile-menu.js') }}"></script>
+=======
+
+  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+
+      <script src="{{ url_for('static', filename='js/mobile-menu.js') }}"></script><!--New js file-->
+>>>>>>> dd0cdcbf051f3e2725bce0f3f989d9ab0c77b2e2
   </body>
 </html>
