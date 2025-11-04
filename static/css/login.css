@@ -5,7 +5,7 @@
 body.auth-page {
   /* auth page background served from static/img */
 
-  background: url('/static/img/background.png') no-repeat center top fixed;
+
   background-repeat: no-repeat;
   background-position: center top;
   background-size: cover;
@@ -339,3 +339,40 @@ body.auth-page {
 }
 
 
+/* Signup form wrapper */
+.signup-form .form-wrapper {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap; /* allow stacking on smaller screens */
+}
+
+/* Columns */
+.signup-form .form-column {
+  flex: 1;
+  min-width: 280px; /* ensures columns don't shrink too small */
+}
+
+/* Ensure consistent spacing for form groups */
+.signup-form .form-group {
+  margin-bottom: 1.2rem;
+}
+
+/* Responsive: stack columns on small screens */
+@media (max-width: 768px) {
+  .signup-form .form-wrapper {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.forgot-password-link {
+  color: #556ee6;
+  text-decoration: underline;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.forgot-password-link:hover {
+  color: #3747a8;
+}

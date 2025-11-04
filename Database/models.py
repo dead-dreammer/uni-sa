@@ -11,6 +11,7 @@ class Student(db.Model):
     dob = db.Column(db.Date)
     gender = db.Column(db.String(10))
     password = db.Column(db.String(200), nullable=False)
+    location = db.Column(db.String(100))
 
     academic_marks = db.relationship('AcademicMark', backref='student', lazy=True)
     preferences = db.relationship('Preference', backref='student', lazy=True)
@@ -120,6 +121,24 @@ class Admission(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
+class Report(db.Model):
+    __tablename__ = 'report'
+    report_id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('student.student_id'), nullable=False)
+    title = db.Column(db.String(255), nullable=False)
+    filename = db.Column(db.String(512), nullable=False)  # filename stored on disk (relative)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    student = db.relationship('Student', backref=db.backref('reports', lazy=True))
+
+    def to_dict(self):
+        return {
+            'id': self.report_id,
+            'student_id': self.student_id,
+            'title': self.title,
+            'filename': self.filename,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
 
 class Application(db.Model):
     __tablename__ = 'application'

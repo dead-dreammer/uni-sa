@@ -39,8 +39,13 @@
           </svg>
           Add Course
         </button>
-  <input type="file" id="importPDF" accept="application/pdf" class="btn-primary">
-<button id="uploadPDFBtn" class="btn-primary">Upload PDF</button>
+<div class="upload-section">
+  <label for="pdfUpload" class="choose-file-btn">Choose File</label>
+  <input type="file" id="pdfUpload" accept=".pdf" />
+  <span class="file-name" id="fileName">No file selected</span>
+  <button id="uploadPDFBtn">Upload PDF</button>
+</div>
+
       </div>
       
       <div class="control-right">

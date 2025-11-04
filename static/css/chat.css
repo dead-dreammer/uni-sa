@@ -8,6 +8,7 @@
   --atom-gradient: linear-gradient(135deg, #b28ef5, #8ab4f8);
 }
 
+
 .typing-indicator {
   display: flex;
   gap: 4px;
@@ -31,37 +32,95 @@
   40% { transform: scale(1); }
 }
 
+/* Tooltip / dialogue hint (visible by default) */
+.chat-hint {
+  position: absolute;
+  right: 85px; /* space between button and bubble */
+  bottom: 22px;
+  background: linear-gradient(135deg, rgba(183, 148, 255, 0.95), rgba(114, 213, 255, 0.95));
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  padding: 9px 14px;
+  border-radius: 14px;
+  box-shadow: 0 0 15px rgba(150, 100, 255, 0.4);
+  opacity: 1; /* visible by default */
+  transform: translateY(0);
+  transition: all 0.35s ease;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: hintPulse 2.5s infinite ease-in-out;
+}
+
+/* Glowing pulse animation */
+@keyframes hintPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(183, 148, 255, 0.5);
+    transform: translateY(0);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(114, 213, 255, 0.7);
+    transform: translateY(-2px);
+  }
+}
+
+/* Small triangle “tail” */
+.chat-hint::after {
+  content: '';
+  position: absolute;
+  right: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 7px solid rgba(183, 148, 255, 0.95);
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  filter: drop-shadow(0 0 4px rgba(150, 100, 255, 0.5));
+}
+
+/* Hide bubble when hovered or clicked */
+.chat-button:hover .chat-hint,
+.chat-button:active .chat-hint,
+.chat-button.clicked .chat-hint {
+  opacity: 0;
+  transform: translateY(10px);
+  filter: blur(1px);
+  animation: none;
+}
 
 /* Floating button */
 .chat-button {
   position: fixed;
   bottom: 32px;
   right: 32px;
-  width: 70px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   border: none;
   border-radius: 50%;
   background: transparent;
-  box-shadow: 0 0 15px var(--atom-glow);
+  box-shadow: 0 0 0.5px var(--atom-glow);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: transform 0.4s ease, box-shadow 0.25s ease;
   z-index: 1000;
 }
 
 .chat-button:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 25px var(--atom-accent);
+  transform: scale(1.08) rotate(360deg);
+  box-shadow: 0 0 5px var(--atom-accent);
 }
 
+/* Icon inside the button */
 .chat-button-icon {
   width: 100px;
   height: 70px;
-  background: url(../img/home/ATOM_LOGO.png) no-repeat center/cover;
+  background: url(../img/home/ATOM_LOGO.png) no-repeat center/contain;
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
+  transition: transform 0.8s ease-in-out;
 }
+
 
 /* Chat container */
 .chat-widget {
@@ -98,6 +157,7 @@
   font-weight: 500;
   letter-spacing: 0.5px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  
 }
 
 .header-icon {
@@ -315,4 +375,19 @@
 
 .chat-messages::-webkit-scrollbar-thumb:hover {
   background: #c0a6f7;
+}
+
+.clear-chat-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  opacity: 0.7;
+}
+
+.clear-chat-btn:hover {
+  opacity: 1;
+  color: #ffd1f9;
 }

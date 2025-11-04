@@ -299,3 +299,33 @@ if (userInput) {
         }
     });
 }
+
+const clearChat = document.getElementById('clearChat');
+if (clearChat) {
+    clearChat.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        if (confirm('Clear all chat messages?')) {
+            // Clear from localStorage
+            localStorage.removeItem('chatMessages');
+
+            // Save the welcome message element
+            const welcomeMessage = chatMessages.querySelector('.welcome-message');
+
+            // Clear chat window
+            chatMessages.innerHTML = '';
+
+            // Re-add timestamp
+            const timestamp = document.createElement('div');
+            timestamp.className = 'timestamp';
+            timestamp.id = 'currentTime';
+            chatMessages.appendChild(timestamp);
+
+            // Re-add the welcome message
+            if (welcomeMessage) chatMessages.appendChild(welcomeMessage);
+
+            // Update time display
+            updateTime();
+        }
+    });
+}
