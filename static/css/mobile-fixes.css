@@ -3,6 +3,25 @@
    Add these styles to your existing CSS
    ============================================ */
 
+/* Remove all bullets from mobile menu - CRITICAL FIX */
+.mobile-menu,
+.mobile-menu ul,
+.mobile-menu li,
+.mobile-menu .dropdown-content,
+.mobile-menu .dropdown-content li {
+    list-style: none !important;
+    list-style-type: none !important;
+    margin: 0;
+    padding-left: 0 !important;
+}
+
+/* Ensure bullets don't appear on any list in navbar */
+.navbar ul,
+.navbar li {
+    list-style: none !important;
+    list-style-type: none !important;
+}
+
 /* Fix for Home Page - Main Content */
 @media (max-width: 768px) {
     /* Atom Container - Make it smaller on mobile */
