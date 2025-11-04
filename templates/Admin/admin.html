@@ -1,17 +1,27 @@
-{% extends 'base.html' %}
-{% block title %}Admin Panel | Uni.sa{% endblock %}
-{% block head_extras %}
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}" />
-<link rel="stylesheet" href="{{ url_for('static', filename='css/mobile-fixes.css') }}" />
-{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% block title %}Admin Panel | Uni.sa{% endblock %} {%
+block head_extras %}
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/admin.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/mobile-fixes.css') }}"
+/>
+{% endblock %} {% block content %}
 <div class="admin-dashboard">
-
   <!-- Mobile menu button (visible on mobile only) -->
   <!-- added aria-expanded for accessibility (JS can update it on toggle) -->
-  <button class="admin-menu-btn" aria-label="Toggle admin menu" aria-expanded="false" type="button">
+  <button
+    class="admin-menu-btn"
+    aria-label="Toggle admin menu"
+    aria-expanded="false"
+    type="button"
+  >
     <span></span>
     <span></span>
     <span></span>
@@ -25,10 +35,15 @@
     <h2 class="logo">UNI.SA Admin</h2>
     <nav class="sidebar-nav">
       <a href="{{ url_for('admin') }}" class="nav-item">🏠 Dashboard</a>
-      <a href="{{ url_for('course_management') }}" class="nav-item">📚 Course Management</a>
-      <a href="{{ url_for('bursary_management') }}" class="nav-item">🎓 Bursary Management</a>
-      <a href="{{ url_for('admissions_calendar_management') }}" class="nav-item">🗓️ Admissions Calendar Management</a>
-      <a href="#" class="nav-item">📈 Reports</a>
+      <a href="{{ url_for('course_management') }}" class="nav-item"
+        >📚 Course Management</a
+      >
+      <a href="{{ url_for('bursary_management') }}" class="nav-item"
+        >🎓 Bursary Management</a
+      >
+      <a href="{{ url_for('admissions_calendar_management') }}" class="nav-item"
+        >🗓️ Admissions Calendar Management</a
+      >
     </nav>
   </aside>
 
