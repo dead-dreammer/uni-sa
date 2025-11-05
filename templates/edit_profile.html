@@ -5,6 +5,7 @@
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='css/styles.css') }}"/>
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
 {% endblock %}
 
 {% block content %}
@@ -26,19 +27,27 @@
                 <input type="text" name="number" id="number" value="{{ session.get('number', '') }}">
             </div>
             <div class="info-row">
-                <label class="info-label" for="age">Age:</label>
-                <input type="number" name="age" id="age" value="{{ session.get('age', '') }}">
+                <label class="info-label" for="dob">Date of Birth:</label>
+                <input type="date" name="dob" id="dob" value="{{ session.get('dob', '') }}">
             </div>
             <div class="info-row">
                 <label class="info-label" for="location">Location:</label>
                 <input type="text" name="location" id="location" value="{{ session.get('location', '') }}">
             </div>
-            <div class="info-row">
-                <label class="info-label" for="gender">Gender:</label>
-                <input type="text" name="gender" id="gender" value="{{ session.get('location', '') }}">
-            </div>
+             <div class="info-row" >
+            <label class="info-label"for="gender">Gender</label>
+            <select id="gender" name="gender" class="form-input" required>
+              <option value="">--Select Gender--</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
         </div>
-        <button type="submit" class="edit-button">Save Changes</button>
+                <div style="display: flex; gap: 1rem;">
+                    <button type="submit" class="edit-button">Save Changes</button>
+                    <a href="{{ url_for('profile') }}" class="edit-button" style="background: #ccc; color: #222;  background: linear-gradient(135deg, #556ee6, #5d24a1); color:white;text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">Cancel</a>
+                </div>
     </form>
 </div>
 {% endblock %}

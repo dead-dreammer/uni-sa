@@ -11,15 +11,49 @@
         box-sizing: border-box;
       }
 
+      /* Define different page sizes */
       @page {
         size: A4;
         margin: 15mm;
+      }
+      
+      @page landscape {
+        size: A4 landscape;
+        margin: 10mm;
       }
 
       body {
         font-family: "Arial", sans-serif;
         color: #333;
         line-height: 1.6;
+      }
+
+      /* Landscape page styling */
+      .landscape-page {
+        page: landscape;
+        page-break-before: always;
+        page-break-after: always;
+        height: 100%;
+      }
+
+      .comparison-section {
+        height: 100%;
+        padding: 20px;
+      }
+
+      .comparison-title {
+        color: #5b21b6;
+        font-size: 24px;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .comparison-subtitle {
+        color: #666;
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: 20px;
       }
 
       .header {
@@ -199,8 +233,9 @@
       .comparison-table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 30px;
-        page-break-inside: avoid;
+        margin: 0 auto;
+        background: white;
+        border: 1px solid #e5e7eb;
       }
 
       .comparison-table thead {
@@ -209,20 +244,57 @@
       }
 
       .comparison-table th {
-        padding: 12px;
+        padding: 15px 10px;
         text-align: left;
-        font-size: 13px;
+        font-size: 14px;
         font-weight: 600;
+        white-space: nowrap;
       }
 
       .comparison-table td {
-        padding: 10px 12px;
+        padding: 12px 10px;
         border-bottom: 1px solid #e5e7eb;
+        font-size: 13px;
+        vertical-align: middle;
+      }
+
+      .comparison-table tbody tr:nth-child(even) {
+        background: #f8f9fa;
+      }
+
+      .requirements-cell {
+        text-align: center;
+      }
+
+      .req-count {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-weight: 600;
         font-size: 12px;
       }
 
-      .comparison-table tbody tr:hover {
-        background: #f9fafb;
+      .req-count.all-met {
+        background: #d1fae5;
+        color: #065f46;
+      }
+
+      .req-count.most-met {
+        background: #fef3c7;
+        color: #92400e;
+      }
+
+      .req-count.some-met {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+
+      .comparison-note {
+        color: #666;
+        font-size: 12px;
+        font-style: italic;
+        margin-top: 15px;
+        text-align: center;
       }
 
       /* Footer Section */
@@ -256,7 +328,7 @@
   <body>
     <!-- Header -->
     <div class="header">
-      <h1>uni.sa</h1>
+      <h1>Uni.sa</h1>
       <p class="subtitle">Your Personalized University Course Matches</p>
     </div>
 
@@ -327,27 +399,17 @@
         </div>
 
         <div class="highlights">
-          {% for req in match.program.requirements %} {% set grade =
-          marks.get(req.required_subject, 0) %}
-          <div
-            class="highlight-item {% if grade >= req.min_grade_percentage %}success{% else %}warning{% endif %}"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-            {{ req.required_subject }}: {{ grade|round|int }}% (Required: {{
-            req.min_grade_percentage|round|int }}%)
-          </div>
-          {% endfor %} {% if not preferences.relocate and
-          match.university.province_state == preferences.location %}
+          {# Use server-precomputed student_grade/met when available; fall back to marks lookup otherwise #}
+          {% for req in match.program.requirements %}
+            {% set grade = (req.student_grade if req.student_grade is defined else (marks.get(req.required_subject, 0) if marks is defined else 0)) %}
+            <div class="highlight-item {% if (req.met if req.met is defined else (grade >= (req.min_grade_percentage or 0))) %}success{% else %}warning{% endif %}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              {{ (req.required_subject or 'Requirement') }}: {{ (grade|default(0)|round)|int }}% (Required: {{ (req.min_grade_percentage|default(0)|round)|int }}%)
+            </div>
+          {% endfor %}
+          {% if not preferences.relocate and match.university.province_state == preferences.location %}
           <div class="highlight-item success">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -402,38 +464,49 @@
 
     <!-- Quick Comparison Table (if 3+ matches) -->
     {% if matches|length >= 3 %}
-    <h2
-      style="
-        color: #5b21b6;
-        font-size: 22px;
-        margin-top: 40px;
-        margin-bottom: 15px;
-      "
-    >
-      Quick Comparison
-    </h2>
-    <table class="comparison-table">
-      <thead>
-        <tr>
-          <th>Institution</th>
-          <th>Course</th>
-          <th>Duration</th>
-          <th>Location</th>
-          <th>Mode</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for match in matches[:5] %}
-        <tr>
-          <td>{{ match.university.name }}</td>
-          <td>{{ match.program.program_name }}</td>
-          <td>{{ match.program.duration_years or 'N/A' }} years</td>
-          <td>{{ match.program.location or 'N/A' }}</td>
-          <td>{{ match.program.study_mode or 'N/A' }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <div class="landscape-page">
+      <div class="comparison-section">
+        <h2 class="comparison-title">Program Comparison Overview</h2>
+        <p class="comparison-subtitle">Side-by-side comparison of your top matches</p>
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Institution</th>
+              <th>Course</th>
+              <th>Duration</th>
+              <th>Location</th>
+              <th>Mode</th>
+              <th>Annual Fees</th>
+              <th>Requirements Met</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for match in matches[:8] %}
+            <tr>
+              <td>{{ match.university.name }}</td>
+              <td>{{ match.program.program_name }}</td>
+              <td>{{ match.program.duration_years or 'N/A' }} years</td>
+              <td>{{ match.program.location or 'N/A' }}</td>
+              <td>{{ match.program.study_mode or 'N/A' }}</td>
+              <td>{{ match.program.fees or 'Contact university' }}</td>
+              <td class="requirements-cell">
+                {% set met_count = namespace(value=0) %}
+                {% for req in match.program.requirements %}
+                  {% if req.met|default(false) %}
+                    {% set met_count.value = met_count.value + 1 %}
+                  {% endif %}
+                {% endfor %}
+                <span class="req-count {% if met_count.value == match.program.requirements|length %}all-met{% elif met_count.value >= (match.program.requirements|length / 2) %}most-met{% else %}some-met{% endif %}">
+                  {{ met_count.value }}/{{ match.program.requirements|length }}
+                </span>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <p class="comparison-note">* Requirements Met shows how many of the program's prerequisites you currently satisfy.</p>
+      </div>
+    </div>
     {% endif %}
 
     <!-- Footer -->

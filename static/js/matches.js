@@ -35,36 +35,104 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Like button functionality
-    document.querySelectorAll('.like-button').forEach(button => {
+    // Like button initialization and functionality
+    const likeButtons = document.querySelectorAll('.like-button');
+
+    // Initialize liked state: prefer server list (authoritative) then fall back to localStorage
+    (async function initLikes() {
+        let serverIds = null;
+        try {
+            const res = await fetch('/courses/liked-courses', { credentials: 'same-origin' });
+            if (res.ok) {
+                const data = await res.json();
+                if (Array.isArray(data)) serverIds = data.map(String);
+            }
+        } catch (e) {
+            // network error - we'll fall back to localStorage
+        }
+
+        if (serverIds && serverIds.length) {
+            // Build a normalized local copy from server ids, trying to attach names from page markup
+            const ls = [];
+            likeButtons.forEach((btn, idx) => {
+                const cid = btn.closest('.option-card').dataset.courseId;
+                if (serverIds.includes(String(cid))) {
+                    btn.classList.add('liked');
+                    btn.textContent = '♥';
+                    const name = btn.dataset.courseName || '';
+                    ls.push({ id: String(cid), name: name, timestamp: new Date().toISOString() });
+                } else {
+                    btn.classList.remove('liked');
+                    btn.textContent = '♡';
+                }
+            });
+            try { localStorage.setItem('likedCourses', JSON.stringify(ls)); } catch (e) {}
+        } else {
+            // Fallback to localStorage
+            let ls = [];
+            try { ls = JSON.parse(localStorage.getItem('likedCourses') || '[]'); } catch (e) { ls = []; }
+            likeButtons.forEach((btn) => {
+                const cid = btn.closest('.option-card').dataset.courseId;
+                const found = ls.find(c => String(c.id) === String(cid));
+                if (found) {
+                    btn.classList.add('liked');
+                    btn.textContent = '♥';
+                } else {
+                    btn.classList.remove('liked');
+                    btn.textContent = '♡';
+                }
+            });
+        }
+    })();
+
+    // Attach click handlers after init so UI reflects correct starting state
+    likeButtons.forEach(button => {
         button.addEventListener('click', function() {
             const courseName = this.dataset.courseName;
+            const courseId = this.closest('.option-card').dataset.courseId;
             this.classList.toggle('liked');
-            
-            // You can add AJAX call here to save the liked status
+
+            // Update localStorage for immediate UI updates across pages/tabs
+            try {
+                const ls = JSON.parse(localStorage.getItem('likedCourses') || '[]');
+                if (this.classList.contains('liked')) {
+                    // Add if not already present
+                    if (!ls.find(c => String(c.id) === String(courseId))) {
+                        ls.push({ id: String(courseId), name: courseName, timestamp: new Date().toISOString() });
+                    }
+                } else {
+                    const idx = ls.findIndex(c => String(c.id) === String(courseId));
+                    if (idx !== -1) ls.splice(idx, 1);
+                }
+                localStorage.setItem('likedCourses', JSON.stringify(ls));
+            } catch (e) {
+                console.warn('Could not update localStorage likedCourses', e);
+            }
+
+            // Persist to server (send credentials so session is used)
             if (this.classList.contains('liked')) {
                 this.textContent = '♥';
-                // Save liked course
-                fetch('/save_liked_course', {
+                fetch('/courses/save_liked_course', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        course_id: this.closest('.option-card').dataset.courseId
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'same-origin',
+                    body: JSON.stringify({ program_id: courseId })
+                }).then(res => res.json()).then(resp => {
+                    // Optionally handle server response
+                }).catch(err => {
+                    console.error('Failed to save liked course', err);
                 });
             } else {
                 this.textContent = '♡';
-                // Remove liked course
-                fetch('/remove_liked_course', {
+                fetch('/courses/remove_liked_course', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        course_id: this.closest('.option-card').dataset.courseId
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'same-origin',
+                    body: JSON.stringify({ program_id: courseId })
+                }).then(res => res.json()).then(resp => {
+                    // Optionally handle server response
+                }).catch(err => {
+                    console.error('Failed to remove liked course', err);
                 });
             }
         });

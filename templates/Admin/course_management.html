@@ -43,6 +43,15 @@
   <label for="pdfUpload" class="choose-file-btn">Choose File</label>
   <input type="file" id="pdfUpload" accept=".pdf" />
   <span class="file-name" id="fileName">No file selected</span>
+  <select id="pdfUniversity" style="margin-left:10px;">
+    <option value="">Select University</option>
+    <option value="Unisa">Unisa</option>
+    <option value="DUT">DUT</option>
+    <option value="UKZN">UKZN</option>
+    <option value="Richfield">Richfield</option>
+    <option value="Stadio">Stadio</option>
+    <option value="MUT">MUT</option>
+  </select>
   <button id="uploadPDFBtn">Upload PDF</button>
 </div>
 
@@ -127,8 +136,8 @@
           <h3 class="course-title">{{ course.title }}</h3>
           <p class="course-description">{{ course.description }}</p>
           <div class="course-meta">
-            <div class="meta-item">{{ course.duration }}</div>
-            <div class="meta-item">{{ course.fees }}</div>
+            <div class="meta-item"><strong>Duration:</strong> {{ course.duration }}</div>
+            <div class="meta-item"><strong>Fees:</strong> {{ course.fees }}</div>
           </div>
         </div>
       </div>

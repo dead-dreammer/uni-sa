@@ -102,7 +102,7 @@ def save_programs_to_db(programs, university_id):
     # Optional: export to CSV
     programs_db = WSProgram.query.all()
     programs_list = [
-        {"program_id": p.program_id, "university_id": p.university_id,
+        {"id": p.id, "university_id": p.university_id,
          "program_name": p.program_name, "degree_type": p.degree_type,
          "duration_years": p.duration_years, "description": p.description}
         for p in programs_db

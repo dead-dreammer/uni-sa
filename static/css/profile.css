@@ -106,22 +106,49 @@
   color: #794fcd;
 }
 
+
 .info-label {
   font-weight: 600;
   color: #622a88;
   min-width: 100px;
+  margin-left: 5px;
+  
 }
+
+.info-row input,
+.info-row select {
+  flex: 1;
+  padding: 12px 14px;
+  border-radius: 12px;
+border: 2px solid rgba(145, 99, 208, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  color: #9346db;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+ margin-left: 20px;
+    
+}
+
+/* Optional: change border color on focus */
+.info-row input:focus,
+.info-row select:focus {
+  border-color: #9346db;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
 
 /* Input Fields (Edit Mode) */
 .info-row input {
   flex: 1;
   padding: 12px 14px;
   border-radius: 12px;
-  border: 2px solid rgba(55, 23, 100, 0.3);
+  border: 2px solid rgba(145, 99, 208, 0.3);
   background: rgba(255,255,255,0.05);
   color: #9346db;
   font-size: 1rem;
   transition: all 0.3s ease;
+  margin-left: 20px;
 }
 
 .info-row input:focus {

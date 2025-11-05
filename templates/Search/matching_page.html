@@ -108,29 +108,29 @@ endblock %} {% block head_extras %}
           </div>
 
           <div class="card-body">
-            <div class="info-grid">
-              <div class="info-item">
-                <span class="info-label">Location:</span>
-                <span class="info-value">{{ match.program.location }}</span>
-              </div>
-              <div class="info-item">
-                <span class="info-label">Duration:</span>
-                <span class="info-value"
-                  >{{ match.program.duration_years }} years</span
-                >
-              </div>
-              <div class="info-item">
-                <span class="info-label">Mode:</span>
-                <span class="info-value">{{ match.program.study_mode }}</span>
-              </div>
-            </div>
-
-            <div class="highlights">
-              {% for req in match.program.requirements %} {% set grade =
-              marks.get(req.required_subject, 0) %}
-              <div
-                class="highlight-item {% if grade >= req.min_grade_percentage %}success{% else %}warning{% endif %}"
-              >
+              <div class="info-grid">
+                <div class="info-item">
+                  <span class="info-label">Location:</span>
+                  <span class="info-value">{{ match.program.location }}</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Duration:</span>
+                  <span class="info-value"
+                    >{{ match.program.duration_years }} years</span
+                  >
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Mode:</span>
+                  <span class="info-value">{{ match.program.study_mode }}</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Fees:</span>
+                  <span class="info-value">{{ match.program.fees }}</span>
+                </div>
+              </div>            <div class="highlights">
+              {% for req in match.program.requirements %}
+              {% set grade = req.student_grade|default(0) %}
+              <div class="highlight-item {% if req.met|default(false) %}success{% else %}warning{% endif %}">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -145,7 +145,8 @@ endblock %} {% block head_extras %}
                 {{ req.required_subject }}: {{ grade|round|int }}% (Required: {{
                 req.min_grade_percentage|round|int }}%)
               </div>
-              {% endfor %} {% if preferences and not preferences.relocate and
+              {% endfor %}
+              {% if preferences and not preferences.relocate and
               match.university.province_state == preferences.location %}
               <div class="highlight-item success">
                 <svg
@@ -163,7 +164,8 @@ endblock %} {% block head_extras %}
               </div>
               {% endif %}
 
-              <div class="highlight-item success">
+              {% if match.program.fees %}
+              <div class="highlight-item {% if preferences and preferences.max_tuition_fee and (match.program.fees|replace('R', '')|replace(',', '')|float) <= preferences.max_tuition_fee %}success{% else %}warning{% endif %}">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -175,8 +177,16 @@ endblock %} {% block head_extras %}
                 >
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                Affordable fees - within most budgets
+                Fees: {{ match.program.fees }} 
+                {% if preferences and preferences.max_tuition_fee %}
+                  {% if (match.program.fees|replace('R', '')|replace(',', '')|float) <= preferences.max_tuition_fee %}
+                    (Within budget)
+                  {% else %}
+                    (Above budget)
+                  {% endif %}
+                {% endif %}
               </div>
+              {% endif %}
 
               <div class="highlight-item success">
                 <svg
@@ -284,24 +294,13 @@ endblock %} {% block head_extras %}
               {% endfor %}
             </tr>
 
-            <!-- Requirements Met Row -->
+            
+          
+            <!-- Fees Row -->
             <tr>
-              <td class="row-label sticky-col">Requirements</td>
+              <td class="row-label sticky-col">Annual Fees</td>
               {% for match in matches[:5] %}
-              <td>
-                <div class="requirements-summary">
-                  {% set met_count = 0 %} {% for req in
-                  match.program.requirements %} {% set grade =
-                  marks.get(req.required_subject, 0) %} {% if grade >=
-                  req.min_grade_percentage %} {% set met_count = met_count + 1
-                  %} {% endif %} {% endfor %}
-                  <span class="req-fraction"
-                    >{{ met_count }}/{{ match.program.requirements|length
-                    }}</span
-                  >
-                  <span class="req-label">met</span>
-                </div>
-              </td>
+              <td>{{ match.program.fees }}</td>
               {% endfor %}
             </tr>
 
@@ -311,21 +310,14 @@ endblock %} {% block head_extras %}
               {% for match in matches[:5] %}
               <td>
                 <div class="subjects-list">
-                  {% for req in match.program.requirements[:3] %} {% set grade =
-                  marks.get(req.required_subject, 0) %}
-                  <div
-                    class="subject-item {% if grade >= req.min_grade_percentage %}met{% else %}not-met{% endif %}"
-                  >
-                    <span class="subject-check"
-                      >{% if grade >= req.min_grade_percentage %}✓{% else %}✗{%
-                      endif %}</span
-                    >
-                    {{ req.required_subject }}
-                  </div>
-                  {% endfor %} {% if match.program.requirements|length > 3 %}
-                  <span class="more-subjects"
-                    >+{{ match.program.requirements|length - 3 }} more</span
-                  >
+                  {% for req in match.program.requirements[:3] %}
+                    <div class="subject-item {% if req.met|default(false) %}met{% else %}not-met{% endif %}">
+                      <span class="subject-check">{% if req.met|default(false) %}✓{% else %}✗{% endif %}</span>
+                      {{ req.required_subject }}
+                    </div>
+                  {% endfor %}
+                  {% if match.program.requirements|length > 3 %}
+                  <span class="more-subjects">+{{ match.program.requirements|length - 3 }} more</span>
                   {% endif %}
                 </div>
               </td>

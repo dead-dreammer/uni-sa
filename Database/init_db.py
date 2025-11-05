@@ -25,6 +25,7 @@ def init_db():
                         'description': 'Covers programming, algorithms, and software engineering.',
                         'location': 'Westville Campus',
                         'study_mode': 'Full-time',
+                        'fees': 'R45000',
                         'requirements': [
                             {'subject': 'Mathematics', 'min_grade': 60},
                             {'subject': 'Physical Science', 'min_grade': 55},
@@ -38,6 +39,7 @@ def init_db():
                         'description': 'Prepares students for careers in accounting and financial management.',
                         'location': 'Westville Campus',
                         'study_mode': 'Full-time',
+                        'fees': 'R42000',
                         'requirements': [
                             {'subject': 'Mathematics', 'min_grade': 55},
                             {'subject': 'English', 'min_grade': 50},
@@ -51,6 +53,7 @@ def init_db():
                         'description': 'Focuses on human behavior, development, and social interaction.',
                         'location': 'Howard College',
                         'study_mode': 'Full-time',
+                        'fees': 'R38000',
                         'requirements': [
                             {'subject': 'English', 'min_grade': 55},
                             {'subject': 'Life Sciences', 'min_grade': 50},
@@ -71,6 +74,7 @@ def init_db():
                         'description': 'Focuses on software development and systems analysis.',
                         'location': 'ML Sultan Campus',
                         'study_mode': 'Full-time',
+                        'fees': 'R35000',
                         'requirements': [
                             {'subject': 'Mathematics', 'min_grade': 50},
                             {'subject': 'English', 'min_grade': 50}
@@ -83,6 +87,7 @@ def init_db():
                         'description': 'Hands-on program in civil engineering principles and practices.',
                         'location': 'Steve Biko Campus',
                         'study_mode': 'Full-time',
+                        'fees': 'R37000',
                         'requirements': [
                             {'subject': 'Mathematics', 'min_grade': 55},
                             {'subject': 'Physical Science', 'min_grade': 55},
@@ -96,6 +101,7 @@ def init_db():
                         'description': 'Teaches design principles, digital art, and creative branding.',
                         'location': 'City Campus',
                         'study_mode': 'Full-time',
+                        'fees': 'R32000',
                         'requirements': [
                             {'subject': 'English', 'min_grade': 50},
                             {'subject': 'Visual Arts', 'min_grade': 55}
@@ -115,6 +121,7 @@ def init_db():
                         'description': 'Comprehensive medical program for aspiring doctors.',
                         'location': 'Groote Schuur Campus',
                         'study_mode': 'Full-time',
+                        'fees': 'R65000',
                         'requirements': [
                             {'subject': 'Mathematics', 'min_grade': 70},
                             {'subject': 'Physical Science', 'min_grade': 70},
@@ -129,10 +136,79 @@ def init_db():
                         'description': 'Covers legal theory, practice, and research.',
                         'location': 'Upper Campus',
                         'study_mode': 'Full-time',
+                        'fees': 'R48000',
                         'requirements': [
                             {'subject': 'English', 'min_grade': 60},
                             {'subject': 'History', 'min_grade': 55},
                             {'subject': 'Mathematics', 'min_grade': 45}
+                        ]
+                    }
+                ]
+            },
+            {
+                'name': 'Stellenbosch University',
+                'city': 'Stellenbosch',
+                'province_state': 'Western Cape',
+                'programs': [
+                    {
+                        'program_name': 'Bachelor of Engineering (Mechanical)',
+                        'degree_type': 'BEng',
+                        'duration_years': 4,
+                        'description': 'Comprehensive mechanical engineering program with focus on design and manufacturing.',
+                        'location': 'Main Campus',
+                        'study_mode': 'Full-time',
+                        'fees': 'R52000',
+                        'requirements': [
+                            {'subject': 'Mathematics', 'min_grade': 70},
+                            {'subject': 'Physical Science', 'min_grade': 65},
+                            {'subject': 'English', 'min_grade': 55}
+                        ]
+                    },
+                    {
+                        'program_name': 'Bachelor of Science in Agriculture',
+                        'degree_type': 'BSc',
+                        'duration_years': 4,
+                        'description': 'Studies in agricultural science, crop production, and farm management.',
+                        'location': 'Agrisciences Campus',
+                        'study_mode': 'Full-time',
+                        'fees': 'R45000',
+                        'requirements': [
+                            {'subject': 'Mathematics', 'min_grade': 55},
+                            {'subject': 'Life Sciences', 'min_grade': 60},
+                            {'subject': 'Physical Science', 'min_grade': 50}
+                        ]
+                    }
+                ]
+            },
+            {
+                'name': 'University of Johannesburg',
+                'city': 'Johannesburg',
+                'province_state': 'Gauteng',
+                'programs': [
+                    {
+                        'program_name': 'Bachelor of Arts in Digital Media Design',
+                        'degree_type': 'BA',
+                        'duration_years': 3,
+                        'description': 'Creative program combining digital design, UI/UX, and multimedia production.',
+                        'location': 'Auckland Park Campus',
+                        'study_mode': 'Full-time',
+                        'fees': 'R39000',
+                        'requirements': [
+                            {'subject': 'English', 'min_grade': 55},
+                            {'subject': 'Mathematics Literacy', 'min_grade': 50}
+                        ]
+                    },
+                    {
+                        'program_name': 'Diploma in Operations Management',
+                        'degree_type': 'Diploma',
+                        'duration_years': 3,
+                        'description': 'Focus on business operations, logistics, and supply chain management.',
+                        'location': 'Doornfontein Campus',
+                        'study_mode': 'Full-time',
+                        'fees': 'R34000',
+                        'requirements': [
+                            {'subject': 'Mathematics', 'min_grade': 50},
+                            {'subject': 'English', 'min_grade': 50}
                         ]
                     }
                 ]

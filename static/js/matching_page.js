@@ -16,9 +16,45 @@ document.addEventListener('DOMContentLoaded', function() {
   let currentIndex = 0;
   const totalCourses = cards.length;
   let likedCourses = JSON.parse(localStorage.getItem('likedCourses') || '[]');
+  // serverLikedIds will be populated from the server for logged-in users
+  let serverLikedIds = [];
   
   // ==================== Initialization ====================
   totalCoursesSpan.textContent = totalCourses;
+  // Fetch liked courses from server (if logged in) and merge
+  fetch('/courses/liked-courses', { credentials: 'same-origin' })
+    .then(r => {
+      if (r.status === 200) return r.json();
+      // if unauthenticated or other non-200, treat as not-authoritative
+      throw r;
+    })
+    .then(data => {
+      if (Array.isArray(data)) {
+        serverLikedIds = data.map(String);
+        // Replace local cache with server list so UI reflects server truth for authenticated users
+        likedCourses = serverLikedIds.map(id => ({ id: String(id), name: '', timestamp: new Date().toISOString() }));
+        localStorage.setItem('likedCourses', JSON.stringify(likedCourses));
+        // initialize UI state now that server likes are known
+        likeButtons.forEach((btn, idx) => {
+          const cid = cards[idx].getAttribute('data-course-id');
+          if (serverLikedIds.includes(String(cid))) {
+            btn.classList.add('liked');
+            btn.textContent = '♥';
+          } else {
+            // ensure any local-only likes don't show as liked
+            btn.classList.remove('liked');
+            btn.textContent = '♡';
+          }
+        });
+      }
+    })
+    .catch(err => {
+      // On 401 or network errors, fall back to localStorage but do not overwrite it.
+      likeButtons.forEach((btn, idx) => {
+        const cid = cards[idx].getAttribute('data-course-id');
+        initializeLikeButton(btn, cid);
+      });
+    });
   
   // ==================== Card Navigation Functions ====================
   
@@ -127,7 +163,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add click handler
     btn.addEventListener('click', function(e) {
       e.stopPropagation(); // Prevent card click
+      const isNowLiked = !btn.classList.contains('liked');
+      // Update UI immediately for responsiveness
       toggleLike(btn, courseId, courseName);
+
+      // Sync with server
+      if (isNowLiked) {
+        fetch('/courses/save_liked_course', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ course_id: courseId })
+        }).then(res => res.json()).then(resp => {
+          // Optionally handle resp
+        }).catch(err => {
+          console.error('Failed to save liked course', err);
+        });
+      } else {
+        fetch('/courses/remove_liked_course', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ course_id: courseId })
+        }).then(res => res.json()).then(resp => {
+          // Optionally handle resp
+        }).catch(err => {
+          console.error('Failed to remove liked course', err);
+        });
+      }
     });
   });
   

@@ -12,6 +12,7 @@ const descInput = document.getElementById('courseDescription');
 const universityInput = document.getElementById('courseCollege');
 const durationInput = document.getElementById('courseDuration');
 const degreeTypeInput = document.getElementById('courseDegreeType');
+const feesInput = document.getElementById('courseFees');
 
 // Open Add Modal
 function openAddModal() {
@@ -38,8 +39,9 @@ courseForm.addEventListener('submit', async (e) => {
     university_id: universityInput.value,
     duration_years: durationInput.value,
     degree_type: degreeTypeInput.value,
-    location: locationInput.value,          // NEW
-    study_mode: studyModeInput.value       // NEW
+  fees: feesInput.value,
+  location: locationInput.value,
+  study_mode: studyModeInput.value
   };
   const url = id ? `/courses/edit/${id}` : '/courses/add';
   
@@ -66,6 +68,7 @@ function populateEditModal(card, id) {
   universityInput.value = card.dataset.college;
   durationInput.value = card.querySelector('.meta-item')?.textContent.replace(/\D/g, '') || '';
   degreeTypeInput.value = card.dataset.degree || '';
+  feesInput.value = card.querySelector('.meta-item:nth-child(3)')?.textContent.replace(/[^\d.]/g, '') || '';
   
   // Populate new fields
   locationInput.value = card.dataset.location || '';
@@ -247,13 +250,19 @@ pdfInput.addEventListener('change', () => {
 // Handle PDF upload
 uploadPDFBtn.addEventListener('click', async () => {
   const file = pdfInput.files[0];
+  const university = document.getElementById('pdfUniversity').value;
   if (!file) {
     alert('Please select a PDF file first.');
+    return;
+  }
+  if (!university) {
+    alert('Please select a university for this PDF.');
     return;
   }
 
   const formData = new FormData();
   formData.append('pdf', file);
+  formData.append('university_name', university);
 
   try {
     uploadPDFBtn.textContent = 'Uploading...';
@@ -270,6 +279,7 @@ uploadPDFBtn.addEventListener('click', async () => {
       loadCourses(); // reload course list
       fileNameDisplay.textContent = 'No file selected';
       pdfInput.value = ''; // reset file input
+      document.getElementById('pdfUniversity').value = '';
     } else {
       alert('❌ Failed to import PDF: ' + (data.error || 'Unknown error'));
     }
