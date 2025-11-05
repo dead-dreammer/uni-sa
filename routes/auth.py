@@ -125,10 +125,18 @@ from flask import session, request, render_template, redirect, url_for, flash
 def forgot_password():
     if request.method == 'POST':
         user_input = request.form.get('userIdentifier')
-        user = db.session.query(Student).filter((Student.email==user_input)|(Student.number==user_input)).first()
-        if not user:
-            flash("User not found", "error")
-            return redirect(url_for('auth.forgot_password'))
+        
+        # Validate input format
+        if '@' in user_input:  # Email format
+            user = Student.query.filter_by(email=user_input).first()
+            if not user:
+                flash("This email address is not registered in our system. Please check the email or sign up for a new account.", "error")
+                return redirect(url_for('auth.forgot_password'))
+        else:  # Phone number format
+            user = Student.query.filter_by(number=user_input).first()
+            if not user:
+                flash("This phone number is not registered in our system. Please check the number or sign up for a new account.", "error")
+                return redirect(url_for('auth.forgot_password'))
 
         otp = str(random.randint(100000, 999999))
         session['reset_otp'] = otp
@@ -141,28 +149,60 @@ def forgot_password():
             Returns True if sending was attempted and succeeded, False if sending was skipped
             due to missing credentials. Raises on unexpected SMTP errors.
             """
-            subject = "Your One-Time Password (OTP)"
-            body = f"Your OTP is: {otp}\nIt is valid for 5 minutes."
-
-            # If credentials are not configured, skip sending — many SMTP servers (including Gmail)
-            # require authentication and will reject unauthenticated send attempts with 530.
+            print(f"\nAttempting to send OTP email to: {to_email}")
+            
             if not EMAIL_ADDRESS or not EMAIL_PASSWORD:
                 print("Email credentials not configured (EMAIL_ADDRESS/EMAIL_PASSWORD). Skipping SMTP send.")
                 return False
 
+            subject = "Your uni.sa Password Reset OTP"
+            body = f"""
+Hello,
+
+You have requested to reset your password on uni.sa.
+
+Your One-Time Password (OTP) is: {otp}
+
+This OTP will expire in 5 minutes.
+
+If you did not request this password reset, please ignore this email.
+
+Best regards,
+uni.sa Team
+"""
             msg = MIMEMultipart()
-            msg['From'] = EMAIL_ADDRESS
+            msg['From'] = f"uni.sa <{EMAIL_ADDRESS}>"
             msg['To'] = to_email
             msg['Subject'] = subject
-            msg.attach(MIMEText(body, 'plain'))
+            msg.attach(MIMEText(body.strip(), 'plain'))
 
-            # SMTP server (example for Gmail)
-            with smtplib.SMTP('smtp.gmail.com', 587) as server:
+            # SMTP server configuration for Gmail
+            try:
+                print(f"Attempting to connect to SMTP server with email: {EMAIL_ADDRESS}")
+                server = smtplib.SMTP('smtp.gmail.com', 587, timeout=10)  # Add timeout
+                print("1. Connected to SMTP server")
+                
                 server.starttls()
+                print("2. TLS connection established")
+                
                 server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+                print("3. Successfully logged in")
+                
                 server.send_message(msg)
-
-            return True
+                print("4. Email sent successfully")
+                
+                server.quit()
+                return True
+                
+            except smtplib.SMTPAuthenticationError:
+                print("SMTP Authentication failed. Please check your email and app password.")
+                raise
+            except smtplib.SMTPConnectError:
+                print("Failed to connect to SMTP server. Please check your internet connection.")
+                raise
+            except Exception as e:
+                print(f"Unexpected SMTP error: {str(e)}")
+                raise
 
         # Try to send the OTP email but don't crash the flow if SMTP fails. Keep the OTP in
         # session/printed output for development testing.
@@ -171,9 +211,13 @@ def forgot_password():
             if not sent:
                 # Provide a helpful debug message so you know why the send was skipped
                 print("Skipped sending OTP email because SMTP credentials are not configured.")
+                flash("Error sending OTP email. Please contact support.", "error")
+                return redirect(url_for('auth.forgot_password'))
         except Exception as e:
             # Log the exception server-side and continue — user will still be able to reset with printed OTP in dev
             print(f"Failed to send OTP email to {user.email}: {e}")
+            flash("Error sending OTP email. Please try again later.", "error")
+            return redirect(url_for('auth.forgot_password'))
 
         # Always print the OTP in logs during development so password resets remain possible
         print(f"OTP for {user_input}: {otp}")  # Testing only
@@ -189,16 +233,46 @@ def otp_reset():
     if request.method == 'POST':
         otp = request.form.get('otp')
         new_password = request.form.get('newPassword')
+        confirm_password = request.form.get('confirmPassword')
 
         if 'reset_otp' not in session or 'otp_expiry' not in session:
             flash("OTP expired. Try again.", "error")
             return redirect(url_for('auth.forgot_password'))
+            
+        # Validate password
+        if new_password != confirm_password:
+            flash("Passwords do not match.", "error")
+            return redirect(url_for('auth.otp_reset'))
+            
+        # Server-side password validation
+        if len(new_password) < 8:
+            flash("Password must be at least 8 characters long.", "error")
+            return redirect(url_for('auth.otp_reset'))
+            
+        if not any(c.isupper() for c in new_password):
+            flash("Password must contain at least one uppercase letter.", "error")
+            return redirect(url_for('auth.otp_reset'))
+            
+        if not any(c.islower() for c in new_password):
+            flash("Password must contain at least one lowercase letter.", "error")
+            return redirect(url_for('auth.otp_reset'))
+            
+        if not any(c.isdigit() for c in new_password):
+            flash("Password must contain at least one number.", "error")
+            return redirect(url_for('auth.otp_reset'))
+            
+        if not any(not c.isalnum() for c in new_password):
+            flash("Password must contain at least one special character.", "error")
+            return redirect(url_for('auth.otp_reset'))
 
-        if datetime.now().timestamp() > session['otp_expiry']:
+        # Check if OTP session exists and hasn't expired
+        if ('otp_expiry' not in session or 
+            datetime.now().timestamp() > session['otp_expiry']):
+            # Clear all reset-related session data
             session.pop('reset_otp', None)
             session.pop('reset_user', None)
             session.pop('otp_expiry', None)
-            flash("OTP expired. Try again.", "error")
+            flash("OTP expired. Please request a new one.", "error")
             return redirect(url_for('auth.forgot_password'))
 
         if otp != session['reset_otp']:

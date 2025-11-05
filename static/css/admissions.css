@@ -509,8 +509,8 @@ body {
 }
 
 .cal-dot {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
 }
 
@@ -976,10 +976,12 @@ body {
     .cal-day {
         aspect-ratio: 1 / 1.1;
         padding: 4px 2px;
+        line-height: 1.2;
     }
     
     .cal-date {
-        font-size: 13px;
+        font-size: 12px;
+        margin-bottom: 2px;
     }
     
     .cal-events {
@@ -1020,32 +1022,3 @@ body {
         justify-content: center;
     }
 }
-
-@media (max-width: 420px) {
-    .event-title {
-        -webkit-line-clamp: 2; /* Keep 2 lines for bigger cards */
-        font-size: 17px;
-    }
-}
-
-/* Reduce hover scale on touch devices */
-@media (hover: none) {
-    .event-card:hover {
-        transform: none;
-        z-index: 0;
-    }
-}
-
-/* Accessibility / touch targets improvements */
-button, select, input[type="date"], input[type="text"], input[type="url"], textarea {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    touch-action: manipulation;
-}
-
-/* small visual polish for focus states */
-button:focus, .filter-select:focus, .search-container input:focus, .event-card:focus {
-    outline: none;
-    box-shadow: 0 6px 20px rgba(102,126,234,0.12);
-}
-
-/* End of file */
