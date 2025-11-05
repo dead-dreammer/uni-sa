@@ -298,13 +298,13 @@ function createEventCard(event) {
     `;
 }
 
-// Render Calendar
+// Render Calendar - FIXED VERSION
 function renderCalendar() {
     const container = document.querySelector('.calendar-container');
     const monthName = new Date(currentCalendarYear, currentCalendarMonth).toLocaleString('default', { month: 'long', year: 'numeric' });
     document.getElementById('calendarMonth').textContent = monthName;
     
-    // Clear existing days (keep weekday headers)
+    // Clear existing days (keep weekday headers) - FIXED
     const existingDays = container.querySelectorAll('.cal-day');
     existingDays.forEach(day => day.remove());
     
@@ -316,23 +316,31 @@ function renderCalendar() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     
+    // Create a document fragment to batch DOM updates (better performance)
+    const fragment = document.createDocumentFragment();
+    
     // Previous month days
     for (let i = firstDay - 1; i >= 0; i--) {
         const day = daysInPrevMonth - i;
-        container.appendChild(createCalendarDay(day, currentCalendarMonth - 1, currentCalendarYear, true));
+        fragment.appendChild(createCalendarDay(day, currentCalendarMonth - 1, currentCalendarYear, true));
     }
     
     // Current month days
     for (let day = 1; day <= daysInMonth; day++) {
-        container.appendChild(createCalendarDay(day, currentCalendarMonth, currentCalendarYear, false));
+        fragment.appendChild(createCalendarDay(day, currentCalendarMonth, currentCalendarYear, false));
     }
     
-    // Next month days
-    const totalCells = container.children.length - 7;
-    const remainingCells = 42 - totalCells;
+    // Next month days - FIXED CALCULATION
+    const weekdayHeaders = 7; // number of weekday header elements
+    const totalCells = weekdayHeaders + firstDay + daysInMonth;
+    const remainingCells = Math.ceil(totalCells / 7) * 7 - totalCells;
+    
     for (let day = 1; day <= remainingCells; day++) {
-        container.appendChild(createCalendarDay(day, currentCalendarMonth + 1, currentCalendarYear, true));
+        fragment.appendChild(createCalendarDay(day, currentCalendarMonth + 1, currentCalendarYear, true));
     }
+    
+    // Append all days at once
+    container.appendChild(fragment);
 }
 
 // Create Calendar Day

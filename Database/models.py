@@ -161,12 +161,32 @@ class Admission(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     def to_dict(self):
+        # return a JSON-serializable dict of admission fields (fixes earlier incorrect copy/paste)
         return {
-            'id': self.report_id,
-            'student_id': self.student_id,
+            'admission_id': self.admission_id,
             'title': self.title,
-            'filename': self.filename,
-            'created_at': self.created_at.isoformat() if self.created_at else None
+            'institution': self.institution,
+            'institution_type': self.institution_type,
+            'program_name': self.program_name,
+            'application_deadline': self.application_deadline.isoformat() if self.application_deadline else None,
+            'registration_deadline': self.registration_deadline.isoformat() if self.registration_deadline else None,
+            'academic_year': self.academic_year,
+            'intake_period': self.intake_period,
+            'field_of_study': self.field_of_study,
+            'study_level': self.study_level,
+            'study_mode': self.study_mode,
+            'description': self.description,
+            'requirements': json.loads(self.requirements) if self.requirements else [],
+            'application_fee': self.application_fee,
+            'tuition_fee': self.tuition_fee,
+            'url': self.url,
+            'application_portal_url': self.application_portal_url,
+            'contact_email': self.contact_email,
+            'contact_phone': self.contact_phone,
+            'tags': json.loads(self.tags) if self.tags else [],
+            'priority': self.priority,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None
         }
 
 class WSUniversity(db.Model):
