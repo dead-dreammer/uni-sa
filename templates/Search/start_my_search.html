@@ -75,7 +75,7 @@ block head_extras %}
           class="section-footer"
           style="margin-top: 1rem; text-align: center"
         >
-          <a href="{{ url_for('courses.get_matches') }}" class="btn btn-primary"
+          <a href="#" id="viewAllMatchesBtn" class="btn btn-primary"
             >View All Matches</a
           >
         </div>
@@ -140,7 +140,9 @@ block head_extras %}
           matchScore: match.match_score,
           ranking: match.match_score,
         }));
+        userData.profileComplete = userData.matches.length > 0;
         renderMatches();
+        updateViewAllButton();
       }
     } catch (error) {
       console.error('Error fetching matches:', error);
@@ -179,7 +181,7 @@ block head_extras %}
     renderLikes();
   })();
 
-  // Render Reports
+  // Render Reports (uses download_url when available)
   function renderReports() {
     const container = document.getElementById('reportsContainer');
     if (userData.reports.length === 0) {
@@ -190,8 +192,8 @@ block head_extras %}
     container.innerHTML = userData.reports.map(report => `
         <div class="report-item">
           <div class="report-info">
-            <h4>${report.title}</h4>
-            <p class="report-date">${report.date}</p>
+            <h4>${escapeHtml(report.title || "Report")}</h4>
+            <p class="report-date">${escapeHtml(displayDate)}</p>
           </div>
           <a href="/reports/${report.id}/download" class="btn btn-small btn-secondary" target="_blank" rel="noopener noreferrer">Download</a>
         </div>
@@ -326,6 +328,22 @@ block head_extras %}
     } catch (err) {
       console.error('Error loading reports:', err);
     }
+
+    // Listen for in-window report generation events
+    window.addEventListener("report:generated", async (e) => {
+      const rep = e.detail;
+      if (!rep) return;
+      // Refresh list from server to get authoritative data
+      const list = await fetchSavedReports();
+      userData.reports = list.map((r) => ({
+        id: r.id || r.report_id,
+        title: r.title,
+        created_at: r.created_at,
+        download_url:
+          r.download_url || `/reports/${r.id || r.report_id}/download`,
+      }));
+      renderReports();
+    });
   })();
 </script>
 {% endblock %}

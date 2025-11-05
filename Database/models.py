@@ -96,32 +96,6 @@ class Bursary(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
-class Admission(db.Model):
-    __tablename__ = 'admission'
-    admission_id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(200), nullable=False)
-    institution = db.Column(db.String(200), nullable=False)
-    institution_type = db.Column(db.String(50))  # university, college, tvet, private
-    program_name = db.Column(db.String(200))
-    application_deadline = db.Column(db.Date)
-    registration_deadline = db.Column(db.Date)
-    academic_year = db.Column(db.String(20))  # e.g., "2025", "2025/2026"
-    intake_period = db.Column(db.String(50))  # first_semester, second_semester, quarterly
-    field_of_study = db.Column(db.String(100))
-    study_level = db.Column(db.String(50))  # undergraduate, postgraduate, diploma, certificate
-    study_mode = db.Column(db.String(50))  # full_time, part_time, distance, online
-    description = db.Column(db.Text)
-    requirements = db.Column(db.Text)  # Store as JSON array - min qualifications, documents needed
-    application_fee = db.Column(db.String(100))
-    tuition_fee = db.Column(db.String(100))
-    url = db.Column(db.String(500))
-    application_portal_url = db.Column(db.String(500))
-    contact_email = db.Column(db.String(200))
-    contact_phone = db.Column(db.String(50))
-    tags = db.Column(db.Text)  # Store as JSON array
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    
 class Report(db.Model):
     __tablename__ = 'report'
     report_id = db.Column(db.Integer, primary_key=True)
@@ -158,6 +132,42 @@ class Application(db.Model):
     student_id = db.Column(db.Integer, db.ForeignKey('student.student_id'), nullable=False)
     program_id = db.Column(db.Integer, db.ForeignKey('program.program_id'), nullable=False)
     application_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+class Admission(db.Model):
+    __tablename__ = 'admission'
+    admission_id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200), nullable=False)
+    institution = db.Column(db.String(200), nullable=False)
+    institution_type = db.Column(db.String(50))  # university, college, tvet, private
+    program_name = db.Column(db.String(200))
+    application_deadline = db.Column(db.Date)
+    registration_deadline = db.Column(db.Date)
+    academic_year = db.Column(db.String(20))  # e.g., "2025", "2025/2026"
+    intake_period = db.Column(db.String(50))  # first_semester, second_semester, quarterly
+    field_of_study = db.Column(db.String(100))
+    study_level = db.Column(db.String(50))  # undergraduate, postgraduate, diploma, certificate
+    study_mode = db.Column(db.String(50))  # full_time, part_time, distance, online
+    description = db.Column(db.Text)
+    requirements = db.Column(db.Text)  # Store as JSON array - min qualifications, documents needed
+    application_fee = db.Column(db.String(100))
+    tuition_fee = db.Column(db.String(100))
+    url = db.Column(db.String(500))
+    application_portal_url = db.Column(db.String(500))
+    contact_email = db.Column(db.String(200))
+    contact_phone = db.Column(db.String(50))
+    tags = db.Column(db.Text)  # Store as JSON array
+    priority = db.Column(db.String(20), default='Medium')  # NEW: priority column
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    
+    def to_dict(self):
+        return {
+            'id': self.report_id,
+            'student_id': self.student_id,
+            'title': self.title,
+            'filename': self.filename,
+            'created_at': self.created_at.isoformat() if self.created_at else None
+        }
 
 class WSUniversity(db.Model):
     __tablename__ = 'ws_university'

@@ -1,8 +1,7 @@
-from flask import Blueprint, request, jsonify, render_template, session
+from flask import Blueprint, request, jsonify, render_template, session, url_for, send_file
 from Database.__init__ import db
 from Database.models import Program, Student, Preference, AcademicMark, Requirement, University, Report, LikedCourse
 import json
-from flask import send_file
 from weasyprint import HTML
 import tempfile
 import os
@@ -464,7 +463,7 @@ def delete_course(course_id):
         print(e)
         db.session.rollback()
         return jsonify({'success': False, 'error': str(e)})
-
+        
 
 # Return all courses as JSON
 @courses.route('/all', methods=['GET'])
@@ -490,65 +489,89 @@ def get_all_courses():
 # report generation
 @courses.route('/download-report')
 def download_report():
-    """Generate and download a PDF report of course matches and save it to disk/DB."""
+    """Generate and download a PDF report of course matches and save it to disk/DB.
+
+    - If request is AJAX/fetch (Accept: application/json or X-Requested-With header), returns JSON:
+      { success: True, report: { id, title, filename, created_at }, download_url: '/reports/<id>/download' }
+    - Otherwise returns the PDF directly (legacy behavior).
+    """
     student_id = session.get('student_id')
     if not student_id:
         return jsonify({'error': 'Not logged in'}), 401
 
-    # Use existing compute_matches function
+    # Compute matches
     matches, student_obj, pref_dict, marks_dict = compute_matches(student_id)
     if matches is None:
+        # If AJAX, return JSON error; else return JSON too (existing behavior uses JSON)
+        if 'application/json' in request.headers.get('Accept', '') or request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.args.get('ajax') == '1':
+            return jsonify({'error': 'Missing preferences or academic marks'}), 400
         return jsonify({'error': 'Missing preferences or academic marks'}), 400
 
-    # Get student info
     student = Student.query.get(student_id)
-    
-    # Render the PDF template with all the data
+
+    # Render the report HTML and create a temporary PDF
     rendered_html = render_template('Reports/course_report.html',
                                     student=student,
                                     matches=matches,
                                     preferences=pref_dict,
                                     marks=marks_dict,
-                                    now=datetime.now()
-                                    )
+                                    now=datetime.now())
 
-    # Create temporary PDF file
     with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as pdf_file:
         HTML(string=rendered_html).write_pdf(pdf_file.name)
-        
-        # Generate filename with student name
-        student_name = student.name.replace(' ', '_') if student and hasattr(student, 'name') and student.name else 'Student'
-        filename = f"{student_name}_Course_Matches_Report_{int(datetime.utcnow().timestamp())}.pdf"
 
-        # Determine persistent reports directory (routes/uploads/reports/<student_id>/)
-        base_reports_dir = os.path.join(os.path.dirname(__file__), 'uploads', 'reports')
-        os.makedirs(base_reports_dir, exist_ok=True)
-        student_dir = os.path.join(base_reports_dir, str(student_id))
-        os.makedirs(student_dir, exist_ok=True)
+    # Build stable filename and save copy to persistent folder
+    student_name = (student.name.replace(' ', '_') if student and getattr(student, 'name', None) else 'Student')
+    filename = f"{student_name}_Course_Matches_Report_{int(datetime.utcnow().timestamp())}.pdf"
 
-        dest_path = os.path.join(student_dir, filename)
-        try:
-            # Copy temp file to persistent location
-            shutil.copy(pdf_file.name, dest_path)
+    base_reports_dir = os.path.join(os.path.dirname(__file__), 'uploads', 'reports')
+    os.makedirs(base_reports_dir, exist_ok=True)
+    student_dir = os.path.join(base_reports_dir, str(student_id))
+    os.makedirs(student_dir, exist_ok=True)
 
-            # Create DB record
-            new_report = Report(
-                student_id=student_id,
-                title=f"Course Matches Report",
-                filename=filename,
-                created_at=datetime.utcnow()
-            )
-            db.session.add(new_report)
-            db.session.commit()
-        except Exception as e:
-            # Log error but still return the generated PDF (don't fail user if save fails)
-            print("Error saving report:", e)
-            db.session.rollback()
+    dest_path = os.path.join(student_dir, filename)
+    saved_report = None
+    try:
+        shutil.copy(pdf_file.name, dest_path)
 
-        # Send the temporary file as download (user receives file immediately)
-        return send_file(
-            pdf_file.name,
-            as_attachment=True,
-            download_name=filename,
-            mimetype='application/pdf'
+        # create DB record (ensure Report is imported at top of file)
+        new_report = Report(
+            student_id=student_id,
+            title="Course Matches Report",
+            filename=filename,
+            created_at=datetime.utcnow()
         )
+        db.session.add(new_report)
+        db.session.commit()
+        saved_report = new_report
+    except Exception as e:
+        print("Error saving report:", e)
+        db.session.rollback()
+
+    # Detect AJAX / fetch call
+    accept = request.headers.get('Accept', '')
+    is_ajax = 'application/json' in accept or request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.args.get('ajax') == '1'
+
+    if is_ajax:
+        if saved_report:
+            download_url = url_for('reports.download_saved_report', report_id=saved_report.report_id)
+            return jsonify({
+                'success': True,
+                'report': {
+                    'id': saved_report.report_id,
+                    'title': saved_report.title,
+                    'filename': saved_report.filename,
+                    'created_at': saved_report.created_at.isoformat()
+                },
+                'download_url': download_url
+            })
+        else:
+            return jsonify({'success': False, 'error': 'Could not save report on server.'}), 500
+
+    # Non-AJAX: return the generated PDF (legacy)
+    return send_file(
+        pdf_file.name,
+        as_attachment=True,
+        download_name=filename,
+        mimetype='application/pdf'
+    )

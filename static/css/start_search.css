@@ -27,16 +27,18 @@ body {
 }
 
 .dashboard-header h1 {
-    font-size: 3rem;
-    font-weight: 700;
+    font-size: 4rem;
+    font-weight: 600;
     margin-bottom: 0.5rem;
-    color: #1a202c;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .dashboard-header p {
-    font-size: 1.1rem;
-    color: #4a5568;
+    font-size: 1.5rem;
+    color: #704792;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 /* Grid Layout */
@@ -82,6 +84,7 @@ body {
 /* Section Cards - Modern Glass Style */
 .dashboard-section {
     background: rgba(255, 255, 255, 0.85);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border-radius: 20px;
     padding: 2rem;
