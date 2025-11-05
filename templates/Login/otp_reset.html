@@ -5,6 +5,69 @@
 
 {% block head_extras %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+<style>
+  .password-requirements {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 12px;
+    color: black;
+  }
+  .requirements-title {
+    font-size: 0.875rem;
+    color: #475569;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .requirement {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.35rem 0;
+    font-size: 0.8125rem;
+    transition: color 0.2s ease;
+  }
+  .requirement.met {
+    color: #059669;
+  }
+  .requirement.unmet {
+    color: #6b7280;
+  }
+  .requirement svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  .requirement.met svg {
+    color: #059669;
+  }
+  .requirement.unmet svg {
+    color: #6b7280;
+  }
+  .password-strength-bar {
+    height: 6px;
+    background: #f1f5f9;
+    margin-top: 8px;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .strength-indicator {
+    height: 100%;
+    width: 0;
+    transition: all 0.3s ease;
+  }
+  .strength-text {
+    font-size: 0.75rem;
+    margin-top: 4px;
+    text-align: right;
+    font-weight: 500;
+  }
+  .password-wrapper {
+    position: relative;
+  }
+
+</style>
 {% endblock %}
 
 {% block content %}
@@ -12,19 +75,74 @@
   <div class="form-container">
     <div class="container">
       <h1>Reset Password</h1>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="flash-message {{ category }}" style="margin-bottom: 1rem; padding: 0.75rem; border-radius: 0.375rem; color: white; background-color: {% if category == 'error' %}#dc2626{% else %}#10b981{% endif %};">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
       <form action="{{ url_for('auth.otp_reset') }}" method="POST">
         <div class="form-wrapper">
           <div class="form-column" style="flex: 1; min-width: 100%;">
             <div class="form-group">
               <label for="otp">Enter OTP</label>
-              <input type="text" id="otp" name="otp" class="form-input" placeholder="6-digit OTP" required />
+              <input type="text" id="otp" name="otp" class="form-input" placeholder="6-digit OTP" required maxlength="6" pattern="[0-9]{6}" />
+              <div class="error-message" id="otp-error"></div>
             </div>
             <div class="form-group">
               <label for="newPassword">New Password</label>
-              <input type="password" id="newPassword" name="newPassword" class="form-input" placeholder="Enter new password" required />
+              <div class="password-wrapper">
+                <input type="password" id="newPassword" name="newPassword" class="form-input" placeholder="Enter new password" required />
+              </div>
+              <div class="error-message" id="password-error"></div>
+              <div class="password-strength-bar">
+                <div class="strength-indicator"></div>
+              </div>
+              <div class="strength-text" id="strengthText">Password strength</div>
+              <div class="password-requirements">
+                <div class="requirements-title">Your password must have:</div>
+                <div class="requirement" id="req-length">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                  </svg>
+                  At least 8 characters
+                </div>
+                <div class="requirement" id="req-uppercase">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                  </svg>
+                  One uppercase letter
+                </div>
+                <div class="requirement" id="req-lowercase">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                  </svg>
+                  One lowercase letter
+                </div>
+                <div class="requirement" id="req-number">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                  </svg>
+                  One number
+                </div>
+                <div class="requirement" id="req-special">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                  </svg>
+                  One special character
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Confirm Password</label>
+              <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="Confirm new password" required />
+              <div class="error-message" id="confirm-error"></div>
             </div>
             <div class="form-group" style="text-align: center; margin-top: 1rem;">
-              <button type="submit" class="button" style="width: 150px;">Reset Password</button>
+              <button type="submit" id="submitBtn" class="button" style="width: 150px;" disabled>Reset Password</button>
             </div>
           </div>
         </div>
@@ -35,4 +153,292 @@
     </div>
   </div>
 </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const otpInput = document.getElementById('otp');
+  const passwordInput = document.getElementById('newPassword');
+  const confirmInput = document.getElementById('confirmPassword');
+  const submitBtn = document.getElementById('submitBtn');
+  const strengthIndicator = document.querySelector('.strength-indicator');
+  const otpError = document.getElementById('otp-error');
+  const passwordError = document.getElementById('password-error');
+  const confirmError = document.getElementById('confirm-error');
+    
+  // Style for messages
+  const errorMessages = document.querySelectorAll('.error-message');
+  errorMessages.forEach(msg => {
+    msg.style.color = '#dc2626';
+    msg.style.fontSize = '0.75rem';
+    msg.style.marginTop = '0.25rem';
+    msg.style.display = 'none'; // Start hidden
+  });
+  
+  // Handle server-side flash messages
+  const flashMessages = document.querySelectorAll('.flash-message');
+  flashMessages.forEach(msg => {
+    // Auto-hide flash messages after 5 seconds
+    setTimeout(() => {
+      msg.style.opacity = '0';
+      setTimeout(() => msg.remove(), 300);
+    }, 5000);
+  });
+    
+    // Requirements and their regex patterns
+    const requirements = {
+        'req-length': str => str.length >= 8,
+        'req-uppercase': str => /[A-Z]/.test(str),
+        'req-lowercase': str => /[a-z]/.test(str),
+        'req-number': str => /[0-9]/.test(str),
+        'req-special': str => /[^A-Za-z0-9]/.test(str)
+    };
+
+    function checkPasswordStrength(password, updateUI = true) {
+        let score = 0;
+        let meetsAllRequirements = true;
+        let metRequirements = {};
+        
+        // Check each requirement
+        for (const [reqId, checkFn] of Object.entries(requirements)) {
+            const isMet = checkFn(password);
+            metRequirements[reqId] = isMet;
+            
+            if (updateUI) {
+                const reqElement = document.getElementById(reqId);
+                reqElement.classList.toggle('met', isMet);
+                reqElement.classList.toggle('unmet', !isMet);
+            }
+            
+            if (isMet) score += 20;
+            else meetsAllRequirements = false;
+        }
+        
+        // Update strength bar only if updateUI is true
+        if (updateUI) {
+            strengthIndicator.style.width = `${score}%`;
+            if (score <= 20) strengthIndicator.style.backgroundColor = '#ef4444';
+            else if (score <= 40) strengthIndicator.style.backgroundColor = '#f59e0b';
+            else if (score <= 60) strengthIndicator.style.backgroundColor = '#fbbf24';
+            else if (score <= 80) strengthIndicator.style.backgroundColor = '#34d399';
+            else strengthIndicator.style.backgroundColor = '#10b981';
+            
+            // Update strength text
+            const strengthText = document.getElementById('strengthText');
+            if (score <= 20) strengthText.textContent = 'Very weak';
+            else if (score <= 40) strengthText.textContent = 'Weak';
+            else if (score <= 60) strengthText.textContent = 'Medium';
+            else if (score <= 80) strengthText.textContent = 'Strong';
+            else strengthText.textContent = 'Very strong';
+        }
+        
+        return {
+            meetsAllRequirements,
+            metRequirements,
+            score
+        };
+    }
+
+    function validateOTP(otp) {
+        if (!otp) {
+            otpError.textContent = 'OTP is required';
+            return false;
+        }
+        if (!/^[0-9]{6}$/.test(otp)) {
+            otpError.textContent = 'OTP must be 6 digits';
+            return false;
+        }
+        otpError.textContent = '';
+        return true;
+    }
+
+  function validateForm(showErrors = false) {
+    // Clear previous error messages if showing new ones
+    if (showErrors) {
+      otpError.textContent = '';
+      passwordError.textContent = '';
+      confirmError.textContent = '';
+    }
+
+    let isValid = true;
+    const otp = otpInput.value.trim();
+    const password = passwordInput.value;
+    const confirmPassword = confirmInput.value;
+    
+    // Validate OTP
+    if (!otp) {
+      isValid = false;
+      if (showErrors) {
+        otpError.textContent = 'OTP is required';
+      }
+    } else if (!/^\d{6}$/.test(otp)) {
+      isValid = false;
+      if (showErrors) {
+        otpError.textContent = 'OTP must be exactly 6 digits';
+      }
+    }
+
+    // Validate Password
+    const strengthResult = checkPasswordStrength(password, false);
+    if (!password) {
+      isValid = false;
+      if (showErrors) {
+        passwordError.textContent = 'Password is required';
+      }
+    } else if (!strengthResult.meetsAllRequirements) {
+      isValid = false;
+      if (showErrors) {
+        // Show specific missing requirements
+        const missing = Object.entries(strengthResult.metRequirements)
+          .filter(([, met]) => !met)
+          .map(([req]) => {
+            switch(req) {
+              case 'req-length': return 'at least 8 characters';
+              case 'req-uppercase': return 'an uppercase letter';
+              case 'req-lowercase': return 'a lowercase letter';
+              case 'req-number': return 'a number';
+              case 'req-special': return 'a special character';
+            }
+          });
+        passwordError.textContent = `Password needs: ${missing.join(', ')}`;
+      }
+    }
+
+    // Validate Confirm Password
+    if (!confirmPassword) {
+      isValid = false;
+      if (showErrors) {
+        confirmError.textContent = 'Please confirm your password';
+      }
+    } else if (password !== confirmPassword) {
+      isValid = false;
+      if (showErrors) {
+        confirmError.textContent = 'Passwords do not match';
+      }
+    }
+
+    return {
+      isValid,
+      otpValid: otp && /^\d{6}$/.test(otp),
+      meetsRequirements: password && strengthResult.meetsAllRequirements,
+      passwordsMatch: password && confirmPassword && password === confirmPassword
+    };
+  }
+
+    otpInput.addEventListener('input', function(e) {
+        // Format to numbers only
+        e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 6);
+        const validationResult = validateForm(false);
+        submitBtn.disabled = !validationResult.isValid;
+    });
+    
+    let passwordTypingTimer;
+    passwordInput.addEventListener('input', function() {
+        // Clear previous timer
+        clearTimeout(passwordTypingTimer);
+        
+        // Check requirements without updating UI while typing
+        const { meetsAllRequirements } = checkPasswordStrength(this.value, false);
+        
+        // Set a timer to update UI after typing stops
+        passwordTypingTimer = setTimeout(() => {
+            checkPasswordStrength(this.value, true);
+            const validationResult = validateForm(false);
+            submitBtn.disabled = !validationResult.isValid;
+        }, 500);
+    });
+    
+    // Update UI immediately when password field loses focus
+    passwordInput.addEventListener('blur', function() {
+        clearTimeout(passwordTypingTimer);
+        checkPasswordStrength(this.value, true);
+        const validationResult = validateForm(true);
+        submitBtn.disabled = !validationResult.isValid;
+    });
+
+    confirmInput.addEventListener('input', function() {
+        // Only validate match when both fields have values
+        if (passwordInput.value && this.value) {
+            const validationResult = validateForm(false);
+            submitBtn.disabled = !validationResult.isValid;
+        } else {
+            submitBtn.disabled = true;
+        }
+    });
+    
+  // Form submission validation
+  document.querySelector('form').addEventListener('submit', function(e) {
+    e.preventDefault(); // Always prevent default first
+    
+    // Clear any previous error messages and flash messages
+    otpError.textContent = '';
+    passwordError.textContent = '';
+    confirmError.textContent = '';
+    document.querySelectorAll('.flash-message').forEach(el => el.remove());
+    
+    let isValid = true;
+    
+    // Validate OTP
+    const otp = otpInput.value.trim();
+    if (!otp) {
+      otpError.textContent = 'OTP is required';
+      otpInput.focus();
+      isValid = false;
+    } else if (!/^\d{6}$/.test(otp)) {
+      otpError.textContent = 'OTP must be exactly 6 digits';
+      otpInput.focus();
+      isValid = false;
+    }
+    
+    // Validate password
+    const password = passwordInput.value;
+    const strengthResult = checkPasswordStrength(password, true);
+    if (!password) {
+      passwordError.textContent = 'Password is required';
+      if (isValid) passwordInput.focus();
+      isValid = false;
+    } else if (!strengthResult.meetsAllRequirements) {
+      // Show specific requirements that aren't met
+      const missing = Object.entries(strengthResult.metRequirements)
+        .filter(([, met]) => !met)
+        .map(([req]) => {
+          switch(req) {
+            case 'req-length': return 'at least 8 characters';
+            case 'req-uppercase': return 'an uppercase letter';
+            case 'req-lowercase': return 'a lowercase letter';
+            case 'req-number': return 'a number';
+            case 'req-special': return 'a special character';
+          }
+        });
+      passwordError.textContent = `Password needs: ${missing.join(', ')}`;
+      if (isValid) passwordInput.focus();
+      isValid = false;
+    }
+    
+    // Validate confirm password
+    const confirmPassword = confirmInput.value;
+    if (!confirmPassword) {
+      confirmError.textContent = 'Please confirm your password';
+      if (isValid) confirmInput.focus();
+      isValid = false;
+    } else if (password !== confirmPassword) {
+      confirmError.textContent = 'Passwords do not match';
+      if (isValid) confirmInput.focus();
+      isValid = false;
+    }
+    
+    // If validation passed, submit the form
+    if (isValid) {
+      submitBtn.disabled = true; // Prevent double submission
+      e.target.submit();
+    }
+  });
+
+  // Initialize submit button state
+  submitBtn.disabled = true;  // Start disabled
+  
+  // Initial validation check
+  const initialValidation = validateForm(false);
+  submitBtn.disabled = !initialValidation.isValid;
+});
+</script>
 {% endblock %}

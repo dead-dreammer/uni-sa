@@ -162,7 +162,7 @@ function filterBursaries() {
     if (!grid) return;
 
     if (filtered.length === 0) {
-        grid.innerHTML = '<div class="no-results">No bursaries found matching your criteria.</div>';
+       
         if (noResults) noResults.style.display = 'block';
     } else {
         grid.innerHTML = filtered.map(createBursaryCard).join('');

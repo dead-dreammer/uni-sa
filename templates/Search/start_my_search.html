@@ -1,10 +1,10 @@
-{% extends 'base.html' %} {% block title %}Dashboard | uni.sa{% endblock %} {%
-block head_extras %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/start_search.css') }}"
-/>
-{% endblock %} {% block content %}
+{% extends 'base.html' %}
+{% block title %}Dashboard | uni.sa{% endblock %}
+{% block head_extras %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/start_search.css') }}" />
+{% endblock %}
+
+{% block content %}
 <main class="main-container">
   <!-- Header -->
   <div class="dashboard-header">
@@ -23,12 +23,9 @@ block head_extras %}
           <span class="section-icon">🎓</span>
         </div>
         <p class="section-description">
-          Update your profile details and preferences to receive better
-          university matches
+          Update your profile details and preferences to receive better university matches
         </p>
-        <a href="{{ url_for('personal_info') }}" class="btn btn-primary"
-          >Edit
-        </a>
+        <a href="{{ url_for('personal_info') }}" class="btn btn-primary">Edit</a>
       </section>
 
       <!-- Generated Reports -->
@@ -67,69 +64,114 @@ block head_extras %}
         </div>
         <div id="matchesContainer" class="matches-container">
           <p class="empty-state">
-            No matches available yet. Complete your profile to discover
-            universities.
+            No matches available yet. Complete your profile to discover universities.
           </p>
         </div>
-        <div
-          class="section-footer"
-          style="margin-top: 1rem; text-align: center"
-        >
-          <a href="#" id="viewAllMatchesBtn" class="btn btn-primary"
-            >View All Matches</a
-          >
+        <div class="section-footer" style="margin-top: 1rem; text-align: center">
+          <a href="#" id="viewAllMatchesBtn" class="btn btn-primary">View All Matches</a>
         </div>
       </section>
     </div>
   </div>
 </main>
+{% endblock %}
 
-{% endblock %} {% block scripts %}
+{% block scripts %}
 <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 
 <script>
-  // Initialize minimal data structure; likes will be populated from server when possible
   const userData = {
     reports: [],
     matches: [],
     likes: [],
+    profileComplete: false,
   };
 
-  // Utility: try to fetch server-side liked course ids; return array of ids or null on non-200
+  // Escape HTML safely
+  function escapeHtml(s) {
+    if (!s) return "";
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  // --- PROFILE COMPLETION CHECK ---
+  async function checkProfileComplete() {
+    try {
+      const response = await fetch("/api/profile/status");
+      const data = await response.json();
+      userData.profileComplete = data.complete || false;
+      updateViewAllButton();
+    } catch (error) {
+      console.error("Error checking profile status:", error);
+      userData.profileComplete = userData.matches.length > 0;
+      updateViewAllButton();
+    }
+  }
+
+  function updateViewAllButton() {
+    const btn = document.getElementById("viewAllMatchesBtn");
+    if (!btn) return;
+    if (!userData.profileComplete || userData.matches.length === 0) {
+      btn.href = "{{ url_for('personal_info') }}";
+      btn.textContent = "Complete Profile";
+    } else {
+      btn.href = "{{ url_for('courses.get_matches') }}";
+      btn.textContent = "View All Matches";
+    }
+  }
+
+  // --- SERVER SYNC HELPERS ---
   async function fetchServerLikes() {
     try {
-      const res = await fetch('/courses/liked-courses', { credentials: 'same-origin' });
-      if (!res.ok) {
-        // If unauthenticated or other error, don't treat as authoritative
-        return null;
-      }
+      const res = await fetch("/courses/liked-courses", { credentials: "same-origin" });
+      if (!res.ok) return null;
       const data = await res.json();
-      // Expecting an array of program_id numbers
       if (Array.isArray(data)) return data;
       return null;
     } catch (e) {
-      console.warn('Could not fetch server likes:', e);
+      console.warn("Could not fetch server likes:", e);
       return null;
     }
   }
 
-  // Normalize server id list to the client like objects used here
-  function mapIdsToLikes(ids) {
-    return ids.map(id => {
-      // Try to find matching program details from the already-fetched matches list
-      const match = userData.matches.find(m => String(m.id) === String(id));
-      if (match) {
-        return { id: String(id), name: (match.name || '') + (match.programName ? ' - ' + match.programName : ''), province: match.province || '', timestamp: null };
-      }
-      // Fallback to a minimal object; UI will show 'Saved University' if name missing
-      return { id: String(id), name: '', province: '', timestamp: null };
-    });
+  async function persistLikeToServer(programId) {
+    try {
+      const res = await fetch("/courses/save_liked_course", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({ program_id: programId }),
+      });
+      return res.ok;
+    } catch (e) {
+      console.warn("Could not persist like to server:", e);
+      return false;
+    }
   }
 
-  // Fetch matches from the server
+  async function removeLikeOnServer(programId) {
+    try {
+      const res = await fetch("/courses/remove_liked_course", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({ program_id: programId }),
+      });
+      return res.ok;
+    } catch (e) {
+      console.warn("Could not remove like on server:", e);
+      return false;
+    }
+  }
+
+  // --- FETCH MATCHES ---
   async function fetchMatches() {
     try {
-      const response = await fetch('/courses/debug_matches', { credentials: 'same-origin' });
+      const response = await fetch("/courses/debug_matches", { credentials: "same-origin" });
       const data = await response.json();
       if (data.matches) {
         userData.matches = data.matches.map((match) => ({
@@ -138,212 +180,153 @@ block head_extras %}
           province: match.university.province_state,
           programName: match.program.program_name,
           matchScore: match.match_score,
-          ranking: match.match_score,
         }));
         userData.profileComplete = userData.matches.length > 0;
         renderMatches();
         updateViewAllButton();
       }
     } catch (error) {
-      console.error('Error fetching matches:', error);
+      console.error("Error fetching matches:", error);
+      updateViewAllButton();
     }
   }
 
-  // Call fetchMatches and load likes when page loads
-  (async function initPage() {
-    await fetchMatches();
-
-    // Try to load server likes first; only accept if server returns OK and an array
-    const serverIds = await fetchServerLikes();
-    if (serverIds !== null) {
-      userData.likes = mapIdsToLikes(serverIds);
-      // persist a local copy to keep UI consistent between reloads
-      try { localStorage.setItem('likedCourses', JSON.stringify(userData.likes)); } catch (e) {}
-    } else {
-      // Fallback to localStorage (only used when unauthenticated or server unavailable)
-      try {
-        const local = JSON.parse(localStorage.getItem('likedCourses') || '[]');
-        // Normalize stored format if it was an array of ids or objects
-        if (Array.isArray(local) && local.length && (typeof local[0] === 'string' || typeof local[0] === 'number')) {
-          userData.likes = local.map(id => ({ id: String(id), name: '', province: '', timestamp: null }));
-        } else if (Array.isArray(local)) {
-          userData.likes = local.map(l => ({ id: String(l.id || l.program_id || l.id), name: l.name || '', province: l.province || '', timestamp: l.timestamp || null }));
-        } else {
-          userData.likes = [];
-        }
-      } catch (e) {
-        userData.likes = [];
-      }
-    }
-
-    renderReports();
-    renderMatches();
-    renderLikes();
-  })();
-
-  // Render Reports (uses download_url when available)
+  // --- RENDER SECTIONS ---
   function renderReports() {
-    const container = document.getElementById('reportsContainer');
-    if (userData.reports.length === 0) {
-      container.innerHTML = '<p class="empty-state">No reports generated yet. Complete your profile to get started.</p>';
+    const container = document.getElementById("reportsContainer");
+    if (!container) return;
+    if (!userData.reports.length) {
+      container.innerHTML = `<p class="empty-state">No reports generated yet. Complete your profile to get started.</p>`;
       return;
     }
-    // Render each saved report with a server download link so clicking re-downloads the persisted PDF
-    container.innerHTML = userData.reports.map(report => `
+    container.innerHTML = userData.reports
+      .map(
+        (r) => `
         <div class="report-item">
           <div class="report-info">
-            <h4>${escapeHtml(report.title || "Report")}</h4>
-            <p class="report-date">${escapeHtml(displayDate)}</p>
+            <h4>${escapeHtml(r.title || "Report")}</h4>
+            <p class="report-date">${escapeHtml(
+              r.created_at ? new Date(r.created_at).toLocaleString() : ""
+            )}</p>
           </div>
-          <a href="/reports/${report.id}/download" class="btn btn-small btn-secondary" target="_blank" rel="noopener noreferrer">Download</a>
+          <a href="${r.download_url || `/reports/${r.id}/download`}" class="btn btn-small btn-secondary" target="_blank" rel="noopener">Download</a>
         </div>
-      `).join('');
+      `
+      )
+      .join("");
   }
 
-  // Render Matched Universities
   function renderMatches() {
-    const container = document.getElementById('matchesContainer');
+    const container = document.getElementById("matchesContainer");
     if (userData.matches.length === 0) {
-      container.innerHTML = '<p class="empty-state">No matches available yet. Complete your profile to discover universities.</p>';
+      container.innerHTML = `<p class="empty-state">No matches available yet. Complete your profile to discover universities.</p>`;
       return;
     }
-    container.innerHTML = userData.matches.map(uni => {
-      const matchClass = uni.matchScore >= 90 ? 'strong-match' : uni.matchScore >= 70 ? 'good-match' : 'moderate-match';
-      const isLiked = userData.likes.some(like => String(like.id) === String(uni.id));
-      return `
+    container.innerHTML = userData.matches
+      .map((uni) => {
+        const matchClass =
+          uni.matchScore >= 90
+            ? "strong-match"
+            : uni.matchScore >= 70
+            ? "good-match"
+            : "moderate-match";
+        const isLiked = userData.likes.some((l) => String(l.id) === String(uni.id));
+        return `
           <div class="match-item ${matchClass}">
             <div class="match-info">
-              <h4>${uni.name}</h4>
-              <p class="match-program">${uni.programName}</p>
-              <p class="match-province">${uni.province}</p>
+              <h4>${escapeHtml(uni.name)}</h4>
+              <p class="match-program">${escapeHtml(uni.programName)}</p>
+              <p class="match-province">${escapeHtml(uni.province)}</p>
               <span class="match-score">Match Score: ${uni.matchScore}%</span>
             </div>
-            <button class="btn btn-like ${isLiked ? 'liked' : ''}" 
-                    onclick="addToLikes('${uni.id}', '${(uni.name + ' - ' + uni.programName).replace(/'/g, "\\'")}', '${uni.province.replace(/'/g, "\\'")}')">
-              <span class="heart">${isLiked ? '♥' : '♡'}</span>
+            <button class="btn btn-like ${isLiked ? "liked" : ""}"
+              onclick="addToLikes('${uni.id}', '${escapeHtml(
+          uni.name
+        )}', '${escapeHtml(uni.province)}')">
+              <span class="heart">${isLiked ? "♥" : "♡"}</span>
             </button>
-          </div>
-        `;
-    }).join('');
+          </div>`;
+      })
+      .join("");
   }
 
-  // Render Liked Universities
   function renderLikes() {
-    const container = document.getElementById('likesContainer');
+    const container = document.getElementById("likesContainer");
     if (userData.likes.length === 0) {
-      container.innerHTML = '<p class="empty-state">You haven\'t saved any universities yet.</p>';
+      container.innerHTML = `<p class="empty-state">You haven't saved any universities yet.</p>`;
       return;
     }
-    container.innerHTML = userData.likes.map((uni, index) => `
+    container.innerHTML = userData.likes
+      .map(
+        (uni) => `
         <div class="like-item">
           <div class="like-info">
-            <h4>${uni.name || 'Saved University'}</h4>
-            <p class="like-province">${uni.province || ''}</p>
+            <h4>${escapeHtml(uni.name || "Saved University")}</h4>
+            <p class="like-province">${escapeHtml(uni.province || "")}</p>
           </div>
-          <button class="btn btn-remove" onclick="removeFromLikes('${uni.id}')">
-            ✕
-          </button>
-        </div>
-      `).join('');
+          <button class="btn btn-remove" onclick="removeFromLikes('${uni.id}')">✕</button>
+        </div>`
+      )
+      .join("");
   }
 
-  // Try to persist a like to server; best-effort. If server responds OK, keep it.
-  async function persistLikeToServer(programId) {
-    try {
-      const res = await fetch('/courses/save_liked_course', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'same-origin',
-        body: JSON.stringify({ program_id: programId })
-      });
-      return res.ok;
-    } catch (e) {
-      console.warn('Could not persist like to server:', e);
-      return false;
-    }
-  }
-
-  async function removeLikeOnServer(programId) {
-    try {
-      const res = await fetch('/courses/remove_liked_course', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'same-origin',
-        body: JSON.stringify({ program_id: programId })
-      });
-      return res.ok;
-    } catch (e) {
-      console.warn('Could not remove like on server:', e);
-      return false;
-    }
-  }
-
-  // Add or remove likes locally and attempt to sync with server
+  // --- LIKE HANDLERS ---
   async function addToLikes(id, name, province) {
     const alreadyLiked = userData.likes.some((uni) => String(uni.id) === String(id));
     if (!alreadyLiked) {
-      const newLike = { id: String(id), name, province, timestamp: new Date().toISOString() };
-      userData.likes.push(newLike);
-      try { localStorage.setItem('likedCourses', JSON.stringify(userData.likes)); } catch (e) {}
-      // Best-effort persist
-      const ok = await persistLikeToServer(id);
-      if (!ok) {
-        // leave local copy (works for unauthenticated/offline users)
-      }
+      userData.likes.push({ id, name, province, timestamp: new Date().toISOString() });
+      localStorage.setItem("likedCourses", JSON.stringify(userData.likes));
+      await persistLikeToServer(id);
     } else {
       userData.likes = userData.likes.filter((uni) => String(uni.id) !== String(id));
-      try { localStorage.setItem('likedCourses', JSON.stringify(userData.likes)); } catch (e) {}
+      localStorage.setItem("likedCourses", JSON.stringify(userData.likes));
       await removeLikeOnServer(id);
     }
     renderLikes();
     renderMatches();
   }
 
-  // Remove from Likes by id
   async function removeFromLikes(id) {
-    userData.likes = userData.likes.filter(l => String(l.id) !== String(id));
-    try { localStorage.setItem('likedCourses', JSON.stringify(userData.likes)); } catch (e) {}
+    userData.likes = userData.likes.filter((l) => String(l.id) !== String(id));
+    localStorage.setItem("likedCourses", JSON.stringify(userData.likes));
     await removeLikeOnServer(id);
     renderLikes();
     renderMatches();
   }
 
-  // Fetch saved reports from server and populate dashboard (unchanged behavior)
-  (async function loadSavedReports() {
+  // --- REPORT FETCHING ---
+  async function fetchSavedReports() {
     try {
-      const res = await fetch('/api/reports', { credentials: 'same-origin' });
-      if (!res.ok) {
-        console.warn('Could not fetch reports:', res.status);
-        return;
-      }
+      const res = await fetch("/api/reports", { credentials: "same-origin" });
+      if (!res.ok) return [];
       const data = await res.json();
-      if (data && Array.isArray(data.reports)) {
-        userData.reports = data.reports.map((r) => ({
-          id: r.id || r.report_id || r.reportId || r.report_id,
-          title: r.title,
-          date: r.created_at || r.createdAt || r.date || '',
-        }));
-        renderReports();
-      }
+      return data.reports || [];
     } catch (err) {
-      console.error('Error loading reports:', err);
+      console.error("Error fetching reports:", err);
+      return [];
     }
+  }
 
-    // Listen for in-window report generation events
-    window.addEventListener("report:generated", async (e) => {
-      const rep = e.detail;
-      if (!rep) return;
-      // Refresh list from server to get authoritative data
-      const list = await fetchSavedReports();
-      userData.reports = list.map((r) => ({
-        id: r.id || r.report_id,
-        title: r.title,
-        created_at: r.created_at,
-        download_url:
-          r.download_url || `/reports/${r.id || r.report_id}/download`,
-      }));
-      renderReports();
-    });
+  // --- INITIALIZATION ---
+  (async function initDashboard() {
+    await fetchMatches();
+    const serverIds = await fetchServerLikes();
+    if (serverIds) {
+      userData.likes = serverIds.map((id) => ({ id: String(id), name: "", province: "", timestamp: null }));
+    } else {
+      const local = JSON.parse(localStorage.getItem("likedCourses") || "[]");
+      userData.likes = Array.isArray(local) ? local : [];
+    }
+    const reports = await fetchSavedReports();
+    userData.reports = reports.map((r) => ({
+      id: r.id || r.report_id,
+      title: r.title,
+      created_at: r.created_at,
+      download_url: r.download_url || `/reports/${r.id}/download`,
+    }));
+    renderReports();
+    renderLikes();
+    checkProfileComplete();
   })();
 </script>
 {% endblock %}
