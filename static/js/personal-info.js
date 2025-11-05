@@ -2,14 +2,142 @@ document.addEventListener("DOMContentLoaded", async () => {
   const form = document.getElementById("searchForm");
   if (!form) return;
 
+  // Function to create a subject entry (used for both loading data and initial setup)
+  function createSubjectEntry(subjectData = null, index = 0) {
+    const subjectsList = window.subjects || [];
+    const entry = document.createElement("div");
+    entry.className = "subject-entry";
+    
+    const selectedSubject = subjectData?.subject_name || "";
+    const markValue = subjectData?.grade_or_percentage || "";
+    const gradeValue = subjectData?.grade_level || "";
+    
+    entry.innerHTML = `
+      <div class="subject-row">
+        <div class="form-group flex-2">
+          <label>Subject</label>
+          <select class="subject-select" required>
+            <option value="">Select Subject</option>
+            ${subjectsList.map(s => `<option value="${s}" ${s === selectedSubject ? 'selected' : ''}>${s}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group flex-1">
+          <label>Mark (%)</label>
+          <input type="number" class="subject-mark" min="0" max="100" placeholder="85" value="${markValue}" required>
+        </div>
+        <div class="form-group flex-1">
+          <label>Grade</label>
+          <select class="subject-grade" required>
+            <option value="">Grade</option>
+            <option value="10" ${gradeValue === '10th Grade' ? 'selected' : ''}>10</option>
+            <option value="11" ${gradeValue === '11th Grade' ? 'selected' : ''}>11</option>
+            <option value="12" ${gradeValue === '12th Grade' ? 'selected' : ''}>12</option>
+          </select>
+        </div>
+        ${index > 0 ? '<button type="button" class="btn-remove-subject" title="Remove Subject">×</button>' : ''}
+      </div>
+    `;
+    return entry;
+  }
+
   try {
     // Load existing data
     const res = await fetch("/search/get_student_data");
     if (res.ok) {
       const data = await res.json();
-      // ...existing code...
-      // (populate fields, update progress, etc.)
-      // ...existing code...
+      console.log("Loaded student data:", data);
+      
+      // Populate Academic Marks
+      const container = document.getElementById("subjectsContainer");
+      container.innerHTML = ''; // Clear existing entries
+      
+      if (data.academic_marks && data.academic_marks.length > 0) {
+        data.academic_marks.forEach((mark, index) => {
+          container.appendChild(createSubjectEntry(mark, index));
+        });
+        
+        // Update the global subjectCount if it exists
+        if (typeof window.subjectCount !== 'undefined') {
+          window.subjectCount = data.academic_marks.length;
+        }
+      } else {
+        // No saved data, create one empty subject entry
+        container.appendChild(createSubjectEntry(null, 0));
+        if (typeof window.subjectCount !== 'undefined') {
+          window.subjectCount = 1;
+        }
+      }
+      
+      // Populate Location
+      if (data.preferences && data.preferences.preferred_location) {
+        const locationParts = data.preferences.preferred_location.split(',');
+        const province = locationParts[0]?.trim() || '';
+        const suburb = locationParts[1]?.trim() || '';
+        
+        const provinceSelect = document.getElementById("province");
+        const suburbInput = document.getElementById("suburb");
+        if (provinceSelect && province) provinceSelect.value = province;
+        if (suburbInput && suburb) suburbInput.value = suburb;
+      }
+      
+      // Populate Relocate
+      if (data.preferences && data.preferences.relocate) {
+        const relocateRadio = document.querySelector(`input[name="relocate"][value="${data.preferences.relocate}"]`);
+        if (relocateRadio) relocateRadio.checked = true;
+      }
+      
+      // Populate Study Mode
+      if (data.preferences && data.preferences.study_mode) {
+        const studyModeRadio = document.querySelector(`input[name="studyMode"][value="${data.preferences.study_mode}"]`);
+        if (studyModeRadio) studyModeRadio.checked = true;
+      }
+      
+      // Populate Preferred Degrees
+      if (data.preferences && data.preferences.preferred_degrees && data.preferences.preferred_degrees.length > 0) {
+        data.preferences.preferred_degrees.forEach(degree => {
+          const checkbox = document.querySelector(`input[name="preferred_degree"][value="${degree}"]`);
+          if (checkbox) checkbox.checked = true;
+        });
+      }
+      
+      // Populate Max Tuition Fee
+      if (data.preferences && data.preferences.max_tuition_fee) {
+        const tuitionInput = document.getElementById("max_tuition_fee");
+        if (tuitionInput) tuitionInput.value = data.preferences.max_tuition_fee;
+      }
+      
+      // Populate Need Support
+      if (data.preferences && data.preferences.need_support) {
+        const supportRadio = document.querySelector(`input[name="needSupport"][value="${data.preferences.need_support}"]`);
+        if (supportRadio) {
+          supportRadio.checked = true;
+          // Trigger change event to show/hide support details section
+          supportRadio.dispatchEvent(new Event('change'));
+        }
+      }
+      
+      // Populate Support Details
+      if (data.preferences && data.preferences.support_details) {
+        const supportDetailsTextarea = document.getElementById("supportDetails");
+        if (supportDetailsTextarea) supportDetailsTextarea.value = data.preferences.support_details;
+      }
+      
+      // Populate Career Interests
+      if (data.preferences && data.preferences.career_interests && data.preferences.career_interests.length > 0) {
+        const careerSelects = document.querySelectorAll(".career-select");
+        data.preferences.career_interests.forEach((career, index) => {
+          if (careerSelects[index] && career) {
+            careerSelects[index].value = career;
+          }
+        });
+      }
+      
+      // Populate NSFAS
+      if (data.preferences && data.preferences.nsfas) {
+        const nsfasRadio = document.querySelector(`input[name="nsfas"][value="${data.preferences.nsfas}"]`);
+        if (nsfasRadio) nsfasRadio.checked = true;
+      }
+      
       updateProgress();
     }
   } catch (err) {

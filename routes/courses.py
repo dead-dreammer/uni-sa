@@ -346,8 +346,23 @@ def get_liked_courses():
         # Return 401 for unauthenticated requests so client can decide whether to
         # use localStorage fallback instead of overwriting it.
         return jsonify({'error': 'Not logged in'}), 401
+    
     liked = LikedCourse.query.filter_by(student_id=student_id).all()
-    return jsonify([l.program_id for l in liked])
+    
+    # Return full course details for display
+    result = []
+    for l in liked:
+        program = Program.query.get(l.program_id)
+        if program:
+            result.append({
+                'id': program.program_id,
+                'name': program.university.name if program.university else 'Unknown University',
+                'programName': program.program_name,
+                'province': program.university.province_state if program.university else '',
+                'timestamp': l.created_at.isoformat() if hasattr(l, 'created_at') and l.created_at else None
+            })
+    
+    return jsonify(result)
 
 
 @courses.route('/save_liked_course', methods=['POST'])

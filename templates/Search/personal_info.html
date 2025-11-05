@@ -51,48 +51,7 @@
           </div>
           <div class="card-body">
             <div id="subjectsContainer">
-              <div class="subject-entry">
-                <div class="subject-row">
-                  <div class="form-group flex-2">
-                    <label>Subject</label>
-                    <select id="subject" class="subject-select" required title="select subject">
-                      <option value="">Select Subject</option>
-                      <option value="mathematics">Mathematics</option>
-                      <option value="physical-sciences">Physical Sciences</option>
-                      <option value="life-sciences">Life Sciences</option>
-                      <option value="accounting">Accounting</option>
-                      <option value="business-studies">Business Studies</option>
-                      <option value="economics">Economics</option>
-                      <option value="geography">Geography</option>
-                      <option value="history">History</option>
-                      <option value="Mathematics Literacy">Mathematics Literacy</option>
-                      <option value="EGD">EGD</option>
-                      <option value="nformation technology">Information Technology</option>
-                        
-                    </select>
-                  </div>
-                  <div class="form-group flex-1">
-                    <label>Mark (%)</label>
-                    <input
-                      type="number"
-                      class="subject-mark"
-                      min="0"
-                      max="100"
-                      placeholder="85"
-                      required
-                    />
-                  </div>
-                  <div class="form-group flex-1">
-                    <label>Grade</label>
-                    <select id="grade" class="subject-grade" required title="Select Grade">
-                      <option value="">Grade</option>
-                      <option value="10">Grade 10</option>
-                      <option value="11">Grade 11</option>
-                      <option value="12">Grade 12</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
+              <!-- Initial subject entry will be populated by JavaScript -->
             </div>
             <button type="button" id="addSubject" class="add-button">
               <span>+</span> Add Another Subject
@@ -490,9 +449,7 @@
                             ${subjects
                               .map(
                                 (s) =>
-                                  `<option value="${s
-                                    .toLowerCase()
-                                    .replace(/\s+/g, "-")}">${s}</option>`
+                                  `<option value="${s}">${s}</option>`
                               )
                               .join("")}
                         </select>
@@ -505,9 +462,9 @@
                         <label>Grade</label>
                         <select class="subject-grade" required>
                             <option value="">Grade</option>
-                            <option value="10">Grade 10</option>
-                            <option value="11">Grade 11</option>
-                            <option value="12">Grade 12</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
                         </select>
                     </div>
                     <button type="button" class="btn-remove-subject" title="Remove Subject">×</button>
