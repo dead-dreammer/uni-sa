@@ -226,9 +226,17 @@ body {
 
 .report-date,
 .match-province,
-.like-province {
+.match-program,
+.like-province,
+.like-program {
     font-size: 0.85rem;
     color: #718096;
+}
+
+.like-program {
+    font-weight: 500;
+    color: #667eea;
+    margin: 0.25rem 0;
 }
 
 /* Empty State */
@@ -236,6 +244,95 @@ body {
     text-align: center;
     padding: 2rem;
     color: #a0aec0;
+}
+
+/* Like Button Styles */
+.btn-like {
+    min-width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.5rem;
+}
+
+.btn-like:hover {
+    border-color: #ef4444;
+    transform: scale(1.1);
+}
+
+.btn-like.liked {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    border-color: #dc2626;
+}
+
+.btn-like .heart {
+    color: #cbd5e0;
+    transition: color 0.3s ease;
+}
+
+.btn-like.liked .heart {
+    color: white;
+}
+
+.btn-like:hover .heart {
+    color: #ef4444;
+}
+
+.btn-like.liked:hover .heart {
+    color: white;
+}
+
+.btn-remove {
+    min-width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #ef4444;
+    color: #ef4444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.btn-remove:hover {
+    background: #ef4444;
+    color: white;
+    transform: scale(1.1);
+}
+
+/* Match Score Badge */
+.match-score {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.match-item.strong-match .match-score {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+}
+
+.match-item.good-match .match-score {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+}
+
+.match-item.moderate-match .match-score {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
 }
 
 /* Responsive */

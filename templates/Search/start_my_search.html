@@ -130,7 +130,10 @@
       const res = await fetch("/courses/liked-courses", { credentials: "same-origin" });
       if (!res.ok) return null;
       const data = await res.json();
-      if (Array.isArray(data)) return data;
+      if (Array.isArray(data)) {
+        // Server now returns full course objects, not just IDs
+        return data;
+      }
       return null;
     } catch (e) {
       console.warn("Could not fetch server likes:", e);
@@ -240,9 +243,7 @@
               <span class="match-score">Match Score: ${uni.matchScore}%</span>
             </div>
             <button class="btn btn-like ${isLiked ? "liked" : ""}"
-              onclick="addToLikes('${uni.id}', '${escapeHtml(
-          uni.name
-        )}', '${escapeHtml(uni.province)}')">
+              onclick="addToLikes('${uni.id}', '${escapeHtml(uni.name)}', '${escapeHtml(uni.province)}', '${escapeHtml(uni.programName)}')">
               <span class="heart">${isLiked ? "♥" : "♡"}</span>
             </button>
           </div>`;
@@ -262,7 +263,8 @@
         <div class="like-item">
           <div class="like-info">
             <h4>${escapeHtml(uni.name || "Saved University")}</h4>
-            <p class="like-province">${escapeHtml(uni.province || "")}</p>
+            ${uni.programName ? `<p class="like-program">${escapeHtml(uni.programName)}</p>` : ''}
+            ${uni.province ? `<p class="like-province">${escapeHtml(uni.province)}</p>` : ''}
           </div>
           <button class="btn btn-remove" onclick="removeFromLikes('${uni.id}')">✕</button>
         </div>`
@@ -271,19 +273,34 @@
   }
 
   // --- LIKE HANDLERS ---
-  async function addToLikes(id, name, province) {
+  async function addToLikes(id, name, province, programName) {
     const alreadyLiked = userData.likes.some((uni) => String(uni.id) === String(id));
     if (!alreadyLiked) {
-      userData.likes.push({ id, name, province, timestamp: new Date().toISOString() });
+      // Add to likes
+      const newLike = { 
+        id, 
+        name, 
+        province, 
+        programName: programName || '',
+        timestamp: new Date().toISOString() 
+      };
+      userData.likes.push(newLike);
       localStorage.setItem("likedCourses", JSON.stringify(userData.likes));
       await persistLikeToServer(id);
+      // Refresh from server to get complete data
+      const serverLikes = await fetchServerLikes();
+      if (serverLikes) {
+        userData.likes = serverLikes;
+        localStorage.setItem("likedCourses", JSON.stringify(serverLikes));
+      }
     } else {
+      // Remove from likes (toggle)
       userData.likes = userData.likes.filter((uni) => String(uni.id) !== String(id));
       localStorage.setItem("likedCourses", JSON.stringify(userData.likes));
       await removeLikeOnServer(id);
     }
     renderLikes();
-    renderMatches();
+    renderMatches(); // Re-render matches to update button states
   }
 
   async function removeFromLikes(id) {
@@ -291,7 +308,7 @@
     localStorage.setItem("likedCourses", JSON.stringify(userData.likes));
     await removeLikeOnServer(id);
     renderLikes();
-    renderMatches();
+    renderMatches(); // Re-render matches to update button states
   }
 
   // --- REPORT FETCHING ---
@@ -309,14 +326,20 @@
 
   // --- INITIALIZATION ---
   (async function initDashboard() {
-    await fetchMatches();
-    const serverIds = await fetchServerLikes();
-    if (serverIds) {
-      userData.likes = serverIds.map((id) => ({ id: String(id), name: "", province: "", timestamp: null }));
+    // Fetch likes FIRST before fetching matches so the liked state is available
+    const serverLikes = await fetchServerLikes();
+    if (serverLikes && serverLikes.length > 0) {
+      userData.likes = serverLikes;
+      localStorage.setItem("likedCourses", JSON.stringify(serverLikes));
     } else {
+      // Fallback to localStorage if server fails
       const local = JSON.parse(localStorage.getItem("likedCourses") || "[]");
       userData.likes = Array.isArray(local) ? local : [];
     }
+    
+    // Now fetch matches - renderMatches() will have access to userData.likes
+    await fetchMatches();
+    
     const reports = await fetchSavedReports();
     userData.reports = reports.map((r) => ({
       id: r.id || r.report_id,
@@ -324,6 +347,7 @@
       created_at: r.created_at,
       download_url: r.download_url || `/reports/${r.id}/download`,
     }));
+    
     renderReports();
     renderLikes();
     checkProfileComplete();
