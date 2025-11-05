@@ -18,17 +18,75 @@ def save_data():
         return jsonify({'message': 'Unauthorized. Please log in first.'}), 401
 
     data = request.get_json()
+    # --- SERVER-SIDE VALIDATION ---
+    def error(msg):
+        return jsonify({'message': msg}), 400
 
-    # ------------------------------
-    # Save Academic Marks
-    # ------------------------------
+    # Academic Marks: at least 1, all required, mark 0-100, subject/grade not empty
     marks = data.get('academic_marks', [])
+    if not marks or not isinstance(marks, list):
+        return error('Please enter at least one subject and mark.')
+    for mark in marks:
+        subject_name = mark.get('subject_name')
+        grade = mark.get('grade_level')
+        try:
+            percent = float(mark.get('grade_or_percentage', 0))
+        except Exception:
+            return error('Mark must be a number.')
+        if not subject_name:
+            return error('Subject is required.')
+        if percent < 0 or percent > 100:
+            return error('Mark must be between 0 and 100.')
+        if not grade:
+            return error('Grade is required.')
+
+    # Preferences
+    prefs = data.get('preferences', {})
+    province = (prefs.get('preferred_location') or '').split(',')[0].strip()
+    suburb = (prefs.get('preferred_location') or '').split(',')[1].strip() if ',' in (prefs.get('preferred_location') or '') else ''
+    if not province:
+        return error('Province is required.')
+    if not suburb:
+        return error('Suburb/area is required.')
+    preferred_degrees = prefs.get('preferred_degrees', [])
+    if not preferred_degrees or not isinstance(preferred_degrees, list):
+        return error('At least one qualification type is required.')
+    try:
+        tuition = float(prefs.get('max_tuition_fee', 0))
+    except Exception:
+        return error('Maximum tuition fee must be a number.')
+    if tuition <= 0:
+        return error('Maximum tuition fee must be positive.')
+    relocate = prefs.get('relocate')
+    if relocate not in ('yes', 'no'):
+        return error('Relocation preference is required.')
+    study_mode = prefs.get('study_mode')
+    if study_mode not in ('contact', 'distance', 'hybrid'):
+        return error('Study mode is required.')
+    need_support = prefs.get('need_support')
+    if need_support not in ('yes', 'no'):
+        return error('Academic support preference is required.')
+    if need_support == 'yes':
+        support_details = prefs.get('support_details', '')
+        if not support_details or len(support_details.strip()) < 5:
+            return error('Please specify the support you need (at least 5 characters).')
+    career_interests = prefs.get('career_interests', [])
+    if not career_interests or not isinstance(career_interests, list) or not any(career_interests):
+        return error('At least one career interest is required.')
+    nsfas = prefs.get('nsfas')
+    if nsfas not in ('yes', 'no'):
+        return error('NSFAS preference is required.')
+
+    # --- END VALIDATION ---
+
+    # Restore missing assignment for existing_pref
+    existing_pref = Preference.query.filter_by(student_id=student_id).first()
+
+    # ...existing code for saving marks and preferences...
     # For Academic Marks, check if a mark for the same subject already exists and update,
     # otherwise create a new record.
     for mark in marks:
         subject_name = mark.get('subject_name')
-        if not subject_name:
-            continue
         existing_mark = AcademicMark.query.filter_by(student_id=student_id, subject_name=subject_name).first()
         if existing_mark:
             try:
@@ -48,16 +106,6 @@ def save_data():
                 grade_level=mark.get('grade_level', '12th Grade')
             )
             db.session.add(new_mark)
-
-
-    # ------------------------------
-    # Save Preferences
-    # ------------------------------
-    prefs = data.get('preferences', {})
-    existing_pref = Preference.query.filter_by(student_id=student_id).first()
-
-    # preferred_degrees is already an array
-    preferred_degrees = prefs.get('preferred_degrees', [])
 
     if existing_pref:
         existing_pref.preferred_location = prefs.get('preferred_location')

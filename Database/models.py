@@ -61,6 +61,7 @@ class Program(db.Model):
     degree_type = db.Column(db.String(50))
     duration_years = db.Column(db.Integer)
     description = db.Column(db.Text)
+    fees = db.Column(db.String(50))  # NEW: Tuition fees
     location = db.Column(db.String(100))        # NEW
     study_mode = db.Column(db.String(20))      # NEW
     __table_args__ = (db.UniqueConstraint('university_id', 'program_name', name='_program_name_uc'),)
@@ -113,6 +114,17 @@ class Report(db.Model):
             'filename': self.filename,
             'created_at': self.created_at.isoformat() if self.created_at else None
         }
+
+
+class LikedCourse(db.Model):
+    __tablename__ = 'liked_course'
+    id = db.Column(db.Integer, primary_key=True)
+    student_id = db.Column(db.Integer, db.ForeignKey('student.student_id'), nullable=False)
+    program_id = db.Column(db.Integer, db.ForeignKey('program.program_id'), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    student = db.relationship('Student', backref=db.backref('liked_courses', lazy=True))
+    program = db.relationship('Program', backref=db.backref('liked_by', lazy=True))
 
 class Application(db.Model):
     __tablename__ = 'application'

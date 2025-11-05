@@ -88,47 +88,48 @@ block head_extras %}
 <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 
 <script>
-  // Initialize data structure
+  // Initialize minimal data structure; likes will be populated from server when possible
   const userData = {
     reports: [],
     matches: [],
-    likes: JSON.parse(localStorage.getItem("likedCourses") || "[]"),
-    profileComplete: false,
+    likes: [],
   };
 
-  // Check if profile is complete
-  async function checkProfileComplete() {
+  // Utility: try to fetch server-side liked course ids; return array of ids or null on non-200
+  async function fetchServerLikes() {
     try {
-      const response = await fetch("/api/profile/status");
-      const data = await response.json();
-      userData.profileComplete = data.complete || false;
-      updateViewAllButton();
-    } catch (error) {
-      console.error("Error checking profile status:", error);
-      // If we can't check, assume incomplete if no matches
-      userData.profileComplete = userData.matches.length > 0;
-      updateViewAllButton();
+      const res = await fetch('/courses/liked-courses', { credentials: 'same-origin' });
+      if (!res.ok) {
+        // If unauthenticated or other error, don't treat as authoritative
+        return null;
+      }
+      const data = await res.json();
+      // Expecting an array of program_id numbers
+      if (Array.isArray(data)) return data;
+      return null;
+    } catch (e) {
+      console.warn('Could not fetch server likes:', e);
+      return null;
     }
   }
 
-  // Update the View All Matches button behavior
-  function updateViewAllButton() {
-    const btn = document.getElementById("viewAllMatchesBtn");
-    if (!btn) return;
-
-    if (!userData.profileComplete || userData.matches.length === 0) {
-      btn.href = "{{ url_for('personal_info') }}";
-      btn.textContent = "Complete Profile";
-    } else {
-      btn.href = "{{ url_for('courses.get_matches') }}";
-      btn.textContent = "View All Matches";
-    }
+  // Normalize server id list to the client like objects used here
+  function mapIdsToLikes(ids) {
+    return ids.map(id => {
+      // Try to find matching program details from the already-fetched matches list
+      const match = userData.matches.find(m => String(m.id) === String(id));
+      if (match) {
+        return { id: String(id), name: (match.name || '') + (match.programName ? ' - ' + match.programName : ''), province: match.province || '', timestamp: null };
+      }
+      // Fallback to a minimal object; UI will show 'Saved University' if name missing
+      return { id: String(id), name: '', province: '', timestamp: null };
+    });
   }
 
   // Fetch matches from the server
   async function fetchMatches() {
     try {
-      const response = await fetch("/courses/debug_matches");
+      const response = await fetch('/courses/debug_matches', { credentials: 'same-origin' });
       const data = await response.json();
       if (data.matches) {
         userData.matches = data.matches.map((match) => ({
@@ -144,69 +145,72 @@ block head_extras %}
         updateViewAllButton();
       }
     } catch (error) {
-      console.error("Error fetching matches:", error);
-      updateViewAllButton();
+      console.error('Error fetching matches:', error);
     }
   }
 
-  // Call fetchMatches when page loads
-  fetchMatches();
-  // Also check profile status explicitly
-  checkProfileComplete();
+  // Call fetchMatches and load likes when page loads
+  (async function initPage() {
+    await fetchMatches();
+
+    // Try to load server likes first; only accept if server returns OK and an array
+    const serverIds = await fetchServerLikes();
+    if (serverIds !== null) {
+      userData.likes = mapIdsToLikes(serverIds);
+      // persist a local copy to keep UI consistent between reloads
+      try { localStorage.setItem('likedCourses', JSON.stringify(userData.likes)); } catch (e) {}
+    } else {
+      // Fallback to localStorage (only used when unauthenticated or server unavailable)
+      try {
+        const local = JSON.parse(localStorage.getItem('likedCourses') || '[]');
+        // Normalize stored format if it was an array of ids or objects
+        if (Array.isArray(local) && local.length && (typeof local[0] === 'string' || typeof local[0] === 'number')) {
+          userData.likes = local.map(id => ({ id: String(id), name: '', province: '', timestamp: null }));
+        } else if (Array.isArray(local)) {
+          userData.likes = local.map(l => ({ id: String(l.id || l.program_id || l.id), name: l.name || '', province: l.province || '', timestamp: l.timestamp || null }));
+        } else {
+          userData.likes = [];
+        }
+      } catch (e) {
+        userData.likes = [];
+      }
+    }
+
+    renderReports();
+    renderMatches();
+    renderLikes();
+  })();
 
   // Render Reports (uses download_url when available)
   function renderReports() {
-    const container = document.getElementById("reportsContainer");
-    if (!container) return;
-    if (!userData.reports || userData.reports.length === 0) {
-      container.innerHTML =
-        '<p class="empty-state">No reports generated yet. Complete your profile to get started.</p>';
+    const container = document.getElementById('reportsContainer');
+    if (userData.reports.length === 0) {
+      container.innerHTML = '<p class="empty-state">No reports generated yet. Complete your profile to get started.</p>';
       return;
     }
-
-    container.innerHTML = userData.reports
-      .map((report) => {
-        const downloadUrl =
-          report.download_url || `/reports/${report.id}/download`;
-        const displayDate = report.created_at
-          ? new Date(report.created_at).toLocaleString()
-          : report.date
-          ? new Date(report.date).toLocaleString()
-          : "";
-        return `
+    // Render each saved report with a server download link so clicking re-downloads the persisted PDF
+    container.innerHTML = userData.reports.map(report => `
         <div class="report-item">
           <div class="report-info">
             <h4>${escapeHtml(report.title || "Report")}</h4>
             <p class="report-date">${escapeHtml(displayDate)}</p>
           </div>
-          <a href="${downloadUrl}" class="btn btn-small btn-secondary" target="_blank" rel="noopener">Download</a>
+          <a href="/reports/${report.id}/download" class="btn btn-small btn-secondary" target="_blank" rel="noopener noreferrer">Download</a>
         </div>
-      `;
-      })
-      .join("");
+      `).join('');
   }
 
   // Render Matched Universities
   function renderMatches() {
-    const container = document.getElementById("matchesContainer");
+    const container = document.getElementById('matchesContainer');
     if (userData.matches.length === 0) {
-      container.innerHTML =
-        '<p class="empty-state">No matches available yet. Complete your profile to discover universities.</p>';
+      container.innerHTML = '<p class="empty-state">No matches available yet. Complete your profile to discover universities.</p>';
       return;
     }
-    container.innerHTML = userData.matches
-      .map((uni) => {
-        const matchClass =
-          uni.matchScore >= 90
-            ? "strong-match"
-            : uni.matchScore >= 70
-            ? "good-match"
-            : "moderate-match";
-        const isLiked = userData.likes.some(
-          (like) => like.id === String(uni.id)
-        );
-
-        return `
+    container.innerHTML = userData.matches.map(uni => {
+      const matchClass = uni.matchScore >= 90 ? 'strong-match' : uni.matchScore >= 70 ? 'good-match' : 'moderate-match';
+      const isLiked = userData.likes.some(like => String(like.id) === String(uni.id));
+      return `
           <div class="match-item ${matchClass}">
             <div class="match-info">
               <h4>${uni.name}</h4>
@@ -214,135 +218,115 @@ block head_extras %}
               <p class="match-province">${uni.province}</p>
               <span class="match-score">Match Score: ${uni.matchScore}%</span>
             </div>
-            <button class="btn btn-like ${isLiked ? "liked" : ""}" 
-                    onclick="addToLikes('${uni.id}', '${uni.name} - ${
-          uni.programName
-        }', '${uni.province}')">
-              <span class="heart">${isLiked ? "♥" : "♡"}</span>
+            <button class="btn btn-like ${isLiked ? 'liked' : ''}" 
+                    onclick="addToLikes('${uni.id}', '${(uni.name + ' - ' + uni.programName).replace(/'/g, "\\'")}', '${uni.province.replace(/'/g, "\\'")}')">
+              <span class="heart">${isLiked ? '♥' : '♡'}</span>
             </button>
           </div>
         `;
-      })
-      .join("");
+    }).join('');
   }
 
   // Render Liked Universities
   function renderLikes() {
-    const container = document.getElementById("likesContainer");
+    const container = document.getElementById('likesContainer');
     if (userData.likes.length === 0) {
-      container.innerHTML =
-        '<p class="empty-state">You haven\'t saved any universities yet.</p>';
+      container.innerHTML = '<p class="empty-state">You haven\'t saved any universities yet.</p>';
       return;
     }
-    container.innerHTML = userData.likes
-      .map(
-        (uni, index) => `
+    container.innerHTML = userData.likes.map((uni, index) => `
         <div class="like-item">
           <div class="like-info">
-            <h4>${uni.name}</h4>
-            <p class="like-province">${uni.province}</p>
+            <h4>${uni.name || 'Saved University'}</h4>
+            <p class="like-province">${uni.province || ''}</p>
           </div>
-          <button class="btn btn-remove" onclick="removeFromLikes(${index})">
+          <button class="btn btn-remove" onclick="removeFromLikes('${uni.id}')">
             ✕
           </button>
         </div>
-      `
-      )
-      .join("");
+      `).join('');
   }
 
-  // Add to Likes
-  function addToLikes(id, name, province) {
-    const alreadyLiked = userData.likes.some((uni) => uni.id === id);
-    if (!alreadyLiked) {
-      userData.likes.push({
-        id,
-        name,
-        province,
-        timestamp: new Date().toISOString(),
+  // Try to persist a like to server; best-effort. If server responds OK, keep it.
+  async function persistLikeToServer(programId) {
+    try {
+      const res = await fetch('/courses/save_liked_course', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ program_id: programId })
       });
-      localStorage.setItem("likedCourses", JSON.stringify(userData.likes));
+      return res.ok;
+    } catch (e) {
+      console.warn('Could not persist like to server:', e);
+      return false;
+    }
+  }
+
+  async function removeLikeOnServer(programId) {
+    try {
+      const res = await fetch('/courses/remove_liked_course', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({ program_id: programId })
+      });
+      return res.ok;
+    } catch (e) {
+      console.warn('Could not remove like on server:', e);
+      return false;
+    }
+  }
+
+  // Add or remove likes locally and attempt to sync with server
+  async function addToLikes(id, name, province) {
+    const alreadyLiked = userData.likes.some((uni) => String(uni.id) === String(id));
+    if (!alreadyLiked) {
+      const newLike = { id: String(id), name, province, timestamp: new Date().toISOString() };
+      userData.likes.push(newLike);
+      try { localStorage.setItem('likedCourses', JSON.stringify(userData.likes)); } catch (e) {}
+      // Best-effort persist
+      const ok = await persistLikeToServer(id);
+      if (!ok) {
+        // leave local copy (works for unauthenticated/offline users)
+      }
     } else {
-      userData.likes = userData.likes.filter((uni) => uni.id !== id);
-      localStorage.setItem("likedCourses", JSON.stringify(userData.likes));
+      userData.likes = userData.likes.filter((uni) => String(uni.id) !== String(id));
+      try { localStorage.setItem('likedCourses', JSON.stringify(userData.likes)); } catch (e) {}
+      await removeLikeOnServer(id);
     }
     renderLikes();
     renderMatches();
   }
 
-  // Remove from Likes
-  function removeFromLikes(index) {
-    userData.likes.splice(index, 1);
+  // Remove from Likes by id
+  async function removeFromLikes(id) {
+    userData.likes = userData.likes.filter(l => String(l.id) !== String(id));
+    try { localStorage.setItem('likedCourses', JSON.stringify(userData.likes)); } catch (e) {}
+    await removeLikeOnServer(id);
     renderLikes();
+    renderMatches();
   }
 
-  // Utility to escape HTML
-  function escapeHtml(s) {
-    if (!s) return "";
-    return String(s)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#39;");
-  }
-
-  // Initialize reports/matches/likes rendering
-  renderReports();
-  renderMatches();
-  renderLikes();
-
-  // --- dashboard_reports.js logic inlined below ---
-
-  // Fetch saved reports from API
-  async function fetchSavedReports() {
+  // Fetch saved reports from server and populate dashboard (unchanged behavior)
+  (async function loadSavedReports() {
     try {
-      const res = await fetch("/api/reports", { credentials: "same-origin" });
-      if (!res.ok) throw new Error("Failed to fetch reports");
+      const res = await fetch('/api/reports', { credentials: 'same-origin' });
+      if (!res.ok) {
+        console.warn('Could not fetch reports:', res.status);
+        return;
+      }
       const data = await res.json();
-      return data.reports || [];
-    } catch (err) {
-      console.error("Error fetching reports:", err);
-      return [];
-    }
-  }
-
-  // On load populate reports and listen for generated events
-  (async function initDashboardReports() {
-    // Fetch reports from server and render
-    const reports = await fetchSavedReports();
-    // Normalize returned reports: ensure download_url exists
-    userData.reports = reports.map((r) => ({
-      id: r.id || r.report_id,
-      title: r.title,
-      created_at: r.created_at,
-      download_url:
-        r.download_url || `/reports/${r.id || r.report_id}/download`,
-    }));
-    renderReports();
-
-    // If a recently-generated report exists in localStorage (from matches page), show it immediately
-    try {
-      const raw = localStorage.getItem("latest_report");
-      if (raw) {
-        const rep = JSON.parse(raw);
-        if (rep) {
-          const download_url = `/reports/${rep.id}/download`;
-          // Prepend the new report if it's not already present
-          if (!userData.reports.some((r) => String(r.id) === String(rep.id))) {
-            userData.reports.unshift({
-              id: rep.id,
-              title: rep.title,
-              created_at: rep.created_at,
-              download_url,
-            });
-            renderReports();
-          }
-        }
-        localStorage.removeItem("latest_report");
+      if (data && Array.isArray(data.reports)) {
+        userData.reports = data.reports.map((r) => ({
+          id: r.id || r.report_id || r.reportId || r.report_id,
+          title: r.title,
+          date: r.created_at || r.createdAt || r.date || '',
+        }));
+        renderReports();
       }
     } catch (err) {
-      console.warn("Could not apply latest_report from localStorage", err);
+      console.error('Error loading reports:', err);
     }
 
     // Listen for in-window report generation events

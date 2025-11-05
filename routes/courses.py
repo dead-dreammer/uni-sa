@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, render_template, session, url_for, send_file
 from Database.__init__ import db
-from Database.models import Program, Student, Preference, AcademicMark, Requirement, University, Report
+from Database.models import Program, Student, Preference, AcademicMark, Requirement, University, Report, LikedCourse
 import json
 from weasyprint import HTML
 import tempfile
@@ -84,7 +84,7 @@ def compute_matches(student_id):
     province = raw_location.split(',')[0].strip() if raw_location else ''
     pref_dict = {
         'location': province.lower(),
-        'max_fee': preferences.max_tuition_fee,
+        'max_tuition_fee': preferences.max_tuition_fee,
         'study_mode': (preferences.study_mode or '').lower(),
         'focus_area': preferences.focus_area,
         'relocate': (preferences.relocate or '').lower() == 'yes',
@@ -94,23 +94,94 @@ def compute_matches(student_id):
 
     # Convert marks to dict for easy lookup
     marks_dict = {mark.subject_name: mark.grade_or_percentage for mark in academic_marks}
+    # Create a list of (subject_name, grade) for fuzzy matching
+    marks_items = list(marks_dict.items())
+
+    def normalize_subject(name: str) -> str:
+        if not name:
+            return ''
+        # lower, remove non-word characters, collapse spaces
+        return re.sub(r"\W+", ' ', name).strip().lower()
+
+    def find_best_mark(req_subject: str):
+        """Try to find the student's grade for a requirement subject.
+
+        Strategy:
+        - exact match
+        - normalized exact match
+        - substring match (req in mark or mark in req)
+        - token overlap (choose best overlap)
+        Returns a float grade or None if not found.
+        """
+        if not req_subject:
+            return None
+        # exact
+        if req_subject in marks_dict:
+            return marks_dict[req_subject]
+
+        req_norm = normalize_subject(req_subject)
+        # normalized exact
+        for s, g in marks_items:
+            if normalize_subject(s) == req_norm:
+                return g
+
+        # substring
+        for s, g in marks_items:
+            s_norm = normalize_subject(s)
+            if req_norm in s_norm or s_norm in req_norm:
+                return g
+
+        # token overlap score
+        req_tokens = set(req_norm.split())
+        best_score = 0.0
+        best_grade = None
+        for s, g in marks_items:
+            s_tokens = set(normalize_subject(s).split())
+            if not s_tokens or not req_tokens:
+                continue
+            inter = req_tokens.intersection(s_tokens)
+            score = len(inter) / max(len(req_tokens), 1)
+            if score > best_score:
+                best_score = score
+                best_grade = g
+
+        # require at least 0.4 overlap to accept
+        if best_score >= 0.4:
+            return best_grade
+
+        return None
 
     # Query programs (we'll do looser filtering in Python to avoid strict DB mismatches)
     potential_programs = Program.query.join(University).all()
 
+    # Filter by max tuition fee if set
+    max_fee = None
+    if pref_dict.get('max_tuition_fee'):
+        try:
+            max_fee = float(pref_dict['max_tuition_fee'])
+        except Exception:
+            max_fee = None
+
+    if max_fee is not None:
+        def parse_fee(fee):
+            if not fee:
+                return None
+            fee_str = str(fee).replace(',', '').replace('R', '').replace(' ', '')
+            try:
+                return float(fee_str)
+            except Exception:
+                return None
+        potential_programs = [p for p in potential_programs if parse_fee(getattr(p, 'fees', None)) is not None and parse_fee(getattr(p, 'fees', None)) <= max_fee]
+
     # Scoring helpers
     from collections import Counter
-    import math
-    import re
-
+    import re, math
     def tokenize(text):
         if not text:
             return []
         return [t for t in re.findall(r"\w+", text.lower()) if len(t) > 1]
-
     def vectorize_counter(tokens):
         return Counter(tokens)
-
     def cosine_sim(c1, c2):
         if not c1 or not c2:
             return 0.0
@@ -144,16 +215,34 @@ def compute_matches(student_id):
     for program in potential_programs:
         requirements = Requirement.query.filter_by(program_id=program.program_id).all()
 
-        # Compute requirement satisfaction ratio (0..1)
-        if requirements:
-            satisfied = 0
-            for req in requirements:
-                student_mark = marks_dict.get(req.required_subject)
-                if student_mark is not None and student_mark >= req.min_grade_percentage:
-                    satisfied += 1
-            req_ratio = satisfied / len(requirements)
-        else:
-            req_ratio = 1.0
+        # Compute requirement satisfaction ratio (0..1) and requirement met status
+        req_met_count = 0
+        reqs_with_status = []
+        for r in requirements:
+            # Try to map the requirement subject to a student mark using fuzzy matching
+            student_grade = find_best_mark(r.required_subject)
+            if student_grade is None:
+                student_grade = 0
+            met = student_grade >= r.min_grade_percentage
+            reqs_with_status.append({
+                'required_subject': r.required_subject,
+                'min_grade_percentage': r.min_grade_percentage,
+                'is_prerequisite': getattr(r, 'is_prerequisite', True),
+                'student_grade': student_grade,
+                'met': met
+            })
+            if met:
+                req_met_count += 1
+        req_ratio = req_met_count / len(requirements) if requirements else 1.0
+
+        # Optional debug: if DEBUG_MATCHER=1, print programs where none of the
+        # requirements matched any student marks to help troubleshooting subject name mismatches.
+        if os.getenv('DEBUG_MATCHER') == '1' and requirements:
+            any_scores = any((req['student_grade'] and req['student_grade'] > 0) for req in reqs_with_status)
+            if not any_scores:
+                print(f"[MATCHER DEBUG] Program '{program.program_name}' has requirements but no matching student marks.")
+                print("  Requirements:", [r['required_subject'] for r in reqs_with_status])
+                print("  Student marks:", marks_items)
 
         # Text similarity
         program_text = ' '.join(filter(None, [program.program_name, program.description, program.degree_type, program.location]))
@@ -191,7 +280,7 @@ def compute_matches(student_id):
             total_surplus = 0.0
             counted = 0
             for req in requirements:
-                student_mark = marks_dict.get(req.required_subject)
+                student_mark = find_best_mark(req.required_subject)
                 if student_mark is not None:
                     surplus = max(0.0, (student_mark - req.min_grade_percentage) / max(1.0, req.min_grade_percentage))
                     total_surplus += surplus
@@ -219,15 +308,8 @@ def compute_matches(student_id):
                 'duration_years': getattr(program, 'duration_years', None),
                 'location': getattr(program, 'location', ''),
                 'study_mode': getattr(program, 'study_mode', ''),
-                # requirements as objects with the same field names templates expect
-                'requirements': [
-                    {
-                        'required_subject': r.required_subject,
-                        'min_grade_percentage': r.min_grade_percentage,
-                        'is_prerequisite': getattr(r, 'is_prerequisite', True)
-                    }
-                    for r in requirements
-                ]
+                'fees': getattr(program, 'fees', ''),
+                'requirements': reqs_with_status
             },
             'university': {
                 'name': program.university.name if program.university else '',
@@ -256,6 +338,69 @@ def debug_matches():
     return jsonify({'matches': matches, 'preferences': pref_dict, 'marks': marks_dict})
 
 
+# Liked courses endpoints
+@courses.route('/liked-courses', methods=['GET'])
+def get_liked_courses():
+    student_id = session.get('student_id')
+    if not student_id:
+        # Return 401 for unauthenticated requests so client can decide whether to
+        # use localStorage fallback instead of overwriting it.
+        return jsonify({'error': 'Not logged in'}), 401
+    liked = LikedCourse.query.filter_by(student_id=student_id).all()
+    return jsonify([l.program_id for l in liked])
+
+
+@courses.route('/save_liked_course', methods=['POST'])
+def save_liked_course():
+    student_id = session.get('student_id')
+    if not student_id:
+        return jsonify({'success': False, 'error': 'Not logged in'}), 401
+    data = request.get_json() or {}
+    program_id = data.get('course_id') or data.get('program_id')
+    if not program_id:
+        return jsonify({'success': False, 'error': 'Missing course_id'}), 400
+
+    # ensure program exists
+    program = Program.query.get(program_id)
+    if not program:
+        return jsonify({'success': False, 'error': 'Program not found'}), 404
+
+    existing = LikedCourse.query.filter_by(student_id=student_id, program_id=program_id).first()
+    if existing:
+        return jsonify({'success': True, 'already': True})
+
+    try:
+        like = LikedCourse(student_id=student_id, program_id=program_id)
+        db.session.add(like)
+        db.session.commit()
+        return jsonify({'success': True})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
+@courses.route('/remove_liked_course', methods=['POST'])
+def remove_liked_course():
+    student_id = session.get('student_id')
+    if not student_id:
+        return jsonify({'success': False, 'error': 'Not logged in'}), 401
+    data = request.get_json() or {}
+    program_id = data.get('course_id') or data.get('program_id')
+    if not program_id:
+        return jsonify({'success': False, 'error': 'Missing course_id'}), 400
+
+    existing = LikedCourse.query.filter_by(student_id=student_id, program_id=program_id).first()
+    if not existing:
+        return jsonify({'success': True, 'removed': False})
+    try:
+        db.session.delete(existing)
+        db.session.commit()
+        return jsonify({'success': True, 'removed': True})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+
 # Add new course
 @courses.route('/add', methods=['POST'])
 def add_course():
@@ -267,8 +412,9 @@ def add_course():
             university_id=int(data['university_id']),
             duration_years=int(data.get('duration_years', 0)),
             degree_type=data.get('degree_type'),
-            location=data.get('location', ''),        # NEW
-            study_mode=data.get('study_mode', '')     # NEW
+            fees=data.get('fees', ''),
+            location=data.get('location', ''),
+            study_mode=data.get('study_mode', '')
         )
         db.session.add(new_course)
         db.session.commit()
@@ -292,8 +438,9 @@ def edit_course(course_id):
         course.university_id = int(data['university_id'])
         course.duration_years = int(data.get('duration_years', 0))
         course.degree_type = data.get('degree_type')
-        course.location = data.get('location', '')          # NEW
-        course.study_mode = data.get('study_mode', '')     # NEW
+        course.fees = data.get('fees', '')
+        course.location = data.get('location', '')
+        course.study_mode = data.get('study_mode', '')
         db.session.commit()
         return jsonify({'success': True})
     except Exception as e:
@@ -327,12 +474,12 @@ def get_all_courses():
             'id': c.program_id,
             'title': c.program_name,
             'description': c.description,
-            'college': c.university.name if c.university else 'N/A',  # ✅ University name
+            'college': c.university.name if c.university else 'N/A',
             'duration': c.duration_years,
             'degree_type': c.degree_type,
-            'fees': getattr(c, 'fees', ''),
-            'location': getattr(c, 'location', ''),
-            'study_mode': getattr(c, 'study_mode', '')
+            'fees': c.fees or '',
+            'location': c.location or '',
+            'study_mode': c.study_mode or ''
         }
         for c in all_courses
     ]

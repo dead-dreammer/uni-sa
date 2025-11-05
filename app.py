@@ -179,6 +179,7 @@ def add_course_page():
 @app.route('/bursaries/add', methods=['GET', 'POST'])
 def add_bursary_page():
     return render_template('Admin/admin.html')
+from datetime import datetime
 
 @app.route('/edit-profile', methods=['GET', 'POST'])
 @login_required
@@ -197,22 +198,39 @@ def edit_profile():
         return redirect(url_for('profile'))
 
     if request.method == 'POST':
-        # Get updated data from form
+        # Update student fields from form
         student.name = request.form.get('name')
         student.email = request.form.get('email')
         student.number = request.form.get('number')
-        student.dob = request.form.get('dob')  # Make sure form uses date input
         student.gender = request.form.get('gender')
         student.location = request.form.get('location')
-        
+
+        # Since the input type="date", the value is already YYYY-MM-DD
+        dob_str = request.form.get('dob')
+        student.dob = datetime.strptime(dob_str, '%Y-%m-%d').date() if dob_str else None
+
         try:
-            db.session.commit()  # Save changes to DB
-            # Update session data too
+            db.session.commit()  # Save changes
+
+            # Update session
             session['name'] = student.name
             session['email'] = student.email
             session['number'] = student.number
+            session['location'] = student.location
+            session['gender'] = student.gender
+            session['dob'] = student.dob.strftime('%Y-%m-%d') if student.dob else None
+
+            # Calculate age
+            if student.dob:
+                today = datetime.today().date()
+                age = today.year - student.dob.year - ((today.month, today.day) < (student.dob.month, student.dob.day))
+                session['age'] = age
+            else:
+                session['age'] = None
+
             flash("Profile updated successfully.", "success")
             return redirect(url_for('profile'))
+
         except Exception as e:
             db.session.rollback()
             flash(f"Error updating profile: {e}", "error")
