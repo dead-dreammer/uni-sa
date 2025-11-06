@@ -6,6 +6,13 @@ let currentCalendarMonth = new Date().getMonth();
 let currentCalendarYear = new Date().getFullYear();
 let filteredEvents = [];
 
+// Helper function to escape HTML
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
     loadAdmissions();
@@ -274,8 +281,7 @@ function createEventCard(event) {
                 </div>
             </div>
             <div class="event-body">
-                <h3 class="event-title">${event.title}</h3>
-                <p class="event-university">${event.university}</p>
+                <h3 class="event-title">${escapeHtml(event.title)}</h3>
             </div>
             <div class="event-footer">
                 ${daysUntil >= 0 ? `

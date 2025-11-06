@@ -338,8 +338,8 @@
   let subjectCount = 1;
   const maxSubjects = 10;
 
-  // Full subject list
-  const subjects = [
+  // Full subject list - Make it globally accessible
+  window.subjects = [
     "Mathematics",
     "Physical Sciences",
     "Life Sciences",
@@ -446,7 +446,7 @@
                         <label>Subject</label>
                         <select class="subject-select" required>
                             <option value="">Select Subject</option>
-                            ${subjects
+                            ${window.subjects
                               .map(
                                 (s) =>
                                   `<option value="${s}">${s}</option>`
